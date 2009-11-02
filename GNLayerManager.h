@@ -6,9 +6,9 @@
 //  Copyright 2009 Gnarus. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#include "GNLayer.h"
-#include "GNLandmark.h"
+#import <UIKit/UIKit.h>
+#import "GNLayer.h"
+#import "GNLandmark.h"
 
 @interface LayerManager : NSObject {
 
@@ -18,10 +18,10 @@
 	
 }
 
--(void) addLayer: (GNLayer*) layer;
--(NSMutableArray*) getNClosestLandmarks: (int) n toLocation: (CLLocation*) location maxDistance: (float) maxDistance;
--(GNLandmark*) getLandmark: (int) landmarkID name: (NSString*) landmarkName location: (CLLocation*) landmarkLocation;
--(void) setLayer: (GNLayer*) layer active: (bool) active;
+-(void) addLayer:(GNLayer*)layer;
+-(NSMutableArray*) getNClosestLandmarks:(int)n toLocation:(CLLocation*)location maxDistance:(float)maxDistance;
+-(GNLandmark*) getLandmark:(int)landmarkID name:(NSString*)landmarkName location:(CLLocation*)landmarkLocation;
+-(void) setLayer:(GNLayer*)layer active:(bool)active;
 
 
 @end

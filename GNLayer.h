@@ -6,8 +6,8 @@
 //  Copyright 2009 Gnarus. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#include "GNLandmark.h"
+#import <UIKit/UIKit.h>
+#import "GNLandmark.h"
 
 @interface GNLayer : NSObject {
 
@@ -24,10 +24,10 @@
 -(NSString*) getLayerName;
 -(bool) getActive;
 // -(NSIcon) getIcon;
--(void) setActive: (bool) active;
--(NSMutableArray*) getNClosestLandmarks: (int) n toLocation: (CLLocation*) location;
+-(void) setActive:(bool)active;
+-(NSMutableArray*) getNClosestLandmarks:(int)n toLocation:(CLLocation*)location;
 -(NSArray*) removeSelfFromLandmarks;
--(UIViewController*) getLayerViewForID: (int) landmarkID;
+-(UIViewController*) getLayerViewForID:(int)landmarkID;
 
 @end
 

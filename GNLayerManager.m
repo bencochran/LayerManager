@@ -6,7 +6,7 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "LayerManager.h"
+#import "GNLayerManager.h"
 
 
 @implementation LayerManager
