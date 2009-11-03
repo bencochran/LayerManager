@@ -18,9 +18,9 @@
 	
 }
 
--(void) addLayer:(GNLayer*)layer;
--(NSMutableArray*) getNClosestLandmarks:(int)n toLocation:(CLLocation*)location maxDistance:(float)maxDistance;
--(GNLandmark*) getLandmark:(int)landmarkID name:(NSString*)landmarkName location:(CLLocation*)landmarkLocation;
+-(void)addLayer:(GNLayer*)layer;
+-(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location maxDistance:(float)maxDistance;
+-(GNLandmark*)getLandmark:(int)landmarkID name:(NSString*)landmarkName location:(CLLocation*)landmarkLocation;
 -(void) setLayer:(GNLayer*)layer active:(bool)active;
 
 

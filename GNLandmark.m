@@ -10,36 +10,36 @@
 
 @implementation GNLandmark
 
--(int) getID {
+-(int)getID {
 	return ID;
 }
 
--(NSString *) getName {
+-(NSString*)getName {
 	return name;
 }
 
--(CLLocation *) getLocation {
+-(CLLocation*)getLocation {
 	return location;
 }
 
--(NSMutableArray *) getActiveLayers {
+-(NSMutableArray*)getActiveLayers {
 	return activeLayers;
 }
 
--(int) getNumActiveLayers {
+-(int)getNumActiveLayers {
 	return (int) ([activeLayers count]);
 }
 
--(void) addActiveLayer: (GNLayer *) layer {
+-(void)addActiveLayer:(GNLayer*)layer {
 	[activeLayers removeObject: layer];
 	[activeLayers addObject: layer];
 }
 
--(void) removeActiveLayer: (GNLayer *) layer {
+-(void)removeActiveLayer:(GNLayer*)layer {
 	[activeLayers removeObject: layer];
 }
 
--(void) clearActiveLayers {
+-(void)clearActiveLayers {
 	[activeLayers removeAllObjects];
 }
 
