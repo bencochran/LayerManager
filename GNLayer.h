@@ -11,7 +11,7 @@
 
 @interface GNLayer : NSObject {
 	NSString *name;
-	bool active;
+	bool _active;
 	NSString *iconPath;
 	NSMutableArray *closestLandmarks;
 	NSDictionary *layerInfoByLandmarkID;
@@ -20,17 +20,17 @@
 	
 }
 
--(NSString *) getName;
--(bool) getActive;
+-(NSString *)getName;
+-(bool)getActive;
 // -(NSIcon) getIcon;
 -(void) setActive:(bool)active;
--(NSMutableArray*) getNClosestLandmarks:(int)n toLocation:(CLLocation*)location;
--(NSArray*) removeSelfFromLandmarks;
--(UIViewController*) getLayerViewForID:(int)landmarkID;
+-(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location;
+-(NSMutableArray*)removeSelfFromLandmarks;
+-(UIViewController*)getLayerViewForID:(int)landmarkID;
 
 @end
 
 struct Dist_And_Landmark {
 	float dist;
 	GNLandmark *landmark;
-};
+}; typedef struct Dist_And_Landmark Dist_And_Landmark;

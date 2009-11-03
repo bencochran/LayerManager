@@ -18,14 +18,14 @@
 	NSMutableArray *activeLayers;
 }
 
--(int) getID;
--(NSString *) getName;
--(CLLocation *) getLocation;
--(NSMutableArray *) getActiveLayers;
+-(int)getID;
+-(NSString*)getName;
+-(CLLocation*)getLocation;
+-(NSMutableArray*)getActiveLayers;
 
--(void) addActiveLayer:(GNLayer*)layer;
--(void) removeActiveLayer:(GNLayer*)layer;
--(int) getNumActiveLayers;
--(void) clearActiveLayers;
+-(void)addActiveLayer:(GNLayer*)layer;
+-(void)removeActiveLayer:(GNLayer*)layer;
+-(int)getNumActiveLayers;
+-(void)clearActiveLayers;
 
 @end

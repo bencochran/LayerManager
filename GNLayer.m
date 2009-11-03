@@ -10,25 +10,27 @@
 
 @implementation GNLayer
 
--(NSString *) getName {
+-(NSString *)getName {
 	return name;
 }
 
--(bool) getActive {
-	return active;
+-(bool)getActive {
+	return _active;
 }
 
 // -(NSIcon) getIcon;
 
--(void) setActive: (bool) active {
-	self.active = active;
+-(void)setActive:(bool)active {
+	_active = active;
 }
 
--(NSMutableArray *) removeSelfFromLandmarks {
+-(NSMutableArray *)removeSelfFromLandmarks {
 	NSMutableArray *ret = closestLandmarks;
 	int i;
-	for(i = 0; i < [closestLandmarks count]; i++)
-		[((Dist_And_Landmark *) [closestLandmarks objectAtIndex: i]).landmark removeActiveLayer: self];
+	for(i = 0; i < [closestLandmarks count]; i++) {
+		Dist_And_Landmark *distLand = (Dist_And_Landmark *) [closestLandmarks objectAtIndex: i];
+		[distLand->landmark removeActiveLayer: self];
+	}
 	closestLandmarks = [[NSMutableArray alloc] init];
 	return ret;
 }
