@@ -6,9 +6,10 @@
 //  Copyright 2009 Gnarus. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "GNLayer.h"
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+
+@class GNLayer;
 
 @interface GNLandmark : NSObject {
 	int ID;
@@ -22,9 +23,9 @@
 -(CLLocation *) getLocation;
 -(NSMutableArray *) getActiveLayers;
 
+-(void) addActiveLayer:(GNLayer*)layer;
+-(void) removeActiveLayer:(GNLayer*)layer;
 -(int) getNumActiveLayers;
--(void) addActiveLayer: (GNLayer *) layer;
--(void) removeActiveLayer: (GNLayer*) layer;
 -(void) clearActiveLayers;
 
 @end
