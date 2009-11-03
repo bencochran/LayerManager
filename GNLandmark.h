@@ -7,27 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-#include "GNLayer.h"
+#import "GNLayer.h"
 #import <Cocoa/Cocoa.h>
 
 @interface GNLandmark : NSObject {
-
 	int ID;
 	NSString *name;
 	CLLocation *location;
 	NSMutableArray *activeLayers;
-	
-
 }
 
--(NSString*) getName;
--(CLLocation*) getLocation;
 -(int) getID;
+-(NSString *) getName;
+-(CLLocation *) getLocation;
+-(NSMutableArray *) getActiveLayers;
 
--(void) addActiveLayer: (GNLayer*) layer;
--(void) removeActiveLayer: (GNLayer*) layer;
--(NSMutableArray*) getActiveLayers;
 -(int) getNumActiveLayers;
+-(void) addActiveLayer: (GNLayer *) layer;
+-(void) removeActiveLayer: (GNLayer*) layer;
 -(void) clearActiveLayers;
 
 @end

@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#include "GNLandmark.h"
+#import "GNLandmark.h"
+#import <Cocoa/Cocoa.h>
 
 @interface GNLayer : NSObject {
-
 	NSString *name;
 	bool active;
 	NSString *iconPath;
@@ -21,18 +21,17 @@
 	
 }
 
--(NSString*) getLayerName;
+-(NSString *) getName;
 -(bool) getActive;
 // -(NSIcon) getIcon;
 -(void) setActive: (bool) active;
--(NSMutableArray*) getNClosestLandmarks: (int) n toLocation: (CLLocation*) location;
--(NSArray*) removeSelfFromLandmarks;
--(UIViewController*) getLayerViewForID: (int) landmarkID;
+-(NSMutableArray *) getNClosestLandmarks: (int) n toLocation: (CLLocation *) location;
+-(NSMutableArray *) removeSelfFromLandmarks;
+-(UIViewController *) getLayerViewForID: (int) landmarkID;
 
 @end
 
 struct Dist_And_Landmark {
 	float dist;
 	GNLandmark *landmark;
-
 };
