@@ -20,6 +20,8 @@
 	
 }
 
++(GNLayer*)initWithName:(NSString*)initName;
+
 -(NSString *)getName;
 -(bool)getActive;
 // -(NSIcon) getIcon;

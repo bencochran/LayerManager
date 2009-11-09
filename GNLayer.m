@@ -10,6 +10,14 @@
 
 @implementation GNLayer
 
++(GNLayer*)initWithName:(NSString*)initName {
+	GNLayer *layer = [[GNLayer alloc] init];
+	layer->name = initName;
+	layer->_active = NO;
+	layer->closestLandmarks = [[NSMutableArray alloc] init];
+	return layer;
+}
+
 -(NSString *)getName {
 	return name;
 }
@@ -24,6 +32,11 @@
 	_active = active;
 }
 
+-(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location {
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
+}
+
 -(NSMutableArray *)removeSelfFromLandmarks {
 	NSMutableArray *ret = closestLandmarks;
 	int i;
@@ -33,6 +46,11 @@
 	}
 	closestLandmarks = [[NSMutableArray alloc] init];
 	return ret;
+}
+
+-(UIViewController*)getLayerViewForID:(int)landmarkID {
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
 }
 
 @end

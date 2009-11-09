@@ -10,11 +10,11 @@
 #import "GNLayer.h"
 #import "GNLandmark.h"
 
-@interface LayerManager : NSObject {
+@interface GNLayerManager : NSObject {
 
 	NSMutableArray *layers;
 	NSMutableArray *distAndLandmarkList;
-	NSDictionary *allLandmarks; // Landmark IDs to Landmark pointers
+	NSMutableDictionary *allLandmarks; // Landmark IDs to Landmark pointers
 	
 }
 

@@ -18,6 +18,8 @@
 	NSMutableArray *activeLayers;
 }
 
++(GNLandmark*)initWithID:(int)initID name:(NSString*)initName location:(CLLocation*)initLocation;
+
 -(int)getID;
 -(NSString*)getName;
 -(CLLocation*)getLocation;

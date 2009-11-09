@@ -7,8 +7,17 @@
 //
 
 #import "GNLandmark.h"
+#import <stdlib.h>
 
 @implementation GNLandmark
+
++(GNLandmark*)initWithID:(int)initID name:(NSString*)initName location:(CLLocation*)initLocation {
+	GNLandmark *newLandmark = [[GNLandmark alloc] init];
+	newLandmark->ID = initID;
+	newLandmark->name = initName;
+	newLandmark->location = initLocation;
+	return newLandmark;
+}
 
 -(int)getID {
 	return ID;
