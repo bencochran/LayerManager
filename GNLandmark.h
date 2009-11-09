@@ -12,18 +12,18 @@
 @class GNLayer;
 
 @interface GNLandmark : NSObject {
-	int ID;
-	NSString *name;
-	CLLocation *location;
-	NSMutableArray *activeLayers;
+	int _id;
+	NSString* _name;
+	CLLocation* _location;
+	NSMutableArray* _activeLayers;
 }
 
-+(GNLandmark*)initWithID:(int)initID name:(NSString*)initName location:(CLLocation*)initLocation;
+@property (nonatomic) int ID;
+@property (nonatomic, copy) NSString* name;
+@property (nonatomic, retain) CLLocation* location;
+@property (nonatomic, retain) NSMutableArray* activeLayers;
 
--(int)getID;
--(NSString*)getName;
--(CLLocation*)getLocation;
--(NSMutableArray*)getActiveLayers;
++(GNLandmark*)initWithID:(int)initID name:(NSString*)initName location:(CLLocation*)initLocation;
 
 -(void)addActiveLayer:(GNLayer*)layer;
 -(void)removeActiveLayer:(GNLayer*)layer;

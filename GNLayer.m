@@ -10,27 +10,17 @@
 
 @implementation GNLayer
 
+@synthesize name=_name, active=_active, closestLandmarks=_closestLandmarks;
+
 +(GNLayer*)initWithName:(NSString*)initName {
 	GNLayer *layer = [[GNLayer alloc] init];
-	layer->name = initName;
-	layer->_active = NO;
-	layer->closestLandmarks = [[NSMutableArray alloc] init];
+	layer.name = initName;
+	layer.active = NO;
+	layer.closestLandmarks = [[NSMutableArray alloc] init];
 	return layer;
 }
 
--(NSString *)getName {
-	return name;
-}
-
--(bool)getActive {
-	return _active;
-}
-
 // -(NSIcon) getIcon;
-
--(void)setActive:(bool)active {
-	_active = active;
-}
 
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location {
 	[self doesNotRecognizeSelector:_cmd];
@@ -38,13 +28,13 @@
 }
 
 -(NSMutableArray *)removeSelfFromLandmarks {
-	NSMutableArray *ret = closestLandmarks;
+	NSMutableArray *ret = self.closestLandmarks;
 	int i;
-	for(i = 0; i < [closestLandmarks count]; i++) {
-		Dist_And_Landmark *distLand = (Dist_And_Landmark *) [closestLandmarks objectAtIndex: i];
+	for(i = 0; i < [self.closestLandmarks count]; i++) {
+		Dist_And_Landmark *distLand = (Dist_And_Landmark *) [self.closestLandmarks objectAtIndex: i];
 		[distLand->landmark removeActiveLayer: self];
 	}
-	closestLandmarks = [[NSMutableArray alloc] init];
+	self.closestLandmarks = [[NSMutableArray alloc] init];
 	return ret;
 }
 
