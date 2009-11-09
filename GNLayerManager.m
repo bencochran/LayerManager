@@ -25,7 +25,7 @@
 	if(landmark != nil)
 		return landmark;
 	
-	landmark = [GNLandmark initWithID:landmarkID name:landmarkName location:landmarkLocation];
+	landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName location:landmarkLocation];
 	[allLandmarks setObject:landmark forKey:[NSNumber numberWithInt:landmarkID]];
 	return landmark;
 }

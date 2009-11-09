@@ -13,7 +13,7 @@
 @synthesize name=_name, active=_active, closestLandmarks=_closestLandmarks;
 
 +(GNLayer*)initWithName:(NSString*)initName {
-	GNLayer *layer = [[GNLayer alloc] init];
+	GNLayer *layer = [[[GNLayer alloc] init] autorelease];
 	layer.name = initName;
 	layer.active = NO;
 	layer.closestLandmarks = [[NSMutableArray alloc] init];

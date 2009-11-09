@@ -13,11 +13,13 @@
 
 @synthesize ID=_id, name=_name, location=_location, activeLayers=_activeLayers;
 
-+(GNLandmark*)initWithID:(int)initID name:(NSString*)initName location:(CLLocation*)initLocation {
-	GNLandmark *newLandmark = [[GNLandmark alloc] init];
-	newLandmark.ID = initID;
-	newLandmark.name = initName;
-	newLandmark.location = initLocation;
+// Methods starting with "init" are usually reserved for non-static methods which run
+// on an alloc'd object, not static methods wich alloc AND init an object itself.
++(GNLandmark*) landmarkWithID:(int)ID name:(NSString*)name location:(CLLocation*)location {
+	GNLandmark *newLandmark = [[[GNLandmark alloc] init] autorelease];
+	newLandmark.ID = ID;
+	newLandmark.name = name;
+	newLandmark.location = location;
 	return newLandmark;
 }
 
