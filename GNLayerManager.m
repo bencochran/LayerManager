@@ -21,12 +21,12 @@
 }
 
 -(GNLandmark*)getLandmark:(int)landmarkID name:(NSString*)landmarkName location:(CLLocation*)landmarkLocation {
-	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:landmarkID]);
+	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:[NSNumber numberWithInt:landmarkID]]);
 	if(landmark != nil)
 		return landmark;
 	
 	landmark = [GNLandmark initWithID:landmarkID name:landmarkName location:landmarkLocation];
-	[allLandmarks setObject:landmark forKey:landmarkID];
+	[allLandmarks setObject:landmark forKey:[NSNumber numberWithInt:landmarkID]];
 	return landmark;
 }
 
@@ -48,7 +48,7 @@
 			distLand = (Dist_And_Landmark *) [layerLandmarks objectAtIndex:i];
 			if([distLand->landmark getNumActiveLayers] == 0)
 			{
-				[allLandmarks removeObjectForKey:[distLand->landmark getID]];
+				[allLandmarks removeObjectForKey:[NSNumber numberWithInt:[distLand->landmark ID]]];
 				[distAndLandmarkList removeObject:distLand];
 				[distLand->landmark release];
 				free(distLand);
