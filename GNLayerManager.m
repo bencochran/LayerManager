@@ -49,6 +49,10 @@
 			if([distLand->landmark getNumActiveLayers] == 0)
 			{
 				[allLandmarks removeObjectForKey:[NSNumber numberWithInt:[distLand->landmark ID]]];
+				
+				// The following will most likely fail at runtime. NSArrays must be given actual objects.
+				// distLand isn't a valid object in that it's not an ancestor of id.
+				// see: http://benc.ch/t
 				[distAndLandmarkList removeObject:distLand];
 				[distLand->landmark release];
 				free(distLand);
