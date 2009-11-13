@@ -8,7 +8,6 @@
 
 #import "GNLayerManager.h"
 
-
 @implementation GNLayerManager
 
 -(void)addLayer:(GNLayer*)layer {
@@ -17,7 +16,36 @@
 }
 
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location maxDistance:(float)maxDistance {
-	return nil;
+	NSMutableArray *buffer;
+	GNDistAndLandmark *gndl;
+	int i;
+	[distAndLandmarkList removeAllObjects];
+	
+	// add all GNDistAndLandmarks to distAndLandmarkList
+	for(i = 0; i < (int) ([layers count]); i++)
+		if([(GNLayer *)[layers objectAtIndex:i] active] == YES)
+		{
+			buffer = [[layers objectAtIndex:i] getNClosestLandmarks:n toLocation:location];
+			[distAndLandmarkList addObjectsFromArray:buffer];
+			[buffer release];
+		}
+	
+	// sort distAndLandmarkList
+	[distAndLandmarkList sortUsingSelector:@selector(compareTo:)];
+	
+	// return top n closest that are closer than maxDistance
+	buffer = [[NSMutableArray alloc] init];
+	
+	for(i = 0; i < MIN(n,[distAndLandmarkList count]); i++)
+	{
+		gndl = [distAndLandmarkList objectAtIndex:i];
+		if(gndl.dist <= maxDistance)
+			[buffer addObject:gndl];
+		else
+			break;
+	}
+	
+	return buffer;
 }
 
 -(GNLandmark*)getLandmark:(int)landmarkID name:(NSString*)landmarkName location:(CLLocation*)landmarkLocation {
@@ -25,7 +53,7 @@
 	if(landmark != nil)
 		return landmark;
 	
-	landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName location:landmarkLocation];
+	landmark = [[GNLandmark landmarkWithID:landmarkID name:landmarkName location:landmarkLocation] retain];
 	[allLandmarks setObject:landmark forKey:[NSNumber numberWithInt:landmarkID]];
 	return landmark;
 }
@@ -33,29 +61,20 @@
 -(void) setLayer:(GNLayer*)layer active:(bool)active {
 	[layer setActive:active];
 	
-	if(active == YES)
-	{
-		/* TODO: Call getNClosestLandmarks on layer, with last n, location, and maxDistance
-		         merge with current list */
-	}
-	else
+	if(active == NO)
 	{
 		NSMutableArray *layerLandmarks = [layer removeSelfFromLandmarks];
-		Dist_And_Landmark *distLand;
+		GNDistAndLandmark *distLand;
 		int i;
 		for(i = 0; i < [layerLandmarks count]; i++)
 		{
-			distLand = (Dist_And_Landmark *) [layerLandmarks objectAtIndex:i];
-			if([distLand->landmark getNumActiveLayers] == 0)
+			distLand = (GNDistAndLandmark *) [layerLandmarks objectAtIndex:i];
+			if([distLand.landmark getNumActiveLayers] == 0)
 			{
-				[allLandmarks removeObjectForKey:[NSNumber numberWithInt:[distLand->landmark ID]]];
-				
-				// The following will most likely fail at runtime. NSArrays must be given actual objects.
-				// distLand isn't a valid object in that it's not an ancestor of id.
-				// see: http://benc.ch/t
+				[allLandmarks removeObjectForKey:[NSNumber numberWithInt:[distLand.landmark ID]]];
 				[distAndLandmarkList removeObject:distLand];
-				[distLand->landmark release];
-				free(distLand);
+				[distLand.landmark release];//////////////////////////////////
+				[distLand release];
 			}
 		}
 	}

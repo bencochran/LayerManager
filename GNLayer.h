@@ -12,20 +12,18 @@
 @interface GNLayer : NSObject {
 	NSString* _name;
 	BOOL _active;
-	NSString* _iconPath;
+	NSString* iconPath;
 	NSMutableArray* _closestLandmarks;
-	NSDictionary* layerInfoByLandmarkID;
+	NSMutableDictionary* layerInfoByLandmarkID;
 // layerInfoByLandmarkID stores the information necessary to generate the final view of a landmark. 
 // The dictionary's keys are Landmark IDs.
-	
 }
 
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic) BOOL active;
 @property (nonatomic, retain) NSMutableArray* closestLandmarks;
 
-
-+(GNLayer*)initWithName:(NSString*)initName;
++(GNLayer*)layerWithName:(NSString*)initName;
 
 // -(NSIcon) getIcon;
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location;
@@ -34,7 +32,16 @@
 
 @end
 
-struct Dist_And_Landmark {
-	float dist;
-	GNLandmark *landmark;
-}; typedef struct Dist_And_Landmark Dist_And_Landmark;
+
+@interface GNDistAndLandmark : NSObject {
+	float _dist;
+	GNLandmark *_landmark;
+}
+
+@property (nonatomic) float dist;
+@property (nonatomic, retain) GNLandmark *landmark;
+
++(GNDistAndLandmark*)gndlWithDist:(float)initDist andLandmark:(GNLandmark*)initLandmark;
+-(NSComparisonResult)compareTo:(GNDistAndLandmark*)gndl;
+
+@end

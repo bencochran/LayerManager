@@ -12,15 +12,23 @@
 
 @synthesize name=_name, active=_active, closestLandmarks=_closestLandmarks;
 
-+(GNLayer*)initWithName:(NSString*)initName {
++(GNLayer*)layerWithName:(NSString*)initName {
 	GNLayer *layer = [[[GNLayer alloc] init] autorelease];
 	layer.name = initName;
-	layer.active = NO;
-	layer.closestLandmarks = [[NSMutableArray alloc] init];
 	return layer;
 }
 
 // -(NSIcon) getIcon;
+
+-(id)init {
+	if (self = [super init]) {
+		self.name = nil;
+		self.active = NO;
+		self.closestLandmarks = [[NSMutableArray alloc] init];
+		layerInfoByLandmarkID = [[NSMutableDictionary alloc] init];
+	}
+	return self;
+}
 
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location {
 	[self doesNotRecognizeSelector:_cmd];
@@ -29,10 +37,11 @@
 
 -(NSMutableArray *)removeSelfFromLandmarks {
 	NSMutableArray *ret = self.closestLandmarks;
+	GNDistAndLandmark *distLand;
 	int i;
 	for(i = 0; i < [self.closestLandmarks count]; i++) {
-		Dist_And_Landmark *distLand = (Dist_And_Landmark *) [self.closestLandmarks objectAtIndex: i];
-		[distLand->landmark removeActiveLayer: self];
+		distLand = (GNDistAndLandmark *) [self.closestLandmarks objectAtIndex: i];
+		[distLand.landmark removeActiveLayer: self];
 	}
 	self.closestLandmarks = [[NSMutableArray alloc] init];
 	return ret;
@@ -41,6 +50,29 @@
 -(UIViewController*)getLayerViewForID:(int)landmarkID {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
+}
+
+@end
+
+
+@implementation GNDistAndLandmark
+
+@synthesize dist=_dist, landmark=_landmark;
+
++(GNDistAndLandmark*)gndlWithDist:(float)initDist andLandmark:(GNLandmark*)initLandmark {
+	GNDistAndLandmark *gndl = [[[GNDistAndLandmark alloc] init] autorelease];
+	gndl.dist = initDist;
+	gndl.landmark = initLandmark;
+	return gndl;
+}
+
+-(NSComparisonResult)compareTo:(GNDistAndLandmark*)gndl {
+	if(self.dist < gndl.dist)
+		return NSOrderedAscending;
+	else if(self.dist > gndl.dist)
+		return NSOrderedDescending;
+	else
+		return NSOrderedSame;
 }
 
 @end
