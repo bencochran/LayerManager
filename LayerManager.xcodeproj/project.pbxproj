@@ -7,6 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A215000210B2548200774314 /* libLayerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libLayerManager.a */; };
+		A215000310B2548200774314 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8BC147E109EBBB8000701DF /* CoreLocation.framework */; };
+		A215000410B2548200774314 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		A215001D10B254E600774314 /* TesterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A215001C10B254E600774314 /* TesterAppDelegate.m */; };
+		A215002B10B2557B00774314 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A215002A10B2557B00774314 /* main.m */; };
+		A215008610B255B000774314 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A215008510B255B000774314 /* MainWindow.xib */; };
+		A215FF2A10B23D8800774314 /* LayerManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FF2810B23D8800774314 /* LayerManagerTest.m */; };
+		A215FF8A10B2476900774314 /* CarletonBuildings.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FF8810B2476900774314 /* CarletonBuildings.h */; };
+		A215FF8B10B2476900774314 /* CarletonBuildings.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FF8910B2476900774314 /* CarletonBuildings.m */; };
+		A215FFAC10B24F2800774314 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FF9F10B24F2800774314 /* JSON.h */; };
+		A215FFAD10B24F2800774314 /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FFA010B24F2800774314 /* NSObject+SBJSON.h */; };
+		A215FFAE10B24F2800774314 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFA110B24F2800774314 /* NSObject+SBJSON.m */; };
+		A215FFAF10B24F2800774314 /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FFA210B24F2800774314 /* NSString+SBJSON.h */; };
+		A215FFB010B24F2800774314 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFA310B24F2800774314 /* NSString+SBJSON.m */; };
+		A215FFB110B24F2800774314 /* SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FFA410B24F2800774314 /* SBJSON.h */; };
+		A215FFB210B24F2800774314 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFA510B24F2800774314 /* SBJSON.m */; };
+		A215FFB310B24F2800774314 /* SBJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FFA610B24F2800774314 /* SBJsonBase.h */; };
+		A215FFB410B24F2800774314 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFA710B24F2800774314 /* SBJsonBase.m */; };
+		A215FFB510B24F2800774314 /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FFA810B24F2800774314 /* SBJsonParser.h */; };
+		A215FFB610B24F2800774314 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFA910B24F2800774314 /* SBJsonParser.m */; };
+		A215FFB710B24F2800774314 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FFAA10B24F2800774314 /* SBJsonWriter.h */; };
+		A215FFB810B24F2800774314 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFAB10B24F2800774314 /* SBJsonWriter.m */; };
 		AA747D9F0F9514B9006C5449 /* LayerManager_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC145E109EBAEC000701DF /* GNLandmark.h */; };
@@ -19,6 +41,29 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A215001B10B254E600774314 /* TesterAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TesterAppDelegate.h; path = TesterApp/TesterAppDelegate.h; sourceTree = "<group>"; };
+		A215001C10B254E600774314 /* TesterAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TesterAppDelegate.m; path = TesterApp/TesterAppDelegate.m; sourceTree = "<group>"; };
+		A215002A10B2557B00774314 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A215008510B255B000774314 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		A215FF2810B23D8800774314 /* LayerManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerManagerTest.m; sourceTree = "<group>"; };
+		A215FF8810B2476900774314 /* CarletonBuildings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarletonBuildings.h; sourceTree = "<group>"; };
+		A215FF8910B2476900774314 /* CarletonBuildings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarletonBuildings.m; sourceTree = "<group>"; };
+		A215FF9F10B24F2800774314 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		A215FFA010B24F2800774314 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		A215FFA110B24F2800774314 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		A215FFA210B24F2800774314 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		A215FFA310B24F2800774314 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		A215FFA410B24F2800774314 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		A215FFA510B24F2800774314 /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		A215FFA610B24F2800774314 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		A215FFA710B24F2800774314 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		A215FFA810B24F2800774314 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		A215FFA910B24F2800774314 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		A215FFAA10B24F2800774314 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		A215FFAB10B24F2800774314 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		A215FFC410B2517D00774314 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
+		A215FFFC10B2546600774314 /* TesterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TesterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A215FFFE10B2546600774314 /* TesterApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TesterApp-Info.plist"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B8BC145E109EBAEC000701DF /* GNLandmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLandmark.h; sourceTree = "<group>"; };
@@ -32,6 +77,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A215FFFA10B2546600774314 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A215000210B2548200774314 /* libLayerManager.a in Frameworks */,
+				A215000310B2548200774314 /* CoreLocation.framework in Frameworks */,
+				A215000410B2548200774314 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2AAC07C0554694100DB518D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -48,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC07E0554694100DB518D /* libLayerManager.a */,
+				A215FFFC10B2546600774314 /* TesterApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,10 +111,14 @@
 		0867D691FE84028FC02AAC07 /* LayerManager */ = {
 			isa = PBXGroup;
 			children = (
+				A215000510B2548C00774314 /* TesterApp */,
+				A215FF9E10B24F2800774314 /* JSON */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
+				A215FFC410B2517D00774314 /* Tests-Info.plist */,
+				A215FFFE10B2546600774314 /* TesterApp-Info.plist */,
 			);
 			name = LayerManager;
 			sourceTree = "<group>";
@@ -75,12 +135,15 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A215FF2810B23D8800774314 /* LayerManagerTest.m */,
 				B8BC145E109EBAEC000701DF /* GNLandmark.h */,
 				B8BC145F109EBAEC000701DF /* GNLandmark.m */,
 				B8BC1460109EBAEC000701DF /* GNLayer.h */,
 				B8BC1461109EBAEC000701DF /* GNLayer.m */,
 				B8BC1462109EBAEC000701DF /* GNLayerManager.h */,
 				B8BC1463109EBAEC000701DF /* GNLayerManager.m */,
+				A215FF8810B2476900774314 /* CarletonBuildings.h */,
+				A215FF8910B2476900774314 /* CarletonBuildings.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -93,6 +156,38 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		A215000510B2548C00774314 /* TesterApp */ = {
+			isa = PBXGroup;
+			children = (
+				A215001B10B254E600774314 /* TesterAppDelegate.h */,
+				A215001C10B254E600774314 /* TesterAppDelegate.m */,
+				A215002A10B2557B00774314 /* main.m */,
+				A215008510B255B000774314 /* MainWindow.xib */,
+			);
+			name = TesterApp;
+			sourceTree = "<group>";
+		};
+		A215FF9E10B24F2800774314 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				A215FF9F10B24F2800774314 /* JSON.h */,
+				A215FFA010B24F2800774314 /* NSObject+SBJSON.h */,
+				A215FFA110B24F2800774314 /* NSObject+SBJSON.m */,
+				A215FFA210B24F2800774314 /* NSString+SBJSON.h */,
+				A215FFA310B24F2800774314 /* NSString+SBJSON.m */,
+				A215FFA410B24F2800774314 /* SBJSON.h */,
+				A215FFA510B24F2800774314 /* SBJSON.m */,
+				A215FFA610B24F2800774314 /* SBJsonBase.h */,
+				A215FFA710B24F2800774314 /* SBJsonBase.m */,
+				A215FFA810B24F2800774314 /* SBJsonParser.h */,
+				A215FFA910B24F2800774314 /* SBJsonParser.m */,
+				A215FFAA10B24F2800774314 /* SBJsonWriter.h */,
+				A215FFAB10B24F2800774314 /* SBJsonWriter.m */,
+			);
+			name = JSON;
+			path = ../../Desktop/JSON;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -104,12 +199,37 @@
 				B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */,
 				B8BC1466109EBAEC000701DF /* GNLayer.h in Headers */,
 				B8BC1468109EBAEC000701DF /* GNLayerManager.h in Headers */,
+				A215FF8A10B2476900774314 /* CarletonBuildings.h in Headers */,
+				A215FFAC10B24F2800774314 /* JSON.h in Headers */,
+				A215FFAD10B24F2800774314 /* NSObject+SBJSON.h in Headers */,
+				A215FFAF10B24F2800774314 /* NSString+SBJSON.h in Headers */,
+				A215FFB110B24F2800774314 /* SBJSON.h in Headers */,
+				A215FFB310B24F2800774314 /* SBJsonBase.h in Headers */,
+				A215FFB510B24F2800774314 /* SBJsonParser.h in Headers */,
+				A215FFB710B24F2800774314 /* SBJsonWriter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		A215FFFB10B2546600774314 /* TesterApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A215000110B2546600774314 /* Build configuration list for PBXNativeTarget "TesterApp" */;
+			buildPhases = (
+				A215FFF810B2546600774314 /* Resources */,
+				A215FFF910B2546600774314 /* Sources */,
+				A215FFFA10B2546600774314 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TesterApp;
+			productName = TesterApp;
+			productReference = A215FFFC10B2546600774314 /* TesterApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D2AAC07D0554694100DB518D /* LayerManager */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "LayerManager" */;
@@ -141,11 +261,32 @@
 			projectRoot = "";
 			targets = (
 				D2AAC07D0554694100DB518D /* LayerManager */,
+				A215FFFB10B2546600774314 /* TesterApp */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		A215FFF810B2546600774314 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A215008610B255B000774314 /* MainWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		A215FFF910B2546600774314 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A215001D10B254E600774314 /* TesterAppDelegate.m in Sources */,
+				A215002B10B2557B00774314 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2AAC07B0554694100DB518D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -153,6 +294,14 @@
 				B8BC1465109EBAEC000701DF /* GNLandmark.m in Sources */,
 				B8BC1467109EBAEC000701DF /* GNLayer.m in Sources */,
 				B8BC1469109EBAEC000701DF /* GNLayerManager.m in Sources */,
+				A215FF2A10B23D8800774314 /* LayerManagerTest.m in Sources */,
+				A215FF8B10B2476900774314 /* CarletonBuildings.m in Sources */,
+				A215FFAE10B24F2800774314 /* NSObject+SBJSON.m in Sources */,
+				A215FFB010B24F2800774314 /* NSString+SBJSON.m in Sources */,
+				A215FFB210B24F2800774314 /* SBJSON.m in Sources */,
+				A215FFB410B24F2800774314 /* SBJsonBase.m in Sources */,
+				A215FFB610B24F2800774314 /* SBJsonParser.m in Sources */,
+				A215FFB810B24F2800774314 /* SBJsonWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +367,55 @@
 			};
 			name = Release;
 		};
+		A215000010B2546600774314 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "TesterApp-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = TesterApp;
+				SDKROOT = iphoneos3.1.2;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		A215FFFF10B2546600774314 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "TesterApp-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = TesterApp;
+				SDKROOT = iphoneos3.1.2;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -235,6 +433,15 @@
 			buildConfigurations = (
 				1DEB922308733DC00010E9CD /* Debug */,
 				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A215000110B2546600774314 /* Build configuration list for PBXNativeTarget "TesterApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A215FFFF10B2546600774314 /* Debug */,
+				A215000010B2546600774314 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
