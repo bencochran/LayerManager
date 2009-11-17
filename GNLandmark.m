@@ -1,6 +1,6 @@
 //
 //  GNLandmark.m
-//  
+//  Implementation of GNLandmark
 //
 //  Created by iComps on 11/1/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
@@ -11,13 +11,12 @@
 
 @implementation GNLandmark
 
-@synthesize ID=_id, name=_name, location=_location, activeLayers=_activeLayers;
+@synthesize ID=_id, name=_name, activeLayers=_activeLayers;
 
-+(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name location:(CLLocation*)location {
-	GNLandmark *newLandmark = [[[GNLandmark alloc] init] autorelease];
++(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
+	GNLandmark *newLandmark = [[[GNLandmark alloc] initWithLatitude:longitude longitude:longitude] autorelease];
 	newLandmark.ID = ID;
 	newLandmark.name = name;
-	newLandmark.location = location;
 	newLandmark.activeLayers = [[NSMutableArray alloc] init];
 	return newLandmark;
 }
@@ -41,7 +40,7 @@
 
 -(void)dealloc {
 	[self.name release];
-	
+	[self.activeLayers release];
 	[super dealloc];
 }
 

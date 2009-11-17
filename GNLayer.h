@@ -1,6 +1,10 @@
 //
 //  GNLayer.h
-//  
+//  The general layer superclass. Contains information relevant to all layers:
+//      a unique name
+//      a BOOL indicating whether or not this layer is active
+//      a string path to this layer's icon (should be hard-coded into each subclass)
+//      a mutable array of this layer's current closest landmarks
 //
 //  Created by iComps on 11/1/09.
 //  Copyright 2009 Gnarus. All rights reserved.
@@ -15,11 +19,14 @@
 @interface GNLayer : NSObject {
 	NSString* _name;
 	BOOL _active;
-	NSString* iconPath;
 	NSMutableArray* _closestLandmarks;
+	
+	NSString* iconPath;
+	// layerInfoByLandmarkID stores the information necessary
+	// to generate the final UIViewController for a landmark. 
+	// Keys are landmark ID's, values are objects containing
+	// layer information that can be parsed to create the UIViewController
 	NSMutableDictionary* layerInfoByLandmarkID;
-// layerInfoByLandmarkID stores the information necessary to generate the final view of a landmark. 
-// The dictionary's keys are Landmark IDs.
 }
 
 @property (nonatomic, copy) NSString* name;
@@ -28,7 +35,7 @@
 
 +(GNLayer*)layerWithName:(NSString*)initName;
 
-// -(NSIcon) getIcon;
+///////////////////////// TODO: -(NSIcon) getIcon;
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager;
 -(NSMutableArray*)removeSelfFromLandmarks;
 -(NSString*)getSummaryStringForID:(int)landmarkID;
@@ -36,7 +43,8 @@
 
 @end
 
-
+// An NSObject that packages together a GNLandmark
+// and its current floating-point distance from the user
 @interface GNDistAndLandmark : NSObject {
 	float _dist;
 	GNLandmark *_landmark;
@@ -46,6 +54,6 @@
 @property (nonatomic, retain) GNLandmark *landmark;
 
 +(GNDistAndLandmark*)gndlWithDist:(float)initDist andLandmark:(GNLandmark*)initLandmark;
--(NSComparisonResult)compareTo:(GNDistAndLandmark*)gndl;
+-(NSComparisonResult)compareTo:(GNDistAndLandmark*)gndl;    // for sorting
 
 @end

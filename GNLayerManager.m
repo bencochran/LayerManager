@@ -10,6 +10,15 @@
 
 @implementation GNLayerManager
 
+-(id)init {
+	if(self = [super init]) {
+		layers = [[NSMutableArray alloc] init];
+		distAndLandmarkList = [[NSMutableArray alloc] init];
+		allLandmarks = [[NSMutableDictionary alloc] init];
+	}
+	return self;
+}
+
 -(void)addLayer:(GNLayer*)layer {
 	[layers removeObject:layer];
 	[layers addObject:layer];
@@ -20,27 +29,24 @@
 	GNDistAndLandmark *gndl;
 	int i;
 	NSArray *allLandmarksList = [allLandmarks allValues];
+	
+	// clear last list of closest landmarks
 	[distAndLandmarkList removeAllObjects];
 	
 	// clear active layers for all landmarks
 	for(i = 0; i < [allLandmarksList count]; i++)
-		[(GNLandmark*) [allLandmarksList objectAtIndex:[NSNumber numberWithInt:i]] clearActiveLayers];
+		[(GNLandmark*) [allLandmarksList objectAtIndex:i] clearActiveLayers];
 	
 	// add all GNDistAndLandmarks to distAndLandmarkList
 	for(i = 0; i < (int) ([layers count]); i++)
 		if([(GNLayer *)[layers objectAtIndex:i] active] == YES)
-		{
-			buffer = [[layers objectAtIndex:i] getNClosestLandmarks:n toLocation:location];
-			[distAndLandmarkList addObjectsFromArray:buffer];
-			[buffer release];
-		}
+			[distAndLandmarkList addObjectsFromArray:[[layers objectAtIndex:i] getNClosestLandmarks:n toLocation:location withLM:self]];
 	
 	// sort distAndLandmarkList
 	[distAndLandmarkList sortUsingSelector:@selector(compareTo:)];
 	
-	// return top n closest that are closer than maxDistance
+	// return top n closest landmarks that are closer than maxDistance
 	buffer = [[NSMutableArray alloc] init];
-	
 	for(i = 0; i < MIN(n,[distAndLandmarkList count]); i++)
 	{
 		gndl = [distAndLandmarkList objectAtIndex:i];
@@ -83,6 +89,13 @@
 			}
 		}
 	}
+}
+
+-(void)dealloc {
+	[layers dealloc];
+	[distAndLandmarkList dealloc];
+	[allLandmarks dealloc];
+	[super dealloc];
 }
 
 @end

@@ -13,7 +13,7 @@
 @interface GNLayerManager : NSObject {
 	NSMutableArray *layers;
 	NSMutableArray *distAndLandmarkList;
-	NSMutableDictionary *allLandmarks; // key = Landmark ID, value = Landmark pointer
+	NSMutableDictionary *allLandmarks; // key = landmark ID, value = GNLandmark
 }
 
 -(void) addLayer:(GNLayer*)layer;

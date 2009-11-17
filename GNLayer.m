@@ -1,6 +1,6 @@
 //
 //  GNLayer.m
-//  
+//  A generalized layer implementation. Does not recognize all methods - must be subclassed.
 //
 //  Created by iComps on 11/1/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
@@ -18,13 +18,14 @@
 	return layer;
 }
 
-// -(NSIcon) getIcon;
+//////////////////// -(NSIcon) getIcon;
 
 -(id)init {
 	if (self = [super init]) {
 		self.name = nil;
 		self.active = NO;
 		self.closestLandmarks = [[NSMutableArray alloc] init];
+		iconPath = nil;
 		layerInfoByLandmarkID = [[NSMutableDictionary alloc] init];
 	}
 	return self;
@@ -37,12 +38,9 @@
 
 -(NSMutableArray *)removeSelfFromLandmarks {
 	NSMutableArray *ret = self.closestLandmarks;
-	GNDistAndLandmark *distLand;
 	int i;
-	for(i = 0; i < [self.closestLandmarks count]; i++) {
-		distLand = (GNDistAndLandmark *) [self.closestLandmarks objectAtIndex: i];
-		[distLand.landmark removeActiveLayer: self];
-	}
+	for(i = 0; i < [self.closestLandmarks count]; i++)
+		[((GNDistAndLandmark *) [self.closestLandmarks objectAtIndex:i]).landmark removeActiveLayer: self];
 	self.closestLandmarks = [[NSMutableArray alloc] init];
 	return ret;
 }
@@ -55,6 +53,14 @@
 -(UIViewController*)getLayerViewForID:(int)landmarkID {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
+}
+
+-(void)dealloc {
+	[self.name dealloc];
+	[self.closestLandmarks dealloc];
+	[iconPath dealloc];
+	[layerInfoByLandmarkID dealloc];
+	[super dealloc];
 }
 
 @end
@@ -78,6 +84,11 @@
 		return NSOrderedDescending;
 	else
 		return NSOrderedSame;
+}
+
+-(void)dealloc {
+	[self.landmark dealloc];
+	[super dealloc];
 }
 
 @end
