@@ -1,7 +1,7 @@
 //
 //  GNLayer.h
 //  The general layer superclass. Contains information relevant to all layers:
-//      a unique name
+//      a unique string name
 //      a BOOL indicating whether or not this layer is active
 //      a string path to this layer's icon (should be hard-coded into each subclass)
 //      a mutable array of this layer's current closest landmarks
@@ -19,8 +19,12 @@
 @interface GNLayer : NSObject {
 	NSString* _name;
 	BOOL _active;
+	// _closestLandmarks is the last list of closest landmarks
+	// returned by the server (stored in GNDistAndLandmarks).
+	// Sorted in increasing order by distance.
 	NSMutableArray* _closestLandmarks;
 	
+	// the path to the icon that will represent this layer in the main view
 	NSString* iconPath;
 	// layerInfoByLandmarkID stores the information necessary
 	// to generate the final UIViewController for a landmark. 
@@ -33,6 +37,7 @@
 @property (nonatomic) BOOL active;
 @property (nonatomic, retain) NSMutableArray* closestLandmarks;
 
+///////////////////////// MIGHT DELETE LATER - SUBCLASS INITS DON'T CALL THIS
 +(GNLayer*)layerWithName:(NSString*)initName;
 
 ///////////////////////// TODO: -(NSIcon) getIcon;

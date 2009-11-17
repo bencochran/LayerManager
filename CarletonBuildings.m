@@ -35,40 +35,41 @@
 	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?lat=%f;long=%f;maxLandmarks=%d.json",
 						   self.name, lat, lon, n];
 	NSURL *url = [NSURL URLWithString:urlString];
-	// TODO: What should we do with the error?
+	//////////////////////// TODO: What should we do with the error?
 	NSString *reply = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+	
+	// parse the reply
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSArray *layerInfoList = [parser objectWithString:reply error:nil];
+	
+	// load the distance and landmark info
 	NSDictionary *landmarkAndLayerInfo;
-	GNLandmark *currLandmark;
-	CLLocation *currLandmarkLocation;
 	NSMutableDictionary *layerInfo;
+	GNLandmark *currLandmark;
 	GNDistAndLandmark *currGNDL;
 	
 	for(i = 0; i < [layerInfoList count]; i++)
 	{
 		landmarkAndLayerInfo = [layerInfoList objectAtIndex:i];
+		
 		layerInfo = [[NSMutableDictionary alloc] init];
+		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
+		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
+		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"yearBuilt"] forKey:@"yearBuilt"];
+		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
 		
-		[layerInfo setValue:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
-		[layerInfo setValue:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
-		[layerInfo setValue:[landmarkAndLayerInfo objectForKey:@"yearBuilt"] forKey:@"yearBuilt"];
-		[layerInfo setValue:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
-		
-		currLandmarkLocation = [[CLLocation alloc] initWithLatitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
-														   longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]];
 		currLandmark = [layerManager getLandmark:[[landmarkAndLayerInfo objectForKey:@"ID"] intValue]
 											name:[landmarkAndLayerInfo objectForKey:@"name"]
-										location:currLandmarkLocation];
+										latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
+									   longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]];
 		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:currLandmark.ID]];
-		currGNDL = [[GNDistAndLandmark alloc] init];
-		currGNDL.dist = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
-		currGNDL.landmark = currLandmark;
+		
+		currGNDL = [[GNDistAndLandmark gndlWithDist:[[landmarkAndLayerInfo objectForKey:@"distance"] floatValue]
+										andLandmark:currLandmark] retain];
 		[self.closestLandmarks addObject:currGNDL];
 	}
 	
 	[self.closestLandmarks sortUsingSelector:@selector(compareTo:)];
-	
 	return self.closestLandmarks;
 }
 

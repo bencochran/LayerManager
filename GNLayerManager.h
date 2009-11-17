@@ -1,6 +1,6 @@
 //
 // GNLayerManager.h
-//  
+//  Manages all landmarks and layers
 //
 //  Created by iComps on 11/1/09.
 //  Copyright 2009 Gnarus. All rights reserved.
@@ -12,13 +12,17 @@
 
 @interface GNLayerManager : NSObject {
 	NSMutableArray *layers;
+	// distAndLandmarkList is a list of GNDistAndLandmarks, compiled from
+	// the lists of closest landmarks returned by each layer on the previous
+	// call to getNClosestLandmarks, sorted in increasing order by distance
 	NSMutableArray *distAndLandmarkList;
-	NSMutableDictionary *allLandmarks; // key = landmark ID, value = GNLandmark
+	// allLandmarks: key = landmark ID, value = GNLandmark
+	NSMutableDictionary *allLandmarks;
 }
 
 -(void) addLayer:(GNLayer*)layer;
 -(NSMutableArray*) getNClosestLandmarks:(int)n toLocation:(CLLocation*)location maxDistance:(float)maxDistance;
--(GNLandmark*) getLandmark:(int)landmarkID name:(NSString*)landmarkName location:(CLLocation*)landmarkLocation;
--(void) setLayer:(GNLayer*)layer active:(bool)active;
+-(GNLandmark*) getLandmark:(int)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
+-(void) setLayer:(GNLayer*)layer active:(BOOL)active;
 
 @end

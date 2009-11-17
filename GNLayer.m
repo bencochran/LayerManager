@@ -3,7 +3,7 @@
 //  A generalized layer implementation. Does not recognize all methods - must be subclassed.
 //
 //  Created by iComps on 11/1/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Gnarus. All rights reserved.
 //
 
 #import "GNLayer.h"
@@ -36,6 +36,9 @@
 	return nil;
 }
 
+// Removes this layer from the active layers list of each of its closest landmarks
+// Sets this layer's list of closest landmarks to a new empty NSMutableArray
+// and returns the closestLandmarks list
 -(NSMutableArray *)removeSelfFromLandmarks {
 	NSMutableArray *ret = self.closestLandmarks;
 	int i;
@@ -84,11 +87,6 @@
 		return NSOrderedDescending;
 	else
 		return NSOrderedSame;
-}
-
--(void)dealloc {
-	[self.landmark dealloc];
-	[super dealloc];
 }
 
 @end
