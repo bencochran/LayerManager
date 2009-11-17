@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GNLandmark.h"
+#import "GNLayerManager.h"
 
 @interface GNLayer : NSObject {
 	NSString* _name;
@@ -26,7 +27,7 @@
 +(GNLayer*)layerWithName:(NSString*)initName;
 
 // -(NSIcon) getIcon;
--(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location;
+-(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager;
 -(NSMutableArray*)removeSelfFromLandmarks;
 -(NSString*)getSummaryStringForID:(int)landmarkID;
 -(UIViewController*)getLayerViewForID:(int)landmarkID;

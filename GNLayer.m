@@ -30,7 +30,7 @@
 	return self;
 }
 
--(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location {
+-(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }

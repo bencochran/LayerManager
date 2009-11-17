@@ -19,7 +19,12 @@
 	NSMutableArray *buffer;
 	GNDistAndLandmark *gndl;
 	int i;
+	NSArray *allLandmarksList = [allLandmarks allValues];
 	[distAndLandmarkList removeAllObjects];
+	
+	// clear active layers for all landmarks
+	for(i = 0; i < [allLandmarksList count]; i++)
+		[(GNLandmark*) [allLandmarksList objectAtIndex:[NSNumber numberWithInt:i]] clearActiveLayers];
 	
 	// add all GNDistAndLandmarks to distAndLandmarkList
 	for(i = 0; i < (int) ([layers count]); i++)

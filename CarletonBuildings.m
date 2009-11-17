@@ -12,10 +12,23 @@
 @implementation CarletonBuildings
 
 -(id)init {
-	return [GNLayer layerWithName:@"CarletonBuildings"];
+	if (self = [super init]) {
+		self.name = @"CarletonBuildings";
+	}
+	return self;
 }
 
--(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location {
+
+-(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
+	[self.closestLandmarks removeAllObjects];
+	
+	int i;
+	NSMutableArray *oldLayerInfo = [layerInfoByLandmarkID allValues];
+	// free old layer info
+	for(i = 0; i < [oldLayerInfo count]; i++)
+		[[oldLayerInfo objectAtIndex:[NSNumber numberWithInt:i]] release];
+	[layerInfoByLandmarkID removeAllObjects];
+	
 	double lat = [location coordinate].latitude;
 	double lon = [location coordinate].longitude;
 	
@@ -26,9 +39,37 @@
 	NSString *reply = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSArray *layerInfoList = [parser objectWithString:reply error:nil];
+	NSDictionary *landmarkAndLayerInfo;
+	GNLandmark *currLandmark;
+	CLLocation *currLandmarkLocation;
+	NSMutableDictionary *layerInfo;
+	GNDistAndLandmark *currGNDL;
 	
+	for(i = 0; i < [layerInfoList count]; i++)
+	{
+		landmarkAndLayerInfo = [layerInfoList objectAtIndex:[NSNumber numberWithInt:i]];
+		layerInfo = [[NSMutableDictionary alloc] init];
+		
+		[layerInfo setValue:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
+		[layerInfo setValue:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
+		[layerInfo setValue:[landmarkAndLayerInfo objectForKey:@"yearBuilt"] forKey:@"yearBuilt"];
+		[layerInfo setValue:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
+		
+		currLandmarkLocation = [[CLLocation alloc] initWithLatitude:[landmarkAndLayerInfo objectForKey:@"latitude"]
+														   longitude:[landmarkAndLayerInfo objectForKey:@"longitude"]];
+		currLandmark = [layerManager getLandmark:[landmarkAndLayerInfo objectForKey:@"ID"]
+											name:[landmarkAndLayerInfo objectForKey:@"name"]
+										location:currLandmarkLocation];
+		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:currLandmark.id]];
+		currGNDL = [[GNDistAndLandmark alloc] init];
+		currGNDL.dist = [landmarkAndLayerInfo objectForKey:@"distance"];
+		currGNDL.landmark = currLandmark;
+		[closestLandmarks addObject:currGNDL];
+	}
 	
-	return nil;
+	[closestLandmarks sortUsingSelector:@selector(compareTo:)]
+	
+	return closestLandmarks;
 }
 
 -(NSString*)getSummaryStringForID:(int)landmarkID {

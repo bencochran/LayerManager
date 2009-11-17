@@ -13,7 +13,7 @@
 
 @synthesize ID=_id, name=_name, location=_location, activeLayers=_activeLayers;
 
-+(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name location:(CLLocation*)location {
++(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name location:(CLLocation*)location withLM:(*GNLayerManager)layerManager {
 	GNLandmark *newLandmark = [[[GNLandmark alloc] init] autorelease];
 	newLandmark.ID = ID;
 	newLandmark.name = name;
