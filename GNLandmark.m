@@ -13,11 +13,12 @@
 
 @synthesize ID=_id, name=_name, location=_location, activeLayers=_activeLayers;
 
-+(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name location:(CLLocation*)location withLM:(*GNLayerManager)layerManager {
++(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name location:(CLLocation*)location {
 	GNLandmark *newLandmark = [[[GNLandmark alloc] init] autorelease];
 	newLandmark.ID = ID;
 	newLandmark.name = name;
 	newLandmark.location = location;
+	newLandmark.activeLayers = [[NSMutableArray alloc] init];
 	return newLandmark;
 }
 
@@ -26,8 +27,8 @@
 }
 
 -(void)addActiveLayer:(GNLayer*)layer {
-	[self.activeLayers removeObject: layer];
-	[self.activeLayers addObject: layer];
+	[self.activeLayers removeObject:layer];
+	[self.activeLayers addObject:layer];
 }
 
 -(void)removeActiveLayer:(GNLayer*)layer {

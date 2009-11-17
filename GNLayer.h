@@ -10,6 +10,8 @@
 #import "GNLandmark.h"
 #import "GNLayerManager.h"
 
+@class GNLayerManager;
+
 @interface GNLayer : NSObject {
 	NSString* _name;
 	BOOL _active;

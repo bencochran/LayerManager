@@ -13,7 +13,6 @@
 		A215001D10B254E600774314 /* TesterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A215001C10B254E600774314 /* TesterAppDelegate.m */; };
 		A215002B10B2557B00774314 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A215002A10B2557B00774314 /* main.m */; };
 		A215008610B255B000774314 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A215008510B255B000774314 /* MainWindow.xib */; };
-		A215FF2A10B23D8800774314 /* LayerManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FF2810B23D8800774314 /* LayerManagerTest.m */; };
 		A215FF8A10B2476900774314 /* CarletonBuildings.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FF8810B2476900774314 /* CarletonBuildings.h */; };
 		A215FF8B10B2476900774314 /* CarletonBuildings.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FF8910B2476900774314 /* CarletonBuildings.m */; };
 		A215FFAC10B24F2800774314 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FF9F10B24F2800774314 /* JSON.h */; };
@@ -40,12 +39,21 @@
 		B8BC147F109EBBB8000701DF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8BC147E109EBBB8000701DF /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A215019610B26A8700774314 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D /* LayerManager */;
+			remoteInfo = LayerManager;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		A215001B10B254E600774314 /* TesterAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TesterAppDelegate.h; path = TesterApp/TesterAppDelegate.h; sourceTree = "<group>"; };
 		A215001C10B254E600774314 /* TesterAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TesterAppDelegate.m; path = TesterApp/TesterAppDelegate.m; sourceTree = "<group>"; };
 		A215002A10B2557B00774314 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A215008510B255B000774314 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		A215FF2810B23D8800774314 /* LayerManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerManagerTest.m; sourceTree = "<group>"; };
 		A215FF8810B2476900774314 /* CarletonBuildings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarletonBuildings.h; sourceTree = "<group>"; };
 		A215FF8910B2476900774314 /* CarletonBuildings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarletonBuildings.m; sourceTree = "<group>"; };
 		A215FF9F10B24F2800774314 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -135,7 +143,6 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A215FF2810B23D8800774314 /* LayerManagerTest.m */,
 				B8BC145E109EBAEC000701DF /* GNLandmark.h */,
 				B8BC145F109EBAEC000701DF /* GNLandmark.m */,
 				B8BC1460109EBAEC000701DF /* GNLayer.h */,
@@ -224,6 +231,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A215019710B26A8700774314 /* PBXTargetDependency */,
 			);
 			name = TesterApp;
 			productName = TesterApp;
@@ -294,7 +302,6 @@
 				B8BC1465109EBAEC000701DF /* GNLandmark.m in Sources */,
 				B8BC1467109EBAEC000701DF /* GNLayer.m in Sources */,
 				B8BC1469109EBAEC000701DF /* GNLayerManager.m in Sources */,
-				A215FF2A10B23D8800774314 /* LayerManagerTest.m in Sources */,
 				A215FF8B10B2476900774314 /* CarletonBuildings.m in Sources */,
 				A215FFAE10B24F2800774314 /* NSObject+SBJSON.m in Sources */,
 				A215FFB010B24F2800774314 /* NSString+SBJSON.m in Sources */,
@@ -306,6 +313,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A215019710B26A8700774314 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC07D0554694100DB518D /* LayerManager */;
+			targetProxy = A215019610B26A8700774314 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB921F08733DC00010E9CD /* Debug */ = {
