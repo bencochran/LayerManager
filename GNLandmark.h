@@ -1,6 +1,10 @@
 //
 //  GNLandmark.h
-//  
+//  Stores the information relevant to a landmark:
+//      a unique integer identifier
+//      a string name (not necessarily unique)
+//      a longitude and latitude packaged into a CLLocation
+//      a list of the active layers that are currently storing information on this landmark
 //
 //  Created by iComps on 11/1/09.
 //  Copyright 2009 Gnarus. All rights reserved.
