@@ -47,6 +47,11 @@
 	return ret;
 }
 
+-(NSString*)getSummaryStringForID:(int)landmarkID {
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
+}
+
 -(UIViewController*)getLayerViewForID:(int)landmarkID {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;

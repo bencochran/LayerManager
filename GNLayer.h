@@ -28,6 +28,7 @@
 // -(NSIcon) getIcon;
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location;
 -(NSMutableArray*)removeSelfFromLandmarks;
+-(NSString*)getSummaryStringForID:(int)landmarkID;
 -(UIViewController*)getLayerViewForID:(int)landmarkID;
 
 @end
