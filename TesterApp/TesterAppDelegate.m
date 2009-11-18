@@ -18,8 +18,7 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    	
 	NSString *landmarkName = @"Boliou";
-	CLLocation *landmarkLocation = [[CLLocation alloc] initWithLatitude:15.0 longitude:20.0];
-	GNLandmark *newLandmark = [[GNLandmark landmarkWithID:1 name:landmarkName location:landmarkLocation] retain];
+	GNLandmark *newLandmark = [[GNLandmark landmarkWithID:1 name:landmarkName latitude:(CLLocationDegrees)15.0 longitude:(CLLocationDegrees)20.0] retain];
 	GNLayer *academicBuildings = [GNLayer layerWithName:@"Academic Buildings"];
 	GNLayer *food = [GNLayer layerWithName:@"Food"];
 	GNLayer *administration = [GNLayer layerWithName:@"Administration"];

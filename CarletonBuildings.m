@@ -3,7 +3,7 @@
 //  LayerManager
 //
 //  Created by iComps on 11/16/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Gnarus. All rights reserved.
 //
 
 #import "CarletonBuildings.h"
@@ -20,11 +20,12 @@
 
 
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
+	////////////////////PREFERABLE????? [self removeSelfFromLandmarks];
 	[self.closestLandmarks removeAllObjects];
 	
 	int i;
 	NSMutableArray *oldLayerInfo = [[layerInfoByLandmarkID allValues] mutableCopy];
-	// free old layer info
+	// release old layer info
 	for(i = 0; i < [oldLayerInfo count]; i++)
 		[[oldLayerInfo objectAtIndex:i] release];
 	[layerInfoByLandmarkID removeAllObjects];

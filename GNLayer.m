@@ -18,8 +18,6 @@
 	return layer;
 }
 
-//////////////////// -(NSIcon) getIcon;
-
 -(id)init {
 	if (self = [super init]) {
 		self.name = nil;
@@ -31,6 +29,8 @@
 	return self;
 }
 
+//////////////////// -(NSIcon) getIcon;
+
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
@@ -38,31 +38,45 @@
 
 // Removes this layer from the active layers list of each of its closest landmarks
 // Sets this layer's list of closest landmarks to a new empty NSMutableArray
-// and returns the closestLandmarks list
+// and returns the previous closestLandmarks list (autoreleased)
 -(NSMutableArray *)removeSelfFromLandmarks {
-	NSMutableArray *ret = self.closestLandmarks;
+	NSMutableArray *prev = self.closestLandmarks;
 	int i;
 	for(i = 0; i < [self.closestLandmarks count]; i++)
 		[((GNDistAndLandmark *) [self.closestLandmarks objectAtIndex:i]).landmark removeActiveLayer: self];
 	self.closestLandmarks = [[NSMutableArray alloc] init];
-	return ret;
+	[prev autorelease];
+	return prev;
 }
 
+// Returns a short string summarizing the layer information
+// for the landmark with the given ID
 -(NSString*)getSummaryStringForID:(int)landmarkID {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
+// Returns a UIViewController displaying the layer information
+// for the landmark with the given ID
 -(UIViewController*)getLayerViewForID:(int)landmarkID {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
 -(void)dealloc {
-	[self.name dealloc];
-	[self.closestLandmarks dealloc];
-	[iconPath dealloc];
-	[layerInfoByLandmarkID dealloc];
+	NSArray *layerInfoList;
+	int i;
+	
+	[self.name release];
+	[self.closestLandmarks release];
+	[iconPath release];
+	
+	// release all layer information
+	layerInfoList = [layerInfoByLandmarkID allValues];
+	for(i = 0; i < [layerInfoList count]; i++)
+		[[layerInfoList objectAtIndex:i] release];
+	[layerInfoByLandmarkID release];
+	
 	[super dealloc];
 }
 
