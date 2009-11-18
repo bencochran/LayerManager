@@ -22,12 +22,13 @@
 	
 	GNLayerManager *manager = [[GNLayerManager alloc] init];
 	GNLayer *carb = [[CarletonBuildings alloc] init];
-	CLLocation *location1 = [[CLLocation alloc] initWithLatitude:19.555 longitude:-22.123];
+	CLLocation *location1 = [[CLLocation alloc] initWithLatitude:44.4654058108 longitude:-93.148436666400002];
 	CLLocation *location2 = [[CLLocation alloc] initWithLatitude:-1.2345 longitude:5.7785];
+	[manager addLayer:carb];
+	[manager setLayer:carb active:YES];
+	NSMutableArray *gndlList = [manager getNClosestLandmarks:10 toLocation:location1 maxDistance:0.22];
 	
-	NSMutableArray *gndlList = [manager getNClosestLandmarks:10 toLocation:location1 maxDistance:50.0];
-	
-	NSLog(@"CarletonBuildings returned:\n");
+	NSLog(@"LayerManager returned:\n");
 	GNDistAndLandmark *gndl;
 	int i,j;
 	for(i = 0; i < [gndlList count]; i++)
@@ -40,10 +41,8 @@
 		NSLog(@"\tActive layers:");
 		for(j = 0; j < [gndl.landmark getNumActiveLayers]; j++)
 			NSLog(@"\t\t\tActive layer %i: %@", j, [[[gndl.landmark activeLayers] objectAtIndex:j] name]);
-		
 		NSLog(@"");
 	}
-	
 	
 	NSLog(@"Releasing CarletonBuildings. . . .");
 	[carb release];

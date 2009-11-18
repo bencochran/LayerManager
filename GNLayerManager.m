@@ -75,11 +75,12 @@
 	
 	///////////////////////////// TODO: ADD THREADING HERE 
 	// add all GNDistAndLandmarks to distAndLandmarkList
-	for(i = 0; i < (int) ([layers count]); i++)
-		if([(GNLayer *)[layers objectAtIndex:i] active] == YES)
+	GNLayer *layer;
+	for(layer in layers)
+		if([layer active])
+			[distAndLandmarkList addObjectsFromArray:[layer getNClosestLandmarks:n toLocation:location withLM:self]];
 		//////////////////////// PROBLEM: CURRENTLY ADDING DUPLICATE LANDMARKS (if landmark is part of 2 layers, will be added twice)
 		//////////////////////// ALSO, WANT ALL LAYERS THAT HAVE A POINTER TO THE SAME LANDMARK TO HAVE POINTERS TO THE SAME GNDistAndLandmark
-			[distAndLandmarkList addObjectsFromArray:[[layers objectAtIndex:i] getNClosestLandmarks:n toLocation:location withLM:self]];
 	
 	// sort distAndLandmarkList
 	[distAndLandmarkList sortUsingSelector:@selector(compareTo:)];

@@ -29,7 +29,7 @@
 		[[oldLayerInfo objectAtIndex:i] release];
 	[layerInfoByLandmarkID removeAllObjects];
 	
-	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?lat=%f&long=%f&maxLandmarks=%d.json",
+	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?lat=%f&lon=%f&maxLandmarks=%d.json",
 						   self.name, [location coordinate].latitude, [location coordinate].longitude, n];
 	NSURL *url = [NSURL URLWithString:urlString];
 	//////////////////////// TODO: What should we do with the error?
@@ -45,10 +45,8 @@
 	GNLandmark *currLandmark;
 	GNDistAndLandmark *currGNDL;
 	
-	for(i = 0; i < [layerInfoList count]; i++)
+	for (landmarkAndLayerInfo in layerInfoList)
 	{
-		landmarkAndLayerInfo = [layerInfoList objectAtIndex:i];
-		
 		layerInfo = [[NSMutableDictionary alloc] init];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
