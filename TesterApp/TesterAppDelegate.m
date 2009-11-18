@@ -10,6 +10,7 @@
 #import "GNLandmark.h"
 #import "GNLayer.h"
 #import "GNLayerManager.h"
+#import "CarletonBuildings.h"
 
 @implementation TesterAppDelegate
 
@@ -17,7 +18,39 @@
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    	
-	NSString *landmarkName = @"Boliou";
+	NSLog(@"Calling getNClosest on CarletonBuildings. . . .");
+	
+	GNLayerManager *manager = [[GNLayerManager alloc] init];
+	GNLayer *carb = [[CarletonBuildings alloc] init];
+	CLLocation *location1 = [[CLLocation alloc] initWithLatitude:19.555 longitude:-22.123];
+	CLLocation *location2 = [[CLLocation alloc] initWithLatitude:-1.2345 longitude:5.7785];
+	
+	NSMutableArray *gndlList = [manager getNClosestLandmarks:10 toLocation:location1 maxDistance:50.0];
+	
+	NSLog(@"CarletonBuildings returned:\n");
+	GNDistAndLandmark *gndl;
+	int i,j;
+	for(i = 0; i < [gndlList count]; i++)
+	{
+		gndl = [gndlList objectAtIndex:i];
+		NSLog(@"Item %i:", i);
+		NSLog(@"\t\tDist:\t%f", gndl.dist);
+		NSLog(@"\t\tID:\t%i", gndl.landmark.ID);
+		NSLog(@"\t\tname:\t%@", gndl.landmark.name);
+		NSLog(@"\tActive layers:");
+		for(j = 0; j < [gndl.landmark getNumActiveLayers]; j++)
+			NSLog(@"\t\t\tActive layer %i: %@", j, [[[gndl.landmark activeLayers] objectAtIndex:j] name]);
+		
+		NSLog(@"");
+	}
+	
+	
+	NSLog(@"Releasing CarletonBuildings. . . .");
+	[carb release];
+	NSLog(@"Releasing LayerManager");
+	[manager release];
+	
+	/*NSString *landmarkName = @"Boliou";
 	GNLandmark *newLandmark = [[GNLandmark landmarkWithID:1 name:landmarkName latitude:(CLLocationDegrees)15.0 longitude:(CLLocationDegrees)20.0] retain];
 	GNLayer *academicBuildings = [GNLayer layerWithName:@"Academic Buildings"];
 	GNLayer *food = [GNLayer layerWithName:@"Food"];
@@ -39,7 +72,7 @@
 	NSLog(@"After removing non-existant food: %i", [newLandmark getNumActiveLayers]);
 	NSLog(@"active layers:%@", newLandmark.activeLayers);
 	[newLandmark clearActiveLayers];
-	NSLog(@"After removing active layers: %i", [newLandmark getNumActiveLayers]);
+	NSLog(@"After removing active layers: %i", [newLandmark getNumActiveLayers]);*/
 	
     // Override point for customization after application launch
     [window makeKeyAndVisible];

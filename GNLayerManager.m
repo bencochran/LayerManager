@@ -126,7 +126,8 @@
 	
 	// dealloc each GNLandmark
 	allLandmarksList = [allLandmarks allValues];
-	for(i = 0; [allLandmarksList count]; i++)
+	
+	for(i = 0; i < [allLandmarksList count]; i++)
 		[[allLandmarksList objectAtIndex:i] release];
 	[allLandmarks dealloc];
 	

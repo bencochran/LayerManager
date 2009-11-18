@@ -20,8 +20,7 @@
 
 
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
-	////////////////////PREFERABLE????? [self removeSelfFromLandmarks];
-	[self.closestLandmarks removeAllObjects];
+	[self removeSelfFromLandmarks];
 	
 	int i;
 	NSMutableArray *oldLayerInfo = [[layerInfoByLandmarkID allValues] mutableCopy];
@@ -30,11 +29,8 @@
 		[[oldLayerInfo objectAtIndex:i] release];
 	[layerInfoByLandmarkID removeAllObjects];
 	
-	double lat = [location coordinate].latitude;
-	double lon = [location coordinate].longitude;
-	
-	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?lat=%f;long=%f;maxLandmarks=%d.json",
-						   self.name, lat, lon, n];
+	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?lat=%f&long=%f&maxLandmarks=%d.json",
+						   self.name, [location coordinate].latitude, [location coordinate].longitude, n];
 	NSURL *url = [NSURL URLWithString:urlString];
 	//////////////////////// TODO: What should we do with the error?
 	NSString *reply = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
@@ -63,6 +59,7 @@
 											name:[landmarkAndLayerInfo objectForKey:@"name"]
 										latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
 									   longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]];
+		[currLandmark addActiveLayer:self];
 		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:currLandmark.ID]];
 		
 		currGNDL = [[GNDistAndLandmark gndlWithDist:[[landmarkAndLayerInfo objectForKey:@"distance"] floatValue]
