@@ -191,9 +191,8 @@
 				A215FFAA10B24F2800774314 /* SBJsonWriter.h */,
 				A215FFAB10B24F2800774314 /* SBJsonWriter.m */,
 			);
-			name = JSON;
-			path = ../../Desktop/JSON;
-			sourceTree = SOURCE_ROOT;
+			path = JSON;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
