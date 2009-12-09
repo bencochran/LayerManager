@@ -63,6 +63,10 @@
 	return nil;
 }
 
+- (NSString *)description {
+	return [NSString stringWithFormat:@"<GNLayer name:%@, active: %@>", self.name, self.active ? @"YES" : @"NO"];
+}
+
 -(void)dealloc {
 	NSArray *layerInfoList;
 	int i;

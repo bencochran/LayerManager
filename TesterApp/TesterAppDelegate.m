@@ -23,9 +23,8 @@
 	CLLocation *location1 = [[CLLocation alloc] initWithLatitude:44.4654058108 longitude:-93.148436666400002];
 	//CLLocation *location2 = [[CLLocation alloc] initWithLatitude:-1.2345 longitude:5.7785];
 	[manager addLayer:carb];
-	[manager addLayer:tweets];
+	[manager addLayer:tweets active:YES];
 	[manager setLayer:carb active:NO];
-	[manager setLayer:tweets active:YES];
 	NSMutableArray *gndlList = [manager getNClosestLandmarks:100 toLocation:location1 maxDistance:5];
 	
 	NSLog(@"LayerManager returned:\n");

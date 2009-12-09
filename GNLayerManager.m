@@ -55,7 +55,6 @@ static GNLayerManager *sharedManager = nil;
     return self;
 }
 
-
 -(id)init {
 	if (self = [super init]) {
 		layers = [[NSMutableArray alloc] init];
@@ -106,6 +105,10 @@ static GNLayerManager *sharedManager = nil;
 			}
 		}
 	}
+}
+
+- (NSString *)description {
+	return [NSString stringWithFormat:@"<GNToggleManager layers:%@>", layers];
 }
 
 // calls getNClosestLandmarks on each layer in the list of layers simultaneously
