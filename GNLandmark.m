@@ -14,7 +14,7 @@
 @synthesize ID=_id, name=_name, activeLayers=_activeLayers;
 
 +(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
-	GNLandmark *newLandmark = [[[GNLandmark alloc] initWithLatitude:longitude longitude:longitude] autorelease];
+	GNLandmark *newLandmark = [[[GNLandmark alloc] initWithLatitude:latitude longitude:longitude] autorelease];
 	newLandmark.ID = ID;
 	newLandmark.name = name;
 	newLandmark.activeLayers = [[NSMutableArray alloc] init];
