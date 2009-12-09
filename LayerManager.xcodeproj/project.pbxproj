@@ -31,6 +31,8 @@
 		AA747D9F0F9514B9006C5449 /* LayerManager_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		B81C4D6910CF4F1100EA3205 /* LayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B81C4D6810CF4F1100EA3205 /* LayerManager.h */; };
+		B88D771910CF6110003A76A1 /* TweetLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B88D771710CF6110003A76A1 /* TweetLayer.h */; };
+		B88D771A10CF6110003A76A1 /* TweetLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D771810CF6110003A76A1 /* TweetLayer.m */; };
 		B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC145E109EBAEC000701DF /* GNLandmark.h */; };
 		B8BC1465109EBAEC000701DF /* GNLandmark.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BC145F109EBAEC000701DF /* GNLandmark.m */; };
 		B8BC1466109EBAEC000701DF /* GNLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC1460109EBAEC000701DF /* GNLayer.h */; };
@@ -75,6 +77,9 @@
 		A215FFFE10B2546600774314 /* TesterApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TesterApp-Info.plist"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B81C4D6810CF4F1100EA3205 /* LayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager.h; sourceTree = "<group>"; };
+		B88D771710CF6110003A76A1 /* TweetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetLayer.h; sourceTree = "<group>"; };
+		B88D771810CF6110003A76A1 /* TweetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetLayer.m; sourceTree = "<group>"; };
 		B8BC145E109EBAEC000701DF /* GNLandmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLandmark.h; sourceTree = "<group>"; };
 		B8BC145F109EBAEC000701DF /* GNLandmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLandmark.m; sourceTree = "<group>"; };
 		B8BC1460109EBAEC000701DF /* GNLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLayer.h; sourceTree = "<group>"; };
@@ -144,6 +149,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B81C4D6810CF4F1100EA3205 /* LayerManager.h */,
 				B8BC145E109EBAEC000701DF /* GNLandmark.h */,
 				B8BC145F109EBAEC000701DF /* GNLandmark.m */,
 				B8BC1460109EBAEC000701DF /* GNLayer.h */,
@@ -152,6 +158,8 @@
 				B8BC1463109EBAEC000701DF /* GNLayerManager.m */,
 				A215FF8810B2476900774314 /* CarletonBuildings.h */,
 				A215FF8910B2476900774314 /* CarletonBuildings.m */,
+				B88D771710CF6110003A76A1 /* TweetLayer.h */,
+				B88D771810CF6110003A76A1 /* TweetLayer.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -214,6 +222,8 @@
 				A215FFB310B24F2800774314 /* SBJsonBase.h in Headers */,
 				A215FFB510B24F2800774314 /* SBJsonParser.h in Headers */,
 				A215FFB710B24F2800774314 /* SBJsonWriter.h in Headers */,
+				B81C4D6910CF4F1100EA3205 /* LayerManager.h in Headers */,
+				B88D771910CF6110003A76A1 /* TweetLayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +319,7 @@
 				A215FFB410B24F2800774314 /* SBJsonBase.m in Sources */,
 				A215FFB610B24F2800774314 /* SBJsonParser.m in Sources */,
 				A215FFB810B24F2800774314 /* SBJsonWriter.m in Sources */,
+				B88D771A10CF6110003A76A1 /* TweetLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,11 +19,14 @@
 	
 	GNLayerManager *manager = [[GNLayerManager alloc] init];
 	GNLayer *carb = [[CarletonBuildings alloc] init];
+	GNLayer *tweets = [[TweetLayer alloc] init];
 	CLLocation *location1 = [[CLLocation alloc] initWithLatitude:44.4654058108 longitude:-93.148436666400002];
 	CLLocation *location2 = [[CLLocation alloc] initWithLatitude:-1.2345 longitude:5.7785];
 	[manager addLayer:carb];
-	[manager setLayer:carb active:YES];
-	NSMutableArray *gndlList = [manager getNClosestLandmarks:10 toLocation:location1 maxDistance:0.22];
+	[manager addLayer:tweets];
+	[manager setLayer:carb active:NO];
+	[manager setLayer:tweets active:YES];
+	NSMutableArray *gndlList = [manager getNClosestLandmarks:100 toLocation:location1 maxDistance:5];
 	
 	NSLog(@"LayerManager returned:\n");
 	GNDistAndLandmark *gndl;
