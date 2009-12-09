@@ -10,6 +10,52 @@
 
 @implementation GNLayerManager
 
+static GNLayerManager *sharedManager = nil;
+
++ (GNLayerManager*)sharedManager {
+	if (sharedManager == nil) {
+		sharedManager = [[super allocWithZone:NULL] init];
+	}
+	return sharedManager;
+}
+
+// Prevent someone from attempting to allocate
+// our class manually
++ (id)allocWithZone:(NSZone *)zone {
+	return [[self sharedManager] retain];
+}
+
+// Don't copy
+- (id)copyWithZone:(NSZone *)zone
+{
+    return self;
+}
+
+// Don't actually retain
+- (id)retain
+{
+    return self;
+}
+
+// Denotes an object that cannot be released
+- (NSUInteger)retainCount
+{
+    return NSUIntegerMax;
+}
+
+- (void)release
+{
+    // Never release
+}
+
+// Don't actually add yourself to the pool.
+// It's gross in there. Kids pee and stuff.
+- (id)autorelease
+{
+    return self;
+}
+
+
 -(id)init {
 	if (self = [super init]) {
 		layers = [[NSMutableArray alloc] init];

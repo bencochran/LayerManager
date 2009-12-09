@@ -47,7 +47,6 @@
 	
 	// load the distance and landmark info
 	NSDictionary *tweet;
-	NSMutableDictionary *layerInfo;
 	GNLandmark *landmark;
 	GNDistAndLandmark *currGNDL;
 	
