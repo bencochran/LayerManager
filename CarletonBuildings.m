@@ -42,8 +42,7 @@
 	// load the distance and landmark info
 	NSDictionary *landmarkAndLayerInfo;
 	NSMutableDictionary *layerInfo;
-	GNLandmark *currLandmark;
-	GNDistAndLandmark *currGNDL;
+	GNLandmark *landmark;
 	
 	for (landmarkAndLayerInfo in layerInfoList)
 	{
@@ -53,16 +52,16 @@
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"yearBuilt"] forKey:@"yearBuilt"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
 		
-		currLandmark = [layerManager getLandmark:[[landmarkAndLayerInfo objectForKey:@"ID"] intValue]
+		landmark = [layerManager getLandmark:[[landmarkAndLayerInfo objectForKey:@"ID"] intValue]
 											name:[landmarkAndLayerInfo objectForKey:@"name"]
 										latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
 									   longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]];
-		[currLandmark addActiveLayer:self];
-		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:currLandmark.ID]];
+		[landmark addActiveLayer:self];
+		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:landmark.ID]];
 		
-		currGNDL = [[GNDistAndLandmark gndlWithDist:[[landmarkAndLayerInfo objectForKey:@"distance"] floatValue]
-										andLandmark:currLandmark] retain];
-		[self.closestLandmarks addObject:currGNDL];
+		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
+		
+		[self.closestLandmarks addObject:landmark];
 	}
 	
 	[self.closestLandmarks sortUsingSelector:@selector(compareTo:)];

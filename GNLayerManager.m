@@ -60,7 +60,7 @@ static GNLayerManager *sharedManager = nil;
 -(id)init {
 	if (self = [super init]) {
 		layers = [[NSMutableArray alloc] init];
-		distAndLandmarkList = [[NSMutableArray alloc] init];
+		closestLandmarks = [[NSMutableArray alloc] init];
 		allLandmarks = [[NSMutableDictionary alloc] init];
 	}
 	return self;
@@ -92,18 +92,14 @@ static GNLayerManager *sharedManager = nil;
 	
 	if(active == NO)
 	{
-		NSMutableArray *layerLandmarks = [layer removeSelfFromLandmarks];
-		GNDistAndLandmark *gndl;
-		int i;
-		for(i = 0; i < [layerLandmarks count]; i++)
-		{
-			gndl = (GNDistAndLandmark*) [layerLandmarks objectAtIndex:i];
-			if([gndl.landmark getNumActiveLayers] == 0)
-			{
-				[allLandmarks removeObjectForKey:[NSNumber numberWithInt:[gndl.landmark ID]]];
-				[distAndLandmarkList removeObject:gndl];
-				[gndl.landmark release];
-				[gndl release];
+		NSArray *layerLandmarks = [layer removeSelfFromLandmarks];
+		
+		for (GNLandmark *landmark in layerLandmarks) {
+			if ([landmark getNumActiveLayers] == 0) {
+				[allLandmarks removeObjectForKey:
+				 [NSNumber numberWithInt:landmark.ID]];
+				
+				[closestLandmarks removeObject:landmark];
 			}
 		}
 	}
@@ -116,53 +112,41 @@ static GNLayerManager *sharedManager = nil;
 // calls getNClosestLandmarks on each layer in the list of layers simultaneously
 // returns a list of GNDistAndLandmarks, sorted in increasing order by distance,
 // of the n closest landmarks (closer than maxDistance) returned by at least one layer
--(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location maxDistance:(float)maxDistance {
-	NSMutableArray *result;
-	GNDistAndLandmark *gndl;
-	int i;
-	
+-(NSArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location maxDistance:(float)maxDistance {
 	// clear active layers for all landmarks
-	NSArray *allLandmarksList = [allLandmarks allValues];
-	for(i = 0; i < [allLandmarksList count]; i++)
-		[(GNLandmark*) [allLandmarksList objectAtIndex:i] clearActiveLayers];
+	for (GNLandmark *landmark in [allLandmarks allValues]) {
+		[landmark clearActiveLayers];
+	}
 	
-	// release all GNDistAndLandmarks and clear last list of closest landmarks
-	for(i = 0; i < [distAndLandmarkList count]; i++)
-		[[distAndLandmarkList objectAtIndex:i] release];
-	[distAndLandmarkList removeAllObjects];
+	// clear out the closestLandmarks
+	[closestLandmarks removeAllObjects];
 	
 	///////////////////////////// TODO: ADD THREADING HERE 
 	// add all GNDistAndLandmarks to distAndLandmarkList
-	GNLayer *layer;
-	for(layer in layers)
-		if([layer active])
-			[distAndLandmarkList addObjectsFromArray:[layer getNClosestLandmarks:n toLocation:location withLM:self]];
+	for(GNLayer *layer in layers) {
+		if([layer active]) {
+			[closestLandmarks addObjectsFromArray:[layer getNClosestLandmarks:n toLocation:location withLM:self]];
+			//[distAndLandmarkList addObjectsFromArray:[layer getNClosestLandmarks:n toLocation:location withLM:self]];
+		}
 		//////////////////////// PROBLEM: CURRENTLY ADDING DUPLICATE LANDMARKS (if landmark is part of 2 layers, will be added twice)
 		//////////////////////// ALSO, WANT ALL LAYERS THAT HAVE A POINTER TO THE SAME LANDMARK TO HAVE POINTERS TO THE SAME GNDistAndLandmark
-	
-	// sort distAndLandmarkList
-	[distAndLandmarkList sortUsingSelector:@selector(compareTo:)];
-	
-	// return top n closest landmarks that are closer than maxDistance
-	result = [[NSMutableArray alloc] init];
-	for(i = 0; i < MIN(n,[distAndLandmarkList count]); i++)
-	{
-		gndl = [distAndLandmarkList objectAtIndex:i];
-		if(gndl.dist <= maxDistance)
-			[result addObject:gndl];
-		else
-			break;
 	}
 	
+	// sort distAndLandmarkList
+	[closestLandmarks sortUsingSelector:@selector(compareTo:)];
+		
+	NSArray* closestN = [closestLandmarks objectsAtIndexes:
+						 [NSIndexSet indexSetWithIndexesInRange:
+						  NSMakeRange(0, MIN(n, [closestLandmarks count]))]];
 	
 	// Send a notification that the landmarks list has been updated. This will
 	// be used later when we add threading and need some way to notify observers
 	// of updates do the landmark list
 	[[NSNotificationCenter defaultCenter] postNotificationName:GNLandmarksUpdated
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:result,@"landmarks",nil]];
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:closestN,@"landmarks",nil]];
 	
-	return result;
+	return closestN;
 }
 
 // if a landmark with the given ID exists in the allLandmarks NSMutableDictionary, returns that GNLandmark
@@ -178,25 +162,9 @@ static GNLayerManager *sharedManager = nil;
 }
 
 -(void)dealloc {
-	NSArray *allLandmarksList;
-	int i;
-	
-	// release each layer and the layer list
-	for(i = 0; i < [layers count]; i++)
-		[[layers objectAtIndex:i] release];
 	[layers release];
-	
-	// release each GNDistAndLandmark
-	for(i = 0; i < [distAndLandmarkList count]; i++)
-		[[distAndLandmarkList objectAtIndex:i] release];
-	[distAndLandmarkList release];
-	
-	// dealloc each GNLandmark
-	allLandmarksList = [allLandmarks allValues];
-	
-	for(i = 0; i < [allLandmarksList count]; i++)
-		[[allLandmarksList objectAtIndex:i] release];
-	[allLandmarks dealloc];
+	[allLandmarks release];
+	[closestLandmarks release];
 	
 	[super dealloc];
 }

@@ -48,7 +48,6 @@
 	// load the distance and landmark info
 	NSDictionary *tweet;
 	GNLandmark *landmark;
-	GNDistAndLandmark *currGNDL;
 	
 	NSNumber *latitude;
 	NSNumber *longitude;
@@ -70,9 +69,10 @@
 			
 			[landmark addActiveLayer:self];
 			[layerInfoByLandmarkID setObject:tweet forKey:[NSNumber numberWithInt:landmark.ID]];
-			
-			currGNDL = [GNDistAndLandmark gndlWithDist:[landmark getDistanceFrom:location]/1609.344 andLandmark:landmark];
-			[self.closestLandmarks addObject:currGNDL];
+						
+			// convert distance to miles
+			landmark.distance = [landmark getDistanceFrom:location]/1609.344;
+			[self.closestLandmarks addObject:landmark];
 		}
 	}
 	

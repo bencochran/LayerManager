@@ -11,7 +11,7 @@
 
 @implementation GNLandmark
 
-@synthesize ID=_id, name=_name, activeLayers=_activeLayers;
+@synthesize ID=_id, name=_name, activeLayers=_activeLayers, distance=_distance;
 
 +(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
 	CLLocationCoordinate2D coordinate;
@@ -31,6 +31,15 @@
 	newLandmark.name = name;
 	newLandmark.activeLayers = [[NSMutableArray alloc] init];
 	return newLandmark;
+}
+
+-(NSComparisonResult)compareTo:(GNLandmark*)other {
+	if(self.distance < other.distance)
+		return NSOrderedAscending;
+	else if(self.distance > other.distance)
+		return NSOrderedDescending;
+	else
+		return NSOrderedSame;
 }
 
 -(int)getNumActiveLayers {

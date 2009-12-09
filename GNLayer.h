@@ -51,15 +51,15 @@
 
 // An NSObject that packages together a GNLandmark
 // and its current floating-point distance from the user
-@interface GNDistAndLandmark : NSObject {
-	float _dist;
-	GNLandmark *_landmark;
-}
-
-@property (nonatomic) float dist;
-@property (nonatomic, retain) GNLandmark *landmark;
-
-+(GNDistAndLandmark*)gndlWithDist:(float)initDist andLandmark:(GNLandmark*)initLandmark;
--(NSComparisonResult)compareTo:(GNDistAndLandmark*)gndl;    // for sorting
-
-@end
+//@interface GNDistAndLandmark : NSObject {
+//	float _dist;
+//	GNLandmark *_landmark;
+//}
+//
+//@property (nonatomic) float dist;
+//@property (nonatomic, retain) GNLandmark *landmark;
+//
+//+(GNDistAndLandmark*)gndlWithDist:(float)initDist andLandmark:(GNLandmark*)initLandmark;
+//-(NSComparisonResult)compareTo:(GNDistAndLandmark*)gndl;    // for sorting
+//
+//@end

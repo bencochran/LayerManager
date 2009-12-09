@@ -19,7 +19,7 @@ extern NSString *const GNLandmarksUpdated;
 	// distAndLandmarkList is a list of GNDistAndLandmarks, compiled from
 	// the lists of closest landmarks returned by each layer on the previous
 	// call to getNClosestLandmarks, sorted in increasing order by distance
-	NSMutableArray *distAndLandmarkList;
+	NSMutableArray *closestLandmarks;
 	// allLandmarks: key = landmark ID, value = GNLandmark
 	NSMutableDictionary *allLandmarks;
 }
@@ -29,7 +29,7 @@ extern NSString *const GNLandmarksUpdated;
 - (void)addLayer:(GNLayer *)layer;
 - (void)setLayer:(GNLayer *)layer active:(BOOL)active;
 - (void)addLayer:(GNLayer *)layer active:(BOOL)active;
-- (NSMutableArray *)getNClosestLandmarks:(int)n toLocation:(CLLocation *)location maxDistance:(float)maxDistance;
+- (NSArray *)getNClosestLandmarks:(int)n toLocation:(CLLocation *)location maxDistance:(float)maxDistance;
 - (GNLandmark *)getLandmark:(int)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 
 @end

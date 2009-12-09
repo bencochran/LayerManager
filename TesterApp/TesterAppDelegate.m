@@ -25,21 +25,21 @@
 	[manager addLayer:carb];
 	[manager addLayer:tweets active:YES];
 	[manager setLayer:carb active:NO];
-	NSMutableArray *gndlList = [manager getNClosestLandmarks:100 toLocation:location1 maxDistance:5];
+	NSArray *landmarks = [manager getNClosestLandmarks:100 toLocation:location1 maxDistance:5];
 	
 	NSLog(@"LayerManager returned:\n");
-	GNDistAndLandmark *gndl;
+	GNLandmark *landmark;
 	int i,j;
-	for(i = 0; i < [gndlList count]; i++)
+	for(i = 0; i < [landmarks count]; i++)
 	{
-		gndl = [gndlList objectAtIndex:i];
+		landmark = [landmarks objectAtIndex:i];
 		NSLog(@"Item %i:", i);
-		NSLog(@"\t\tDist:\t%f", gndl.dist);
-		NSLog(@"\t\tID:\t%i", gndl.landmark.ID);
-		NSLog(@"\t\tname:\t%@", gndl.landmark.name);
+		NSLog(@"\t\tDist:\t%f", landmark.distance);
+		NSLog(@"\t\tID:\t%i", landmark.ID);
+		NSLog(@"\t\tname:\t%@", landmark.name);
 		NSLog(@"\tActive layers:");
-		for(j = 0; j < [gndl.landmark getNumActiveLayers]; j++)
-			NSLog(@"\t\t\tActive layer %i: %@", j, [[[gndl.landmark activeLayers] objectAtIndex:j] name]);
+		for(j = 0; j < [landmark getNumActiveLayers]; j++)
+			NSLog(@"\t\t\tActive layer %i: %@", j, [[landmark.activeLayers objectAtIndex:j] name]);
 		NSLog(@"");
 	}
 	

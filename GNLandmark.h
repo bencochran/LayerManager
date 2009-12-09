@@ -19,11 +19,15 @@
 	int _id;
 	NSString* _name;
 	NSMutableArray* _activeLayers;
+	
+	// The distance from the last known location of the user
+	float _distance;
 }
 
 @property (nonatomic) int ID;
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, retain) NSMutableArray* activeLayers;
+@property (nonatomic) float distance;
 
 +(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;
 +(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;

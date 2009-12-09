@@ -40,13 +40,13 @@
 // Sets this layer's list of closest landmarks to a new empty NSMutableArray
 // and returns the previous closestLandmarks list (autoreleased)
 -(NSMutableArray *)removeSelfFromLandmarks {
-	NSMutableArray *prev = self.closestLandmarks;
-	int i;
-	for(i = 0; i < [self.closestLandmarks count]; i++)
-		[((GNDistAndLandmark *) [self.closestLandmarks objectAtIndex:i]).landmark removeActiveLayer: self];
-	self.closestLandmarks = [[NSMutableArray alloc] init];
-	[prev autorelease];
-	return prev;
+	for (GNLandmark *landmark in self.closestLandmarks) {
+		[landmark removeActiveLayer:self];
+	}
+	
+	NSMutableArray *prev = [self.closestLandmarks copy];
+	[self.closestLandmarks removeAllObjects];
+	return [prev autorelease];
 }
 
 // Returns a short string summarizing the layer information
@@ -87,28 +87,28 @@
 @end
 
 
-@implementation GNDistAndLandmark
-
-@synthesize dist=_dist, landmark=_landmark;
-
-+(GNDistAndLandmark*)gndlWithDist:(float)initDist andLandmark:(GNLandmark*)initLandmark {
-	GNDistAndLandmark *gndl = [[[GNDistAndLandmark alloc] init] autorelease];
-	gndl.dist = initDist;
-	gndl.landmark = initLandmark;
-	return gndl;
-}
-
--(NSComparisonResult)compareTo:(GNDistAndLandmark*)gndl {
-	if(self.dist < gndl.dist)
-		return NSOrderedAscending;
-	else if(self.dist > gndl.dist)
-		return NSOrderedDescending;
-	else
-		return NSOrderedSame;
-}
-
-- (NSString *)description {
-	return [NSString stringWithFormat:@"Distance: %f, Landmark: %@", self.dist, self.landmark];
-}
-
-@end
+//@implementation GNDistAndLandmark
+//
+//@synthesize dist=_dist, landmark=_landmark;
+//
+//+(GNDistAndLandmark*)gndlWithDist:(float)initDist andLandmark:(GNLandmark*)initLandmark {
+//	GNDistAndLandmark *gndl = [[[GNDistAndLandmark alloc] init] autorelease];
+//	gndl.dist = initDist;
+//	gndl.landmark = initLandmark;
+//	return gndl;
+//}
+//
+//-(NSComparisonResult)compareTo:(GNDistAndLandmark*)gndl {
+//	if(self.dist < gndl.dist)
+//		return NSOrderedAscending;
+//	else if(self.dist > gndl.dist)
+//		return NSOrderedDescending;
+//	else
+//		return NSOrderedSame;
+//}
+//
+//- (NSString *)description {
+//	return [NSString stringWithFormat:@"Distance: %f, Landmark: %@", self.dist, self.landmark];
+//}
+//
+//@end
