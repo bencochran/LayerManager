@@ -25,6 +25,7 @@
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, retain) NSMutableArray* activeLayers;
 
++(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;
 +(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 
 -(void)addActiveLayer:(GNLayer*)layer;

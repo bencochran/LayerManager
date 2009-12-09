@@ -13,6 +13,18 @@
 
 @synthesize ID=_id, name=_name, activeLayers=_activeLayers;
 
++(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
+	CLLocationCoordinate2D coordinate;
+	coordinate.latitude = latitude;
+	coordinate.longitude = longitude;
+	
+	GNLandmark *landmark = [[GNLandmark alloc] initWithCoordinate:coordinate altitude:altitude horizontalAccuracy:0.0 verticalAccuracy:0.0 timestamp:[NSDate date]];
+	landmark.ID = ID;
+	landmark.name = name;
+	landmark.activeLayers = [NSMutableArray array];
+	return [landmark autorelease];	
+}
+
 +(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
 	GNLandmark *newLandmark = [[[GNLandmark alloc] initWithLatitude:latitude longitude:longitude] autorelease];
 	newLandmark.ID = ID;
