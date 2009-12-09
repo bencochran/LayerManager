@@ -29,7 +29,7 @@
 		[[oldLayerInfo objectAtIndex:i] release];
 	[layerInfoByLandmarkID removeAllObjects];
 	
-	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?lat=%f&lon=%f&maxLandmarks=%d.json",
+	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?lat=%f&lon=%f&maxLandmarks=%d",
 						   self.name, [location coordinate].latitude, [location coordinate].longitude, n];
 	NSURL *url = [NSURL URLWithString:urlString];
 	//////////////////////// TODO: What should we do with the error?
