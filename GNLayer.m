@@ -103,4 +103,8 @@
 		return NSOrderedSame;
 }
 
+- (NSString *)description {
+	return [NSString stringWithFormat:@"Distance: %f, Landmark: %@", self.dist, self.landmark];
+}
+
 @end

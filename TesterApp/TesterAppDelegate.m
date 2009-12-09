@@ -7,10 +7,7 @@
 //
 
 #import "TesterAppDelegate.h"
-#import "GNLandmark.h"
-#import "GNLayer.h"
-#import "GNLayerManager.h"
-#import "CarletonBuildings.h"
+#import "LayerManager.h"
 
 @implementation TesterAppDelegate
 
@@ -47,7 +44,7 @@
 	NSLog(@"Releasing CarletonBuildings. . . .");
 	[carb release];
 	NSLog(@"Releasing LayerManager");
-	[manager release];
+	//[manager release];
 	
 	/*NSString *landmarkName = @"Boliou";
 	GNLandmark *newLandmark = [[GNLandmark landmarkWithID:1 name:landmarkName latitude:(CLLocationDegrees)15.0 longitude:(CLLocationDegrees)20.0] retain];

@@ -105,7 +105,7 @@
 	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:[NSNumber numberWithInt:landmarkID]]);
 	if(landmark == nil)
 	{
-		landmark = [[GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude] retain];
+		landmark = [[GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude] autorelease];
 		[allLandmarks setObject:landmark forKey:[NSNumber numberWithInt:landmarkID]];
 	}
 	return landmark;

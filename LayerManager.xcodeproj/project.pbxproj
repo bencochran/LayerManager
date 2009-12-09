@@ -30,6 +30,7 @@
 		A215FFB810B24F2800774314 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFAB10B24F2800774314 /* SBJsonWriter.m */; };
 		AA747D9F0F9514B9006C5449 /* LayerManager_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		B81C4D6910CF4F1100EA3205 /* LayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B81C4D6810CF4F1100EA3205 /* LayerManager.h */; };
 		B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC145E109EBAEC000701DF /* GNLandmark.h */; };
 		B8BC1465109EBAEC000701DF /* GNLandmark.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BC145F109EBAEC000701DF /* GNLandmark.m */; };
 		B8BC1466109EBAEC000701DF /* GNLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC1460109EBAEC000701DF /* GNLayer.h */; };
