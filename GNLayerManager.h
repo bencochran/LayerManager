@@ -10,6 +10,10 @@
 #import "GNLayer.h"
 #import "GNLandmark.h"
 
+@protocol GNLayerManagerDelegate;
+
+extern NSString *const GNLandmarksUpdated;
+
 @interface GNLayerManager : NSObject {
 	NSMutableArray *layers;
 	// distAndLandmarkList is a list of GNDistAndLandmarks, compiled from

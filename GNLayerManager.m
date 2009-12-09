@@ -10,6 +10,8 @@
 
 @implementation GNLayerManager
 
+NSString *const GNLandmarksUpdated = @"GNLandmarksUpdated";
+
 static GNLayerManager *sharedManager = nil;
 
 + (GNLayerManager*)sharedManager {
@@ -151,6 +153,14 @@ static GNLayerManager *sharedManager = nil;
 		else
 			break;
 	}
+	
+	
+	// Send a notification that the landmarks list has been updated. This will
+	// be used later when we add threading and need some way to notify observers
+	// of updates do the landmark list
+	[[NSNotificationCenter defaultCenter] postNotificationName:GNLandmarksUpdated
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:result,@"landmarks",nil]];
 	
 	return result;
 }
