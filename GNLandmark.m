@@ -50,6 +50,11 @@
 	[self.activeLayers removeAllObjects];
 }
 
+- (NSString *)description {
+	return [NSString stringWithFormat:@"<%f, %f> %@", self.coordinate.latitude,
+			self.coordinate.longitude, self.name];
+}
+
 -(void)dealloc {
 	[self.name release];
 	[self.activeLayers release];
