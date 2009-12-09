@@ -71,6 +71,13 @@ static GNLayerManager *sharedManager = nil;
 	[layers addObject:layer];
 }
 
+// convenience method for adding a layer and simultaneously
+// setting its active status
+- (void)addLayer:(GNLayer *)layer active:(BOOL)active {
+	[self addLayer:layer];
+	[self setLayer:layer active:active];
+}
+
 // sets the given layer to the indicated activity
 // if the layer is being set to inactive, removes this layer
 // from its landmarks' lists of active layers,

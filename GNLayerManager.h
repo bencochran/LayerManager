@@ -20,11 +20,12 @@
 	NSMutableDictionary *allLandmarks;
 }
 
-+ (GNLayerManager*)sharedManager;
++ (GNLayerManager *)sharedManager;
 
--(void)addLayer:(GNLayer*)layer;
--(void)setLayer:(GNLayer*)layer active:(BOOL)active;
--(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location maxDistance:(float)maxDistance;
--(GNLandmark*)getLandmark:(int)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
+- (void)addLayer:(GNLayer *)layer;
+- (void)setLayer:(GNLayer *)layer active:(BOOL)active;
+- (void)addLayer:(GNLayer *)layer active:(BOOL)active;
+- (NSMutableArray *)getNClosestLandmarks:(int)n toLocation:(CLLocation *)location maxDistance:(float)maxDistance;
+- (GNLandmark *)getLandmark:(int)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 
 @end
