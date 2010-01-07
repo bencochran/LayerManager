@@ -43,6 +43,7 @@
 		B8BC1467109EBAEC000701DF /* GNLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BC1461109EBAEC000701DF /* GNLayer.m */; };
 		B8BC1468109EBAEC000701DF /* GNLayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC1462109EBAEC000701DF /* GNLayerManager.h */; };
 		B8BC1469109EBAEC000701DF /* GNLayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BC1463109EBAEC000701DF /* GNLayerManager.m */; };
+		B8D0169610F68E9600A84D50 /* libLayerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libLayerManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8D0169610F68E9600A84D50 /* libLayerManager.a in Frameworks */,
 				A251B08B10F53CAE0041E1D7 /* CoreLocation.framework in Frameworks */,
 				A251B08F10F53CBD0041E1D7 /* Foundation.framework in Frameworks */,
 			);

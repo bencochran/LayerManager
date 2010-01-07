@@ -9,14 +9,13 @@
 #import "UnitTestCase.h"
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "GNLayerManager.h"
 
 
 @implementation UnitTestCase
 
 - (void) testPass {
 	
-	STAssertTrue(TRUE, @"");
+	STAssertTrue(YES, @"");
 	
 }
 - (void) testFail {
@@ -27,6 +26,13 @@
 - (void) testLayerManager {
 	GNLayerManager *manager = [GNLayerManager sharedManager];
 	[manager release];
+}
+
+- (void) testSingleton {
+	GNLayerManager *firstManager = [GNLayerManager sharedManager];
+	GNLayerManager *secondManager = [[GNLayerManager alloc] init];
+	
+	STAssertTrue(firstManager == secondManager, @"Should-be singleton class created two instances");
 }
 
 @end

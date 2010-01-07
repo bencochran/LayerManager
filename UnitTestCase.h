@@ -13,7 +13,7 @@
 #define USE_APPLICATION_UNIT_TEST 1
 
 #import <CoreLocation/CoreLocation.h>
-#import "GNLayerManager.h"
+#import "LayerManager.h"
 #import <SenTestingKit/SenTestingKit.h>
 #import <UIKit/UIKit.h>
 //#import "application_headers" as required
@@ -34,5 +34,7 @@
 - (void) testPass;
 
 - (void) testLayerManager;
+
+- (void) testSingleton;
 
 @end
