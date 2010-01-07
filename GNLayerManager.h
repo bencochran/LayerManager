@@ -10,8 +10,6 @@
 #import "GNLayer.h"
 #import "GNLandmark.h"
 
-@protocol GNLayerManagerDelegate;
-
 extern NSString *const GNLandmarksUpdated;
 
 @interface GNLayerManager : NSObject {
