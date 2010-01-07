@@ -155,7 +155,7 @@ static GNLayerManager *sharedManager = nil;
 	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:[NSNumber numberWithInt:landmarkID]]);
 	if(landmark == nil)
 	{
-		landmark = [[GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude] autorelease];
+		landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude];
 		[allLandmarks setObject:landmark forKey:[NSNumber numberWithInt:landmarkID]];
 	}
 	return landmark;

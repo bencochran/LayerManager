@@ -21,12 +21,7 @@
 
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
 	[self removeSelfFromLandmarks];
-	
-	int i;
-	NSMutableArray *oldLayerInfo = [[layerInfoByLandmarkID allValues] mutableCopy];
-	// release old layer info
-	for(i = 0; i < [oldLayerInfo count]; i++)
-		[[oldLayerInfo objectAtIndex:i] release];
+
 	[layerInfoByLandmarkID removeAllObjects];
 	
 	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?lat=%f&lon=%f&maxLandmarks=%d",
@@ -38,6 +33,7 @@
 	// parse the reply
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSArray *layerInfoList = [parser objectWithString:reply error:nil];
+	[parser release];
 	
 	// load the distance and landmark info
 	NSDictionary *landmarkAndLayerInfo;
@@ -60,6 +56,7 @@
 		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:landmark.ID]];
 		
 		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
+		[layerInfo release];
 		
 		[self.closestLandmarks addObject:landmark];
 	}

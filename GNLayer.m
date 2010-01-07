@@ -68,17 +68,9 @@
 }
 
 -(void)dealloc {
-	NSArray *layerInfoList;
-	int i;
-	
 	[self.name release];
 	[self.closestLandmarks release];
 	[iconPath release];
-	
-	// release all layer information
-	layerInfoList = [layerInfoByLandmarkID allValues];
-	for(i = 0; i < [layerInfoList count]; i++)
-		[[layerInfoList objectAtIndex:i] release];
 	[layerInfoByLandmarkID release];
 	
 	[super dealloc];

@@ -26,11 +26,11 @@
 }
 
 +(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
-	GNLandmark *newLandmark = [[[GNLandmark alloc] initWithLatitude:latitude longitude:longitude] autorelease];
+	GNLandmark *newLandmark = [[GNLandmark alloc] initWithLatitude:latitude longitude:longitude];
 	newLandmark.ID = ID;
 	newLandmark.name = name;
 	newLandmark.activeLayers = [[NSMutableArray alloc] init];
-	return newLandmark;
+	return [newLandmark autorelease];
 }
 
 -(NSComparisonResult)compareTo:(GNLandmark*)other {

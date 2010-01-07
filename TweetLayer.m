@@ -20,14 +20,8 @@
 
 
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
-	NSLog(@"Refresh tweets");
 	[self removeSelfFromLandmarks];
-	
-	int i;
-	NSMutableArray *oldLayerInfo = [[layerInfoByLandmarkID allValues] mutableCopy];
-	// release old layer info
-	for(i = 0; i < [oldLayerInfo count]; i++)
-		[[oldLayerInfo objectAtIndex:i] release];
+
 	[layerInfoByLandmarkID removeAllObjects];
 	
 	// http://search.twitter.com/search.json?geocode=44.46087,-93.1536,5mi&rpp=50
@@ -41,6 +35,7 @@
 	// parse the reply
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSDictionary *parsedReply = [parser objectWithString:reply error:nil];
+	[parser release];
 	
 	NSArray *tweets = [parsedReply objectForKey:@"results"];
 	
