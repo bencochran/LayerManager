@@ -48,6 +48,10 @@
 	STAssertTrue([newLandmark getNumActiveLayers] == 2, @"After removing a non-existent layer, the landmark should still be associated with 2 layers: academic buildings and administration");
 	[newLandmark clearActiveLayers];
 	STAssertTrue([newLandmark getNumActiveLayers] == 0, @"After removing all layers, the landmark shouldn't be associated with any layers");
+	[newLandmark release];
+	[academicBuildings release];
+	[food release];
+	[administration release];
 	[manager release];
 }
 
@@ -56,6 +60,14 @@
 	GNLayerManager *secondManager = [[GNLayerManager alloc] init];
 	
 	STAssertTrue(firstManager == secondManager, @"Should-be singleton class created two instances");
+}
+
+- (void) testServer {
+	GNLayerManager *manager = [GNLayerManager sharedManager];
+	CarletonBuildingsLayer *carletonBuildings = [CarletonBuildingsLayer layerWithName:@"Carleton Buildings"];
+	DiningAreasLayer *diningAreas = [DiningAreasLayer layerWithName:@"Dining Areas"];
+	TweetLayer *tweets = [TweetLayer layerWithName:@"Tweets"];
+	
 }
 
 @end

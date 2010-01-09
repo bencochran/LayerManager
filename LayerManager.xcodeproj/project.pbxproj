@@ -12,8 +12,8 @@
 		A215001D10B254E600774314 /* TesterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A215001C10B254E600774314 /* TesterAppDelegate.m */; };
 		A215002B10B2557B00774314 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A215002A10B2557B00774314 /* main.m */; };
 		A215008610B255B000774314 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A215008510B255B000774314 /* MainWindow.xib */; };
-		A215FF8A10B2476900774314 /* CarletonBuildings.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FF8810B2476900774314 /* CarletonBuildings.h */; };
-		A215FF8B10B2476900774314 /* CarletonBuildings.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FF8910B2476900774314 /* CarletonBuildings.m */; };
+		A215FF8A10B2476900774314 /* CarletonBuildingsLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FF8810B2476900774314 /* CarletonBuildingsLayer.h */; };
+		A215FF8B10B2476900774314 /* CarletonBuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FF8910B2476900774314 /* CarletonBuildingsLayer.m */; };
 		A215FFAC10B24F2800774314 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FF9F10B24F2800774314 /* JSON.h */; };
 		A215FFAD10B24F2800774314 /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FFA010B24F2800774314 /* NSObject+SBJSON.h */; };
 		A215FFAE10B24F2800774314 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFA110B24F2800774314 /* NSObject+SBJSON.m */; };
@@ -44,6 +44,7 @@
 		B8BC1468109EBAEC000701DF /* GNLayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC1462109EBAEC000701DF /* GNLayerManager.h */; };
 		B8BC1469109EBAEC000701DF /* GNLayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BC1463109EBAEC000701DF /* GNLayerManager.m */; };
 		B8D0169610F68E9600A84D50 /* libLayerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libLayerManager.a */; };
+		FCE3BA2710F900AC003BE4A2 /* DiningAreasLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE3BA2610F900AC003BE4A2 /* DiningAreasLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,8 +69,8 @@
 		A215001C10B254E600774314 /* TesterAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TesterAppDelegate.m; path = TesterApp/TesterAppDelegate.m; sourceTree = "<group>"; };
 		A215002A10B2557B00774314 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A215008510B255B000774314 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		A215FF8810B2476900774314 /* CarletonBuildings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarletonBuildings.h; sourceTree = "<group>"; };
-		A215FF8910B2476900774314 /* CarletonBuildings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarletonBuildings.m; sourceTree = "<group>"; };
+		A215FF8810B2476900774314 /* CarletonBuildingsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarletonBuildingsLayer.h; sourceTree = "<group>"; };
+		A215FF8910B2476900774314 /* CarletonBuildingsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarletonBuildingsLayer.m; sourceTree = "<group>"; };
 		A215FF9F10B24F2800774314 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		A215FFA010B24F2800774314 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		A215FFA110B24F2800774314 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -103,6 +104,8 @@
 		B8BC1463109EBAEC000701DF /* GNLayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLayerManager.m; sourceTree = "<group>"; };
 		B8BC147E109EBBB8000701DF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libLayerManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLayerManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCE3BA2510F900AC003BE4A2 /* DiningAreasLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiningAreasLayer.h; sourceTree = "<group>"; };
+		FCE3BA2610F900AC003BE4A2 /* DiningAreasLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiningAreasLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,12 +183,14 @@
 				B81C4D6810CF4F1100EA3205 /* LayerManager.h */,
 				B8BC145E109EBAEC000701DF /* GNLandmark.h */,
 				B8BC145F109EBAEC000701DF /* GNLandmark.m */,
+				FCE3BA2510F900AC003BE4A2 /* DiningAreasLayer.h */,
+				FCE3BA2610F900AC003BE4A2 /* DiningAreasLayer.m */,
 				B8BC1460109EBAEC000701DF /* GNLayer.h */,
 				B8BC1461109EBAEC000701DF /* GNLayer.m */,
 				B8BC1462109EBAEC000701DF /* GNLayerManager.h */,
 				B8BC1463109EBAEC000701DF /* GNLayerManager.m */,
-				A215FF8810B2476900774314 /* CarletonBuildings.h */,
-				A215FF8910B2476900774314 /* CarletonBuildings.m */,
+				A215FF8810B2476900774314 /* CarletonBuildingsLayer.h */,
+				A215FF8910B2476900774314 /* CarletonBuildingsLayer.m */,
 				B88D771710CF6110003A76A1 /* TweetLayer.h */,
 				B88D771810CF6110003A76A1 /* TweetLayer.m */,
 			);
@@ -251,7 +256,7 @@
 				B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */,
 				B8BC1466109EBAEC000701DF /* GNLayer.h in Headers */,
 				B8BC1468109EBAEC000701DF /* GNLayerManager.h in Headers */,
-				A215FF8A10B2476900774314 /* CarletonBuildings.h in Headers */,
+				A215FF8A10B2476900774314 /* CarletonBuildingsLayer.h in Headers */,
 				A215FFAC10B24F2800774314 /* JSON.h in Headers */,
 				A215FFAD10B24F2800774314 /* NSObject+SBJSON.h in Headers */,
 				A215FFAF10B24F2800774314 /* NSString+SBJSON.h in Headers */,
@@ -390,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A251AE9110F525160041E1D7 /* UnitTestCase.m in Sources */,
+				FCE3BA2710F900AC003BE4A2 /* DiningAreasLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +406,7 @@
 				B8BC1465109EBAEC000701DF /* GNLandmark.m in Sources */,
 				B8BC1467109EBAEC000701DF /* GNLayer.m in Sources */,
 				B8BC1469109EBAEC000701DF /* GNLayerManager.m in Sources */,
-				A215FF8B10B2476900774314 /* CarletonBuildings.m in Sources */,
+				A215FF8B10B2476900774314 /* CarletonBuildingsLayer.m in Sources */,
 				A215FFAE10B24F2800774314 /* NSObject+SBJSON.m in Sources */,
 				A215FFB010B24F2800774314 /* NSString+SBJSON.m in Sources */,
 				A215FFB210B24F2800774314 /* SBJSON.m in Sources */,

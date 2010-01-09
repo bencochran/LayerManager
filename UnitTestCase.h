@@ -37,4 +37,6 @@
 
 - (void) testSingleton;
 
+- (void) testServer;
+
 @end

@@ -119,6 +119,7 @@ static GNLayerManager *sharedManager = nil;
 	}
 	
 	// clear out the closestLandmarks
+	// Might want to change this for efficiency's sake
 	[closestLandmarks removeAllObjects];
 	
 	///////////////////////////// TODO: ADD THREADING HERE 
