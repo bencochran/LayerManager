@@ -64,10 +64,20 @@
 
 - (void) testServer {
 	GNLayerManager *manager = [GNLayerManager sharedManager];
-	CarletonBuildingsLayer *carletonBuildings = [CarletonBuildingsLayer layerWithName:@"Carleton Buildings"];
-	DiningAreasLayer *diningAreas = [DiningAreasLayer layerWithName:@"Dining Areas"];
-	TweetLayer *tweets = [TweetLayer layerWithName:@"Tweets"];
-	
+	CarletonBuildingsLayer *carletonBuildings = [[CarletonBuildingsLayer alloc] init];
+	DiningAreasLayer *diningAreas = [[DiningAreasLayer alloc] init];
+	TweetLayer *tweets = [[TweetLayer alloc] init];
+	// FOR SOME REASON THIS CRASHES!!!
+	[manager addLayer:tweets];
+	STAssertTrue(NO, @"Must FAIL");
+	[manager addLayer:diningAreas];
+	[manager addLayer:carletonBuildings active:YES];
+	STAssertTrue(NO, @"Must FAIL");
+	CLLocation *location1 = [[CLLocation alloc] initWithLatitude:44.4654058108 longitude:-93.148436666400002];
+	[manager getNClosestLandmarks: 1 toLocation:location1 maxDistance:5];
+	STAssertTrue(NO, @"Must FAIL");
+	STAssertTrue([manager getSizeofClosestLandmarks] == 2, @"The max number of landmarks was 1, hence there should only be 1 in the closest landmark list");
+
 }
 
 @end

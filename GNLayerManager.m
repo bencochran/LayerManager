@@ -162,6 +162,10 @@ static GNLayerManager *sharedManager = nil;
 	return landmark;
 }
 
+- (NSUInteger)getSizeofClosestLandmarks{
+	return [closestLandmarks count];
+}
+
 -(void)dealloc {
 	[layers release];
 	[allLandmarks release];

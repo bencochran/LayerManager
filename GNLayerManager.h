@@ -29,5 +29,6 @@ extern NSString *const GNLandmarksUpdated;
 - (void)addLayer:(GNLayer *)layer active:(BOOL)active;
 - (NSArray *)getNClosestLandmarks:(int)n toLocation:(CLLocation *)location maxDistance:(float)maxDistance;
 - (GNLandmark *)getLandmark:(int)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
+- (NSUInteger)getSizeofClosestLandmarks;
 
 @end
