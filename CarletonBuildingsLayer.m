@@ -24,8 +24,9 @@
 
 	[layerInfoByLandmarkID removeAllObjects];
 	
-	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?lat=%f&lon=%f&maxLandmarks=%d",
-						   self.name, [location coordinate].latitude, [location coordinate].longitude, n];
+	// http://dev.gnar.us/getInfo.py/CarletonBuildings?lat=44.46055309703;lon=-93.1566672394;maxLandmarks=2
+	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/CarletonBuildings?lat=%f&lon=%f&maxLandmarks=%d",
+						   [location coordinate].latitude, [location coordinate].longitude, n];
 	NSURL *url = [NSURL URLWithString:urlString];
 	//////////////////////// TODO: What should we do with the error?
 	NSString *reply = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
