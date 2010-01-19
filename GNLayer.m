@@ -13,9 +13,9 @@
 @synthesize name=_name, active=_active, closestLandmarks=_closestLandmarks;
 
 +(GNLayer*)layerWithName:(NSString*)initName {
-	GNLayer *layer = [[[GNLayer alloc] init] autorelease];
+	GNLayer *layer = [[GNLayer alloc] init];
 	layer.name = initName;
-	return layer;
+	return [layer autorelease];
 }
 
 -(id)init {
@@ -77,30 +77,3 @@
 }
 
 @end
-
-
-//@implementation GNDistAndLandmark
-//
-//@synthesize dist=_dist, landmark=_landmark;
-//
-//+(GNDistAndLandmark*)gndlWithDist:(float)initDist andLandmark:(GNLandmark*)initLandmark {
-//	GNDistAndLandmark *gndl = [[[GNDistAndLandmark alloc] init] autorelease];
-//	gndl.dist = initDist;
-//	gndl.landmark = initLandmark;
-//	return gndl;
-//}
-//
-//-(NSComparisonResult)compareTo:(GNDistAndLandmark*)gndl {
-//	if(self.dist < gndl.dist)
-//		return NSOrderedAscending;
-//	else if(self.dist > gndl.dist)
-//		return NSOrderedDescending;
-//	else
-//		return NSOrderedSame;
-//}
-//
-//- (NSString *)description {
-//	return [NSString stringWithFormat:@"Distance: %f, Landmark: %@", self.dist, self.landmark];
-//}
-//
-//@end

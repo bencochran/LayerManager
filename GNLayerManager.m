@@ -79,14 +79,13 @@ static GNLayerManager *sharedManager = nil;
 	[self setLayer:layer active:active];
 }
 
-// sets the given layer to the indicated activity
+// Sets the given layer to the indicated activity
 // if the layer is being set to inactive, removes this layer
 // from its landmarks' lists of active layers,
-// and clears the layer's closestLandmarks list
-// if any landmark has no more active layers, removes the
-// appropriate GNDistAndLandmark from the distAndLandmarksList,
-// removes the landmark from allLandmarks, and releases
-// both the GNLandmark and the GNDistAndLandmark
+// and clears the layer's closestLandmarks list.
+// If any landmark has no more active layers, removes the
+// appropriate GNLandmark from closestLandmarks,
+// removes the landmark from allLandmarks, and releases it.
 -(void) setLayer:(GNLayer*)layer active:(BOOL)active {
 	[layer setActive:active];
 	
@@ -96,10 +95,9 @@ static GNLayerManager *sharedManager = nil;
 		
 		for (GNLandmark *landmark in layerLandmarks) {
 			if ([landmark getNumActiveLayers] == 0) {
+				[closestLandmarks removeObject:landmark];
 				[allLandmarks removeObjectForKey:
 				 [NSNumber numberWithInt:landmark.ID]];
-				
-				[closestLandmarks removeObject:landmark];
 			}
 		}
 	}
@@ -110,7 +108,7 @@ static GNLayerManager *sharedManager = nil;
 }
 
 // calls getNClosestLandmarks on each layer in the list of layers simultaneously
-// returns a list of GNDistAndLandmarks, sorted in increasing order by distance,
+// returns a list of GNLandmarks, sorted in increasing order by distance
 // of the n closest landmarks (closer than maxDistance) returned by at least one layer
 -(NSArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location maxDistance:(float)maxDistance {
 	// clear active layers for all landmarks
@@ -118,18 +116,19 @@ static GNLayerManager *sharedManager = nil;
 		[landmark clearActiveLayers];
 	}
 	
-	// clear out the closestLandmarks
+	// clear closestLandmarks
 	[closestLandmarks removeAllObjects];
 	
 	///////////////////////////// TODO: ADD THREADING HERE 
-	// add all GNDistAndLandmarks to distAndLandmarkList
-	for(GNLayer *layer in layers) {
-		if([layer active]) {
-			[closestLandmarks addObjectsFromArray:[layer getNClosestLandmarks:n toLocation:location withLM:self]];
-			//[distAndLandmarkList addObjectsFromArray:[layer getNClosestLandmarks:n toLocation:location withLM:self]];
+	// add all GNLandmarks to closestLandmarks
+	for (GNLayer *layer in layers) {
+		if ([layer active]) {
+			for (GNLandmark *landmark in [layer getNClosestLandmarks:n toLocation:location withLM:self]) {
+				if ([closestLandmarks containsObject:landmark] == NO) {
+					[closestLandmarks addObject:landmark];
+				}
+			}
 		}
-		//////////////////////// PROBLEM: CURRENTLY ADDING DUPLICATE LANDMARKS (if landmark is part of 2 layers, will be added twice)
-		//////////////////////// ALSO, WANT ALL LAYERS THAT HAVE A POINTER TO THE SAME LANDMARK TO HAVE POINTERS TO THE SAME GNDistAndLandmark
 	}
 	
 	// sort distAndLandmarkList
