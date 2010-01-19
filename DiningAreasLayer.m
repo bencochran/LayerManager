@@ -13,7 +13,7 @@
 
 -(id)init {
 	if (self = [super init]) {
-		self.name = @"DiningAreasLayer";
+		self.name = @"Dining";
 	}
 	return self;
 }

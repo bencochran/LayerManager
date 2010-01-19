@@ -13,7 +13,7 @@
 
 -(id)init {
 	if (self = [super init]) {
-		self.name = @"CarletonBuildingsLayer";
+		self.name = @"Carleton Buildings";
 	}
 	return self;
 }
