@@ -132,7 +132,7 @@ static GNLayerManager *sharedManager = nil;
 		}
 	}
 	
-	// sort distAndLandmarkList
+	// sort closestLandmarks
 	[closestLandmarks sortUsingSelector:@selector(compareTo:)];
 		
 	NSArray* closestN = [closestLandmarks objectsAtIndexes:
