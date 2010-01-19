@@ -14,7 +14,7 @@ extern NSString *const GNLandmarksUpdated;
 
 @interface GNLayerManager : NSObject {
 	NSMutableArray *layers;
-	// distAndLandmarkList is a list of GNDistAndLandmarks, compiled from
+	// closestLandmarks is a list of GNLandmarks, compiled from
 	// the lists of closest landmarks returned by each layer on the previous
 	// call to getNClosestLandmarks, sorted in increasing order by distance
 	NSMutableArray *closestLandmarks;

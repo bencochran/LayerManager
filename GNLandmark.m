@@ -11,7 +11,7 @@
 
 @implementation GNLandmark
 
-@synthesize ID=_id, name=_name, activeLayers=_activeLayers, distance=_distance;
+@synthesize ID=_id, distance=_distance, name=_name, activeLayers=_activeLayers;
 
 +(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
 	CLLocationCoordinate2D coordinate;

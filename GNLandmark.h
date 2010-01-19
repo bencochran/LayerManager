@@ -2,6 +2,7 @@
 //  GNLandmark.h
 //  Stores the information relevant to a landmark:
 //      a unique integer identifier
+//      a float with the value of the last known distance of this landmark from the user
 //      a string name (not necessarily unique)
 //      a longitude and latitude (inherited from CLLocation)
 //      a list of the active layers that are currently storing information on this landmark
@@ -17,17 +18,15 @@
 
 @interface GNLandmark : CLLocation {
 	int _id;
+	float _distance;
 	NSString* _name;
 	NSMutableArray* _activeLayers;
-	
-	// The distance from the last known location of the user
-	float _distance;
 }
 
 @property (nonatomic) int ID;
+@property (nonatomic) float distance;
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, retain) NSMutableArray* activeLayers;
-@property (nonatomic) float distance;
 
 +(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;
 +(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;

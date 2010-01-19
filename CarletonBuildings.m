@@ -21,7 +21,6 @@
 
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
 	[self removeSelfFromLandmarks];
-
 	[layerInfoByLandmarkID removeAllObjects];
 	
 	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?lat=%f&lon=%f&maxLandmarks=%d",
@@ -49,9 +48,9 @@
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
 		
 		landmark = [layerManager getLandmark:[[landmarkAndLayerInfo objectForKey:@"ID"] intValue]
-											name:[landmarkAndLayerInfo objectForKey:@"name"]
-										latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
-									   longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]];
+										name:[landmarkAndLayerInfo objectForKey:@"name"]
+									latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
+								   longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]];
 		[landmark addActiveLayer:self];
 		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:landmark.ID]];
 		
