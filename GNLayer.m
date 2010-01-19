@@ -10,6 +10,8 @@
 
 @implementation GNLayer
 
+NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
+
 @synthesize name=_name, active=_active, closestLandmarks=_closestLandmarks;
 
 +(GNLayer*)layerWithName:(NSString*)initName {
@@ -24,14 +26,71 @@
 		self.active = NO;
 		self.closestLandmarks = [[NSMutableArray alloc] init];
 		iconPath = nil;
-		layerInfoByLandmarkID = [[NSMutableDictionary alloc] init];
+		layerInfoByLandmark = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
 
 //////////////////// -(NSIcon) getIcon;
 
--(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
+- (void)updateToCenterLocation:(CLLocation *)location {
+	center = [location retain];
+	NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForLocation:location]
+											 cachePolicy:NSURLRequestUseProtocolCachePolicy
+										 timeoutInterval:60.0];
+	
+	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+	if (connection) {
+		receivedData = [[NSMutableData data] retain];
+	} else {
+		NSLog(@"Could not create connection");
+	}
+}
+
+- (NSURL *)URLForLocation:(CLLocation *)location {
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    // The response has started, clear out the recievedData
+	
+	[receivedData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    // Append the incoming data
+	[receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	[connection release];
+	[receivedData release];
+	
+	// Log it
+	NSLog(@"Connection failed! Error - %@ %@",
+          [error localizedDescription],
+          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+	
+	// Also fire off a notification
+	[[NSNotificationCenter defaultCenter] postNotificationName:GNLayerUpdateFailed
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:error,@"error",nil]];
+	
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	[self ingestNewData:receivedData];
+	
+	[connection release];
+    [receivedData release];
+}
+
+- (void)ingestNewData:(NSData *)data {
+	[self doesNotRecognizeSelector:_cmd];
+}
+
+- (NSMutableArray *)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
@@ -39,7 +98,7 @@
 // Removes this layer from the active layers list of each of its closest landmarks
 // Sets this layer's list of closest landmarks to a new empty NSMutableArray
 // and returns the previous closestLandmarks list (autoreleased)
--(NSMutableArray *)removeSelfFromLandmarks {
+- (NSMutableArray *)removeSelfFromLandmarks {
 	for (GNLandmark *landmark in self.closestLandmarks) {
 		[landmark removeActiveLayer:self];
 	}
@@ -50,28 +109,29 @@
 }
 
 // Returns a short string summarizing the layer information
-// for the landmark with the given ID
--(NSString*)getSummaryStringForID:(int)landmarkID {
+// for the given landmark
+- (NSString *)summaryForLandmark:(GNLandmark *)landmark {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
 // Returns a UIViewController displaying the layer information
-// for the landmark with the given ID
--(UIViewController*)getLayerViewForID:(int)landmarkID {
+// for the given landmark
+- (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<GNLayer name:%@, active: %@>", self.name, self.active ? @"YES" : @"NO"];
+	return [NSString stringWithFormat:@"<GNLayer name: %@, active: %@>", self.name, self.active ? @"YES" : @"NO"];
 }
 
 -(void)dealloc {
 	[self.name release];
 	[self.closestLandmarks release];
 	[iconPath release];
-	[layerInfoByLandmarkID release];
+	[layerInfoByLandmark release];
+	[center release];
 	
 	[super dealloc];
 }

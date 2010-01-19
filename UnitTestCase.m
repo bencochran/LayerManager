@@ -13,6 +13,8 @@
 
 @implementation UnitTestCase
 
+@synthesize landmarks=_landmarks;
+
 - (void) testPass {
 	
 	STAssertTrue(YES, @"");
@@ -63,21 +65,47 @@
 }
 
 - (void) testServer {
-	GNLayerManager *manager = [GNLayerManager sharedManager];
+//	GNLayerManager *manager = [GNLayerManager sharedManager];
 	CarletonBuildingsLayer *carletonBuildings = [[CarletonBuildingsLayer alloc] init];
 	DiningAreasLayer *diningAreas = [[DiningAreasLayer alloc] init];
-	TweetLayer *tweets = [[TweetLayer alloc] init];
-	// FOR SOME REASON THIS CRASHES!!!
-	[manager addLayer:tweets];
-	STAssertTrue(NO, @"Must FAIL");
-	[manager addLayer:diningAreas];
-	[manager addLayer:carletonBuildings active:YES];
-	STAssertTrue(NO, @"Must FAIL");
-	CLLocation *location1 = [[CLLocation alloc] initWithLatitude:44.4654058108 longitude:-93.148436666400002];
-	[manager getNClosestLandmarks: 1 toLocation:location1 maxDistance:5];
-	STAssertTrue(NO, @"Must FAIL");
-	STAssertTrue([manager getSizeofClosestLandmarks] == 2, @"The max number of landmarks was 1, hence there should only be 1 in the closest landmark list");
+//	TweetLayer *tweets = [[TweetLayer alloc] init];
+//	// FOR SOME REASON THIS CRASHES!!!
+//	[manager addLayer:tweets];
+//	STAssertTrue(NO, @"Must FAIL");
+//	[manager addLayer:diningAreas];
+//	[manager addLayer:carletonBuildings active:YES];
+	[carletonBuildings release];
+	[diningAreas release];
+//	[tweets release];
+	
+//	STAssertTrue(NO, @"Must FAIL");
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(locationsUpdated:)
+												 name:GNLandmarksUpdated
+											   object:[GNLayerManager sharedManager]];
+	
+	CLLocation *location = [[CLLocation alloc] initWithLatitude:44.4654058108 longitude:-93.148436666400002];
+	[[GNLayerManager sharedManager] updateToCenterLocation:location];
+	[location release];
+	// Because this happens asynchronously, we need to poll for updates
+	while (self.landmarks == nil) {
+		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate
+												  dateWithTimeIntervalSinceNow:1.0]];
+		NSLog(@"Polling...");
+	}
+	
+	NSLog(@"Finished");
+	
+	
+//	[[GNLayerManager sharedManager] getNClosestLandmarks: 1 toLocation:location1 maxDistance:5];
+//	STAssertTrue(NO, @"Must FAIL");
+//	STAssertTrue([[GNLayerManager sharedManager] getSizeofClosestLandmarks] == 2, @"The max number of landmarks was 1, hence there should only be 1 in the closest landmark list");
 
+}
+
+- (void)locationsUpdated:(NSNotification *)note {
+	self.landmarks = [note.userInfo objectForKey:@"landmarks"];
 }
 
 @end

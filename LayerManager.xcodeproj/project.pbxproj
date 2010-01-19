@@ -35,6 +35,8 @@
 		AA747D9F0F9514B9006C5449 /* LayerManager_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		B81C4D6910CF4F1100EA3205 /* LayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B81C4D6810CF4F1100EA3205 /* LayerManager.h */; };
+		B85D52901105A1370067D658 /* DiningAreasLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE3BA2610F900AC003BE4A2 /* DiningAreasLayer.m */; };
+		B85D52911105A1410067D658 /* DiningAreasLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE3BA2510F900AC003BE4A2 /* DiningAreasLayer.h */; };
 		B88D771910CF6110003A76A1 /* TweetLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B88D771710CF6110003A76A1 /* TweetLayer.h */; };
 		B88D771A10CF6110003A76A1 /* TweetLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D771810CF6110003A76A1 /* TweetLayer.m */; };
 		B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC145E109EBAEC000701DF /* GNLandmark.h */; };
@@ -252,6 +254,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B85D52911105A1410067D658 /* DiningAreasLayer.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* LayerManager_Prefix.pch in Headers */,
 				B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */,
 				B8BC1466109EBAEC000701DF /* GNLayer.h in Headers */,
@@ -408,6 +411,7 @@
 				B8BC1469109EBAEC000701DF /* GNLayerManager.m in Sources */,
 				A215FF8B10B2476900774314 /* CarletonBuildingsLayer.m in Sources */,
 				A215FFAE10B24F2800774314 /* NSObject+SBJSON.m in Sources */,
+				B85D52901105A1370067D658 /* DiningAreasLayer.m in Sources */,
 				A215FFB010B24F2800774314 /* NSString+SBJSON.m in Sources */,
 				A215FFB210B24F2800774314 /* SBJSON.m in Sources */,
 				A215FFB410B24F2800774314 /* SBJsonBase.m in Sources */,
@@ -502,6 +506,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "TesterApp-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -527,6 +532,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "TesterApp-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (

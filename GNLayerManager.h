@@ -20,15 +20,23 @@ extern NSString *const GNLandmarksUpdated;
 	NSMutableArray *closestLandmarks;
 	// allLandmarks: key = landmark ID, value = GNLandmark
 	NSMutableDictionary *allLandmarks;
+	
+	// The hard-coded maximum number of landmarks to retreive
+	int maxLandmarks;
 }
+
+@property (readonly) int maxLandmarks;
 
 + (GNLayerManager *)sharedManager;
 
 - (void)addLayer:(GNLayer *)layer;
 - (void)setLayer:(GNLayer *)layer active:(BOOL)active;
 - (void)addLayer:(GNLayer *)layer active:(BOOL)active;
-- (NSArray *)getNClosestLandmarks:(int)n toLocation:(CLLocation *)location maxDistance:(float)maxDistance;
+//- (NSArray *)getNClosestLandmarks:(int)n toLocation:(CLLocation *)location maxDistance:(float)maxDistance;
 - (GNLandmark *)getLandmark:(int)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 - (NSUInteger)getSizeofClosestLandmarks;
+
+- (void)updateToCenterLocation:(CLLocation *)location;
+- (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks;
 
 @end

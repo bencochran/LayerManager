@@ -20,8 +20,10 @@
 
 
 @interface UnitTestCase : SenTestCase {
-
+	NSArray *_landmarks;
 }
+
+@property (nonatomic, retain) NSArray *landmarks;
 
 //#if USE_APPLICATION_UNIT_TEST
 //- (void) testAppDelegate;       // simple test on application
