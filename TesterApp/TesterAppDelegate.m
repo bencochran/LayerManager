@@ -18,7 +18,7 @@
 	NSLog(@"Calling getNClosest on CarletonBuildings. . . .");
 	
 	GNLayerManager *manager = [GNLayerManager sharedManager];
-	GNLayer *carb = [[CarletonBuildings alloc] init];
+	GNLayer *carb = [[CarletonBuildingsLayer alloc] init];
 	GNLayer *tweets = [[TweetLayer alloc] init];
 	CLLocation *location1 = [[CLLocation alloc] initWithLatitude:44.4654058108 longitude:-93.148436666400002];
 	//CLLocation *location2 = [[CLLocation alloc] initWithLatitude:-1.2345 longitude:5.7785];

@@ -117,6 +117,7 @@ static GNLayerManager *sharedManager = nil;
 	}
 	
 	// clear closestLandmarks
+	// Might want to change this for efficiency's sake
 	[closestLandmarks removeAllObjects];
 	
 	///////////////////////////// TODO: ADD THREADING HERE 
@@ -158,6 +159,10 @@ static GNLayerManager *sharedManager = nil;
 		[allLandmarks setObject:landmark forKey:[NSNumber numberWithInt:landmarkID]];
 	}
 	return landmark;
+}
+
+- (NSUInteger)getSizeofClosestLandmarks{
+	return [closestLandmarks count];
 }
 
 -(void)dealloc {

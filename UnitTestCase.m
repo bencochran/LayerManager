@@ -48,6 +48,10 @@
 	STAssertTrue([newLandmark getNumActiveLayers] == 2, @"After removing a non-existent layer, the landmark should still be associated with 2 layers: academic buildings and administration");
 	[newLandmark clearActiveLayers];
 	STAssertTrue([newLandmark getNumActiveLayers] == 0, @"After removing all layers, the landmark shouldn't be associated with any layers");
+	[newLandmark release];
+	[academicBuildings release];
+	[food release];
+	[administration release];
 	[manager release];
 }
 
@@ -56,6 +60,24 @@
 	GNLayerManager *secondManager = [[GNLayerManager alloc] init];
 	
 	STAssertTrue(firstManager == secondManager, @"Should-be singleton class created two instances");
+}
+
+- (void) testServer {
+	GNLayerManager *manager = [GNLayerManager sharedManager];
+	CarletonBuildingsLayer *carletonBuildings = [[CarletonBuildingsLayer alloc] init];
+	DiningAreasLayer *diningAreas = [[DiningAreasLayer alloc] init];
+	TweetLayer *tweets = [[TweetLayer alloc] init];
+	// FOR SOME REASON THIS CRASHES!!!
+	[manager addLayer:tweets];
+	STAssertTrue(NO, @"Must FAIL");
+	[manager addLayer:diningAreas];
+	[manager addLayer:carletonBuildings active:YES];
+	STAssertTrue(NO, @"Must FAIL");
+	CLLocation *location1 = [[CLLocation alloc] initWithLatitude:44.4654058108 longitude:-93.148436666400002];
+	[manager getNClosestLandmarks: 1 toLocation:location1 maxDistance:5];
+	STAssertTrue(NO, @"Must FAIL");
+	STAssertTrue([manager getSizeofClosestLandmarks] == 2, @"The max number of landmarks was 1, hence there should only be 1 in the closest landmark list");
+
 }
 
 @end
