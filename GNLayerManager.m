@@ -111,14 +111,14 @@ static GNLayerManager *sharedManager = nil;
 // returns a list of GNLandmarks, sorted in increasing order by distance
 // of the n closest landmarks (closer than maxDistance) returned by at least one layer
 -(NSArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location maxDistance:(float)maxDistance {
+	// clear closestLandmarks
+	// Might want to change this for efficiency's sake
+	[closestLandmarks removeAllObjects];
+	
 	// clear active layers for all landmarks
 	for (GNLandmark *landmark in [allLandmarks allValues]) {
 		[landmark clearActiveLayers];
 	}
-	
-	// clear closestLandmarks
-	// Might want to change this for efficiency's sake
-	[closestLandmarks removeAllObjects];
 	
 	///////////////////////////// TODO: ADD THREADING HERE 
 	// add all GNLandmarks to closestLandmarks
@@ -129,6 +129,14 @@ static GNLayerManager *sharedManager = nil;
 					[closestLandmarks addObject:landmark];
 				}
 			}
+		}
+	}
+	
+	// release any unused landmarks
+	for (GNLandmark *landmark in [allLandmarks allValues]) {
+		if ([landmark getNumActiveLayers] == 0) {
+			[allLandmarks removeObjectForKey:
+			 [NSNumber numberWithInt:landmark.ID]];
 		}
 	}
 	

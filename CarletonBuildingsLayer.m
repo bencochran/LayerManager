@@ -21,7 +21,6 @@
 
 -(NSMutableArray*)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
 	[self removeSelfFromLandmarks];
-
 	[layerInfoByLandmarkID removeAllObjects];
 	
 	// http://dev.gnar.us/getInfo.py/CarletonBuildings?lat=44.46055309703;lon=-93.1566672394;maxLandmarks=2
@@ -50,16 +49,15 @@
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
 		
 		landmark = [layerManager getLandmark:[[landmarkAndLayerInfo objectForKey:@"ID"] intValue]
-											name:[landmarkAndLayerInfo objectForKey:@"name"]
-										latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
-									   longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]];
-		[landmark addActiveLayer:self];
-		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:landmark.ID]];
-		
+										name:[landmarkAndLayerInfo objectForKey:@"name"]
+									latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
+								   longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]];
 		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
-		[layerInfo release];
-		
+		[landmark addActiveLayer:self];
 		[self.closestLandmarks addObject:landmark];
+		
+		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:landmark.ID]];
+		[layerInfo release];
 	}
 	
 	[self.closestLandmarks sortUsingSelector:@selector(compareTo:)];
