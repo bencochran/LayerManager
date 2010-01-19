@@ -54,13 +54,13 @@
 														  name:[landmarkAndLayerInfo objectForKey:@"name"]
 													  latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]];
+  		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
 		[landmark addActiveLayer:self];
 		[layerInfoByLandmark setObject:layerInfo forKey:landmark];
-		
-		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
-		[layerInfo release];
-		
 		[self.closestLandmarks addObject:landmark];
+		
+		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:landmark.ID]];
+		[layerInfo release];
 	}
 	
 	[self.closestLandmarks sortUsingSelector:@selector(compareTo:)];
