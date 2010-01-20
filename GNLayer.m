@@ -34,6 +34,11 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 //////////////////// -(NSIcon) getIcon;
 
 - (void)updateToCenterLocation:(CLLocation *)location {
+	if (receivedData != nil) {
+		// We're already updating, don't start another request
+		return;
+	}
+		
 	center = [location retain];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForLocation:location]
 											 cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -53,8 +58,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // The response has started, clear out the recievedData
-	
+    // The response has started, clear out the receivedData
 	[receivedData setLength:0];
 }
 
@@ -66,6 +70,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	[connection release];
 	[receivedData release];
+	receivedData = nil;
 	
 	// Log it
 	NSLog(@"Connection failed! Error - %@ %@",
