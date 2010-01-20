@@ -28,7 +28,7 @@
 - (void)ingestNewData:(NSData *)data {
 	[self removeSelfFromLandmarks];
 	
-	[layerInfoByLandmark removeAllObjects];
+	[layerInfoByLandmarkID removeAllObjects];
 	
 //	NSString *reply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
@@ -51,13 +51,13 @@
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
 		
-		landmark = [[GNLayerManager sharedManager] getLandmark:[[landmarkAndLayerInfo objectForKey:@"ID"] intValue]
+		landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"gnarus:%@", [landmarkAndLayerInfo objectForKey:@"ID"]]
 														  name:[landmarkAndLayerInfo objectForKey:@"name"]
 													  latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
 		[landmark addActiveLayer:self];
-		[layerInfoByLandmark setObject:layerInfo forKey:landmark];
+		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 		
 		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
 		[layerInfo release];
@@ -70,7 +70,7 @@
 }
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	return [(NSDictionary*) [layerInfoByLandmark objectForKey:landmark] objectForKey:@"summary"];
+	return [(NSDictionary*) [layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {

@@ -17,22 +17,22 @@
 @class GNLayer;
 
 @interface GNLandmark : CLLocation {
-	int _id;
+	NSString *_id;
 	float _distance;
 	NSString* _name;
 	NSMutableArray* _activeLayers;
 }
 
-@property (nonatomic) int ID;
+@property (nonatomic, copy) NSString *ID;
 @property (nonatomic) float distance;
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, retain) NSMutableArray* activeLayers;
 
-+(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;
-+(GNLandmark*)landmarkWithID:(int)ID name:(NSString*)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
++ (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;
++ (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 
--(void)addActiveLayer:(GNLayer*)layer;
--(void)removeActiveLayer:(GNLayer*)layer;
--(void)clearActiveLayers;
+- (void)addActiveLayer:(GNLayer *)layer;
+- (void)removeActiveLayer:(GNLayer *)layer;
+- (void)clearActiveLayers;
 
 @end

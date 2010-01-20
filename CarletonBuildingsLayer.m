@@ -28,7 +28,7 @@
 - (void)ingestNewData:(NSData *)data {
 	[self removeSelfFromLandmarks];
 	
-	[layerInfoByLandmark removeAllObjects];
+	[layerInfoByLandmarkID removeAllObjects];
 
 	//NSString *reply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
@@ -50,14 +50,19 @@
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"yearBuilt"] forKey:@"yearBuilt"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
 		
-		landmark = [[GNLayerManager sharedManager] getLandmark:[[landmarkAndLayerInfo objectForKey:@"ID"] intValue]
+		landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"gnarus:%@",[landmarkAndLayerInfo objectForKey:@"ID"]]
 														  name:[landmarkAndLayerInfo objectForKey:@"name"]
 													  latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
   		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
 		[landmark addActiveLayer:self];
-		[layerInfoByLandmark setObject:layerInfo forKey:landmark];
+		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
+		NSLog(@"added landmark: %@", landmark);
+		NSLog(@"to info: %@", layerInfoByLandmarkID);
+		
+		NSLog(@"Everything's fucked? %@", [layerInfoByLandmarkID objectForKey:landmark.ID] == nil ? @"Yes" : @"No");
+		
 		[self.landmarks addObject:landmark];
 		
 		[layerInfo release];

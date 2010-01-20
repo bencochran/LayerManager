@@ -92,8 +92,7 @@ static GNLayerManager *sharedManager = nil;
 	{
 		for (GNLandmark *landmark in layer.landmarks) {
 			if (landmark.activeLayers.count == 0) {
-				[allLandmarks removeObjectForKey:
-				 [NSNumber numberWithInt:landmark.ID]];
+				[allLandmarks removeObjectForKey: landmark.ID];
 			}
 		}		
 		
@@ -165,24 +164,24 @@ static GNLayerManager *sharedManager = nil;
 
 // if a landmark with the given ID exists in the allLandmarks NSMutableDictionary, returns that GNLandmark
 // otherwise, creates the GNLandmark with the given attributes, adds it to allLandmarks, and returns it
--(GNLandmark*)getLandmark:(int)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
-	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:[NSNumber numberWithInt:landmarkID]]);
+-(GNLandmark*)getLandmark:(NSString *)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
+	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:landmarkID]);
 	if(landmark == nil)
 	{
 		landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude];
-		[allLandmarks setObject:landmark forKey:[NSNumber numberWithInt:landmarkID]];
+		[allLandmarks setObject:landmark forKey:landmarkID];
 	}
 	return landmark;
 }
 
 // if a landmark with the given ID exists in the allLandmarks NSMutableDictionary, returns that GNLandmark
 // otherwise, creates the GNLandmark with the given attributes, adds it to allLandmarks, and returns it
--(GNLandmark*)getLandmark:(int)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
-	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:[NSNumber numberWithInt:landmarkID]]);
+-(GNLandmark*)getLandmark:(NSString *)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
+	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:landmarkID]);
 	if(landmark == nil)
 	{
 		landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude altitude:altitude];
-		[allLandmarks setObject:landmark forKey:[NSNumber numberWithInt:landmarkID]];
+		[allLandmarks setObject:landmark forKey:landmarkID];
 	}
 	return landmark;
 }

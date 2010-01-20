@@ -28,7 +28,7 @@
 - (void)ingestNewData:(NSData *)data {
 	[self removeSelfFromLandmarks];
 	
-	[layerInfoByLandmark removeAllObjects];
+	[layerInfoByLandmarkID removeAllObjects];
 	
 //	NSString *reply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
@@ -58,15 +58,14 @@
 			longitude = [[[tweet objectForKey:@"geo"] objectForKey:@"coordinates"] objectAtIndex:1];
 			NSLog(@"id: %@",[tweet objectForKey:@"id"]);
 			
-			// this conversion from tweet id to int is causing an overflow.
-			landmark = [[GNLayerManager sharedManager] getLandmark:[[tweet objectForKey:@"id"] intValue]
+			landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"twitter:%@",[tweet objectForKey:@"id"]]
 															  name:[tweet objectForKey:@"from_user"]
 														  latitude:[latitude floatValue]
 														 longitude:[longitude floatValue]
 														  altitude:center.altitude];
 			
 			[landmark addActiveLayer:self];
-			[layerInfoByLandmark setObject:tweet forKey:landmark];
+			[layerInfoByLandmarkID setObject:tweet forKey:landmark.ID];
 			
 			// calculate distance
 			landmark.distance = [landmark getDistanceFrom:center];
@@ -79,7 +78,7 @@
 }
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	return [(NSDictionary*) [layerInfoByLandmark objectForKey:landmark] objectForKey:@"text"];
+	return [(NSDictionary*) [layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"text"];
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {

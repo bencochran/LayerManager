@@ -26,7 +26,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		self.active = NO;
 		self.landmarks = [[NSMutableArray alloc] init];
 		iconPath = nil;
-		layerInfoByLandmark = [[NSMutableDictionary alloc] init];
+		layerInfoByLandmarkID = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
@@ -127,7 +127,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[self.name release];
 	[self.landmarks release];
 	[iconPath release];
-	[layerInfoByLandmark release];
+	[layerInfoByLandmarkID release];
 	[center release];
 	
 	[super dealloc];

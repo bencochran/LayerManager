@@ -95,7 +95,7 @@
 		landmark = [landmarks objectAtIndex:i];
 		NSLog(@"Item %i:", i);
 		NSLog(@"\t\tDist:\t%f", landmark.distance);
-		NSLog(@"\t\tID:\t%i", landmark.ID);
+		NSLog(@"\t\tID:\t%@", landmark.ID);
 		NSLog(@"\t\tname:\t%@", landmark.name);
 		NSLog(@"\tActive layers:");
 		for(int j = 0; j < landmark.activeLayers.count; j++)

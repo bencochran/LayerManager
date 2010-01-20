@@ -30,9 +30,9 @@ extern NSString *const GNLayerUpdateFailed;
 	NSString *iconPath;
 	// layerInfoByLandmark stores the information necessary to generate
 	// the UIViewController for each landmark in _landmarks. 
-	// Keys are landmarks, values are objects containing
+	// Keys are landmark IDs, values are objects containing
 	// layer information that can be parsed to create a UIViewController
-	NSMutableDictionary *layerInfoByLandmark;
+	NSMutableDictionary *layerInfoByLandmarkID;
 	
 	// NSData to hold incomming data from the NSURLConnection as
 	// we receive it.

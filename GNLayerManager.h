@@ -33,8 +33,8 @@ extern NSString *const GNLandmarksUpdated;
 - (void)setLayer:(GNLayer *)layer active:(BOOL)active;
 - (void)addLayer:(GNLayer *)layer active:(BOOL)active;
 //- (NSArray *)getNClosestLandmarks:(int)n toLocation:(CLLocation *)location maxDistance:(float)maxDistance;
-- (GNLandmark *)getLandmark:(int)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
-- (GNLandmark *)getLandmark:(int)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude;
+- (GNLandmark *)getLandmark:(NSString *)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
+- (GNLandmark *)getLandmark:(NSString *)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude;
 
 - (void)updateToCenterLocation:(CLLocation *)location;
 - (void)updateWithPreviousLocation;
