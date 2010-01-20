@@ -59,7 +59,6 @@
 		[layerInfoByLandmark setObject:layerInfo forKey:landmark];
 		[self.closestLandmarks addObject:landmark];
 		
-		[layerInfoByLandmarkID setObject:layerInfo forKey:[NSNumber numberWithInt:landmark.ID]];
 		[layerInfo release];
 	}
 	
