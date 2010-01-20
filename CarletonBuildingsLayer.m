@@ -53,7 +53,8 @@
 		landmark = [[GNLayerManager sharedManager] getLandmark:[[landmarkAndLayerInfo objectForKey:@"ID"] intValue]
 														  name:[landmarkAndLayerInfo objectForKey:@"name"]
 													  latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
-													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]];
+													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
+													  altitude:center.altitude];
   		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
 		[landmark addActiveLayer:self];
 		[layerInfoByLandmark setObject:layerInfo forKey:landmark];

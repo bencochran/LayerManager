@@ -163,6 +163,18 @@ static GNLayerManager *sharedManager = nil;
 	return landmark;
 }
 
+// if a landmark with the given ID exists in the allLandmarks NSMutableDictionary, returns that GNLandmark
+// otherwise, creates the GNLandmark with the given attributes, adds it to allLandmarks, and returns it
+-(GNLandmark*)getLandmark:(int)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
+	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:[NSNumber numberWithInt:landmarkID]]);
+	if(landmark == nil)
+	{
+		landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude altitude:altitude];
+		[allLandmarks setObject:landmark forKey:[NSNumber numberWithInt:landmarkID]];
+	}
+	return landmark;
+}
+
 - (NSUInteger)getSizeofClosestLandmarks{
 	return [closestLandmarks count];
 }

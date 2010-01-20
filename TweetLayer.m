@@ -62,7 +62,8 @@
 			landmark = [[GNLayerManager sharedManager] getLandmark:[[tweet objectForKey:@"id"] intValue]
 															  name:[tweet objectForKey:@"from_user"]
 														  latitude:[latitude floatValue]
-														 longitude:[longitude floatValue]];
+														 longitude:[longitude floatValue]
+														  altitude:center.altitude];
 			
 			[landmark addActiveLayer:self];
 			[layerInfoByLandmark setObject:tweet forKey:landmark];
