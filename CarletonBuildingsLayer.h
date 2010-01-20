@@ -13,3 +13,11 @@
 }
 
 @end
+
+/////
+
+@interface CarletonBuildingsViewController : UIViewController {
+	
+}
+
+@end

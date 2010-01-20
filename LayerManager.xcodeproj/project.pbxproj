@@ -39,6 +39,7 @@
 		B85D52911105A1410067D658 /* DiningAreasLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE3BA2510F900AC003BE4A2 /* DiningAreasLayer.h */; };
 		B88D771910CF6110003A76A1 /* TweetLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B88D771710CF6110003A76A1 /* TweetLayer.h */; };
 		B88D771A10CF6110003A76A1 /* TweetLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D771810CF6110003A76A1 /* TweetLayer.m */; };
+		B8AD59231106B89900D2E6A0 /* CarletonBuildingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8AD59211106B89900D2E6A0 /* CarletonBuildingsView.xib */; };
 		B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC145E109EBAEC000701DF /* GNLandmark.h */; };
 		B8BC1465109EBAEC000701DF /* GNLandmark.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BC145F109EBAEC000701DF /* GNLandmark.m */; };
 		B8BC1466109EBAEC000701DF /* GNLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC1460109EBAEC000701DF /* GNLayer.h */; };
@@ -98,6 +99,7 @@
 		B81C4D6810CF4F1100EA3205 /* LayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager.h; sourceTree = "<group>"; };
 		B88D771710CF6110003A76A1 /* TweetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetLayer.h; sourceTree = "<group>"; };
 		B88D771810CF6110003A76A1 /* TweetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetLayer.m; sourceTree = "<group>"; };
+		B8AD59211106B89900D2E6A0 /* CarletonBuildingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarletonBuildingsView.xib; sourceTree = "<group>"; };
 		B8BC145E109EBAEC000701DF /* GNLandmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLandmark.h; sourceTree = "<group>"; };
 		B8BC145F109EBAEC000701DF /* GNLandmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLandmark.m; sourceTree = "<group>"; };
 		B8BC1460109EBAEC000701DF /* GNLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLayer.h; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				A215FF9E10B24F2800774314 /* JSON */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
+				B8AD59261106B8B800D2E6A0 /* Resources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 				A215FFC410B2517D00774314 /* Tests-Info.plist */,
@@ -245,6 +248,14 @@
 				A251AE9010F525160041E1D7 /* UnitTestCase.m */,
 			);
 			name = Tests;
+			sourceTree = "<group>";
+		};
+		B8AD59261106B8B800D2E6A0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B8AD59211106B89900D2E6A0 /* CarletonBuildingsView.xib */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A215008610B255B000774314 /* MainWindow.xib in Resources */,
+				B8AD59231106B89900D2E6A0 /* CarletonBuildingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
