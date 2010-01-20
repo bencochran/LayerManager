@@ -75,12 +75,26 @@
 }
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	return [(NSDictionary*) [layerInfoByLandmark objectForKey:landmark] objectForKey:@"summary"];
+	return [(NSDictionary*) [layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	CarletonBuildingsViewController *viewController = [[CarletonBuildingsViewController alloc] init];
 //	CarletonBuildingsViewController *viewController = [[CarletonBuildingsViewController alloc] initWithCoder:nil];
+	
+	viewController.buildingName = landmark.name;
+	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
+	
+	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
+	
+	if (urlString != nil) {
+		viewController.imageURL = [NSURL URLWithString:urlString]; 
+	}
+	
+	NSLog(@"landmark: %@", landmark);
+	NSLog(@"all layer info: %@", layerInfoByLandmarkID);
+	NSLog(@"layer info: %@", [layerInfoByLandmarkID objectForKey:landmark.ID]);
+	NSLog(@"urlString: %@", urlString);
 	
 	return [viewController autorelease];
 }
@@ -91,12 +105,76 @@
 
 @implementation CarletonBuildingsViewController
 
+@synthesize imageURL=_imageURL, buildingName=_buildingName, description=_description;
+
 - (id)init {
 	if (self = [super initWithNibName:@"CarletonBuildingsView" bundle:nil]) {
 		
 	}
 	return self;
 }
+
+- (void)setImageURL:(NSURL *)url {
+	_imageURL = [url retain];
+	
+	NSURLRequest *theRequest=[NSURLRequest requestWithURL:url
+											  cachePolicy:NSURLRequestUseProtocolCachePolicy
+										  timeoutInterval:60.0];
+	// create the connection with the request
+	// and start loading the data
+	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+	if (theConnection) {
+		// Create the NSMutableData that will hold
+		// the received data
+		// receivedData is declared as a method instance elsewhere
+		receivedData=[[NSMutableData data] retain];
+	} else {
+		// inform the user that the download could not be made
+	}
+	
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    // this method is called when the server has determined that it
+    // has enough information to create the NSURLResponse
+	
+    // it can be called multiple times, for example in the case of a
+    // redirect, so each time we reset the data.
+    // receivedData is declared as a method instance elsewhere
+    [receivedData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    // append the new data to the receivedData
+    // receivedData is declared as a method instance elsewhere
+    [receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    // release the connection, and the data object
+    [connection release];
+    // receivedData is declared as a method instance elsewhere
+    [receivedData release];
+	
+    // inform the user
+    NSLog(@"Connection failed! Error - %@ %@",
+          [error localizedDescription],
+          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+	UIImage *image = [UIImage imageWithData:receivedData];
+	imageView.image = image;
+	
+    // release the connection, and the data object
+    [connection release];
+    [receivedData release];
+}
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -108,12 +186,31 @@
  }
  */
 
-/*
+- (void)setBuildingName:(NSString *)name {
+	if (_buildingName != nil) [_buildingName release];
+	_buildingName = [name copy];
+	buildingNameLabel.text = _buildingName;
+}
+
+- (void)description:(NSString *)description {
+	if (_description != nil) [_description release];
+	_description = [description copy];
+	if (_description != nil) {
+		descriptionView.text = _description;
+	} else {
+		descriptionView.text = @"I'll assume this building is great."; 
+	}
+
+}
+
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
- - (void)viewDidLoad {
- [super viewDidLoad];
- }
- */
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	buildingNameLabel.text = self.buildingName;
+	if (self.description != nil) {
+		descriptionView.text = self.description;
+	}
+}
 
 /*
  // Override to allow orientations other than the default portrait orientation.
