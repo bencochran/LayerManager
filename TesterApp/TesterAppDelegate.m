@@ -65,23 +65,23 @@
 	GNLayer *food = [GNLayer layerWithName:@"Food"];
 	GNLayer *administration = [GNLayer layerWithName:@"Administration"];
 	
-	NSLog(@"Starting active layers: %i", [newLandmark getNumActiveLayers]);
+	NSLog(@"Starting active layers: %i", newLandmark.activeLayers.count);
 	NSLog(@"landmark:%@", newLandmark);
 	[newLandmark addActiveLayer:academicBuildings];
-	NSLog(@"After adding academic buildings: %i", [newLandmark getNumActiveLayers]);
+	NSLog(@"After adding academic buildings: %i", newLandmark.activeLayers.count);
 	NSLog(@"active layers:%@", newLandmark.activeLayers);
 	[newLandmark addActiveLayer:food];
 	[newLandmark addActiveLayer:administration];
-	NSLog(@"After adding two more: %i", [newLandmark getNumActiveLayers]);
+	NSLog(@"After adding two more: %i", newLandmark.activeLayers.count);
 	[newLandmark addActiveLayer:food];
-	NSLog(@"After adding redundant food: %i", [newLandmark getNumActiveLayers]);
+	NSLog(@"After adding redundant food: %i", newLandmark.activeLayers.count);
 	[newLandmark removeActiveLayer:food];
-	NSLog(@"After removing food: %i", [newLandmark getNumActiveLayers]);
+	NSLog(@"After removing food: %i", newLandmark.activeLayers.count);
 	[newLandmark removeActiveLayer:food];
-	NSLog(@"After removing non-existant food: %i", [newLandmark getNumActiveLayers]);
+	NSLog(@"After removing non-existant food: %i", newLandmark.activeLayers.count);
 	NSLog(@"active layers:%@", newLandmark.activeLayers);
 	[newLandmark clearActiveLayers];
-	NSLog(@"After removing active layers: %i", [newLandmark getNumActiveLayers]);*/
+	NSLog(@"After removing active layers: %i", newLandmark.activeLayers.count);*/
 	
     // Override point for customization after application launch
     [window makeKeyAndVisible];
@@ -98,7 +98,7 @@
 		NSLog(@"\t\tID:\t%i", landmark.ID);
 		NSLog(@"\t\tname:\t%@", landmark.name);
 		NSLog(@"\tActive layers:");
-		for(int j = 0; j < [landmark getNumActiveLayers]; j++)
+		for(int j = 0; j < landmark.activeLayers.count; j++)
 			NSLog(@"\t\t\tActive layer %i: %@", j, [[landmark.activeLayers objectAtIndex:j] name]);
 		NSLog(@"");
 	}

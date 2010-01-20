@@ -22,14 +22,14 @@ extern NSString *const GNLayerUpdateFailed;
 @interface GNLayer : NSObject {
 	NSString *_name;
 	BOOL _active;
-	// _closestLandmarks is the last list of closest landmarks
+	// _landmarks is the last list of closest landmarks
 	// returned by the server, sorted in increasing order by distance.
-	NSMutableArray *_closestLandmarks;
+	NSMutableArray *_landmarks;
 	
 	// the path to the icon that will represent this layer in the main view
 	NSString *iconPath;
 	// layerInfoByLandmark stores the information necessary to generate
-	// the UIViewController for each landmark in _closestLandmarks. 
+	// the UIViewController for each landmark in _landmarks. 
 	// Keys are landmarks, values are objects containing
 	// layer information that can be parsed to create a UIViewController
 	NSMutableDictionary *layerInfoByLandmark;
@@ -44,14 +44,13 @@ extern NSString *const GNLayerUpdateFailed;
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) BOOL active;
-@property (nonatomic, retain) NSMutableArray *closestLandmarks;
+@property (nonatomic, retain) NSMutableArray *landmarks;
 
 ///////////////////////// MIGHT DELETE LATER - SUBCLASS INITS DON'T CALL THIS
 + (GNLayer *)layerWithName:(NSString *)initName;
 
 ///////////////////////// TODO: -(NSIcon) getIcon;
-//- (NSMutableArray *)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager;
-- (NSMutableArray *)removeSelfFromLandmarks;
+- (void)removeSelfFromLandmarks;
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark;
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark;
 

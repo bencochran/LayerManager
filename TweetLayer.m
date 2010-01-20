@@ -70,12 +70,12 @@
 			
 			// calculate distance
 			landmark.distance = [landmark getDistanceFrom:center];
-			[self.closestLandmarks addObject:landmark];
+			[self.landmarks addObject:landmark];
 		}
 	}
 	
-	[self.closestLandmarks sortUsingSelector:@selector(compareTo:)];
-	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.closestLandmarks];
+	[self.landmarks sortUsingSelector:@selector(compareTo:)];
+	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
 }
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {

@@ -33,7 +33,6 @@
 
 -(void)addActiveLayer:(GNLayer*)layer;
 -(void)removeActiveLayer:(GNLayer*)layer;
--(int)getNumActiveLayers;
 -(void)clearActiveLayers;
 
 @end

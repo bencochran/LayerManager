@@ -12,7 +12,7 @@
 
 NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 
-@synthesize name=_name, active=_active, closestLandmarks=_closestLandmarks;
+@synthesize name=_name, active=_active, landmarks=_landmarks;
 
 +(GNLayer*)layerWithName:(NSString*)initName {
 	GNLayer *layer = [[GNLayer alloc] init];
@@ -24,7 +24,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	if (self = [super init]) {
 		self.name = nil;
 		self.active = NO;
-		self.closestLandmarks = [[NSMutableArray alloc] init];
+		self.landmarks = [[NSMutableArray alloc] init];
 		iconPath = nil;
 		layerInfoByLandmark = [[NSMutableDictionary alloc] init];
 	}
@@ -95,22 +95,14 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[self doesNotRecognizeSelector:_cmd];
 }
 
-- (NSMutableArray *)getNClosestLandmarks:(int)n toLocation:(CLLocation*)location withLM:(GNLayerManager*)layerManager {
-	[self doesNotRecognizeSelector:_cmd];
-	return nil;
-}
-
 // Removes this layer from the active layers list of each of its closest landmarks
-// Sets this layer's list of closest landmarks to a new empty NSMutableArray
-// and returns the previous closestLandmarks list (autoreleased)
-- (NSMutableArray *)removeSelfFromLandmarks {
-	for (GNLandmark *landmark in self.closestLandmarks) {
+// Clears this layer's set of landmarks
+- (void)removeSelfFromLandmarks {
+	for (GNLandmark *landmark in self.landmarks) {
 		[landmark removeActiveLayer:self];
 	}
 	
-	NSMutableArray *prev = [self.closestLandmarks copy];
-	[self.closestLandmarks removeAllObjects];
-	return [prev autorelease];
+	[self.landmarks removeAllObjects];
 }
 
 // Returns a short string summarizing the layer information
@@ -133,7 +125,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 
 -(void)dealloc {
 	[self.name release];
-	[self.closestLandmarks release];
+	[self.landmarks release];
 	[iconPath release];
 	[layerInfoByLandmark release];
 	[center release];

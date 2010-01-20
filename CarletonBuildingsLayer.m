@@ -58,15 +58,15 @@
   		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
 		[landmark addActiveLayer:self];
 		[layerInfoByLandmark setObject:layerInfo forKey:landmark];
-		[self.closestLandmarks addObject:landmark];
+		[self.landmarks addObject:landmark];
 		
 		[layerInfo release];
 	}
 	
-	[self.closestLandmarks sortUsingSelector:@selector(compareTo:)];
+	[self.landmarks sortUsingSelector:@selector(compareTo:)];
 	
 	// Inform the LayerManager that we've got new landmarks
-	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.closestLandmarks];
+	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
 }
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {

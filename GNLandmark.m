@@ -42,10 +42,6 @@
 		return NSOrderedSame;
 }
 
--(int)getNumActiveLayers {
-	return (int) ([self.activeLayers count]);
-}
-
 -(void)addActiveLayer:(GNLayer*)layer {
 	[self.activeLayers removeObject:layer];
 	[self.activeLayers addObject:layer];

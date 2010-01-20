@@ -62,7 +62,6 @@ static GNLayerManager *sharedManager = nil;
 -(id)init {
 	if (self = [super init]) {
 		layers = [[NSMutableArray alloc] init];
-		closestLandmarks = [[NSMutableArray alloc] init];
 		allLandmarks = [[NSMutableDictionary alloc] init];
 		maxLandmarks = 10;
 	}
@@ -82,28 +81,30 @@ static GNLayerManager *sharedManager = nil;
 	[self setLayer:layer active:active];
 }
 
-// Sets the given layer to the indicated activity
-// if the layer is being set to inactive, removes this layer
-// from its landmarks' lists of active layers,
-// and clears the layer's closestLandmarks list.
-// If any landmark has no more active layers, removes the
-// appropriate GNLandmark from closestLandmarks,
-// removes the landmark from allLandmarks, and releases it.
+// Sets the given layer to the indicated activity.
+// If the layer is being set to inactive, removes the layer
+// from the landmark's list of active layers. Then remove
+// any of that layer's landmarks that have no active layers.
 -(void) setLayer:(GNLayer*)layer active:(BOOL)active {
 	[layer setActive:active];
 	
 	if(active == NO)
 	{
-		NSArray *layerLandmarks = [layer removeSelfFromLandmarks];
-		
-		for (GNLandmark *landmark in layerLandmarks) {
-			if ([landmark getNumActiveLayers] == 0) {
-				[closestLandmarks removeObject:landmark];
+		for (GNLandmark *landmark in layer.landmarks) {
+			if (landmark.activeLayers.count == 0) {
 				[allLandmarks removeObjectForKey:
 				 [NSNumber numberWithInt:landmark.ID]];
 			}
-		}
+		}		
+		
+		[layer removeSelfFromLandmarks];
 	}
+	
+	// Immediately send a notification of updated landmarks in order
+	// to remove landmarks that are no longer on an active layer
+	[[NSNotificationCenter defaultCenter] postNotificationName:GNLandmarksUpdated
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.closestLandmarks,@"landmarks",nil]];	
 }
 
 - (NSString *)description {
@@ -111,6 +112,7 @@ static GNLayerManager *sharedManager = nil;
 }
 
 - (void)updateToCenterLocation:(CLLocation *)location {
+	center = location;
 	for (GNLayer *layer in layers) {
 		if([layer active]) {
 			[layer updateToCenterLocation:location];
@@ -118,36 +120,46 @@ static GNLayerManager *sharedManager = nil;
 	}
 }
 
-- (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks {
-	GNLandmark *landmark;
-	
-	// merge them into the main array
-	for (landmark in landmarks) {
-		if (![closestLandmarks containsObject:landmark]) {
-			[closestLandmarks addObject:landmark];
-		}
+- (void)updateWithPreviousLocation {
+	if (center == nil) {
+		// Send an error notification in the future
+		return;
 	}
 	
-	NSMutableArray *landmarksToRemove = [NSMutableArray array];
-	for (landmark in closestLandmarks) {
-		if (landmark.activeLayers.count < 1) {
-			[landmarksToRemove addObject:landmark];
+	for (GNLayer *layer in layers) {
+		if([layer active]) {
+			[layer updateToCenterLocation:center];
 		}
 	}
-	[closestLandmarks removeObjectsInArray:landmarksToRemove];
-	
-	// Sort the closest landmarks
-	[closestLandmarks sortUsingSelector:@selector(compareTo:)];
-	
-	NSArray* closestN = [closestLandmarks objectsAtIndexes:
-						 [NSIndexSet indexSetWithIndexesInRange:
-						  NSMakeRange(0, MIN([self maxLandmarks], [closestLandmarks count]))]];
-	
-	
+}
+
+- (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks {	
 	// Send a notification that the landmarks list has been updated.
 	[[NSNotificationCenter defaultCenter] postNotificationName:GNLandmarksUpdated
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:closestN,@"landmarks",nil]];
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.closestLandmarks,@"landmarks",nil]];
+}
+
+- (NSArray *)closestLandmarks {
+	NSMutableArray* activeLandmarks = [[NSMutableArray alloc] init];
+	
+	for (GNLandmark *landmark in [allLandmarks allValues]) {
+		if (landmark.activeLayers.count > 0) {
+			[activeLandmarks addObject:landmark];
+		}
+	}
+	
+	[activeLandmarks sortUsingSelector:@selector(compareTo:)];
+	
+	NSArray* closest = [activeLandmarks objectsAtIndexes:
+						 [NSIndexSet indexSetWithIndexesInRange:
+						  NSMakeRange(0, MIN([self maxLandmarks], [activeLandmarks count]))]];
+	
+	NSLog(@"closest: %@", closest);
+	
+	[activeLandmarks release];
+	
+	return closest;
 }
 
 
@@ -175,14 +187,9 @@ static GNLayerManager *sharedManager = nil;
 	return landmark;
 }
 
-- (NSUInteger)getSizeofClosestLandmarks{
-	return [closestLandmarks count];
-}
-
 -(void)dealloc {
 	[layers release];
 	[allLandmarks release];
-	[closestLandmarks release];
 	
 	[super dealloc];
 }

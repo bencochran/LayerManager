@@ -14,15 +14,15 @@ extern NSString *const GNLandmarksUpdated;
 
 @interface GNLayerManager : NSObject {
 	NSMutableArray *layers;
-	// closestLandmarks is a list of GNLandmarks, compiled from
-	// the lists of closest landmarks returned by each layer on the previous
-	// call to getNClosestLandmarks, sorted in increasing order by distance
-	NSMutableArray *closestLandmarks;
+
 	// allLandmarks: key = landmark ID, value = GNLandmark
 	NSMutableDictionary *allLandmarks;
 	
 	// The hard-coded maximum number of landmarks to retreive
 	int maxLandmarks;
+	
+	// The most recent center location
+	CLLocation *center;
 }
 
 @property (readonly) int maxLandmarks;
@@ -36,9 +36,9 @@ extern NSString *const GNLandmarksUpdated;
 - (GNLandmark *)getLandmark:(int)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 - (GNLandmark *)getLandmark:(int)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude;
 
-- (NSUInteger)getSizeofClosestLandmarks;
-
 - (void)updateToCenterLocation:(CLLocation *)location;
+- (void)updateWithPreviousLocation;
 - (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks;
+- (NSArray *)closestLandmarks;
 
 @end
