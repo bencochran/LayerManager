@@ -64,7 +64,9 @@
 														 longitude:[longitude floatValue]
 														  altitude:center.altitude];
 			
-			[landmark addActiveLayer:self];
+			if (self.active) {
+				[landmark addActiveLayer:self];
+			}
 			[layerInfoByLandmarkID setObject:tweet forKey:landmark.ID];
 			
 			// calculate distance

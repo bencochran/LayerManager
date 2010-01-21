@@ -56,12 +56,13 @@
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
   		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
-		[landmark addActiveLayer:self];
+		if (self.active) {
+			[landmark addActiveLayer:self];
+			NSLog(@"Added %@", landmark.name);
+		} else {
+			NSLog(@"Ignored %@", landmark.name);
+		}
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
-		NSLog(@"added landmark: %@", landmark);
-		NSLog(@"to info: %@", layerInfoByLandmarkID);
-		
-		NSLog(@"Everything's fucked? %@", [layerInfoByLandmarkID objectForKey:landmark.ID] == nil ? @"Yes" : @"No");
 		
 		[self.landmarks addObject:landmark];
 		

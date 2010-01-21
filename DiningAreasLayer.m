@@ -56,7 +56,9 @@
 													  latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
-		[landmark addActiveLayer:self];
+		if (self.active) {
+			[landmark addActiveLayer:self];
+		}
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 		
 		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
