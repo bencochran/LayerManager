@@ -76,7 +76,17 @@
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
-	return [[[UIViewController alloc] initWithCoder:nil] autorelease];
+	UIViewController *viewController = [[UIViewController alloc] init];
+	UIWebView *webView = [[UIWebView alloc] init];
+	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
+
+	[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
+	
+	viewController.title = self.name;
+	viewController.view = webView;
+	[webView release];
+	
+	return [viewController autorelease];;
 }
 
 @end
