@@ -45,7 +45,8 @@
 	// load the distance and landmark info
 	NSDictionary *tweet;
 	GNLandmark *landmark;
-	
+	NSMutableDictionary *layerInfo;
+
 	NSNumber *latitude;
 	NSNumber *longitude;
 	
@@ -57,6 +58,11 @@
 			latitude = [[[tweet objectForKey:@"geo"] objectForKey:@"coordinates"] objectAtIndex:0];
 			longitude = [[[tweet objectForKey:@"geo"] objectForKey:@"coordinates"] objectAtIndex:1];
 			NSLog(@"id: %@",[tweet objectForKey:@"id"]);
+			
+			layerInfo = [[NSMutableDictionary alloc] init];
+			[layerInfo setObject:[tweet objectForKey:@"from_user"] forKey:@"from_user"];
+			[layerInfo setObject:[tweet objectForKey:@"text"] forKey:@"text"];
+			[layerInfo setObject:[tweet objectForKey:@"id"] forKey:@"id"];
 			
 			landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"twitter:%@",[tweet objectForKey:@"id"]]
 															  name:[tweet objectForKey:@"from_user"]
@@ -72,6 +78,9 @@
 			// calculate distance
 			landmark.distance = [landmark getDistanceFrom:center];
 			[self.landmarks addObject:landmark];
+			
+			[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
+			[layerInfo release];
 		}
 	}
 	
@@ -84,7 +93,19 @@
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
-	return [[[UIViewController alloc] initWithCoder:nil] autorelease];
+	UIViewController *viewController = [[UIViewController alloc] init];
+	UIWebView *webView = [[UIWebView alloc] init];
+	NSString *username = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"from_user"];
+	NSString *tweetid = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"id"];
+	NSString *urlString = [NSString stringWithFormat:@"http://twitter.com/%@/status/%@", username, tweetid];
+	
+	[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
+	
+	viewController.title = self.name;
+	viewController.view = webView;
+	[webView release];
+	
+	return [viewController autorelease];;
 }
 
 @end
