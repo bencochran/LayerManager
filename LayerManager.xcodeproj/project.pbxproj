@@ -39,6 +39,7 @@
 		B85D52911105A1410067D658 /* DiningAreasLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE3BA2510F900AC003BE4A2 /* DiningAreasLayer.h */; };
 		B88D771910CF6110003A76A1 /* TweetLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B88D771710CF6110003A76A1 /* TweetLayer.h */; };
 		B88D771A10CF6110003A76A1 /* TweetLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D771810CF6110003A76A1 /* TweetLayer.m */; };
+		B89BA2FF11081DA900A5FE3C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89BA2FE11081DA900A5FE3C /* MapKit.framework */; };
 		B8AD59231106B89900D2E6A0 /* CarletonBuildingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8AD59211106B89900D2E6A0 /* CarletonBuildingsView.xib */; };
 		B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC145E109EBAEC000701DF /* GNLandmark.h */; };
 		B8BC1465109EBAEC000701DF /* GNLandmark.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BC145F109EBAEC000701DF /* GNLandmark.m */; };
@@ -99,6 +100,7 @@
 		B81C4D6810CF4F1100EA3205 /* LayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager.h; sourceTree = "<group>"; };
 		B88D771710CF6110003A76A1 /* TweetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetLayer.h; sourceTree = "<group>"; };
 		B88D771810CF6110003A76A1 /* TweetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetLayer.m; sourceTree = "<group>"; };
+		B89BA2FE11081DA900A5FE3C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B8AD59211106B89900D2E6A0 /* CarletonBuildingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarletonBuildingsView.xib; sourceTree = "<group>"; };
 		B8BC145E109EBAEC000701DF /* GNLandmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLandmark.h; sourceTree = "<group>"; };
 		B8BC145F109EBAEC000701DF /* GNLandmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLandmark.m; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			files = (
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 				A251B08C10F53CB10041E1D7 /* CoreLocation.framework in Frameworks */,
+				B89BA2FF11081DA900A5FE3C /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +179,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B89BA2FE11081DA900A5FE3C /* MapKit.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 				B8BC147E109EBBB8000701DF /* CoreLocation.framework */,
 			);

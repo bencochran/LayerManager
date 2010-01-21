@@ -67,6 +67,10 @@
 	return copy;
 }
 
+- (NSString *)title {
+	return self.name;
+}
+
 -(void)addActiveLayer:(GNLayer*)layer {
 	[self.activeLayers removeObject:layer];
 	[self.activeLayers addObject:layer];

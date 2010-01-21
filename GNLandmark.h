@@ -13,10 +13,11 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 @class GNLayer;
 
-@interface GNLandmark : CLLocation {
+@interface GNLandmark : CLLocation <MKAnnotation> {
 	NSString *_id;
 	float _distance;
 	NSString* _name;
@@ -27,6 +28,9 @@
 @property (nonatomic) float distance;
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, retain) NSMutableArray* activeLayers;
+
+// We need to provide a title property to comply with the MKAnnotation interface
+@property (nonatomic, readonly) NSString *title;
 
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;

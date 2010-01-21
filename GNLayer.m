@@ -89,6 +89,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	
 	[connection release];
     [receivedData release];
+	receivedData = nil;
 }
 
 - (void)ingestNewData:(NSData *)data {
