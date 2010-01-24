@@ -27,24 +27,21 @@
 
 - (void)ingestNewData:(NSData *)data {
 	[self removeSelfFromLandmarks];
-	
 	[layerInfoByLandmarkID removeAllObjects];
-
-	//NSString *reply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSArray *layerInfoList = [parser objectWithString:reply error:nil];
-	[parser release];
 	[reply release];
-
+	[parser release];
+	
 	// load the distance and landmark info
-	NSDictionary *landmarkAndLayerInfo;
 	NSMutableDictionary *layerInfo;
 	GNLandmark *landmark;
 	
-	for (landmarkAndLayerInfo in layerInfoList)
+	for (NSDictionary *landmarkAndLayerInfo in layerInfoList)
 	{
-		layerInfo = [[NSMutableDictionary alloc] init];
+		layerInfo = [NSMutableDictionary dictionary];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"yearBuilt"] forKey:@"yearBuilt"];
@@ -56,16 +53,16 @@
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
   		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
+		
 		if (self.active) {
 			[landmark addActiveLayer:self];
 			NSLog(@"Added %@", landmark.name);
 		} else {
 			NSLog(@"Ignored %@", landmark.name);
 		}
+		
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
-		
 		[self.landmarks addObject:landmark];
-		
 		[layerInfo release];
 	}
 	
