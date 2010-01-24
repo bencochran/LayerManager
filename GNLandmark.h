@@ -1,10 +1,10 @@
 //
 //  GNLandmark.h
 //  Stores the information relevant to a landmark:
-//      a unique integer identifier
-//      a float with the value of the last known distance of this landmark from the user
-//      a string name (not necessarily unique)
 //      a longitude and latitude (inherited from CLLocation)
+//      a unique string identifier
+//      a string name (not necessarily unique)
+//      a float with the value of the last known distance from the user
 //      a list of the active layers that are currently storing information on this landmark
 //
 //  Created by iComps on 11/1/09.
@@ -19,14 +19,14 @@
 
 @interface GNLandmark : CLLocation <MKAnnotation> {
 	NSString *_id;
-	float _distance;
 	NSString* _name;
+	float _distance;
 	NSMutableArray* _activeLayers;
 }
 
 @property (nonatomic, copy) NSString *ID;
-@property (nonatomic) float distance;
 @property (nonatomic, copy) NSString* name;
+@property (nonatomic) float distance;
 @property (nonatomic, retain) NSMutableArray* activeLayers;
 
 // We need to provide a title property to comply with the MKAnnotation interface

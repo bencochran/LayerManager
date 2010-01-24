@@ -11,7 +11,7 @@
 
 @implementation GNLandmark
 
-@synthesize ID=_id, distance=_distance, name=_name, activeLayers=_activeLayers;
+@synthesize ID=_id, name=_name, distance=_distance, activeLayers=_activeLayers;
 
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
 	CLLocationCoordinate2D coordinate;
@@ -21,16 +21,18 @@
 	GNLandmark *landmark = [[GNLandmark alloc] initWithCoordinate:coordinate altitude:altitude horizontalAccuracy:0.0 verticalAccuracy:0.0 timestamp:[NSDate date]];
 	landmark.ID = ID;
 	landmark.name = name;
+	landmark.distance = INFINITY;
 	landmark.activeLayers = [NSMutableArray array];
 	return [landmark autorelease];	
 }
 
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
-	GNLandmark *newLandmark = [[GNLandmark alloc] initWithLatitude:latitude longitude:longitude];
-	newLandmark.ID = ID;
-	newLandmark.name = name;
-	newLandmark.activeLayers = [[NSMutableArray alloc] init];
-	return [newLandmark autorelease];
+	GNLandmark *landmark = [[GNLandmark alloc] initWithLatitude:latitude longitude:longitude];
+	landmark.ID = ID;
+	landmark.name = name;
+	landmark.distance = INFINITY;
+	landmark.activeLayers = [NSMutableArray array];
+	return [landmark autorelease];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -40,15 +42,6 @@
 		self.activeLayers = [aDecoder decodeObjectForKey:@"GNLandmarkActiveLayers"];
 	}
 	return self;
-}
-
--(NSComparisonResult)compareTo:(GNLandmark*)other {
-	if(self.distance < other.distance)
-		return NSOrderedAscending;
-	else if(self.distance > other.distance)
-		return NSOrderedDescending;
-	else
-		return NSOrderedSame;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -71,6 +64,15 @@
 	return self.name;
 }
 
+-(NSComparisonResult)compareTo:(GNLandmark*)other {
+	if(self.distance < other.distance)
+		return NSOrderedAscending;
+	else if(self.distance > other.distance)
+		return NSOrderedDescending;
+	else
+		return NSOrderedSame;
+}
+
 -(void)addActiveLayer:(GNLayer*)layer {
 	[self.activeLayers removeObject:layer];
 	[self.activeLayers addObject:layer];
@@ -90,6 +92,7 @@
 }
 
 -(void)dealloc {
+	[self.ID release];
 	[self.name release];
 	[self.activeLayers release];
 	[super dealloc];
