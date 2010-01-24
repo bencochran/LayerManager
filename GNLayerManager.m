@@ -61,8 +61,8 @@ static GNLayerManager *sharedManager = nil;
 
 -(id)init {
 	if (self = [super init]) {
-		layers = [[NSMutableArray alloc] init];
-		allLandmarks = [[NSMutableDictionary alloc] init];
+		layers = [NSMutableArray array];
+		allLandmarks = [NSMutableDictionary dictionary];
 		maxLandmarks = 10;
 	}
 	return self;
@@ -83,7 +83,7 @@ static GNLayerManager *sharedManager = nil;
 
 // Sets the given layer to the indicated activity.
 // If the layer is being set to inactive, removes the layer
-// from the landmark's list of active layers. Then remove
+// from the landmarks' lists of active layers. Then removes
 // any of that layer's landmarks that have no active layers.
 -(void) setLayer:(GNLayer*)layer active:(BOOL)active {
 	[layer setActive:active];
@@ -91,7 +91,9 @@ static GNLayerManager *sharedManager = nil;
 	if(active == NO)
 	{
 		for (GNLandmark *landmark in layer.landmarks) {
-			if (landmark.activeLayers.count == 0) {
+			if (landmark.activeLayers.count <= 1) {
+				// the given layer is the only remaining active layer for this landmark:
+				// once layer is inactive, landmark will also be inactive, so remove it
 				[allLandmarks removeObjectForKey: landmark.ID];
 			}
 		}		
@@ -140,7 +142,7 @@ static GNLayerManager *sharedManager = nil;
 }
 
 - (NSArray *)closestLandmarks {
-	NSMutableArray* activeLandmarks = [[NSMutableArray alloc] init];
+	NSMutableArray* activeLandmarks = [NSMutableArray array];
 	
 	for (GNLandmark *landmark in [allLandmarks allValues]) {
 		if (landmark.activeLayers.count > 0) {

@@ -1,7 +1,7 @@
 //
 //  GNLayer.h
 //  The general layer superclass. Contains information relevant to all layers:
-//      a unique string name
+//      a unique string name (should begin with a source-specific string immediately followed by a colon)
 //      a BOOL indicating whether or not this layer is active
 //      a mutable array of this layer's current closest landmarks (sorted in increasing order by distance)
 //      a string path to this layer's icon (should be hard-coded into each subclass)

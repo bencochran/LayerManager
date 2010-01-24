@@ -14,13 +14,10 @@ extern NSString *const GNLandmarksUpdated;
 
 @interface GNLayerManager : NSObject {
 	NSMutableArray *layers;
-
 	// allLandmarks: key = landmark ID, value = GNLandmark
 	NSMutableDictionary *allLandmarks;
-	
 	// The hard-coded maximum number of landmarks to retreive
 	int maxLandmarks;
-	
 	// The most recent center location
 	CLLocation *center;
 }
@@ -35,7 +32,6 @@ extern NSString *const GNLandmarksUpdated;
 
 - (GNLandmark *)getLandmark:(NSString *)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 - (GNLandmark *)getLandmark:(NSString *)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude;
-
 
 - (void)updateToCenterLocation:(CLLocation *)location;
 - (void)updateWithPreviousLocation;
