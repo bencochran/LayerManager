@@ -27,20 +27,15 @@
 
 - (void)ingestNewData:(NSData *)data {
 	[self removeSelfFromLandmarks];
-	
 	[layerInfoByLandmarkID removeAllObjects];
 	
-//	NSString *reply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-	
-	// parse the reply
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSDictionary *parsedReply = [parser objectWithString:reply error:nil];
-	[parser release];
 	[reply release];
+	[parser release];
 	
 	NSArray *tweets = [parsedReply objectForKey:@"results"];
-	
 	
 	// load the distance and landmark info
 	NSDictionary *tweet;

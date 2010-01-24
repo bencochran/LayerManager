@@ -67,7 +67,6 @@
 	}
 	
 	[self.landmarks sortUsingSelector:@selector(compareTo:)];
-	
 	// Inform the LayerManager that we've got new landmarks
 	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
 }
