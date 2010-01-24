@@ -29,9 +29,12 @@
 	GNLayerManager *manager = [GNLayerManager sharedManager];
 	NSString *landmarkName = @"Boliou";
 	GNLandmark *newLandmark = [[GNLandmark landmarkWithID:@"1" name:landmarkName latitude:(CLLocationDegrees)15.0 longitude:(CLLocationDegrees)20.0] retain];
-	GNLayer *academicBuildings = [GNLayer layerWithName:@"Academic Buildings"];
-	GNLayer *food = [GNLayer layerWithName:@"Food"];
-	GNLayer *administration = [GNLayer layerWithName:@"Administration"];
+	GNLayer *academicBuildings = [[GNLayer alloc] init];
+	academicBuildings.name = @"Academic Buildings";
+	GNLayer *food = [[GNLayer alloc] init];
+	food.name = @"Food";
+	GNLayer *administration = [[GNLayer alloc] init];
+	administration.name = @"Administration";
 	[manager addLayer:academicBuildings];
 	[manager addLayer:food active:NO];
 	[manager addLayer:administration];

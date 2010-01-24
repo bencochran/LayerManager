@@ -34,10 +34,8 @@ extern NSString *const GNLayerUpdateFailed;
 	// layer information that can be parsed to create a UIViewController
 	NSMutableDictionary *layerInfoByLandmarkID;
 	
-	// NSData to hold incomming data from the NSURLConnection as
-	// we receive it.
+	// NSData to hold incomming data from the NSURLConnection as we receive it.
 	NSMutableData *receivedData;
-	
 	// The most recent center location
 	CLLocation *center;
 }
@@ -45,9 +43,6 @@ extern NSString *const GNLayerUpdateFailed;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) BOOL active;
 @property (nonatomic, retain) NSMutableArray *landmarks;
-
-///////////////////////// MIGHT DELETE LATER - SUBCLASS INITS DON'T CALL THIS
-+ (GNLayer *)layerWithName:(NSString *)initName;
 
 ///////////////////////// TODO: -(NSIcon) getIcon;
 - (void)removeSelfFromLandmarks;

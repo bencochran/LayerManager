@@ -14,19 +14,13 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 
 @synthesize name=_name, active=_active, landmarks=_landmarks;
 
-+(GNLayer*)layerWithName:(NSString*)initName {
-	GNLayer *layer = [[GNLayer alloc] init];
-	layer.name = initName;
-	return [layer autorelease];
-}
-
 -(id)init {
 	if (self = [super init]) {
 		self.name = nil;
 		self.active = NO;
-		self.landmarks = [[NSMutableArray alloc] init];
+		self.landmarks = [NSMutableArray array];
 		iconPath = nil;
-		layerInfoByLandmarkID = [[NSMutableDictionary alloc] init];
+		layerInfoByLandmarkID = [NSMutableDictionary dictionary];
 	}
 	return self;
 }
@@ -81,7 +75,6 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[[NSNotificationCenter defaultCenter] postNotificationName:GNLayerUpdateFailed
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:error,@"error",nil]];
-	
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -106,15 +99,13 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[self.landmarks removeAllObjects];
 }
 
-// Returns a short string summarizing the layer information
-// for the given landmark
+// Returns a short string summarizing the layer information for the given landmark
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
-// Returns a UIViewController displaying the layer information
-// for the given landmark
+// Returns a UIViewController displaying the layer information for the given landmark
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
