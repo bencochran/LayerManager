@@ -61,8 +61,8 @@ static GNLayerManager *sharedManager = nil;
 
 -(id)init {
 	if (self = [super init]) {
-		layers = [NSMutableArray array];
-		allLandmarks = [NSMutableDictionary dictionary];
+		layers = [[NSMutableArray array] retain];
+		allLandmarks = [[NSMutableDictionary dictionary] retain];
 		maxLandmarks = 10;
 	}
 	return self;
@@ -157,8 +157,6 @@ static GNLayerManager *sharedManager = nil;
 						  NSMakeRange(0, MIN([self maxLandmarks], [activeLandmarks count]))]];
 	
 	NSLog(@"closest: %@", closest);
-	
-	[activeLandmarks release];
 	
 	return closest;
 }

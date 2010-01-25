@@ -20,7 +20,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		self.active = NO;
 		self.landmarks = [NSMutableArray array];
 		iconPath = nil;
-		layerInfoByLandmarkID = [NSMutableDictionary dictionary];
+		layerInfoByLandmarkID = [[NSMutableDictionary dictionary] retain];
 	}
 	return self;
 }

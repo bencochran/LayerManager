@@ -48,7 +48,6 @@
 	STAssertTrue(newLandmark.activeLayers.count == 2, @"After removing a non-existent layer, the landmark should still be associated with 2 layers: academic buildings and administration");
 	[newLandmark clearActiveLayers];
 	STAssertTrue(newLandmark.activeLayers.count == 0, @"After removing all layers, the landmark shouldn't be associated with any layers");
-	[newLandmark release];
 	[carletonBuildings release];
 	[food release];
 	[twitter release];
@@ -73,7 +72,7 @@
 	[manager addLayer:carletonBuildings active:YES];
 	[carletonBuildings release];
 	[diningAreas release];
-//	[tweets release];
+	[tweets release];
 	
 //	STAssertTrue(NO, @"Must FAIL");
 	

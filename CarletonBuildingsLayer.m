@@ -41,7 +41,7 @@
 	
 	for (NSDictionary *landmarkAndLayerInfo in layerInfoList)
 	{
-		layerInfo = [NSMutableDictionary dictionary];
+		layerInfo = [[NSMutableDictionary alloc] init];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"yearBuilt"] forKey:@"yearBuilt"];

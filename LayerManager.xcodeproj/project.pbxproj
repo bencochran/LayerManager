@@ -60,21 +60,21 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B8CB2DA4110D840800BED463 /* GHUnitIPhone.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 00A952F50FDA2B99006A80A6 /* libGHUnitIPhoneSimulator3_0.a */;
+			remoteGlobalIDString = 00A952F50FDA2B99006A80A6;
 			remoteInfo = "GHUnitIPhone (Simulator-3.0)";
 		};
 		B8CB2DB0110D840800BED463 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B8CB2DA4110D840800BED463 /* GHUnitIPhone.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 00A953270FDA2BB8006A80A6 /* libGHUnitIPhoneDevice3_0.a */;
+			remoteGlobalIDString = 00A953270FDA2BB8006A80A6;
 			remoteInfo = "GHUnitIPhone (Device-3.0)";
 		};
 		B8CB2DB2110D840800BED463 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B8CB2DA4110D840800BED463 /* GHUnitIPhone.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 1D6058910D05DD3D006BFB54 /* Tests.app */;
+			remoteGlobalIDString = 1D6058910D05DD3D006BFB54;
 			remoteInfo = Tests;
 		};
 /* End PBXContainerItemProxy section */
