@@ -35,31 +35,6 @@
 	return [landmark autorelease];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-		self.name = [aDecoder decodeObjectForKey:@"GNLandmarkName"];
-		self.ID = [aDecoder decodeObjectForKey:@"GNLandmarkID"];
-		self.activeLayers = [aDecoder decodeObjectForKey:@"GNLandmarkActiveLayers"];
-	}
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-	[super encodeWithCoder:aCoder];
-	[aCoder encodeObject:self.name forKey:@"GNLandmarkName"];
-	[aCoder encodeObject:self.ID forKey:@"GNLandmarkID"];
-	[aCoder encodeObject:self.activeLayers forKey:@"GNLandmarkActiveLayers"];
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-	id copy = [super copyWithZone:zone];
-	
-	[copy setName:[self.name copy]];
-	[copy setID:[self.ID copy]];
-	[copy setActiveLayers:self.activeLayers];
-	return copy;
-}
-
 - (NSString *)title {
 	return self.name;
 }
