@@ -1,0 +1,3 @@
+[submodule "ghunit"]
+	path = ghunit
+	url = git://github.com/gabriel/gh-unit.git
