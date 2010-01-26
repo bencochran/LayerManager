@@ -21,6 +21,8 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		self.landmarks = [NSMutableArray array];
 		iconPath = nil;
 		layerInfoByLandmarkID = [[NSMutableDictionary dictionary] retain];
+		layerFields = nil;
+		userModifiable = NO;
 	}
 	return self;
 }
@@ -111,6 +113,14 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	return nil;
 }
 
+- (UIViewController *)getEditingViewController; {
+	return nil;
+}
+
+- (BOOL)layerIsUserModifiable;{
+	return userModifiable;
+}
+
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<GNLayer name: %@, active: %@>", self.name, self.active ? @"YES" : @"NO"];
 }
@@ -120,9 +130,25 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[self.landmarks release];
 	[iconPath release];
 	[layerInfoByLandmarkID release];
-	[center release];
-	
+	[center release];	
 	[super dealloc];
+}
+
+@end
+
+@implementation GNTextFieldCell
+
+- (id)initWithLabel:(NSString *) labelText {
+	if (self = [super init]) {
+		UILabel *label = [[UILabel alloc] init];
+		label.text = labelText;
+		UITextField *textField = [[UITextField alloc] init];
+		[self.contentView addSubview:label];
+		[self.contentView addSubview:textField];
+		[label release];
+		[textField release];
+	}
+	return self;
 }
 
 @end

@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		A215000210B2548200774314 /* libLayerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libLayerManager.a */; };
 		A215000410B2548200774314 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
-		A215FF8A10B2476900774314 /* CarletonBuildingsLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FF8810B2476900774314 /* CarletonBuildingsLayer.h */; };
-		A215FF8B10B2476900774314 /* CarletonBuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FF8910B2476900774314 /* CarletonBuildingsLayer.m */; };
+		A215FF8A10B2476900774314 /* CarletonLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FF8810B2476900774314 /* CarletonLayer.h */; };
+		A215FF8B10B2476900774314 /* CarletonLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FF8910B2476900774314 /* CarletonLayer.m */; };
 		A215FFAC10B24F2800774314 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FF9F10B24F2800774314 /* JSON.h */; };
 		A215FFAD10B24F2800774314 /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A215FFA010B24F2800774314 /* NSObject+SBJSON.h */; };
 		A215FFAE10B24F2800774314 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFA110B24F2800774314 /* NSObject+SBJSON.m */; };
@@ -26,17 +26,19 @@
 		A215FFB810B24F2800774314 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFAB10B24F2800774314 /* SBJsonWriter.m */; };
 		A251B08C10F53CB10041E1D7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8BC147E109EBBB8000701DF /* CoreLocation.framework */; };
 		A251B08D10F53CB30041E1D7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8BC147E109EBBB8000701DF /* CoreLocation.framework */; };
+		A2D2085F110E62C100C99513 /* GNEditingTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2D2085C110E62C100C99513 /* GNEditingTable.h */; };
+		A2D20860110E62C100C99513 /* GNEditingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D2085D110E62C100C99513 /* GNEditingTable.m */; };
 		AA747D9F0F9514B9006C5449 /* LayerManager_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		B81C4D6910CF4F1100EA3205 /* LayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B81C4D6810CF4F1100EA3205 /* LayerManager.h */; };
 		B855D74A110D3849001CF7BD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B855D749110D3849001CF7BD /* UIKit.framework */; };
 		B855D74E110D3851001CF7BD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B855D74D110D3851001CF7BD /* CoreGraphics.framework */; };
-		B85D52901105A1370067D658 /* DiningAreasLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE3BA2610F900AC003BE4A2 /* DiningAreasLayer.m */; };
-		B85D52911105A1410067D658 /* DiningAreasLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE3BA2510F900AC003BE4A2 /* DiningAreasLayer.h */; };
+		B85D52901105A1370067D658 /* FoodLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE3BA2610F900AC003BE4A2 /* FoodLayer.m */; };
+		B85D52911105A1410067D658 /* FoodLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FCE3BA2510F900AC003BE4A2 /* FoodLayer.h */; };
 		B88D771910CF6110003A76A1 /* TweetLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B88D771710CF6110003A76A1 /* TweetLayer.h */; };
 		B88D771A10CF6110003A76A1 /* TweetLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D771810CF6110003A76A1 /* TweetLayer.m */; };
 		B89BA2FF11081DA900A5FE3C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89BA2FE11081DA900A5FE3C /* MapKit.framework */; };
-		B8AD59231106B89900D2E6A0 /* CarletonBuildingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8AD59211106B89900D2E6A0 /* CarletonBuildingsView.xib */; };
+		B8AD59231106B89900D2E6A0 /* CarletonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8AD59211106B89900D2E6A0 /* CarletonView.xib */; };
 		B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC145E109EBAEC000701DF /* GNLandmark.h */; };
 		B8BC1465109EBAEC000701DF /* GNLandmark.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BC145F109EBAEC000701DF /* GNLandmark.m */; };
 		B8BC1466109EBAEC000701DF /* GNLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B8BC1460109EBAEC000701DF /* GNLayer.h */; };
@@ -80,8 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A215FF8810B2476900774314 /* CarletonBuildingsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarletonBuildingsLayer.h; sourceTree = "<group>"; };
-		A215FF8910B2476900774314 /* CarletonBuildingsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarletonBuildingsLayer.m; sourceTree = "<group>"; };
+		A215FF8810B2476900774314 /* CarletonLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarletonLayer.h; sourceTree = "<group>"; };
+		A215FF8910B2476900774314 /* CarletonLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarletonLayer.m; sourceTree = "<group>"; };
 		A215FF9F10B24F2800774314 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		A215FFA010B24F2800774314 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		A215FFA110B24F2800774314 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -99,6 +101,9 @@
 		A215FFFE10B2546600774314 /* TesterApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TesterApp-Info.plist"; sourceTree = "<group>"; };
 		A251AE8F10F525160041E1D7 /* UnitTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestCase.h; sourceTree = "<group>"; };
 		A251AE9010F525160041E1D7 /* UnitTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTestCase.m; sourceTree = "<group>"; };
+		A2D2085C110E62C100C99513 /* GNEditingTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNEditingTable.h; sourceTree = "<group>"; };
+		A2D2085D110E62C100C99513 /* GNEditingTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNEditingTable.m; sourceTree = "<group>"; };
+		A2D2085E110E62C100C99513 /* GNEditingTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GNEditingTable.xib; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B81C4D6810CF4F1100EA3205 /* LayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager.h; sourceTree = "<group>"; };
@@ -107,7 +112,7 @@
 		B88D771710CF6110003A76A1 /* TweetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetLayer.h; sourceTree = "<group>"; };
 		B88D771810CF6110003A76A1 /* TweetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetLayer.m; sourceTree = "<group>"; };
 		B89BA2FE11081DA900A5FE3C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		B8AD59211106B89900D2E6A0 /* CarletonBuildingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarletonBuildingsView.xib; sourceTree = "<group>"; };
+		B8AD59211106B89900D2E6A0 /* CarletonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarletonView.xib; sourceTree = "<group>"; };
 		B8BC145E109EBAEC000701DF /* GNLandmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLandmark.h; sourceTree = "<group>"; };
 		B8BC145F109EBAEC000701DF /* GNLandmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLandmark.m; sourceTree = "<group>"; };
 		B8BC1460109EBAEC000701DF /* GNLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLayer.h; sourceTree = "<group>"; };
@@ -118,8 +123,8 @@
 		B8CB2DA4110D840800BED463 /* GHUnitIPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHUnitIPhone.xcodeproj; path = "ghunit/Project-IPhone/GHUnitIPhone.xcodeproj"; sourceTree = "<group>"; };
 		B8CB2E95110D8B2E00BED463 /* GHUnitIPhoneTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHUnitIPhoneTestMain.m; path = "ghunit/Classes-IPhone/GHUnitIPhoneTestMain.m"; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libLayerManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLayerManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCE3BA2510F900AC003BE4A2 /* DiningAreasLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiningAreasLayer.h; sourceTree = "<group>"; };
-		FCE3BA2610F900AC003BE4A2 /* DiningAreasLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiningAreasLayer.m; sourceTree = "<group>"; };
+		FCE3BA2510F900AC003BE4A2 /* FoodLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodLayer.h; sourceTree = "<group>"; };
+		FCE3BA2610F900AC003BE4A2 /* FoodLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,17 +195,19 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A2D2085C110E62C100C99513 /* GNEditingTable.h */,
+				A2D2085D110E62C100C99513 /* GNEditingTable.m */,
 				B81C4D6810CF4F1100EA3205 /* LayerManager.h */,
 				B8BC145E109EBAEC000701DF /* GNLandmark.h */,
 				B8BC145F109EBAEC000701DF /* GNLandmark.m */,
-				FCE3BA2510F900AC003BE4A2 /* DiningAreasLayer.h */,
-				FCE3BA2610F900AC003BE4A2 /* DiningAreasLayer.m */,
+				FCE3BA2510F900AC003BE4A2 /* FoodLayer.h */,
+				FCE3BA2610F900AC003BE4A2 /* FoodLayer.m */,
 				B8BC1460109EBAEC000701DF /* GNLayer.h */,
 				B8BC1461109EBAEC000701DF /* GNLayer.m */,
 				B8BC1462109EBAEC000701DF /* GNLayerManager.h */,
 				B8BC1463109EBAEC000701DF /* GNLayerManager.m */,
-				A215FF8810B2476900774314 /* CarletonBuildingsLayer.h */,
-				A215FF8910B2476900774314 /* CarletonBuildingsLayer.m */,
+				A215FF8810B2476900774314 /* CarletonLayer.h */,
+				A215FF8910B2476900774314 /* CarletonLayer.m */,
 				B88D771710CF6110003A76A1 /* TweetLayer.h */,
 				B88D771810CF6110003A76A1 /* TweetLayer.m */,
 			);
@@ -247,7 +254,8 @@
 		B8AD59261106B8B800D2E6A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B8AD59211106B89900D2E6A0 /* CarletonBuildingsView.xib */,
+				A2D2085E110E62C100C99513 /* GNEditingTable.xib */,
+				B8AD59211106B89900D2E6A0 /* CarletonView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -277,12 +285,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B85D52911105A1410067D658 /* DiningAreasLayer.h in Headers */,
+				B85D52911105A1410067D658 /* FoodLayer.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* LayerManager_Prefix.pch in Headers */,
 				B8BC1464109EBAEC000701DF /* GNLandmark.h in Headers */,
 				B8BC1466109EBAEC000701DF /* GNLayer.h in Headers */,
 				B8BC1468109EBAEC000701DF /* GNLayerManager.h in Headers */,
-				A215FF8A10B2476900774314 /* CarletonBuildingsLayer.h in Headers */,
+				A215FF8A10B2476900774314 /* CarletonLayer.h in Headers */,
 				A215FFAC10B24F2800774314 /* JSON.h in Headers */,
 				A215FFAD10B24F2800774314 /* NSObject+SBJSON.h in Headers */,
 				A215FFAF10B24F2800774314 /* NSString+SBJSON.h in Headers */,
@@ -292,6 +300,7 @@
 				A215FFB710B24F2800774314 /* SBJsonWriter.h in Headers */,
 				B81C4D6910CF4F1100EA3205 /* LayerManager.h in Headers */,
 				B88D771910CF6110003A76A1 /* TweetLayer.h in Headers */,
+				A2D2085F110E62C100C99513 /* GNEditingTable.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8AD59231106B89900D2E6A0 /* CarletonBuildingsView.xib in Resources */,
+				B8AD59231106B89900D2E6A0 /* CarletonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,15 +419,16 @@
 				B8BC1465109EBAEC000701DF /* GNLandmark.m in Sources */,
 				B8BC1467109EBAEC000701DF /* GNLayer.m in Sources */,
 				B8BC1469109EBAEC000701DF /* GNLayerManager.m in Sources */,
-				A215FF8B10B2476900774314 /* CarletonBuildingsLayer.m in Sources */,
+				A215FF8B10B2476900774314 /* CarletonLayer.m in Sources */,
 				A215FFAE10B24F2800774314 /* NSObject+SBJSON.m in Sources */,
-				B85D52901105A1370067D658 /* DiningAreasLayer.m in Sources */,
+				B85D52901105A1370067D658 /* FoodLayer.m in Sources */,
 				A215FFB010B24F2800774314 /* NSString+SBJSON.m in Sources */,
 				A215FFB210B24F2800774314 /* SBJSON.m in Sources */,
 				A215FFB410B24F2800774314 /* SBJsonBase.m in Sources */,
 				A215FFB610B24F2800774314 /* SBJsonParser.m in Sources */,
 				A215FFB810B24F2800774314 /* SBJsonWriter.m in Sources */,
 				B88D771A10CF6110003A76A1 /* TweetLayer.m in Sources */,
+				A2D20860110E62C100C99513 /* GNEditingTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

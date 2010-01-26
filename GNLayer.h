@@ -38,6 +38,12 @@ extern NSString *const GNLayerUpdateFailed;
 	NSMutableData *receivedData;
 	// The most recent center location
 	CLLocation *center;
+	
+	//The fields that are editable when creating a landmark
+	NSArray *layerFields;
+
+	//Indicates whether a layer can be AUGMENTED by users
+	BOOL userModifiable;
 }
 
 @property (nonatomic, copy) NSString *name;
@@ -48,9 +54,18 @@ extern NSString *const GNLayerUpdateFailed;
 - (void)removeSelfFromLandmarks;
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark;
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark;
+- (UIViewController *)getEditingViewController;
+- (BOOL)layerIsUserModifiable;
 
 - (void)updateToCenterLocation:(CLLocation *)location;
 - (NSURL *)URLForLocation:(CLLocation *)location;
 - (void)ingestNewData:(NSData *)data;
+
+@end
+
+@interface GNTextFieldCell : UITableViewCell {
+}
+
+- (id)initWithLabel:(NSString *) labelText;
 
 @end

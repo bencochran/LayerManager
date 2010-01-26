@@ -39,6 +39,8 @@
 
 - (void) testSingleton;
 
+- (void) testEditingTable;
+
 - (void) testServer;
 
 @end

@@ -5,6 +5,6 @@
 #import "GNLayerManager.h"
 
 // Layers
-#import "CarletonBuildingsLayer.h"
+#import "CarletonLayer.h"
 #import "TweetLayer.h"
-#import "DiningAreasLayer.h"
+#import "FoodLayer.h"
