@@ -18,7 +18,7 @@
 		GNTextFieldCell *menuCell = [[GNTextFieldCell alloc] initWithLabel:@"Menu:"];
 		GNTextFieldCell *summaryCell = [[GNTextFieldCell alloc] initWithLabel:@"Summary:"];
 		GNTextFieldCell *descriptionCell = [[GNTextFieldCell alloc] initWithLabel:@"Description:"];
-		layerFields = [[NSArray alloc] initWithObjects:menuCell, summaryCell, descriptionCell];
+		layerFields = [[NSArray alloc] initWithObjects:menuCell, summaryCell, descriptionCell, nil];
 		[menuCell release];
 		[summaryCell release];
 		[descriptionCell release];
