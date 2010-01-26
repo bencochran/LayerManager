@@ -25,22 +25,12 @@
 
 @property (nonatomic, retain) NSArray *landmarks;
 
-//#if USE_APPLICATION_UNIT_TEST
-//- (void) testAppDelegate;       // simple test on application
-//#else
-//- (void) testMath;              // simple standalone test
-//#endif
+- (void)testLayerManager;
 
-- (void) testFail;
+- (void)testSingleton;
 
-- (void) testPass;
+- (void)testEditingTable;
 
-- (void) testLayerManager;
-
-- (void) testSingleton;
-
-- (void) testEditingTable;
-
-- (void) testServer;
+- (void)testServer;
 
 @end
