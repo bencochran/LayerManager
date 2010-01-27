@@ -18,9 +18,9 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	if (self = [super init]) {
 		self.name = nil;
 		self.active = NO;
-		self.landmarks = [NSMutableArray array];
+		self.landmarks = [[NSMutableArray alloc] init];
 		iconPath = nil;
-		layerInfoByLandmarkID = [[NSMutableDictionary dictionary] retain];
+		layerInfoByLandmarkID = [[NSMutableDictionary alloc] init];
 		layerFields = nil;
 		userModifiable = NO;
 	}
@@ -113,12 +113,18 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	return nil;
 }
 
-- (UIViewController *)getEditingViewController; {
-	return nil;
-}
-
 - (BOOL)layerIsUserModifiable;{
 	return userModifiable;
+}
+
+- (UIViewController *)getEditingViewController; {
+	if (![self layerIsUserModifiable])
+	{
+		[self doesNotRecognizeSelector:_cmd];
+		return nil;
+	}
+	
+	return nil;
 }
 
 - (NSString *)description {

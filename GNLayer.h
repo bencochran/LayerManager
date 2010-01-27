@@ -34,7 +34,7 @@ extern NSString *const GNLayerUpdateFailed;
 	// layer information that can be parsed to create a UIViewController
 	NSMutableDictionary *layerInfoByLandmarkID;
 	
-	// NSData to hold incomming data from the NSURLConnection as we receive it.
+	// NSData to hold incomming data from the NSURLConnection as we receive it
 	NSMutableData *receivedData;
 	// The most recent center location
 	CLLocation *center;

@@ -61,8 +61,8 @@ static GNLayerManager *sharedManager = nil;
 
 -(id)init {
 	if (self = [super init]) {
-		layers = [[NSMutableArray array] retain];
-		allLandmarks = [[NSMutableDictionary dictionary] retain];
+		layers = [[NSMutableArray alloc] init];
+		allLandmarks = [[NSMutableDictionary alloc] init];
 		maxLandmarks = 10;
 	}
 	return self;
