@@ -22,7 +22,7 @@
 	landmark.ID = ID;
 	landmark.name = name;
 	landmark.distance = INFINITY;
-	landmark.activeLayers = [[NSMutableArray alloc] init];
+	landmark.activeLayers = [[[NSMutableArray alloc] init] autorelease];
 	return [landmark autorelease];	
 }
 
@@ -31,7 +31,7 @@
 	landmark.ID = ID;
 	landmark.name = name;
 	landmark.distance = INFINITY;
-	landmark.activeLayers = [[NSMutableArray alloc] init];
+	landmark.activeLayers = [[[NSMutableArray alloc] init] autorelease];
 	return [landmark autorelease];
 }
 
