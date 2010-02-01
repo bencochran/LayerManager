@@ -108,6 +108,10 @@ static GNLayerManager *sharedManager = nil;
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.closestLandmarks,@"landmarks",nil]];	
 }
 
+- (NSArray *)layers {
+	return [[layers copy] autorelease];
+}
+
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<GNToggleManager layers:%@>", layers];
 }

@@ -23,6 +23,7 @@ extern NSString *const GNLandmarksUpdated;
 }
 
 @property (readonly) int maxLandmarks;
+@property (readonly) NSArray *layers;
 
 + (GNLayerManager *)sharedManager;
 
