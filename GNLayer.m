@@ -123,7 +123,6 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		[self doesNotRecognizeSelector:_cmd];
 		return nil;
 	}
-	
 	return [[GNEditingTableViewController alloc] initWithFields:layerFields];
 }
 

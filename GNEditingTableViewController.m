@@ -124,6 +124,14 @@
 	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
+	if (indexPath.section == 0){
+		NSLog(@"Instantiate Name Editing Interface Here");
+	}
+	else{
+		NSLog(@"String Name: %i", [fields objectAtIndex:(indexPath.section-1)]);
+	}
+	//UIViewController *editingViewController = [layer getEditingViewController];
+	//[self.navigationController pushViewController:editingViewController animated:YES];
 }
 
 
