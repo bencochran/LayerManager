@@ -14,6 +14,7 @@
 #import <UIKit/UIKit.h>
 #import "GNLandmark.h"
 #import "GNLayerManager.h"
+#import "GNEditingTableViewController.h"
 
 @class GNLayerManager;
 

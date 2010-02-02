@@ -26,8 +26,8 @@
 		A215FFB810B24F2800774314 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFAB10B24F2800774314 /* SBJsonWriter.m */; };
 		A251B08C10F53CB10041E1D7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8BC147E109EBBB8000701DF /* CoreLocation.framework */; };
 		A251B08D10F53CB30041E1D7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8BC147E109EBBB8000701DF /* CoreLocation.framework */; };
-		A2D2085F110E62C100C99513 /* GNEditingTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2D2085C110E62C100C99513 /* GNEditingTable.h */; };
-		A2D20860110E62C100C99513 /* GNEditingTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D2085D110E62C100C99513 /* GNEditingTable.m */; };
+		A2D2085F110E62C100C99513 /* GNEditingTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */; };
+		A2D20860110E62C100C99513 /* GNEditingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */; };
 		AA747D9F0F9514B9006C5449 /* LayerManager_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		B81C4D6910CF4F1100EA3205 /* LayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B81C4D6810CF4F1100EA3205 /* LayerManager.h */; };
@@ -101,8 +101,8 @@
 		A215FFFE10B2546600774314 /* TesterApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TesterApp-Info.plist"; sourceTree = "<group>"; };
 		A251AE8F10F525160041E1D7 /* UnitTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestCase.h; sourceTree = "<group>"; };
 		A251AE9010F525160041E1D7 /* UnitTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTestCase.m; sourceTree = "<group>"; };
-		A2D2085C110E62C100C99513 /* GNEditingTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNEditingTable.h; sourceTree = "<group>"; };
-		A2D2085D110E62C100C99513 /* GNEditingTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNEditingTable.m; sourceTree = "<group>"; };
+		A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNEditingTableViewController.h; sourceTree = "<group>"; };
+		A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNEditingTableViewController.m; sourceTree = "<group>"; };
 		A2D2085E110E62C100C99513 /* GNEditingTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GNEditingTable.xib; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -195,8 +195,8 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A2D2085C110E62C100C99513 /* GNEditingTable.h */,
-				A2D2085D110E62C100C99513 /* GNEditingTable.m */,
+				A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */,
+				A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */,
 				B81C4D6810CF4F1100EA3205 /* LayerManager.h */,
 				B8BC145E109EBAEC000701DF /* GNLandmark.h */,
 				B8BC145F109EBAEC000701DF /* GNLandmark.m */,
@@ -300,7 +300,7 @@
 				A215FFB710B24F2800774314 /* SBJsonWriter.h in Headers */,
 				B81C4D6910CF4F1100EA3205 /* LayerManager.h in Headers */,
 				B88D771910CF6110003A76A1 /* TweetLayer.h in Headers */,
-				A2D2085F110E62C100C99513 /* GNEditingTable.h in Headers */,
+				A2D2085F110E62C100C99513 /* GNEditingTableViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,7 +428,7 @@
 				A215FFB610B24F2800774314 /* SBJsonParser.m in Sources */,
 				A215FFB810B24F2800774314 /* SBJsonWriter.m in Sources */,
 				B88D771A10CF6110003A76A1 /* TweetLayer.m in Sources */,
-				A2D20860110E62C100C99513 /* GNEditingTable.m in Sources */,
+				A2D20860110E62C100C99513 /* GNEditingTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
