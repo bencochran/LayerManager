@@ -113,7 +113,7 @@
 		NSString *fieldName = [fields objectAtIndex:(indexPath.section - 1)];
 		cell.textLabel.text = fieldName;
     }
-		// Set up the cell...
+	[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 	
     return cell;
 }
