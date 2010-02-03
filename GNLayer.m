@@ -130,8 +130,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		[self doesNotRecognizeSelector:_cmd];
 		return nil;
 	}
-	
-	return [[GNEditingTableViewController alloc] initWithFields:layerFields];
+	return [[[GNEditingTableViewController alloc] initWithFields:layerFields] autorelease];
 }
 
 - (NSString *)description {
@@ -149,6 +148,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 
 @end
 
+/*
 @implementation GNTextFieldCell
 
 - (id)initWithLabel:(NSString *) labelText {
@@ -165,3 +165,4 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 }
 
 @end
+*/
