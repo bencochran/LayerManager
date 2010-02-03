@@ -28,6 +28,7 @@ NSArray *fieldArray;
     [super viewDidLoad];
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
 	self.navigationItem.rightBarButtonItem = saveButton;
+	self.title = [fieldArray objectAtIndex:0];
 	[saveButton release];
 	
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -36,7 +37,8 @@ NSArray *fieldArray;
 
 - (void)save:(id)sender {
 	UIViewController *previousViewController = [self.navigationController.viewControllers objectAtIndex:3];
-	[previousViewController addUserInputToField:textView.text];
+	[previousViewController addUserInput:textView.text toField:[previousViewController getCurrentField]];
+	[[previousViewController tableView] reloadData];
 }
 
 /*
@@ -98,23 +100,24 @@ NSArray *fieldArray;
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
+/*    
 	label = [[UILabel alloc] init];
 	label.frame = CGRectMake(10,10,300,40);
 	label.textAlignment = UITextAlignmentCenter;
 	label.text = [fieldArray objectAtIndex:0];
 	[self.view addSubview:label];
 	[label release];
-	
-	textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 50, 300, 200)];
+*/	
+	textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 100)];
 	//textView.placeholder = [NSString stringWithFormat:@"Enter %@ Here...",[fieldArray objectAtIndex:0]];
 	textView.delegate = self;
-	textView.textAlignment = UITextAlignmentCenter;
+	textView.textAlignment = UITextAlignmentLeft;
 	//textView.layer.borderWidth = 1;
 	//textView.layer.cornerRadius = 5;
 	//textView.clipsToBounds = YES;
 	//textView.layer.borderColor = [[UIColor grayColor] CGColor];
 	[self.view addSubview:textView];
+	[textView becomeFirstResponder];
 	[textView release];
 	
     return cell;
@@ -169,7 +172,6 @@ NSArray *fieldArray;
 */
 
 - (void)dealloc {
-	[textView release];
 	[label release];
     [super dealloc];
 }

@@ -21,8 +21,12 @@
 	return self;
 }
 
-- (void)addUserInputToField:(NSString *)input;{
-	NSLog(@"User Inputted: %@", input);
+- (void)addUserInput:(NSString *)input toField:(NSInteger *)index;{
+	[[fields objectAtIndex:index] replaceObjectAtIndex:2 withObject:input];
+}
+
+-(NSInteger)getCurrentField{
+	return currentField;
 }
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -114,10 +118,11 @@
 		cell.textLabel.text = @"Name";
 	}
 	else {
-		NSString *fieldName = [[fields objectAtIndex:(indexPath.section - 1)]objectAtIndex:0];
-		cell.textLabel.text = fieldName;
+		NSString *fieldName = [[[fields objectAtIndex:(indexPath.section - 1)]objectAtIndex:0] stringByAppendingString:@": "];
+		NSString *userInput = [[fields objectAtIndex:(indexPath.section - 1)]objectAtIndex:2];
+		cell.textLabel.text = [fieldName stringByAppendingString: userInput];
     }
-	[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+	//[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 	
     return cell;
 }
@@ -132,7 +137,7 @@
 		NSLog(@"Instantiate Name Editing Interface Here");
 	}
 	else{
-		NSLog(@"String Name: %@", [[fields objectAtIndex:(indexPath.section-1)]objectAtIndex:0]);
+		currentField = indexPath.section-1;
 		UIViewController *textEditingViewController =[[[GNTextViewEditor alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section-1)]] autorelease];
 		[self.navigationController pushViewController:textEditingViewController animated:YES];
 	}

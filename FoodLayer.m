@@ -15,9 +15,9 @@
 	if (self = [super init]) {
 		self.name = @"Food";
 		userModifiable = YES;
-		NSArray *menuField = [[NSArray alloc] initWithObjects:@"Menu", @"longString", nil];
-		NSArray* summaryField = [[NSArray alloc] initWithObjects:@"Summary", @"longString", nil];
-		NSArray *descriptionField = [[NSArray alloc] initWithObjects:@"Description", @"longString", nil];
+		NSArray *menuField = [[NSMutableArray alloc] initWithObjects:@"Menu", @"longString", @"", nil];
+		NSArray* summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"longString",@"", nil];
+		NSArray *descriptionField = [[NSMutableArray alloc] initWithObjects:@"Description", @"longString",@"", nil];
 		layerFields = [[NSArray alloc] initWithObjects:menuField, summaryField, descriptionField, nil];
 	}
 	return self;
