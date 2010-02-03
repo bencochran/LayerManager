@@ -16,3 +16,11 @@
 - (id)initWithFields:(NSArray *)fields;
 
 @end
+
+@interface GNTextFieldEditor : UIViewController<UITextFieldDelegate> {
+	
+}
+
+- (id)initWithFieldArray:(NSArray *)fieldArray;
+
+@end

@@ -110,7 +110,7 @@
 		cell.textLabel.text = @"Name";
 	}
 	else {
-		NSString *fieldName = [fields objectAtIndex:(indexPath.section - 1)];
+		NSString *fieldName = [[fields objectAtIndex:(indexPath.section - 1)]objectAtIndex:0];
 		cell.textLabel.text = fieldName;
     }
 	[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
@@ -128,7 +128,9 @@
 		NSLog(@"Instantiate Name Editing Interface Here");
 	}
 	else{
-		NSLog(@"String Name: %i", [fields objectAtIndex:(indexPath.section-1)]);
+		NSLog(@"String Name: %@", [[fields objectAtIndex:(indexPath.section-1)]objectAtIndex:0]);
+		UIViewController *textEditingViewController =[[[GNTextFieldEditor alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section-1)]] autorelease];
+		[self.navigationController pushViewController:textEditingViewController animated:YES];
 	}
 	//UIViewController *editingViewController = [layer getEditingViewController];
 	//[self.navigationController pushViewController:editingViewController animated:YES];
@@ -182,3 +184,79 @@
 
 @end
 
+@implementation GNTextFieldEditor
+
+UILabel *label;
+UITextField *textField;
+NSArray *fieldArray;
+
+ // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+-(id)initWithFieldArray:(NSArray *)newFieldArray {
+	if (self = [super init]) {
+		fieldArray = [newFieldArray retain];
+	}
+	return self;
+}
+
+
+/*
+ // Implement loadView to create a view hierarchy programmatically, without using a nib.
+ - (void)loadView {
+ }
+ */
+
+
+ // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+ - (void)viewDidLoad {
+ [super viewDidLoad];
+	 label = [[UILabel alloc] init];
+	 label.frame = CGRectMake(10,10,300,40);
+	 label.textAlignment = UITextAlignmentCenter;
+	 label.text = [fieldArray objectAtIndex:0];
+	 [self.view addSubview:label];
+	 [label release];
+	 
+	 textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 50, 300, 50)];
+	 textField.delegate = self;
+	 textField.placeholder = [NSString stringWithFormat:@"Enter %@ Here...",[fieldArray objectAtIndex:0]];
+	 textField.textAlignment = UITextAlignmentCenter;
+	 [self.view addSubview:textField];
+	 [textField release];
+ }
+
+
+/*
+ // Override to allow orientations other than the default portrait orientation.
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ // Return YES for supported orientations
+ return (interfaceOrientation == UIInterfaceOrientationPortrait);
+ }
+ */
+
+- (void)didReceiveMemoryWarning {
+	// Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc that aren't in use.
+}
+
+- (void)viewDidUnload {
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+	//SET the third element of the field array to textField.text
+	[textField resignFirstResponder];
+    return YES;
+}
+
+
+- (void)dealloc {
+	[textField release];
+	[label release];
+    [super dealloc];
+}
+
+
+@end
