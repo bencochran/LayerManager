@@ -11,12 +11,12 @@
 
 @interface GNEditingTableViewController : UITableViewController {
 	NSArray *fields;
-	NSInteger *currentField;
+	NSInteger currentField;
 }
 
 - (id)initWithFields:(NSArray *)fields;
 
-- (void)addUserInputToField:(NSString *)input;
+- (void)addUserInput:(NSString *)input toField:(NSInteger)index;
 
 - (NSInteger)getCurrentField;
 

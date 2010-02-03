@@ -21,11 +21,11 @@
 	return self;
 }
 
-- (void)addUserInput:(NSString *)input toField:(NSInteger *)index;{
+- (void)addUserInput:(NSString *)input toField:(NSInteger)index {
 	[[fields objectAtIndex:index] replaceObjectAtIndex:2 withObject:input];
 }
 
--(NSInteger)getCurrentField{
+-(NSInteger)getCurrentField {
 	return currentField;
 }
 /*
@@ -137,8 +137,8 @@
 		NSLog(@"Instantiate Name Editing Interface Here");
 	}
 	else{
-		currentField = indexPath.section-1;
-		UIViewController *textEditingViewController =[[[GNTextViewEditor alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section-1)]] autorelease];
+		currentField = indexPath.section - 1;
+		UIViewController *textEditingViewController =[[[GNTextViewEditor alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section - 1)]] autorelease];
 		[self.navigationController pushViewController:textEditingViewController animated:YES];
 	}
 	//UIViewController *editingViewController = [layer getEditingViewController];
