@@ -101,6 +101,9 @@
 		A215FFFE10B2546600774314 /* TesterApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TesterApp-Info.plist"; sourceTree = "<group>"; };
 		A251AE8F10F525160041E1D7 /* UnitTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestCase.h; sourceTree = "<group>"; };
 		A251AE9010F525160041E1D7 /* UnitTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTestCase.m; sourceTree = "<group>"; };
+		A25B5893111A272200C63840 /* academic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = academic.png; sourceTree = "<group>"; };
+		A25B5894111A272200C63840 /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bird.png; sourceTree = "<group>"; };
+		A25B5895111A272200C63840 /* food.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food.png; sourceTree = "<group>"; };
 		A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNEditingTableViewController.h; sourceTree = "<group>"; };
 		A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNEditingTableViewController.m; sourceTree = "<group>"; };
 		A2D2085E110E62C100C99513 /* GNEditingTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GNEditingTable.xib; sourceTree = "<group>"; };
@@ -256,6 +259,9 @@
 			children = (
 				A2D2085E110E62C100C99513 /* GNEditingTable.xib */,
 				B8AD59211106B89900D2E6A0 /* CarletonView.xib */,
+				A25B5893111A272200C63840 /* academic.png */,
+				A25B5894111A272200C63840 /* bird.png */,
+				A25B5895111A272200C63840 /* food.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";

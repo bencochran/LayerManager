@@ -51,7 +51,7 @@ extern NSString *const GNLayerUpdateFailed;
 @property (nonatomic) BOOL active;
 @property (nonatomic, retain) NSMutableArray *landmarks;
 
-///////////////////////// TODO: -(NSIcon) getIcon;
+- (UIImage *) getIcon;
 - (void)removeSelfFromLandmarks;
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark;
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark;

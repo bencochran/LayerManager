@@ -14,6 +14,7 @@
 -(id)init {
 	if (self = [super init]) {
 		self.name = @"Food";
+		iconPath = @"food.png";
 		userModifiable = YES;
 		layerFields = [[NSArray alloc] initWithObjects:@"Menu", @"Summary", @"Description", nil];
 	}

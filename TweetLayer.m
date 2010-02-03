@@ -14,6 +14,7 @@
 -(id)init {
 	if (self = [super init]) {
 		self.name = @"Tweets";
+		iconPath = @"bird.png";
 	}
 	return self;
 }
