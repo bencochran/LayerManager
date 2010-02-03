@@ -39,6 +39,7 @@ NSArray *fieldArray;
 	UIViewController *previousViewController = [self.navigationController.viewControllers objectAtIndex:3];
 	[previousViewController addUserInput:textView.text toField:[previousViewController getCurrentField]];
 	[[previousViewController tableView] reloadData];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
