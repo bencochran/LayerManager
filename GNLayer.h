@@ -63,10 +63,11 @@ extern NSString *const GNLayerUpdateFailed;
 - (void)ingestNewData:(NSData *)data;
 
 @end
-
+/*
 @interface GNTextFieldCell : UITableViewCell {
 }
 
 - (id)initWithLabel:(NSString *) labelText;
 
 @end
+*/

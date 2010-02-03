@@ -1,52 +1,44 @@
 //
-//  GNEditingTableViewController.m
+//  GNTextViewEditor.m
 //  LayerManager
 //
-//  Created by iComps on 1/25/10.
+//  Created by Jake Kring on 2/2/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "GNEditingTableViewController.h"
-#import "GNLayer.h"
 #import "GNTextViewEditor.h"
-#import <QuartzCore/QuartzCore.h>
 
-@implementation GNEditingTableViewController
 
--(id)initWithFields:(NSArray *)newFields {
+@implementation GNTextViewEditor
+
+UILabel *label;
+UITextView *textView;
+NSArray *fieldArray;
+
+// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+-(id)initWithFieldArray:(NSArray *)newFieldArray {
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-		//GNTextFieldCell *nameField = [[GNTextFieldCell alloc] initWithLabel:@"Name:"];
-		fields = [newFields retain];
+		fieldArray = [newFieldArray retain];
 	}
 	return self;
 }
 
-- (void)addUserInputToField:(NSString *)input;{
-	NSLog(@"User Inputted: %@", input);
-}
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
-    }
-    return self;
-}
-*/
 
-/*
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
+	self.navigationItem.rightBarButtonItem = saveButton;
+	[saveButton release];
+	
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-*/
 
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)save:(id)sender {
+	UIViewController *previousViewController = [self.navigationController.viewControllers objectAtIndex:3];
+	[previousViewController addUserInputToField:textView.text];
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -87,17 +79,15 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // the First section can be for the proposed title of the landmark, the second section can contain everything else.
-	return [fields count] + 1;
-	//return 1;
+    return 1;
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 1;
-	//return [fields count]+1;
+    return 1;
 }
+
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,15 +99,23 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	NSLog(@"IndexPath.section: %i", indexPath.section);
-	if (indexPath.section == 0) {
-		cell.textLabel.text = @"Name";
-	}
-	else {
-		NSString *fieldName = [[fields objectAtIndex:(indexPath.section - 1)]objectAtIndex:0];
-		cell.textLabel.text = fieldName;
-    }
-	[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+	label = [[UILabel alloc] init];
+	label.frame = CGRectMake(10,10,300,40);
+	label.textAlignment = UITextAlignmentCenter;
+	label.text = [fieldArray objectAtIndex:0];
+	[self.view addSubview:label];
+	[label release];
+	
+	textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 50, 300, 200)];
+	//textView.placeholder = [NSString stringWithFormat:@"Enter %@ Here...",[fieldArray objectAtIndex:0]];
+	textView.delegate = self;
+	textView.textAlignment = UITextAlignmentCenter;
+	//textView.layer.borderWidth = 1;
+	//textView.layer.cornerRadius = 5;
+	//textView.clipsToBounds = YES;
+	//textView.layer.borderColor = [[UIColor grayColor] CGColor];
+	[self.view addSubview:textView];
+	[textView release];
 	
     return cell;
 }
@@ -128,16 +126,6 @@
 	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
-	if (indexPath.section == 0){
-		NSLog(@"Instantiate Name Editing Interface Here");
-	}
-	else{
-		NSLog(@"String Name: %@", [[fields objectAtIndex:(indexPath.section-1)]objectAtIndex:0]);
-		UIViewController *textEditingViewController =[[[GNTextViewEditor alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section-1)]] autorelease];
-		[self.navigationController pushViewController:textEditingViewController animated:YES];
-	}
-	//UIViewController *editingViewController = [layer getEditingViewController];
-	//[self.navigationController pushViewController:editingViewController animated:YES];
 }
 
 
@@ -180,8 +168,9 @@
 }
 */
 
-
 - (void)dealloc {
+	[textView release];
+	[label release];
     [super dealloc];
 }
 

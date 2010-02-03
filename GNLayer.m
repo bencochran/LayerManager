@@ -141,6 +141,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 
 @end
 
+/*
 @implementation GNTextFieldCell
 
 - (id)initWithLabel:(NSString *) labelText {
@@ -157,3 +158,4 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 }
 
 @end
+*/
