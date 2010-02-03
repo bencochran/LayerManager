@@ -27,7 +27,14 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	return self;
 }
 
-//////////////////// -(NSIcon) getIcon;
+- (UIImage *) getIcon {
+	if (!iconPath) {
+		[self doesNotRecognizeSelector:_cmd];
+		return nil;
+	}
+	
+	return [UIImage imageNamed:iconPath];
+}
 
 - (void)updateToCenterLocation:(CLLocation *)location {
 	if (receivedData != nil) {

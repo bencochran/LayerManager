@@ -14,6 +14,7 @@
 -(id)init {
 	if (self = [super init]) {
 		self.name = @"Carleton";
+		iconPath = @"academic.png";
 	}
 	return self;
 }

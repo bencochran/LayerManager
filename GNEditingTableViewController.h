@@ -13,11 +13,13 @@
 	NSArray *fields;
 	NSInteger *currentField;
 	NSMutableArray *userInput;
+
+
 }
 
 - (id)initWithFields:(NSArray *)fields;
 
-- (void)addUserInputToField:(NSString *)input;
+- (void)addUserInput:(NSString *)input toField:(NSInteger)index;
 
 - (NSInteger)getCurrentField;
 
