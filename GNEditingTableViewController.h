@@ -11,7 +11,7 @@
 
 @interface GNEditingTableViewController : UITableViewController {
 	NSArray *fields;
-	NSInteger *currentField;
+	NSInteger currentField;
 	NSMutableArray *userInput;
 
 

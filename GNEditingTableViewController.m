@@ -26,8 +26,7 @@
 	return self;
 }
 
-- (void)addUserInput:(NSString *)input toField:(NSInteger *)index;{
-	//[[fields objectAtIndex:index] replaceObjectAtIndex:2 withObject:input];
+- (void)addUserInput:(NSString *)input toField:(NSInteger)index;{
 	[userInput replaceObjectAtIndex:index withObject:input];
 	NSLog(@"%@",userInput);
 	self.navigationItem.rightBarButtonItem.enabled = YES;
