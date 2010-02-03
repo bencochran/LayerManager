@@ -28,7 +28,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 }
 
 - (UIImage *) getIcon {
-	if (iconPath) {
+	if (!iconPath) {
 		[self doesNotRecognizeSelector:_cmd];
 		return nil;
 	}
