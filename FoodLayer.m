@@ -20,6 +20,9 @@
 		NSArray* summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"longString",@"", nil];
 		NSArray *descriptionField = [[NSMutableArray alloc] initWithObjects:@"Description", @"longString",@"", nil];
 		layerFields = [[NSArray alloc] initWithObjects:menuField, summaryField, descriptionField, nil];
+		[menuField release];
+		[summaryField release];
+		[descriptionField release];
 	}
 	return self;
 }

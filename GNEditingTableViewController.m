@@ -91,16 +91,14 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // the First section can be for the proposed title of the landmark, the second section can contain everything else.
+    // One section is devoted to each field, including the proposed title/name.
 	return [fields count] + 1;
-	//return 1;
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return 1;
-	//return [fields count]+1;
 }
 
 // Customize the appearance of table view cells.
@@ -115,7 +113,7 @@
     
 	NSLog(@"IndexPath.section: %i", indexPath.section);
 	if (indexPath.section == 0) {
-		cell.textLabel.text = @"Name";
+		cell.textLabel.text = @"Name: ";
 	}
 	else {
 		NSString *fieldName = [[[fields objectAtIndex:(indexPath.section - 1)]objectAtIndex:0] stringByAppendingString:@": "];
