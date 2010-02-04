@@ -9,19 +9,27 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GNEditingTableViewController.h"
 #import "GNLayer.h"
-#import "GNTextViewEditor.h"
+#import "GNInfoInputViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation GNEditingTableViewController
 
 -(id)initWithFields:(NSArray *)newFields {
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		fields = [newFields retain];
+		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count]+1)];
+		for (int i = 0; i < ([fields count]+1); i ++){
+			[userInput insertObject:@"" atIndex:0];
+		}
+		NSLog(@"%d",[userInput count]);
 	}
 	return self;
 }
 
-- (void)addUserInput:(NSString *)input toField:(NSInteger)index {
-	[[fields objectAtIndex:index] replaceObjectAtIndex:2 withObject:input];
+- (void)addUserInput:(NSString *)input toField:(NSInteger)index;{
+	[userInput replaceObjectAtIndex:index withObject:input];
+	NSLog(@"%@",userInput);
+	self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
 -(NSInteger)getCurrentField {
@@ -37,14 +45,22 @@
 }
 */
 
-/*
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(postToServer:)];
+	self.navigationItem.rightBarButtonItem = doneButton;
+	self.navigationItem.rightBarButtonItem.enabled = NO;
+	[doneButton release];
+	
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-*/
+
+- (void)postToServer:(id)sender {
+	NSLog(@"Posting to server...");
+}
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -113,12 +129,12 @@
     
 	NSLog(@"IndexPath.section: %i", indexPath.section);
 	if (indexPath.section == 0) {
-		cell.textLabel.text = @"Name: ";
+		cell.textLabel.text = [@"Name: " stringByAppendingString:[userInput objectAtIndex:0]];
 	}
 	else {
 		NSString *fieldName = [[[fields objectAtIndex:(indexPath.section - 1)]objectAtIndex:0] stringByAppendingString:@": "];
-		NSString *userInput = [[fields objectAtIndex:(indexPath.section - 1)]objectAtIndex:2];
-		cell.textLabel.text = [fieldName stringByAppendingString: userInput];
+		NSString *inputFields = [userInput objectAtIndex:(indexPath.section)];
+		cell.textLabel.text = [fieldName stringByAppendingString: inputFields];
     }
 	//[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 	
@@ -132,11 +148,13 @@
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
 	if (indexPath.section == 0) {
-		NSLog(@"Instantiate Name Editing Interface Here");
+		currentField = indexPath.section;
+		UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[[NSArray alloc] initWithObjects:@"Name", @"", nil]] autorelease];
+		[self.navigationController pushViewController:textEditingViewController animated:YES];
 	}
-	else{
-		currentField = indexPath.section - 1;
-		UIViewController *textEditingViewController =[[[GNTextViewEditor alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section - 1)]] autorelease];
+	else {
+		currentField = indexPath.section;
+		UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section-1)]] autorelease];
 		[self.navigationController pushViewController:textEditingViewController animated:YES];
 	}
 	//UIViewController *editingViewController = [layer getEditingViewController];

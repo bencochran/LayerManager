@@ -13,7 +13,9 @@
 
 UILabel *label;
 UITextView *textView;
+UITextField *textField;
 NSArray *fieldArray;
+NSString *inputString;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 -(id)initWithFieldArray:(NSArray *)newFieldArray {
@@ -36,9 +38,16 @@ NSArray *fieldArray;
 }
 
 - (void)save:(id)sender {
+	if([fieldArray objectAtIndex:1] == @"longString"){
+		inputString = textView.text;
+	}
+	else{
+		inputString = textField.text;
+	}
 	UIViewController *previousViewController = [self.navigationController.viewControllers objectAtIndex:3];
-	[previousViewController addUserInput:textView.text toField:[previousViewController getCurrentField]];
+	[previousViewController addUserInput:inputString toField:[previousViewController getCurrentField]];
 	[[previousViewController tableView] reloadData];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
@@ -100,25 +109,24 @@ NSArray *fieldArray;
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-/*    
-	label = [[UILabel alloc] init];
-	label.frame = CGRectMake(10,10,300,40);
-	label.textAlignment = UITextAlignmentCenter;
-	label.text = [fieldArray objectAtIndex:0];
-	[self.view addSubview:label];
-	[label release];
-*/	
-	textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 100)];
-	//textView.placeholder = [NSString stringWithFormat:@"Enter %@ Here...",[fieldArray objectAtIndex:0]];
-	textView.delegate = self;
-	textView.textAlignment = UITextAlignmentLeft;
-	//textView.layer.borderWidth = 1;
-	//textView.layer.cornerRadius = 5;
-	//textView.clipsToBounds = YES;
-	//textView.layer.borderColor = [[UIColor grayColor] CGColor];
-	[self.view addSubview:textView];
-	[textView becomeFirstResponder];
-	[textView release];
+	
+	if([fieldArray objectAtIndex:1] == @"longString"){
+		textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 100)];
+		textView.delegate = self;
+		textView.textAlignment = UITextAlignmentLeft;
+		[self.view addSubview:textView];
+		[textView becomeFirstResponder];
+		[textView release];
+	}
+	else{
+		textField = [[UITextField alloc] initWithFrame:CGRectMake(10,10,300,25)];
+		textField.textAlignment = UITextAlignmentLeft;
+		textField.borderStyle = UITextBorderStyleRoundedRect;
+		[self.view addSubview:textField];
+		[textField becomeFirstResponder];
+		[textField release];
+	}
+	//else if([fieldArray objectAtIndex:1] == @"longString")
 	
     return cell;
 }

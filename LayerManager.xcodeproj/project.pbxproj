@@ -48,8 +48,8 @@
 		B8CB2DB4110D844100BED463 /* libGHUnitIPhoneSimulator3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CB2DAF110D840800BED463 /* libGHUnitIPhoneSimulator3_0.a */; };
 		B8CB2DD0110D84EF00BED463 /* UnitTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A251AE9010F525160041E1D7 /* UnitTestCase.m */; };
 		B8CB2E96110D8B2E00BED463 /* GHUnitIPhoneTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CB2E95110D8B2E00BED463 /* GHUnitIPhoneTestMain.m */; };
-		FC9BD8FC111917530045E59D /* GNTextViewEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = FC9BD8FA111917530045E59D /* GNTextViewEditor.h */; };
-		FC9BD8FD111917530045E59D /* GNTextViewEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9BD8FB111917530045E59D /* GNTextViewEditor.m */; };
+		FCBF977F111A46A00071F029 /* GNInfoInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */; };
+		FCBF9780111A46A00071F029 /* GNInfoInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,8 +128,8 @@
 		B8CB2DA4110D840800BED463 /* GHUnitIPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHUnitIPhone.xcodeproj; path = "ghunit/Project-IPhone/GHUnitIPhone.xcodeproj"; sourceTree = "<group>"; };
 		B8CB2E95110D8B2E00BED463 /* GHUnitIPhoneTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHUnitIPhoneTestMain.m; path = "ghunit/Classes-IPhone/GHUnitIPhoneTestMain.m"; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libLayerManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLayerManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC9BD8FA111917530045E59D /* GNTextViewEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNTextViewEditor.h; sourceTree = "<group>"; };
-		FC9BD8FB111917530045E59D /* GNTextViewEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNTextViewEditor.m; sourceTree = "<group>"; };
+		FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNInfoInputViewController.h; sourceTree = "<group>"; };
+		FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNInfoInputViewController.m; sourceTree = "<group>"; };
 		FCE3BA2510F900AC003BE4A2 /* FoodLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodLayer.h; sourceTree = "<group>"; };
 		FCE3BA2610F900AC003BE4A2 /* FoodLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,8 +202,8 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FC9BD8FA111917530045E59D /* GNTextViewEditor.h */,
-				FC9BD8FB111917530045E59D /* GNTextViewEditor.m */,
+				FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */,
+				FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */,
 				A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */,
 				A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */,
 				B81C4D6810CF4F1100EA3205 /* LayerManager.h */,
@@ -313,7 +313,7 @@
 				B81C4D6910CF4F1100EA3205 /* LayerManager.h in Headers */,
 				B88D771910CF6110003A76A1 /* TweetLayer.h in Headers */,
 				A2D2085F110E62C100C99513 /* GNEditingTableViewController.h in Headers */,
-				FC9BD8FC111917530045E59D /* GNTextViewEditor.h in Headers */,
+				FCBF977F111A46A00071F029 /* GNInfoInputViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +442,7 @@
 				A215FFB810B24F2800774314 /* SBJsonWriter.m in Sources */,
 				B88D771A10CF6110003A76A1 /* TweetLayer.m in Sources */,
 				A2D20860110E62C100C99513 /* GNEditingTableViewController.m in Sources */,
-				FC9BD8FD111917530045E59D /* GNTextViewEditor.m in Sources */,
+				FCBF9780111A46A00071F029 /* GNInfoInputViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

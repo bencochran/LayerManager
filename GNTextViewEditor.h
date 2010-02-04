@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface GNTextViewEditor:UITableViewController<UITextViewDelegate> {
+@interface GNTextViewEditor:UITableViewController<UITextViewDelegate>{
 	
 }
 
