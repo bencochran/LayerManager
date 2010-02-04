@@ -133,6 +133,10 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	return [[[GNEditingTableViewController alloc] initWithFields:layerFields] autorelease];
 }
 
+- (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location {
+	NSLog(@"My Name Is: %@", self.name);
+	NSLog(@"And I'm Posting this: %@",info);
+}
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<GNLayer name: %@, active: %@>", self.name, self.active ? @"YES" : @"NO"];
 }

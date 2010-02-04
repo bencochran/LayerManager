@@ -13,6 +13,7 @@
 	NSArray *fields;
 	NSInteger currentField;
 	NSMutableArray *userInput;
+	//UIImagePickerController *photoTaker;
 
 
 }

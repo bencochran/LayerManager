@@ -28,10 +28,10 @@
 
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index;{
 	[userInput replaceObjectAtIndex:index withObject:input];
-	NSLog(@"%@",userInput);
-	self.navigationItem.rightBarButtonItem.enabled = YES;
+	if (index == 0){
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+	}
 }
-
 -(NSInteger)getCurrentField {
 	return currentField;
 }
@@ -50,6 +50,9 @@
 	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(postToServer:)];
 	self.navigationItem.rightBarButtonItem = doneButton;
 	self.navigationItem.rightBarButtonItem.enabled = NO;
+	//photoTaker = [[UIImagePickerController alloc] init];
+	//photoTaker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+	//[self.tableView addSubview: photoTaker.view];
 	[doneButton release];
 	
 
@@ -58,7 +61,12 @@
 }
 
 - (void)postToServer:(id)sender {
-	NSLog(@"Posting to server...");
+	UIViewController *layersViewController = [self.navigationController.viewControllers objectAtIndex:2];
+	GNLayer *layer = [layersViewController getSelectedLayer];
+	UIViewController *mapViewController = [self.navigationController.viewControllers objectAtIndex:1];
+	CLLocation *location = [mapViewController getSelectedLocation];
+	[layer postLandmarkArray:userInput withLocation:location];
+
 }
 
 /*

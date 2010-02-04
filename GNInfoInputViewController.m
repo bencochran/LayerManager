@@ -61,9 +61,9 @@ NSString *inputString;
 	else{
 		inputString = textField.text;
 	}
-	UIViewController *previousViewController = [self.navigationController.viewControllers objectAtIndex:3];
-	[previousViewController addUserInput:inputString toField:[previousViewController getCurrentField]];
-	[[previousViewController tableView] reloadData];
+	UIViewController *editingTableViewController = [self.navigationController.viewControllers objectAtIndex:3];
+	[editingTableViewController addUserInput:inputString toField:[editingTableViewController getCurrentField]];
+	[[editingTableViewController tableView] reloadData];
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
