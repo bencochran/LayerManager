@@ -6,16 +6,15 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "GNEditingTableViewController.h"
 #import "GNLayer.h"
 #import "GNTextViewEditor.h"
-#import <QuartzCore/QuartzCore.h>
 
 @implementation GNEditingTableViewController
 
 -(id)initWithFields:(NSArray *)newFields {
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-		//GNTextFieldCell *nameField = [[GNTextFieldCell alloc] initWithLabel:@"Name:"];
 		fields = [newFields retain];
 	}
 	return self;
@@ -28,6 +27,7 @@
 -(NSInteger)getCurrentField {
 	return currentField;
 }
+
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -131,7 +131,7 @@
 	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
-	if (indexPath.section == 0){
+	if (indexPath.section == 0) {
 		NSLog(@"Instantiate Name Editing Interface Here");
 	}
 	else{

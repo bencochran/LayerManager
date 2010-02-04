@@ -172,7 +172,7 @@ NSArray *fieldArray;
 */
 
 - (void)dealloc {
-	[label release];
+	//[label release];
     [super dealloc];
 }
 

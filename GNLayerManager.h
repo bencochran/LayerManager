@@ -22,14 +22,14 @@ extern NSString *const GNLandmarksUpdated;
 	CLLocation *center;
 }
 
-@property (readonly) int maxLandmarks;
 @property (readonly) NSArray *layers;
+@property (readonly) int maxLandmarks;
 
 + (GNLayerManager *)sharedManager;
 
 - (void)addLayer:(GNLayer *)layer;
-- (void)setLayer:(GNLayer *)layer active:(BOOL)active;
 - (void)addLayer:(GNLayer *)layer active:(BOOL)active;
+- (void)setLayer:(GNLayer *)layer active:(BOOL)active;
 
 - (GNLandmark *)getLandmark:(NSString *)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 - (GNLandmark *)getLandmark:(NSString *)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude;

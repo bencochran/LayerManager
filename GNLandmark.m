@@ -13,6 +13,10 @@
 
 @synthesize ID=_id, name=_name, distance=_distance, activeLayers=_activeLayers;
 
+- (NSString *)title {
+	return self.name;
+}
+
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
 	CLLocationCoordinate2D coordinate;
 	coordinate.latitude = latitude;
@@ -35,19 +39,6 @@
 	return [landmark autorelease];
 }
 
-- (NSString *)title {
-	return self.name;
-}
-
--(NSComparisonResult)compareTo:(GNLandmark*)other {
-	if(self.distance < other.distance)
-		return NSOrderedAscending;
-	else if(self.distance > other.distance)
-		return NSOrderedDescending;
-	else
-		return NSOrderedSame;
-}
-
 -(void)addActiveLayer:(GNLayer*)layer {
 	[self.activeLayers removeObject:layer];
 	[self.activeLayers addObject:layer];
@@ -59,6 +50,16 @@
 
 -(void)clearActiveLayers {
 	[self.activeLayers removeAllObjects];
+}
+
+// Used to sort landmarks by distance
+-(NSComparisonResult)compareTo:(GNLandmark*)other {
+	if(self.distance < other.distance)
+		return NSOrderedAscending;
+	else if(self.distance > other.distance)
+		return NSOrderedDescending;
+	else
+		return NSOrderedSame;
 }
 
 - (NSString *)description {

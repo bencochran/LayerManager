@@ -29,7 +29,7 @@
 @property (nonatomic) float distance;
 @property (nonatomic, retain) NSMutableArray* activeLayers;
 
-// We need to provide a title property to comply with the MKAnnotation interface
+// To comply with the MKAnnotation interface
 @property (nonatomic, readonly) NSString *title;
 
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;

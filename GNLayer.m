@@ -21,8 +21,8 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		self.landmarks = [[[NSMutableArray alloc] init] autorelease];
 		iconPath = nil;
 		layerInfoByLandmarkID = [[NSMutableDictionary alloc] init];
-		layerFields = nil;
 		userModifiable = NO;
+		layerFields = nil;
 	}
 	return self;
 }
@@ -32,8 +32,41 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		[self doesNotRecognizeSelector:_cmd];
 		return nil;
 	}
-	
 	return [UIImage imageNamed:iconPath];
+}
+
+// Removes this layer from the active layers list of each of its closest landmarks
+// Clears this layer's set of landmarks
+- (void)removeSelfFromLandmarks {
+	for (GNLandmark *landmark in self.landmarks) {
+		[landmark removeActiveLayer:self];
+	}
+	[self.landmarks removeAllObjects];
+}
+
+// Returns a short string summarizing the layer information for the given landmark
+- (NSString *)summaryForLandmark:(GNLandmark *)landmark {
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
+}
+
+// Returns a UIViewController displaying the layer information for the given landmark
+- (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
+}
+
+- (BOOL)layerIsUserModifiable {
+	return userModifiable;
+}
+
+- (UIViewController *)getEditingViewController {
+	if (![self layerIsUserModifiable])
+	{
+		[self doesNotRecognizeSelector:_cmd];
+		return nil;
+	}
+	return [[[GNEditingTableViewController alloc] initWithFields:layerFields] autorelease];
 }
 
 - (void)updateToCenterLocation:(CLLocation *)location {
@@ -41,7 +74,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		// We're already updating, don't start another request
 		return;
 	}
-		
+	
 	center = [location retain];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForLocation:location]
 											 cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -88,7 +121,6 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	[self ingestNewData:receivedData];
-	
 	[connection release];
     [receivedData release];
 	receivedData = nil;
@@ -96,41 +128,6 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 
 - (void)ingestNewData:(NSData *)data {
 	[self doesNotRecognizeSelector:_cmd];
-}
-
-// Removes this layer from the active layers list of each of its closest landmarks
-// Clears this layer's set of landmarks
-- (void)removeSelfFromLandmarks {
-	for (GNLandmark *landmark in self.landmarks) {
-		[landmark removeActiveLayer:self];
-	}
-	
-	[self.landmarks removeAllObjects];
-}
-
-// Returns a short string summarizing the layer information for the given landmark
-- (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	[self doesNotRecognizeSelector:_cmd];
-	return nil;
-}
-
-// Returns a UIViewController displaying the layer information for the given landmark
-- (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
-	[self doesNotRecognizeSelector:_cmd];
-	return nil;
-}
-
-- (BOOL)layerIsUserModifiable;{
-	return userModifiable;
-}
-
-- (UIViewController *)getEditingViewController; {
-	if (![self layerIsUserModifiable])
-	{
-		[self doesNotRecognizeSelector:_cmd];
-		return nil;
-	}
-	return [[[GNEditingTableViewController alloc] initWithFields:layerFields] autorelease];
 }
 
 - (NSString *)description {
@@ -142,27 +139,9 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[self.landmarks release];
 	[iconPath release];
 	[layerInfoByLandmarkID release];
+	[layerFields release];
 	[center release];	
 	[super dealloc];
 }
 
 @end
-
-/*
-@implementation GNTextFieldCell
-
-- (id)initWithLabel:(NSString *) labelText {
-	if (self = [super init]) {
-		UILabel *label = [[UILabel alloc] init];
-		label.text = labelText;
-		UITextField *textField = [[UITextField alloc] init];
-		[self.contentView addSubview:label];
-		[self.contentView addSubview:textField];
-		[label release];
-		[textField release];
-	}
-	return self;
-}
-
-@end
-*/
