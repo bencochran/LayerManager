@@ -8,7 +8,7 @@
 
 #import "GNEditingTableViewController.h"
 #import "GNLayer.h"
-#import "GNTextViewEditor.h"
+#import "GNInfoInputViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation GNEditingTableViewController
@@ -151,7 +151,7 @@
 	}
 	else{
 		currentField = indexPath.section;
-		UIViewController *textEditingViewController =[[[GNTextViewEditor alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section-1)]] autorelease];
+		UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section-1)]] autorelease];
 		[self.navigationController pushViewController:textEditingViewController animated:YES];
 	}
 	//UIViewController *editingViewController = [layer getEditingViewController];
