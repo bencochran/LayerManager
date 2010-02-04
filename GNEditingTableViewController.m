@@ -128,7 +128,7 @@
     
 	NSLog(@"IndexPath.section: %i", indexPath.section);
 	if (indexPath.section == 0) {
-		cell.textLabel.text = @"Name: ";
+		cell.textLabel.text = [@"Name: " stringByAppendingString:[userInput objectAtIndex:0]];
 	}
 	else {
 		NSString *fieldName = [[[fields objectAtIndex:(indexPath.section - 1)]objectAtIndex:0] stringByAppendingString:@": "];
@@ -147,7 +147,9 @@
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
 	if (indexPath.section == 0){
-		NSLog(@"Instantiate Name Editing Interface Here");
+		currentField = indexPath.section;
+		UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[[NSArray alloc] initWithObjects:@"Name", @"", nil]] autorelease];
+		[self.navigationController pushViewController:textEditingViewController animated:YES];
 	}
 	else{
 		currentField = indexPath.section;

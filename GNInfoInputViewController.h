@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface GNInfoInputViewController : UIViewController<UITextViewDelegate> {
+@interface GNInfoInputViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate> {
 
 }
 

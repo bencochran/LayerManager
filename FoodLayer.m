@@ -17,7 +17,7 @@
 		iconPath = @"food.png";
 		userModifiable = YES;
 		NSArray *menuField = [[NSMutableArray alloc] initWithObjects:@"Menu", @"longString", nil];
-		NSArray* summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"shortString", nil];
+		NSArray* summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"longString", nil];
 		NSArray *descriptionField = [[NSMutableArray alloc] initWithObjects:@"Description", @"longString", nil];
 		layerFields = [[NSArray alloc] initWithObjects:menuField, summaryField, descriptionField, nil];
 		[menuField release];

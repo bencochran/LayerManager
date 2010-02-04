@@ -35,6 +35,7 @@ NSString *inputString;
 		textView.delegate = self;
 		textView.textAlignment = UITextAlignmentLeft;
 		[self.view addSubview:textView];
+		self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 		[textView becomeFirstResponder];
 		[textView release];
 	}
@@ -43,6 +44,7 @@ NSString *inputString;
 		textField.textAlignment = UITextAlignmentLeft;
 		textField.borderStyle = UITextBorderStyleRoundedRect;
 		[self.view addSubview:textField];
+		self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 		[textField becomeFirstResponder];
 		[textField release];
 	}	
