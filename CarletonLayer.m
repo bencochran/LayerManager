@@ -78,8 +78,6 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	CarletonViewController *viewController = [[CarletonViewController alloc] init];
-//	CarletonBuildingsViewController *viewController = [[CarletonBuildingsViewController alloc] initWithCoder:nil];
-	
 	viewController.buildingName = landmark.name;
 	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
 	
@@ -122,8 +120,7 @@
 	// and start loading the data
 	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
 	if (theConnection) {
-		// Create the NSMutableData that will hold
-		// the received data
+		// Create the NSMutableData that will hold the received data
 		// receivedData is declared as a method instance elsewhere
 		receivedData=[[NSMutableData data] retain];
 	} else {
@@ -198,7 +195,6 @@
 	} else {
 		descriptionView.text = @"I'll assume this building is great."; 
 	}
-
 }
 
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -230,10 +226,8 @@
 	// e.g. self.myOutlet = nil;
 }
 
-
 - (void)dealloc {
     [super dealloc];
 }
-
 
 @end

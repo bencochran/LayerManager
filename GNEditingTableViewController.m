@@ -6,6 +6,7 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "GNEditingTableViewController.h"
 #import "GNLayer.h"
 #import "GNInfoInputViewController.h"
@@ -15,7 +16,6 @@
 
 -(id)initWithFields:(NSArray *)newFields {
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-		//GNTextFieldCell *nameField = [[GNTextFieldCell alloc] initWithLabel:@"Name:"];
 		fields = [newFields retain];
 		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count]+1)];
 		for (int i = 0; i < ([fields count]+1); i ++){
@@ -35,6 +35,7 @@
 -(NSInteger)getCurrentField {
 	return currentField;
 }
+
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -154,12 +155,12 @@
 	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
-	if (indexPath.section == 0){
+	if (indexPath.section == 0) {
 		currentField = indexPath.section;
 		UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[[NSArray alloc] initWithObjects:@"Name", @"", nil]] autorelease];
 		[self.navigationController pushViewController:textEditingViewController animated:YES];
 	}
-	else{
+	else {
 		currentField = indexPath.section;
 		UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section-1)]] autorelease];
 		[self.navigationController pushViewController:textEditingViewController animated:YES];

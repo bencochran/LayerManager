@@ -30,32 +30,27 @@ static GNLayerManager *sharedManager = nil;
 }
 
 // Don't copy
-- (id)copyWithZone:(NSZone *)zone
-{
+- (id)copyWithZone:(NSZone *)zone {
     return self;
 }
 
 // Don't actually retain
-- (id)retain
-{
+- (id)retain {
     return self;
 }
 
 // Denotes an object that cannot be released
-- (NSUInteger)retainCount
-{
+- (NSUInteger)retainCount {
     return NSUIntegerMax;
 }
 
-- (void)release
-{
+- (void)release {
     // Never release
 }
 
 // Don't actually add yourself to the pool.
 // It's gross in there. Kids pee and stuff.
-- (id)autorelease
-{
+- (id)autorelease {
     return self;
 }
 
@@ -66,6 +61,10 @@ static GNLayerManager *sharedManager = nil;
 		maxLandmarks = 10;
 	}
 	return self;
+}
+
+- (NSArray *)layers {
+	return [[layers copy] autorelease];
 }
 
 // adds the provided layer to the list of layers
@@ -83,8 +82,9 @@ static GNLayerManager *sharedManager = nil;
 
 // Sets the given layer to the indicated activity.
 // If the layer is being set to inactive, removes the layer
-// from the landmarks' lists of active layers. Then removes
-// any of that layer's landmarks that have no active layers.
+// from its landmarks' lists of active layers. Then removes
+// any of that layer's landmarks that have no active layers
+// from the allLandmarks dictionary.
 -(void) setLayer:(GNLayer*)layer active:(BOOL)active {
 	[layer setActive:active];
 	
@@ -108,12 +108,28 @@ static GNLayerManager *sharedManager = nil;
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.closestLandmarks,@"landmarks",nil]];	
 }
 
-- (NSArray *)layers {
-	return [[layers copy] autorelease];
+// If a landmark with the given ID exists in the allLandmarks NSMutableDictionary, returns that GNLandmark
+// otherwise, creates the GNLandmark with the given attributes, adds it to allLandmarks, and returns it
+-(GNLandmark*)getLandmark:(NSString *)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
+	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:landmarkID]);
+	if(landmark == nil)
+	{
+		landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude];
+		[allLandmarks setObject:landmark forKey:landmarkID];
+	}
+	return landmark;
 }
 
-- (NSString *)description {
-	return [NSString stringWithFormat:@"<GNToggleManager layers:%@>", layers];
+// If a landmark with the given ID exists in the allLandmarks NSMutableDictionary, returns that GNLandmark
+// otherwise, creates the GNLandmark with the given attributes, adds it to allLandmarks, and returns it
+-(GNLandmark*)getLandmark:(NSString *)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
+	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:landmarkID]);
+	if(landmark == nil)
+	{
+		landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude altitude:altitude];
+		[allLandmarks setObject:landmark forKey:landmarkID];
+	}
+	return landmark;
 }
 
 - (void)updateToCenterLocation:(CLLocation *)location {
@@ -156,6 +172,7 @@ static GNLayerManager *sharedManager = nil;
 	
 	[activeLandmarks sortUsingSelector:@selector(compareTo:)];
 	
+	///////////////////////////////////// Also need to cap to maxDistance
 	NSArray* closest = [activeLandmarks objectsAtIndexes:
 						 [NSIndexSet indexSetWithIndexesInRange:
 						  NSMakeRange(0, MIN([self maxLandmarks], [activeLandmarks count]))]];
@@ -165,35 +182,13 @@ static GNLayerManager *sharedManager = nil;
 	return closest;
 }
 
-
-// if a landmark with the given ID exists in the allLandmarks NSMutableDictionary, returns that GNLandmark
-// otherwise, creates the GNLandmark with the given attributes, adds it to allLandmarks, and returns it
--(GNLandmark*)getLandmark:(NSString *)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
-	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:landmarkID]);
-	if(landmark == nil)
-	{
-		landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude];
-		[allLandmarks setObject:landmark forKey:landmarkID];
-	}
-	return landmark;
-}
-
-// if a landmark with the given ID exists in the allLandmarks NSMutableDictionary, returns that GNLandmark
-// otherwise, creates the GNLandmark with the given attributes, adds it to allLandmarks, and returns it
--(GNLandmark*)getLandmark:(NSString *)landmarkID name:(NSString*)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
-	GNLandmark *landmark = (GNLandmark*) ([allLandmarks objectForKey:landmarkID]);
-	if(landmark == nil)
-	{
-		landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude altitude:altitude];
-		[allLandmarks setObject:landmark forKey:landmarkID];
-	}
-	return landmark;
+- (NSString *)description {
+	return [NSString stringWithFormat:@"<GNToggleManager layers:%@>", layers];
 }
 
 -(void)dealloc {
 	[layers release];
 	[allLandmarks release];
-	
 	[super dealloc];
 }
 

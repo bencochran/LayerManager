@@ -21,8 +21,8 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		self.landmarks = [[[NSMutableArray alloc] init] autorelease];
 		iconPath = nil;
 		layerInfoByLandmarkID = [[NSMutableDictionary alloc] init];
-		layerFields = nil;
 		userModifiable = NO;
+		layerFields = nil;
 	}
 	return self;
 }
@@ -32,7 +32,6 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		[self doesNotRecognizeSelector:_cmd];
 		return nil;
 	}
-	
 	return [UIImage imageNamed:iconPath];
 }
 
@@ -41,7 +40,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		// We're already updating, don't start another request
 		return;
 	}
-		
+	
 	center = [location retain];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForLocation:location]
 											 cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -88,7 +87,6 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	[self ingestNewData:receivedData];
-	
 	[connection release];
     [receivedData release];
 	receivedData = nil;
@@ -137,6 +135,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	NSLog(@"My Name Is: %@", self.name);
 	NSLog(@"And I'm Posting this: %@",info);
 }
+
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<GNLayer name: %@, active: %@>", self.name, self.active ? @"YES" : @"NO"];
 }
@@ -146,27 +145,9 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[self.landmarks release];
 	[iconPath release];
 	[layerInfoByLandmarkID release];
+	[layerFields release];
 	[center release];	
 	[super dealloc];
 }
 
 @end
-
-/*
-@implementation GNTextFieldCell
-
-- (id)initWithLabel:(NSString *) labelText {
-	if (self = [super init]) {
-		UILabel *label = [[UILabel alloc] init];
-		label.text = labelText;
-		UITextField *textField = [[UITextField alloc] init];
-		[self.contentView addSubview:label];
-		[self.contentView addSubview:textField];
-		[label release];
-		[textField release];
-	}
-	return self;
-}
-
-@end
-*/
