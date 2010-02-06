@@ -122,13 +122,13 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	return userModifiable;
 }
 
-- (UIViewController *)getEditingViewController; {
+- (UIViewController *)getEditingViewControllerWithLocation:(CLLocation *)location; {
 	if (![self layerIsUserModifiable])
 	{
 		[self doesNotRecognizeSelector:_cmd];
 		return nil;
 	}
-	return [[[GNEditingTableViewController alloc] initWithFields:layerFields] autorelease];
+	return [[[GNEditingTableViewController alloc] initWithFields:layerFields andLayer:self andLocation:location] autorelease];
 }
 
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location {

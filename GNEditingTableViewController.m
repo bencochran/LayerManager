@@ -14,19 +14,21 @@
 
 @implementation GNEditingTableViewController
 
--(id)initWithFields:(NSArray *)newFields {
+- (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location {
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		fields = [newFields retain];
 		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count]+1)];
 		for (int i = 0; i < ([fields count]+1); i ++){
 			[userInput insertObject:@"" atIndex:0];
 		}
+		selectedLayer = layer;
+		selectedLocation = location;
 		NSLog(@"%d",[userInput count]);
 	}
 	return self;
 }
 
-- (void)addUserInput:(NSString *)input toField:(NSInteger)index;{
+- (void)addUserInput:(NSString *)input toField:(NSInteger)index{
 	[userInput replaceObjectAtIndex:index withObject:input];
 	if (index == 0){
 		self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -62,11 +64,11 @@
 }
 
 - (void)postToServer:(id)sender {
-	UIViewController *layersViewController = [self.navigationController.viewControllers objectAtIndex:2];
-	GNLayer *layer = [layersViewController getSelectedLayer];
-	UIViewController *mapViewController = [self.navigationController.viewControllers objectAtIndex:1];
-	CLLocation *location = [mapViewController getSelectedLocation];
-	[layer postLandmarkArray:userInput withLocation:location];
+	//UIViewController *layersViewController = [self.navigationController.viewControllers objectAtIndex:2];
+	//GNLayer *layer = [layersViewController getSelectedLayer];
+	//UIViewController *mapViewController = [self.navigationController.viewControllers objectAtIndex:1];
+	//CLLocation *location = [mapViewController getSelectedLocation];
+	[selectedLayer postLandmarkArray:userInput withLocation:selectedLocation];
 
 }
 

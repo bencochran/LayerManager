@@ -7,18 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GNLayer.h"
 
 @interface GNEditingTableViewController : UITableViewController {
 	NSArray *fields;
 	NSInteger currentField;
 	NSMutableArray *userInput;
+	GNLayer *selectedLayer;
+	CLLocation *selectedLocation;
 	//UIImagePickerController *photoTaker;
 
 
 }
 
-- (id)initWithFields:(NSArray *)fields;
+- (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location;
 
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index;
 

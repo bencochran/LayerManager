@@ -19,7 +19,7 @@ NSString *inputString;
 
 -(id)initWithFieldArray:(NSArray *)newFieldArray {
 	if (self = [super init]) {
-		fieldArray = [newFieldArray retain];
+		fieldArray = newFieldArray;
 	}
 	return self;
 }
@@ -30,7 +30,7 @@ NSString *inputString;
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
 	self.navigationItem.rightBarButtonItem = saveButton;
 	self.title = [fieldArray objectAtIndex:0];
-	if([fieldArray objectAtIndex:1] == @"longString"){
+	if([fieldArray objectAtIndex:1] == @"textView"){
 		textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 100)];
 		textView.delegate = self;
 		textView.textAlignment = UITextAlignmentLeft;
@@ -55,7 +55,7 @@ NSString *inputString;
 }
 
 - (void)save:(id)sender {
-	if([fieldArray objectAtIndex:1] == @"longString"){
+	if([fieldArray objectAtIndex:1] == @"textView"){
 		inputString = textView.text;
 	}
 	else{
