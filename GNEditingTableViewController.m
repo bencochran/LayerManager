@@ -53,14 +53,25 @@
 	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(postToServer:)];
 	self.navigationItem.rightBarButtonItem = doneButton;
 	self.navigationItem.rightBarButtonItem.enabled = NO;
-	//photoTaker = [[UIImagePickerController alloc] init];
-	//photoTaker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	//[self.tableView addSubview: photoTaker.view];
-	[doneButton release];
-	
+}
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+-(IBAction) takePhoto:(id) sender {
+	photoController = [[UIImagePickerController alloc] init];
+#if !TARGET_IPHONE_SIMULATOR
+		photoController.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+#else
+		NSLog(@"The camera's not available in simulator");
+		photoController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+#endif
+	photoController.delegate = self;
+	[self presentModalViewController:photoController animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)controller didFinishPickingMediaWithInfo:(NSDictionary *)info {
+	[controller dismissModalViewControllerAnimated:YES];
+	photo = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+	NSLog(@"Image Size: %d",photo.size);
 }
 
 - (void)postToServer:(id)sender {
@@ -118,7 +129,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // One section is devoted to each field, including the proposed title/name.
-	return [fields count] + 1;
+	return [fields count] + 2;
 }
 
 
@@ -138,7 +149,15 @@
     }
     
 	NSLog(@"IndexPath.section: %i", indexPath.section);
-	if (indexPath.section == 0) {
+	if (indexPath.section == [fields count] +1){
+		takePhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		[takePhotoButton setTitle:@"Take Photo" forState:UIControlStateNormal];
+		takePhotoButton.frame = CGRectMake(10,0,300,45);
+		takePhotoButton.alpha = 0.8;
+		[takePhotoButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
+		[cell addSubview:takePhotoButton];
+	}
+	else if (indexPath.section == 0) {
 		cell.textLabel.text = [@"Name: " stringByAppendingString:[userInput objectAtIndex:0]];
 	}
 	else {

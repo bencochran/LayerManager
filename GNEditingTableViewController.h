@@ -9,13 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "GNLayer.h"
 
-@interface GNEditingTableViewController : UITableViewController {
+@interface GNEditingTableViewController : UITableViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 	NSArray *fields;
 	NSInteger currentField;
 	NSMutableArray *userInput;
 	GNLayer *selectedLayer;
 	CLLocation *selectedLocation;
-	//UIImagePickerController *photoTaker;
+	UIImagePickerController *photoController;
+	UIButton *takePhotoButton;
+	UIImage *photo;
+	UIImageView *photoView;
 
 
 }
@@ -23,6 +26,8 @@
 - (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location;
 
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index;
+
+-(IBAction) takePhoto:(id) sender;
 
 - (NSInteger)getCurrentField;
 
