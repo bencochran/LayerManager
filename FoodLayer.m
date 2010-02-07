@@ -77,10 +77,6 @@
 }
 
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{
-	//NSLog(@"My Name Is: %@", self.name);
-	//NSLog(@"And I'm Posting this: %@", info);
-	//NSLog(@"With a photo of size: %d", photo.size);
-	//NSLog(@"Photo: %@",photo);
 	NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
 	NSURL *url = [NSURL URLWithString:@"http://dev.gnar.us/post.py/restaurants"];
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -91,6 +87,7 @@
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
 	[request setData:photoData forKey:@"restImage"];
+	[request startAsynchronous];
 }
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {

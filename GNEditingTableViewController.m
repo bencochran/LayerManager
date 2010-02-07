@@ -53,6 +53,17 @@
 	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(postToServer:)];
 	self.navigationItem.rightBarButtonItem = doneButton;
 	self.navigationItem.rightBarButtonItem.enabled = NO;
+	buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
+	NSLog(@"Photo: %@",photo);
+	if (photo == nil){
+		takePhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		[takePhotoButton setTitle:@"Photo" forState:UIControlStateNormal];
+		takePhotoButton.frame = CGRectMake(10,10,80,80);
+		takePhotoButton.alpha = 0.8;
+		[takePhotoButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
+		[buttonContainer addSubview:takePhotoButton];
+	}
+	self.tableView.tableHeaderView = buttonContainer;
 }
 
 -(IBAction) takePhoto:(id) sender {
@@ -71,6 +82,11 @@
 - (void)imagePickerController:(UIImagePickerController *)controller didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	[controller dismissModalViewControllerAnimated:YES];
 	photo = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];
+	photoView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,80,80)];
+	photoView.image = photo;
+	[buttonContainer addSubview:photoView];
+	[buttonContainer setNeedsDisplay];
+	self.tableView.tableHeaderView = buttonContainer;
 }
 
 - (void)postToServer:(id)sender {
@@ -129,7 +145,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // One section is devoted to each field, including the proposed title/name.
-	return [fields count] + 2;
+	return [fields count] + 1;
 }
 
 
@@ -147,15 +163,7 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-	if (indexPath.section == [fields count] +1){
-		takePhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-		[takePhotoButton setTitle:@"Take Photo" forState:UIControlStateNormal];
-		takePhotoButton.frame = CGRectMake(10,0,300,45);
-		takePhotoButton.alpha = 0.8;
-		[takePhotoButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
-		[cell addSubview:takePhotoButton];
-	}
-	else if (indexPath.section == 0) {
+	if (indexPath.section == 0) {
 		cell.textLabel.text = [@"Name: " stringByAppendingString:[userInput objectAtIndex:0]];
 	}
 	else {

@@ -17,6 +17,7 @@
 	CLLocation *selectedLocation;
 	UIImagePickerController *photoController;
 	UIButton *takePhotoButton;
+	UIView *buttonContainer;
 	UIImage *photo;
 	UIImageView *photoView;
 
