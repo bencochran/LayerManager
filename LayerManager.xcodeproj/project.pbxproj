@@ -30,6 +30,10 @@
 		A2D20860110E62C100C99513 /* GNEditingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */; };
 		AA747D9F0F9514B9006C5449 /* LayerManager_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		B805EAAA111F5B0D00C3E65B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B855D749110D3849001CF7BD /* UIKit.framework */; };
+		B805EAAE111F5B1400C3E65B /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B805EAAD111F5B1400C3E65B /* libz.1.2.3.dylib */; };
+		B805EAB0111F5B1B00C3E65B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B805EAAF111F5B1B00C3E65B /* CFNetwork.framework */; };
+		B805EAB4111F5B1F00C3E65B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B805EAB3111F5B1F00C3E65B /* SystemConfiguration.framework */; };
 		B81C4D6910CF4F1100EA3205 /* LayerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B81C4D6810CF4F1100EA3205 /* LayerManager.h */; };
 		B855D74A110D3849001CF7BD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B855D749110D3849001CF7BD /* UIKit.framework */; };
 		B855D74E110D3851001CF7BD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B855D74D110D3851001CF7BD /* CoreGraphics.framework */; };
@@ -126,6 +130,9 @@
 		A2D2085E110E62C100C99513 /* GNEditingTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GNEditingTable.xib; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B805EAAD111F5B1400C3E65B /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
+		B805EAAF111F5B1B00C3E65B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		B805EAB3111F5B1F00C3E65B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B81C4D6810CF4F1100EA3205 /* LayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager.h; sourceTree = "<group>"; };
 		B855D749110D3849001CF7BD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B855D74D110D3851001CF7BD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -185,6 +192,10 @@
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 				A251B08C10F53CB10041E1D7 /* CoreLocation.framework in Frameworks */,
 				B89BA2FF11081DA900A5FE3C /* MapKit.framework in Frameworks */,
+				B805EAAA111F5B0D00C3E65B /* UIKit.framework in Frameworks */,
+				B805EAAE111F5B1400C3E65B /* libz.1.2.3.dylib in Frameworks */,
+				B805EAB0111F5B1B00C3E65B /* CFNetwork.framework in Frameworks */,
+				B805EAB4111F5B1F00C3E65B /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +227,9 @@
 				B855D749110D3849001CF7BD /* UIKit.framework */,
 				B855D74D110D3851001CF7BD /* CoreGraphics.framework */,
 				B8CB2DA4110D840800BED463 /* GHUnitIPhone.xcodeproj */,
+				B805EAAD111F5B1400C3E65B /* libz.1.2.3.dylib */,
+				B805EAAF111F5B1B00C3E65B /* CFNetwork.framework */,
+				B805EAB3111F5B1F00C3E65B /* SystemConfiguration.framework */,
 			);
 			name = LayerManager;
 			sourceTree = "<group>";
@@ -557,6 +571,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LayerManager_Prefix.pch;
+				HEADER_SEARCH_PATHS = "asi-http-request/**";
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -1,6 +1,3 @@
 [submodule "ghunit"]
 	path = ghunit
 	url = git://github.com/gabriel/gh-unit.git
-[submodule "asi-http-request"]
-	path = asi-http-request
-	url = git://github.com/pokeb/asi-http-request.git
