@@ -79,6 +79,7 @@
 	//UIViewController *mapViewController = [self.navigationController.viewControllers objectAtIndex:1];
 	//CLLocation *location = [mapViewController getSelectedLocation];
 	[selectedLayer postLandmarkArray:userInput withLocation:selectedLocation andPhoto:photo];
+	[self.navigationController popToRootViewControllerAnimated:YES];
 
 }
 

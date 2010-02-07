@@ -16,13 +16,15 @@
 		self.name = @"Food";
 		iconPath = @"food.png";
 		userModifiable = YES;
-		NSArray *menuField = [[NSMutableArray alloc] initWithObjects:@"Menu", @"textView", nil];
+		NSArray *hoursField = [[NSMutableArray alloc] initWithObjects:@"Hours", @"textView", nil];
 		NSArray* summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"textField", nil];
 		NSArray *descriptionField = [[NSMutableArray alloc] initWithObjects:@"Description", @"textView", nil];
-		layerFields = [[NSArray alloc] initWithObjects:menuField, summaryField, descriptionField, nil];
-		[menuField release];
+		NSArray *menuField = [[NSMutableArray alloc] initWithObjects:@"Menu", @"textView", nil];
+		layerFields = [[NSArray alloc] initWithObjects:hoursField, summaryField, descriptionField, menuField, nil];
+		[hoursField release];
 		[summaryField release];
 		[descriptionField release];
+		[menuField release];
 	}
 	return self;
 }
@@ -84,11 +86,11 @@
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
 	[request setPostValue:[info objectAtIndex:0] forKey:@"restName"];
 	[request setPostValue:[info objectAtIndex:1] forKey:@"hours"];
-	[request setPostValue:[info objectAtIndex:2] forKey:@"description"];
+	[request setPostValue:[info objectAtIndex:2] forKey:@"summary"];
+	[request setPostValue:[info objectAtIndex:3] forKey:@"description"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
 	[request setData:photoData forKey:@"restImage"];
-
 }
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {
