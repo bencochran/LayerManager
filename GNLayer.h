@@ -15,6 +15,8 @@
 #import "GNLandmark.h"
 #import "GNLayerManager.h"
 #import "GNEditingTableViewController.h"
+#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 
 @class GNLayerManager;
 
@@ -44,6 +46,7 @@ extern NSString *const GNLayerUpdateFailed;
 	NSMutableData *receivedData;
 	// The most recent center location
 	CLLocation *center;
+
 }
 
 @property (nonatomic, copy) NSString *name;

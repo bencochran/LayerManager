@@ -70,7 +70,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)controller didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	[controller dismissModalViewControllerAnimated:YES];
-	photo = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+	photo = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];
 }
 
 - (void)postToServer:(id)sender {

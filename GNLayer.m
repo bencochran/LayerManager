@@ -7,7 +7,6 @@
 //
 
 #import "GNLayer.h"
-
 @implementation GNLayer
 
 NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
@@ -132,9 +131,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 }
 
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{
-	NSLog(@"My Name Is: %@", self.name);
-	NSLog(@"And I'm Posting this: %@", info);
-	//NSLog(@"With a photo of size: %d", photo.size);
+	[self doesNotRecognizeSelector:_cmd];
 }
 
 - (NSString *)description {
