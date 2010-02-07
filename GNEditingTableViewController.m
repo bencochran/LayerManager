@@ -57,13 +57,13 @@
 
 -(IBAction) takePhoto:(id) sender {
 	photoController = [[UIImagePickerController alloc] init];
-#if !TARGET_IPHONE_SIMULATOR
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
 		photoController.sourceType = UIImagePickerControllerSourceTypeCamera;
-
-#else
+	}
+	else {
 		NSLog(@"The camera's not available in simulator");
 		photoController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-#endif
+	}
 	photoController.delegate = self;
 	[self presentModalViewController:photoController animated:YES];
 }
@@ -71,7 +71,6 @@
 - (void)imagePickerController:(UIImagePickerController *)controller didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	[controller dismissModalViewControllerAnimated:YES];
 	photo = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-	NSLog(@"Image Size: %d",photo.size);
 }
 
 - (void)postToServer:(id)sender {
@@ -79,7 +78,7 @@
 	//GNLayer *layer = [layersViewController getSelectedLayer];
 	//UIViewController *mapViewController = [self.navigationController.viewControllers objectAtIndex:1];
 	//CLLocation *location = [mapViewController getSelectedLocation];
-	[selectedLayer postLandmarkArray:userInput withLocation:selectedLocation];
+	[selectedLayer postLandmarkArray:userInput withLocation:selectedLocation andPhoto:photo];
 
 }
 
@@ -147,8 +146,6 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
-	NSLog(@"IndexPath.section: %i", indexPath.section);
 	if (indexPath.section == [fields count] +1){
 		takePhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[takePhotoButton setTitle:@"Take Photo" forState:UIControlStateNormal];
