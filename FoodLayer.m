@@ -33,7 +33,7 @@
 
 - (NSURL *)URLForLocation:(CLLocation *)location {	
 	// http://dev.gnar.us/getInfo.py/DiningAreas?lat=44.46055309703&lon=-93.1566672394&maxLandmarks=2
-	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/DiningAreas?lat=%f&lon=%f&maxLandmarks=%d",
+	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/Food?lat=%f&lon=%f&maxLandmarks=%d",
 						   [location coordinate].latitude, [location coordinate].longitude, [[GNLayerManager sharedManager] maxLandmarks]];
 	return [NSURL URLWithString:urlString];
 }
@@ -55,7 +55,8 @@
 	for (NSDictionary *landmarkAndLayerInfo in layerInfoList)
 	{
 		layerInfo = [[NSMutableDictionary alloc] init];
-		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"menuURL"] forKey:@"menuURL"];
+		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"menu"] forKey:@"menu"];
+		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
 		
@@ -80,17 +81,34 @@
 
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{
 	NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
-	NSURL *url = [NSURL URLWithString:@"http://dev.gnar.us/post.py/restaurants"];
+	NSURL *url = [NSURL URLWithString:@"http://dev.gnar.us/post.py/food"];
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-	[request setPostValue:[info objectAtIndex:0] forKey:@"restName"];
+	NSLog(@"Info: %@", info);
+	[request setPostValue:[info objectAtIndex:0] forKey:@"name"];
 	[request setPostValue:[info objectAtIndex:1] forKey:@"hours"];
 	[request setPostValue:[info objectAtIndex:2] forKey:@"summary"];
 	[request setPostValue:[info objectAtIndex:3] forKey:@"description"];
+	[request setPostValue:[info objectAtIndex:4] forKey:@"menu"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
-	[request setData:photoData forKey:@"restImage"];
+	[request setData:photoData forKey:@"foodImage"];
+	request.delegate = self;
 	[request startAsynchronous];
 }
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+	// Use when fetching text data
+	NSString *responseString = [request responseString];
+	NSLog(@"Finished: %@", responseString);
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+	NSError *error = [request error];
+	NSLog(@"Error: %@", error);
+}
+
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {
 	return [(NSDictionary*) [layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
@@ -98,14 +116,14 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	UIViewController *viewController = [[UIViewController alloc] init];
-	UIWebView *webView = [[UIWebView alloc] init];
-	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
-
-	[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
-	
-	viewController.title = self.name;
-	viewController.view = webView;
-	[webView release];
+//	UIWebView *webView = [[UIWebView alloc] init];
+//	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
+//
+//	[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
+//	
+//	viewController.title = self.name;
+//	viewController.view = webView;
+//	[webView release];
 	
 	return [viewController autorelease];;
 }
