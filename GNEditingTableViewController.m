@@ -17,8 +17,8 @@
 - (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location {
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		fields = [newFields retain];
-		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count]+1)];
-		for (int i = 0; i < ([fields count]+1); i ++){
+		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count])];
+		for (int i = 0; i < ([fields count]); i ++){
 			[userInput insertObject:@"" atIndex:0];
 		}
 		selectedLayer = layer;
@@ -46,7 +46,6 @@
     return self;
 }
 */
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -145,7 +144,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // One section is devoted to each field, including the proposed title/name.
-	return [fields count] + 1;
+	return [fields count];
 }
 
 
@@ -163,14 +162,14 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-	if (indexPath.section == 0) {
-		cell.textLabel.text = [@"Name: " stringByAppendingString:[userInput objectAtIndex:0]];
-	}
-	else {
-		NSString *fieldName = [[[fields objectAtIndex:(indexPath.section - 1)]objectAtIndex:0] stringByAppendingString:@": "];
-		NSString *inputFields = [userInput objectAtIndex:(indexPath.section)];
-		cell.textLabel.text = [fieldName stringByAppendingString: inputFields];
-    }
+	//if (indexPath.section == 0) {
+	//	cell.textLabel.text = [@"Name: " stringByAppendingString:[userInput objectAtIndex:0]];
+	//}
+	//else {
+	NSString *fieldName = [[[fields objectAtIndex:(indexPath.section)]objectAtIndex:0] stringByAppendingString:@": "];
+	NSString *inputFields = [userInput objectAtIndex:(indexPath.section)];
+	cell.textLabel.text = [fieldName stringByAppendingString: inputFields];
+    //}
 	//[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 	
     return cell;
@@ -182,16 +181,18 @@
 	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
-	if (indexPath.section == 0) {
-		currentField = indexPath.section;
-		UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[NSArray arrayWithObjects:@"Name", @"", nil]] autorelease];
-		[self.navigationController pushViewController:textEditingViewController animated:YES];
-	}
-	else {
-		currentField = indexPath.section;
-		UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section-1)]] autorelease];
-		[self.navigationController pushViewController:textEditingViewController animated:YES];
-	}
+	//if (indexPath.section == 0) {
+	//	currentField = indexPath.section;
+	//	NSArray *nameInfo = [[[NSMutableArray alloc] initWithObjects:@"Name", @"textField",@"", nil]retain];
+	//	UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:nameInfo] autorelease];
+	//	[self.navigationController pushViewController:textEditingViewController animated:YES];
+	//}
+	//else {
+	currentField = indexPath.section;
+	UIViewController *infoInputViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section)] 
+																							 andInput:[userInput objectAtIndex:indexPath.section]] autorelease];
+	[self.navigationController pushViewController:infoInputViewController animated:YES];
+	//}
 	//UIViewController *editingViewController = [layer getEditingViewController];
 	//[self.navigationController pushViewController:editingViewController animated:YES];
 }

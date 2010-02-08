@@ -16,11 +16,13 @@
 		self.name = @"Food";
 		iconPath = @"food.png";
 		userModifiable = YES;
+		NSArray *nameField = [[NSMutableArray alloc] initWithObjects:@"Name", @"textField", nil];
 		NSArray *hoursField = [[NSMutableArray alloc] initWithObjects:@"Hours", @"textView", nil];
 		NSArray* summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"textField", nil];
 		NSArray *descriptionField = [[NSMutableArray alloc] initWithObjects:@"Description", @"textView", nil];
 		NSArray *menuField = [[NSMutableArray alloc] initWithObjects:@"Menu", @"textView", nil];
-		layerFields = [[NSArray alloc] initWithObjects:hoursField, summaryField, descriptionField, menuField, nil];
+		layerFields = [[NSArray alloc] initWithObjects:nameField, hoursField, summaryField, descriptionField, menuField, nil];
+		[nameField release];
 		[hoursField release];
 		[summaryField release];
 		[descriptionField release];

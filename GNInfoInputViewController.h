@@ -11,8 +11,14 @@
 
 @interface GNInfoInputViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate> {
 
+	UILabel *label;
+	UITextView *textView;
+	UITextField *textField;
+	NSArray *fieldArray;
+	NSString *inputString;
+	NSString *savedInput;
 }
 
-- (id)initWithFieldArray:(NSArray *)fieldArray;
+- (id)initWithFieldArray:(NSArray *)fieldArray andInput:(NSString *)input;
 
 @end

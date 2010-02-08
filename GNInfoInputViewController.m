@@ -11,15 +11,11 @@
 
 @implementation GNInfoInputViewController
 
-UILabel *label;
-UITextView *textView;
-UITextField *textField;
-NSArray *fieldArray;
-NSString *inputString;
-
--(id)initWithFieldArray:(NSArray *)newFieldArray {
+-(id)initWithFieldArray:(NSArray *)newFieldArray andInput:(NSString *)input{
 	if (self = [super init]) {
 		fieldArray = newFieldArray;
+		savedInput = input;
+		NSLog(@"Fields: %@",[fieldArray objectAtIndex:0]);
 	}
 	return self;
 }
@@ -29,6 +25,7 @@ NSString *inputString;
     [super viewDidLoad];
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
 	self.navigationItem.rightBarButtonItem = saveButton;
+	[saveButton release];
 	self.title = [fieldArray objectAtIndex:0];
 	if([fieldArray objectAtIndex:1] == @"textView"){
 		textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 100)];
@@ -36,6 +33,7 @@ NSString *inputString;
 		textView.textAlignment = UITextAlignmentLeft;
 		[self.view addSubview:textView];
 		self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+		textView.text = savedInput;
 		[textView becomeFirstResponder];
 		[textView release];
 	}
@@ -45,10 +43,10 @@ NSString *inputString;
 		textField.borderStyle = UITextBorderStyleRoundedRect;
 		[self.view addSubview:textField];
 		self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+		textField.text = savedInput;
 		[textField becomeFirstResponder];
 		[textField release];
-	}	
-	[saveButton release];
+	}
 	
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;

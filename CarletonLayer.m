@@ -16,10 +16,12 @@
 		self.name = @"Carleton";
 		iconPath = @"academic.png";
 		userModifiable = YES;
+		NSArray *nameField = [[NSMutableArray alloc] initWithObjects:@"Name", @"textField", nil];
 		NSArray *yearBuiltField = [[NSMutableArray alloc] initWithObjects:@"Year Built", @"textField", nil];
 		NSArray* summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"textField", nil];
 		NSArray *descriptionField = [[NSMutableArray alloc] initWithObjects:@"Description", @"textView", nil];
-		layerFields = [[NSArray alloc] initWithObjects:yearBuiltField, summaryField, descriptionField, nil];
+		layerFields = [[NSArray alloc] initWithObjects:nameField, yearBuiltField, summaryField, descriptionField, nil];
+		[nameField release];
 		[yearBuiltField release];
 		[summaryField release];
 		[descriptionField release];
