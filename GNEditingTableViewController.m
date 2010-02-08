@@ -184,7 +184,7 @@
 	// [anotherViewController release];
 	if (indexPath.section == 0) {
 		currentField = indexPath.section;
-		UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[[NSArray alloc] initWithObjects:@"Name", @"", nil]] autorelease];
+		UIViewController *textEditingViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[NSArray arrayWithObjects:@"Name", @"", nil]] autorelease];
 		[self.navigationController pushViewController:textEditingViewController animated:YES];
 	}
 	else {
