@@ -15,6 +15,14 @@
 	if (self = [super init]) {
 		self.name = @"Carleton";
 		iconPath = @"academic.png";
+		userModifiable = YES;
+		NSArray *yearBuiltField = [[NSMutableArray alloc] initWithObjects:@"Year Built", @"textField", nil];
+		NSArray* summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"textField", nil];
+		NSArray *descriptionField = [[NSMutableArray alloc] initWithObjects:@"Description", @"textView", nil];
+		layerFields = [[NSArray alloc] initWithObjects:yearBuiltField, summaryField, descriptionField, nil];
+		[yearBuiltField release];
+		[summaryField release];
+		[descriptionField release];
 	}
 	return self;
 }
@@ -70,6 +78,20 @@
 	[self.landmarks sortUsingSelector:@selector(compareTo:)];
 	// Inform the LayerManager that we've got new landmarks
 	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
+}
+
+- (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{
+	NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
+	NSURL *url = [NSURL URLWithString:@"http://dev.gnar.us/post.py/carleton"];
+	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+	[request setPostValue:[info objectAtIndex:0] forKey:@"name"];
+	[request setPostValue:[info objectAtIndex:1] forKey:@"yearBuilt"];
+	[request setPostValue:[info objectAtIndex:2] forKey:@"summary"];
+	[request setPostValue:[info objectAtIndex:3] forKey:@"description"];
+	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
+	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
+	[request setData:photoData forKey:@"image"];
+	[request startAsynchronous];
 }
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {
