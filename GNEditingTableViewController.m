@@ -63,10 +63,13 @@
 		[buttonContainer addSubview:takePhotoButton];
 	}
 	self.tableView.tableHeaderView = buttonContainer;
+	photoView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,80,80)];
 }
 
 -(IBAction) takePhoto:(id) sender {
+	NSLog(@"In takePhoto");
 	photoController = [[UIImagePickerController alloc] init];
+	
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
 		photoController.sourceType = UIImagePickerControllerSourceTypeCamera;
 	}
@@ -76,16 +79,22 @@
 	}
 	photoController.delegate = self;
 	[self presentModalViewController:photoController animated:YES];
+	
+	NSLog(@"End of takePhoto, photoController: %@", photoController);
+
 }
 
+
 - (void)imagePickerController:(UIImagePickerController *)controller didFinishPickingMediaWithInfo:(NSDictionary *)info {
+	NSLog(@"In imagePickerController, controller: %@", controller);
+	
 	[controller dismissModalViewControllerAnimated:YES];
 	photo = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];
-	photoView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,80,80)];
 	photoView.image = photo;
 	[buttonContainer addSubview:photoView];
 	[buttonContainer setNeedsDisplay];
 	self.tableView.tableHeaderView = buttonContainer;
+	[photoController release];
 }
 
 - (void)postToServer:(id)sender {
