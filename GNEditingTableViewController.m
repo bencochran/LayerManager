@@ -95,6 +95,7 @@
 	[buttonContainer setNeedsDisplay];
 	self.tableView.tableHeaderView = buttonContainer;
 	[photoController release];
+	photoController = nil;
 }
 
 - (void)postToServer:(id)sender {
