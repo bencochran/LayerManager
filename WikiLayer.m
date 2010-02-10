@@ -13,8 +13,8 @@
 
 -(id)init {
 	if (self = [super init]) {
-		self.name = @"Wiki";
-		iconPath = @"food.png";
+		self.name = @"Wikipedia";
+		iconPath = @"wiki.png";
 		userModifiable = NO;
 	}
 	return self;

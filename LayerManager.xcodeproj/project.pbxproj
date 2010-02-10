@@ -138,6 +138,7 @@
 		B81C4D6810CF4F1100EA3205 /* LayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager.h; sourceTree = "<group>"; };
 		B855D749110D3849001CF7BD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B855D74D110D3851001CF7BD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B87136FC112284AE00091359 /* wiki.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wiki.png; sourceTree = "<group>"; };
 		B88D771710CF6110003A76A1 /* TweetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetLayer.h; sourceTree = "<group>"; };
 		B88D771810CF6110003A76A1 /* TweetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetLayer.m; sourceTree = "<group>"; };
 		B89BA2FE11081DA900A5FE3C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -319,6 +320,7 @@
 				A25B5893111A272200C63840 /* academic.png */,
 				A25B5894111A272200C63840 /* bird.png */,
 				A25B5895111A272200C63840 /* food.png */,
+				B87136FC112284AE00091359 /* wiki.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
