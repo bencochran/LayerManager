@@ -67,6 +67,8 @@
 		FC242C26111F4C14003AFB03 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC242C24111F4C14003AFB03 /* Reachability.m */; };
 		FC242C44111F4D35003AFB03 /* ASIInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = FC242C42111F4D35003AFB03 /* ASIInputStream.h */; };
 		FC242C45111F4D35003AFB03 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FC242C43111F4D35003AFB03 /* ASIInputStream.m */; };
+		FC9694DB11224C8C00218696 /* WikiLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FC9694D911224C8C00218696 /* WikiLayer.h */; };
+		FC9694DC11224C8C00218696 /* WikiLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9694DA11224C8C00218696 /* WikiLayer.m */; };
 		FCBF977F111A46A00071F029 /* GNInfoInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */; };
 		FCBF9780111A46A00071F029 /* GNInfoInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */; };
 /* End PBXBuildFile section */
@@ -165,6 +167,8 @@
 		FC242C24111F4C14003AFB03 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "asi-http-request/External/Reachability1.5/Reachability.m"; sourceTree = "<group>"; };
 		FC242C42111F4D35003AFB03 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIInputStream.h; path = "asi-http-request/Classes/ASIInputStream.h"; sourceTree = "<group>"; };
 		FC242C43111F4D35003AFB03 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIInputStream.m; path = "asi-http-request/Classes/ASIInputStream.m"; sourceTree = "<group>"; };
+		FC9694D911224C8C00218696 /* WikiLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiLayer.h; sourceTree = "<group>"; };
+		FC9694DA11224C8C00218696 /* WikiLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiLayer.m; sourceTree = "<group>"; };
 		FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNInfoInputViewController.h; sourceTree = "<group>"; };
 		FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNInfoInputViewController.m; sourceTree = "<group>"; };
 		FCE3BA2510F900AC003BE4A2 /* FoodLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodLayer.h; sourceTree = "<group>"; };
@@ -251,6 +255,8 @@
 				FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */,
 				A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */,
 				A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */,
+				FC9694D911224C8C00218696 /* WikiLayer.h */,
+				FC9694DA11224C8C00218696 /* WikiLayer.m */,
 				B81C4D6810CF4F1100EA3205 /* LayerManager.h */,
 				B8BC145E109EBAEC000701DF /* GNLandmark.h */,
 				B8BC145F109EBAEC000701DF /* GNLandmark.m */,
@@ -389,6 +395,7 @@
 				FC242BD8111F4A73003AFB03 /* ASIHTTPRequestConfig.h in Headers */,
 				FC242C25111F4C14003AFB03 /* Reachability.h in Headers */,
 				FC242C44111F4D35003AFB03 /* ASIInputStream.h in Headers */,
+				FC9694DB11224C8C00218696 /* WikiLayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +532,7 @@
 				FC242BD6111F4A63003AFB03 /* ASIAuthenticationDialog.m in Sources */,
 				FC242C26111F4C14003AFB03 /* Reachability.m in Sources */,
 				FC242C45111F4D35003AFB03 /* ASIInputStream.m in Sources */,
+				FC9694DC11224C8C00218696 /* WikiLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
