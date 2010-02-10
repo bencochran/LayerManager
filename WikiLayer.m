@@ -21,18 +21,22 @@
 }
 
 - (NSURL *)URLForLocation:(CLLocation *)location {
-	NSString *query = @"PREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>\n"
-					   "PREFIX p:<http://dbpedia.org/property/>\n"
-					   "SELECT ?s ?name ?lat ?long WHERE{\n"
-					   "?s geo:lat ?lat .\n"
-					   "?s geo:long ?long .\n"
-					   "?s p:name ?name .\n"
-					   "FILTER (\n"
-					   "?lat<=44.45+.1 &&\n"
-					   "?long>=-93.15-.1 &&\n"
-					   "?lat>=44.45-.1 &&\n"
-					   "?long<=-93.15+.1)\n"
-					   "}";
+	NSString *query = [NSString stringWithFormat:@"PREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>\n"
+												  "PREFIX p:<http://dbpedia.org/property/>\n"
+												  "SELECT ?s ?name ?lat ?long WHERE{\n"
+												  "?s geo:lat ?lat .\n"
+												  "?s geo:long ?long .\n"
+												  "?s p:name ?name .\n"
+												  "FILTER (\n"
+												  "?lat<=%f+.1 &&\n"
+												  "?long>=%f-.1 &&\n"
+												  "?lat>=%f-.1 &&\n"
+												  "?long<=%f+.1)\n"
+												  "}",
+					   [location coordinate].latitude,
+					   [location coordinate].longitude,
+					   [location coordinate].latitude,
+					   [location coordinate].longitude];
 	
 	query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	
