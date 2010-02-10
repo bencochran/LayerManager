@@ -21,7 +21,28 @@
 }
 
 - (NSURL *)URLForLocation:(CLLocation *)location {
-	NSString *urlString = @"http://dbpedia.org/sparql?default-graph-uri=http://dbpedia.org&should-sponge=&query=PREFIX+geo:<http://www.w3.org/2003/01/geo/wgs84_pos%23>PREFIX+p:<http://dbpedia.org/property/>SELECT+%3Fs+%3Fname+%3Flat+%3Flong+WHERE{%3Fs+geo:lat+%3Flat+.%3Fs+geo:long+%3Flong+.%3Fs+p:name+%3Fname+.FILTER+(%3Flat<%3D44.45%2B.1%26%26+%3Flong>%3D-93.15-.1+%26%26+%3Flat>%3D44.45-.1+%26%26+%3Flong<%3D-93.15%2B.1)}&format=JSON&debug=on&timeout=";
+	NSString *query = @"PREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>\n"
+					   "PREFIX p:<http://dbpedia.org/property/>\n"
+					   "SELECT ?s ?name ?lat ?long WHERE{\n"
+					   "?s geo:lat ?lat .\n"
+					   "?s geo:long ?long .\n"
+					   "?s p:name ?name .\n"
+					   "FILTER (\n"
+					   "?lat<=44.45+.1 &&\n"
+					   "?long>=-93.15-.1 &&\n"
+					   "?lat>=44.45-.1 &&\n"
+					   "?long<=-93.15+.1)\n"
+					   "}";
+	
+	query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	
+	// Escape a few extras missed by that method
+	query = [query stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+	query = [query stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
+
+	// Now build the whole URL
+	NSString *urlString = [NSString stringWithFormat:@"http://dbpedia.org/sparql?query=%@&format=json", query];
+	
 	return [NSURL URLWithString:urlString];
 }
 
@@ -32,6 +53,7 @@
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSArray *layerInfoList = [parser objectWithString:reply error:nil];
+	NSLog(@"Got wiki data %@", layerInfoList);
 	[reply release]; reply = nil;
 	[parser release]; parser = nil;
 	
