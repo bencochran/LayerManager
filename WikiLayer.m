@@ -56,42 +56,58 @@
 	
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	SBJSON *parser = [[SBJSON alloc] init];
-	NSArray *layerInfoList = [parser objectWithString:reply error:nil];
-	NSLog(@"Got wiki data %@", layerInfoList);
+	NSDictionary *layerInfoList = [parser objectWithString:reply error:nil];
 	[reply release]; reply = nil;
 	[parser release]; parser = nil;
 	
 	// load the distance and landmark info
-	//NSMutableDictionary *layerInfo;
-	//GNLandmark *landmark;
+	NSMutableDictionary *layerInfo;
+	GNLandmark *landmark;
+	NSString *wikiURL;
+	NSString *landmarkName;
+	CLLocationDegrees landmarkLon;
+	CLLocationDegrees landmarkLat;
 	
-	for (NSDictionary *landmarkAndLayerInfo in layerInfoList)
+	for (NSDictionary *landmarkAndLayerInfo in [[layerInfoList objectForKey:@"results"] objectForKey:@"bindings"])
 	{
-		//layerInfo = [[NSMutableDictionary alloc] init];
-		//[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"menu"] forKey:@"menu"];
-		//[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
-		//[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
-		//[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
+		layerInfo = [[NSMutableDictionary alloc] init];
+		// Build the wikipedia URL using the dbpedia resource URL.
+		// Also be sure to give it the correct-language wikipedia subdomain
+		wikiURL = [[[landmarkAndLayerInfo objectForKey:@"s"]
+					objectForKey:@"value"]
+				   stringByReplacingOccurrencesOfString:@"://dbpedia.org/resource/"
+				   withString:[NSString stringWithFormat:@"://%@.wikipedia.org/wiki/",
+							   [[landmarkAndLayerInfo objectForKey:@"name"]
+								objectForKey:@"xml:lang"]]];
 		
-		//landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"gnarus:%@", [landmarkAndLayerInfo objectForKey:@"ID"]]
-		//												  name:[landmarkAndLayerInfo objectForKey:@"name"]
-		//											  latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
-		//											 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
-		//											  altitude:center.altitude];
-		//landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
-		//if (self.active) {
-		//	[landmark addActiveLayer:self];
-		//}
+		landmarkName = [[landmarkAndLayerInfo objectForKey:@"name"] objectForKey:@"value"];
+		landmarkLat = [(NSString *)[[landmarkAndLayerInfo objectForKey:@"lat"] objectForKey:@"value" ] floatValue];
+		landmarkLon = [(NSString *)[[landmarkAndLayerInfo objectForKey:@"long"] objectForKey:@"value" ] floatValue];
 		
-		//[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
-		//[self.landmarks addObject:landmark];
-		//[layerInfo release];
-	//}
-	
-	//[self.landmarks sortUsingSelector:@selector(compareTo:)];
-	//[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
+		[layerInfo setObject:wikiURL forKey:@"wikiURL"];
+		
+		landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"gnarus:%@", wikiURL]
+														  name:landmarkName
+													  latitude:landmarkLat
+													 longitude:landmarkLon
+													  altitude:center.altitude];
+		if (self.active) {
+			[landmark addActiveLayer:self];
+		}
+		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
+		
+		// calculate distance
+		landmark.distance = [landmark getDistanceFrom:center];
+		[self.landmarks addObject:landmark];
+		
+		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
+		[layerInfo release]; layerInfo = nil;
 	}
+	
+	[self.landmarks sortUsingSelector:@selector(compareTo:)];
+	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
 }
+
 - (void)requestFinished:(ASIHTTPRequest *)request{
 	// Use when fetching text data
 	NSString *responseString = [request responseString];
