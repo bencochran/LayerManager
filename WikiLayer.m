@@ -127,16 +127,17 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	UIViewController *viewController = [[UIViewController alloc] init];
-		UIWebView *webView = [[UIWebView alloc] init];
-		NSString *urlString = @"www.wikipedia.org";
+	UIWebView *webView = [[UIWebView alloc] init];
+	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"wikiURL"];
 	
-		[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
-		
-		viewController.title = self.name;
-		viewController.view = webView;
-		[webView release];
+	[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
 	
-	return [viewController autorelease];;
+	viewController.title = self.name;
+	viewController.view = webView;
+
+	[webView release];
+	
+	return [viewController autorelease];	
 }
 
 @end
