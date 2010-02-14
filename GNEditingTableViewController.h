@@ -23,16 +23,11 @@
 	UIImage *photo;
 	UIImageView *photoView;
 	NSDictionary *infoDictionary;
-
-
 }
 
 - (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark;
-
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index;
-
--(IBAction) takePhoto:(id) sender;
-
+- (IBAction) takePhoto:(id) sender;
 - (NSInteger)getCurrentField;
 
 @end

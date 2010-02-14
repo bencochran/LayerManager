@@ -15,7 +15,7 @@
 	if (self = [super init]) {
 		fieldArray = newFieldArray;
 		savedInput = input;
-		NSLog(@"Fields: %@",[fieldArray objectAtIndex:0]);
+		NSLog(@"Field name for info input: %@",[fieldArray objectAtIndex:0]);
 	}
 	return self;
 }

@@ -65,6 +65,9 @@
 													  altitude:center.altitude];
   		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
 		
+		NSLog(@"Carleton layer, adding landmark: %@", landmark);
+		NSLog(@"Carleton layer, above landmark's layer info: %@", layerInfo);
+		
 		if (self.active) {
 			[landmark addActiveLayer:self];
 			NSLog(@"Added %@", landmark.name);
@@ -117,6 +120,21 @@
 	NSLog(@"urlString: %@", urlString);
 	
 	return [viewController autorelease];
+}
+
+- (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark {
+	NSDictionary *layerInfo = [layerInfoByLandmarkID objectForKey:landmark.ID];
+	NSMutableDictionary *landmarkFieldInfo = [[NSMutableDictionary alloc] init];
+	///////////// WHAT SHOULD WE DO ABOUT EXISTING IMAGE???????????????????????
+	
+	[landmarkFieldInfo setObject:landmark.name forKey:@"Name"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"yearBuilt"] forKey:@"Year Built"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"summary"] forKey:@"Summary"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"description"] forKey:@"Description"];
+	
+	NSLog(@"fieldInformationForLandmark, landmarkFieldInfo: %@", landmarkFieldInfo);
+	
+	return [landmarkFieldInfo autorelease];
 }
 
 @end

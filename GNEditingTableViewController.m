@@ -22,26 +22,27 @@
 		selectedLayer = layer;
 		if (selectedLandmark && [selectedLandmark.activeLayers containsObject:layer]) {
 			NSLog(@"Hello World!");
-			(NSMutableDictionary *)infoDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
-			for (int i = 0; i < ([fields count]); i ++){
-				NSLog(@"Fields: %@", [infoDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]);
-				[userInput insertObject:@"" atIndex:0];
+			NSDictionary *fieldDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
+			for (int i = 0; i < ([fields count]); i++) {
+				NSLog(@"Fields (key = %@): %@", [[fields objectAtIndex:i] objectAtIndex:0],
+												[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]);
+				[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
 			}
 		}
-		else{
-			for (int i = 0; i < ([fields count]); i ++){
-				[userInput insertObject:@"" atIndex:0];
+		else {
+			for (int i = 0; i < ([fields count]); i++) {
+				[userInput insertObject:@"" atIndex:i];
 			}
 		}
 		selectedLocation = location;
-		NSLog(@"%d",[userInput count]);
+		NSLog(@"Number of elements in user input: %d",[userInput count]);
 	}
 	return self;
 }
 
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index{
 	[userInput replaceObjectAtIndex:index withObject:input];
-	if (index == 0){
+	if (index == 0) {
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 	}
 }

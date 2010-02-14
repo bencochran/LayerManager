@@ -66,6 +66,11 @@
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
 		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
+		
+		
+		NSLog(@"Food, added landmark: %@", landmark);
+		NSLog(@"Food, added landmark info: %@", layerInfo);
+		
 		if (self.active) {
 			[landmark addActiveLayer:self];
 		}
@@ -125,19 +130,19 @@
 //	viewController.view = webView;
 //	[webView release];
 	
-	return [viewController autorelease];;
+	return [viewController autorelease];
 }
 
 - (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark {
-	NSMutableDictionary *landmarkInfo;
-	landmarkInfo = [[NSMutableDictionary alloc] init];
-	NSLog([[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"]);
+	NSMutableDictionary *landmarkInfo = [[NSMutableDictionary alloc] init];
+	NSLog(@"fieldInformationForLandmark, entire dictionary: %@", layerInfoByLandmarkID);
+	NSLog(@"fieldInformationForLandmark, hours value: %@", [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"]);
 	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"] forKey:@"Hours"];
 	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"] forKey:@"Summary"];
 	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"] forKey:@"Description"];
 	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menu"] forKey:@"Menu"];
 	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"name"] forKey:@"Name"];	
-	return landmarkInfo;
+	return [landmarkInfo autorelease];
 }
 
 @end

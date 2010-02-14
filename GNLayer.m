@@ -134,6 +134,11 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[self doesNotRecognizeSelector:_cmd];
 }
 
+- (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark {
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
+}
+
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<GNLayer name: %@, active: %@>", self.name, self.active ? @"YES" : @"NO"];
 }
