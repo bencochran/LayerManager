@@ -59,10 +59,12 @@ extern NSString *const GNLayerUpdateFailed;
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark;
 - (BOOL)layerIsUserModifiable;
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo;
-- (UIViewController *)getEditingViewControllerWithLocation:(CLLocation *)location;
+- (UIViewController *)getEditingViewControllerWithLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark;
 
 - (void)updateToCenterLocation:(CLLocation *)location;
 - (NSURL *)URLForLocation:(CLLocation *)location;
 - (void)ingestNewData:(NSData *)data;
+
+- (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark;
 
 @end

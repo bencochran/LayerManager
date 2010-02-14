@@ -14,14 +14,25 @@
 
 @implementation GNEditingTableViewController
 
-- (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location {
+- (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark{
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		fields = [newFields retain];
 		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count])];
-		for (int i = 0; i < ([fields count]); i ++){
-			[userInput insertObject:@"" atIndex:0];
-		}
+		selectedLandmark = landmark;
 		selectedLayer = layer;
+		if (selectedLandmark && [selectedLandmark.activeLayers containsObject:layer]) {
+			NSLog(@"Hello World!");
+			(NSMutableDictionary *)infoDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
+			for (int i = 0; i < ([fields count]); i ++){
+				NSLog(@"Fields: %@", [infoDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]);
+				[userInput insertObject:@"" atIndex:0];
+			}
+		}
+		else{
+			for (int i = 0; i < ([fields count]); i ++){
+				[userInput insertObject:@"" atIndex:0];
+			}
+		}
 		selectedLocation = location;
 		NSLog(@"%d",[userInput count]);
 	}

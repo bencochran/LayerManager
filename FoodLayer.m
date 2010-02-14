@@ -128,4 +128,16 @@
 	return [viewController autorelease];;
 }
 
+- (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark {
+	NSMutableDictionary *landmarkInfo;
+	landmarkInfo = [[NSMutableDictionary alloc] init];
+	NSLog([[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"]);
+	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"] forKey:@"Hours"];
+	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"] forKey:@"Summary"];
+	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"] forKey:@"Description"];
+	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menu"] forKey:@"Menu"];
+	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"name"] forKey:@"Name"];	
+	return landmarkInfo;
+}
+
 @end

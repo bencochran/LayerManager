@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GNLayer.h"
+#import "GNLandmark.h"
 
 @interface GNEditingTableViewController : UITableViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 	NSArray *fields;
@@ -15,16 +16,18 @@
 	NSMutableArray *userInput;
 	GNLayer *selectedLayer;
 	CLLocation *selectedLocation;
+	GNLandmark *selectedLandmark;
 	UIImagePickerController *photoController;
 	UIButton *takePhotoButton;
 	UIView *buttonContainer;
 	UIImage *photo;
 	UIImageView *photoView;
+	NSDictionary *infoDictionary;
 
 
 }
 
-- (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location;
+- (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark;
 
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index;
 

@@ -121,13 +121,13 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	return userModifiable;
 }
 
-- (UIViewController *)getEditingViewControllerWithLocation:(CLLocation *)location; {
+- (UIViewController *)getEditingViewControllerWithLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark; {
 	if (![self layerIsUserModifiable])
 	{
 		[self doesNotRecognizeSelector:_cmd];
 		return nil;
 	}
-	return [[[GNEditingTableViewController alloc] initWithFields:layerFields andLayer:self andLocation:location] autorelease];
+	return [[[GNEditingTableViewController alloc] initWithFields:layerFields andLayer:self andLocation:location andLandmark:landmark] autorelease];
 }
 
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{
