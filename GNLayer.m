@@ -26,7 +26,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	return self;
 }
 
-- (UIImage *) getIcon {
+- (UIImage *)getIcon {
 	if (!iconPath) {
 		[self doesNotRecognizeSelector:_cmd];
 		return nil;
@@ -34,65 +34,83 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	return [UIImage imageNamed:iconPath];
 }
 
-- (void)updateToCenterLocation:(CLLocation *)location {
-	if (receivedData != nil) {
-		// We're already updating, don't start another request
-		return;
-	}
-	
-	center = [location retain];
-	NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForLocation:location]
-											 cachePolicy:NSURLRequestUseProtocolCachePolicy
-										 timeoutInterval:60.0];
-	
-	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-	if (connection) {
-		receivedData = [[NSMutableData data] retain];
-	} else {
-		NSLog(@"Could not create connection");
-	}
-}
-
-- (NSURL *)URLForLocation:(CLLocation *)location {
+// Compile a NSURL that will be used to request new data.
+// limitToValidated is YES when we're using the resulting
+// landmarks to allow a user to add new landmarks
+- (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // The response has started, clear out the receivedData
-	[receivedData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // Append the incoming data
-	[receivedData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	[connection release];
-	[receivedData release];
-	receivedData = nil;
+- (void)updateToCenterLocation:(CLLocation *)location {
+	if (self.active != YES) {
+		// Well, this shouldn't have happened.
+		NSLog(@"updateToCenterLocation: was called on %s, which is inavtive", [self name]);
+		return;
+	}
 	
+	NSLog(@"called update to center location on %@", self.name);
+	
+	center = [location retain];
+	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[self URLForLocation:location limitToValidated:YES]];
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(didFinishUpdateRequest:)];
+	[request startAsynchronous];
+}
+
+- (void)didFinishUpdateRequest:(ASIHTTPRequest *)request {
+	NSLog(@"called didFinishUpdateRequest on %@", self.name);
+	NSLog(@"request data %s", [request responseString]);
+
+	if (self.active) {
+		NSArray *landmarks = [self parseDataIntoLandmarks:[request responseData]];
+		[self ingestLandmarks:landmarks];
+	}
+}
+
+// Parse the NSData and return an NSArray of landmarks the layer should not
+// store the landmarks created in this step, that will happen elsewhere
+-(NSArray *)parseDataIntoLandmarks:(NSData *)data {
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
+}
+
+- (void)ingestLandmarks:(NSArray *)landmarks {
+	[self removeSelfFromLandmarks];
+	
+	for (GNLandmark *landmark in landmarks)
+	{		
+		[landmark addActiveLayer:self];
+		[self.landmarks addObject:landmark];
+	}
+	
+	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
+}
+
+- (void)requestEditableLandmarksForLocation:(CLLocation *)location {	
+	center = [location retain];
+	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[self URLForLocation:location limitToValidated:NO]];
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(didFinishEditableLandmarksRequest:)];
+	[request startAsynchronous];
+}
+
+- (void)didFinishEditableLandmarksRequest:(ASIHTTPRequest *)request {
+	NSArray *landmarks = [self parseDataIntoLandmarks:[request responseData]];
+	
+	[[GNLayerManager sharedManager] layer:self didUpdateEditableLandmarks:landmarks];
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
 	// Log it
 	NSLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+          [[request error] localizedDescription],
+          [[[request error] userInfo] objectForKey:NSErrorFailingURLStringKey]);
 	
 	// Also fire off a notification
 	[[NSNotificationCenter defaultCenter] postNotificationName:GNLayerUpdateFailed
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:error,@"error",nil]];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	[self ingestNewData:receivedData];
-	[connection release];
-    [receivedData release];
-	receivedData = nil;
-}
-
-- (void)ingestNewData:(NSData *)data {
-	[self doesNotRecognizeSelector:_cmd];
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[request error], @"error", request, @"request", nil]];
 }
 
 // Removes this layer from the active layers list of each of its closest landmarks

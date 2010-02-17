@@ -19,17 +19,14 @@
 	return self;
 }
 
-- (NSURL *)URLForLocation:(CLLocation *)location {	
+- (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {	
 	// http://search.twitter.com/search.json?geocode=44.46087,-93.1536,5mi&rpp=50	
 	NSString *urlString = [NSString stringWithFormat:@"http://search.twitter.com/search.json?geocode=%f,%f,5mi&ppm=100",
 						   [location coordinate].latitude, [location coordinate].longitude];
 	return [NSURL URLWithString:urlString];
 }
 
-- (void)ingestNewData:(NSData *)data {
-	[self removeSelfFromLandmarks];
-	[layerInfoByLandmarkID removeAllObjects];
-	
+- (NSArray *)parseDataIntoLandmarks:(NSData *)data {
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSDictionary *parsedReply = [parser objectWithString:reply error:nil];
@@ -42,6 +39,7 @@
 	NSDictionary *tweet;
 	GNLandmark *landmark;
 	NSMutableDictionary *layerInfo;
+	NSMutableArray *landmarks = [NSMutableArray array];
 
 	NSNumber *latitude;
 	NSNumber *longitude;
@@ -49,11 +47,8 @@
 	for (tweet in tweets)
 	{
 		if (![[tweet objectForKey:@"geo"] isKindOfClass:[NSNull class]]) {
-			//NSLog(@"tweet: %@", tweet);
-			
 			latitude = [[[tweet objectForKey:@"geo"] objectForKey:@"coordinates"] objectAtIndex:0];
 			longitude = [[[tweet objectForKey:@"geo"] objectForKey:@"coordinates"] objectAtIndex:1];
-			NSLog(@"id: %@",[tweet objectForKey:@"id"]);
 			
 			layerInfo = [[NSMutableDictionary alloc] init];
 			[layerInfo setObject:[tweet objectForKey:@"from_user"] forKey:@"from_user"];
@@ -66,9 +61,6 @@
 														 longitude:[longitude floatValue]
 														  altitude:center.altitude];
 			
-			if (self.active) {
-				[landmark addActiveLayer:self];
-			}
 			[layerInfoByLandmarkID setObject:tweet forKey:landmark.ID];
 			
 			// calculate distance
@@ -77,11 +69,11 @@
 			
 			[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 			[layerInfo release];
+			
+			[landmarks addObject:landmark];
 		}
 	}
-	
-	[self.landmarks sortUsingSelector:@selector(compareTo:)];
-	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
+	return landmarks;
 }
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {
