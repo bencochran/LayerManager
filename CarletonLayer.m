@@ -131,6 +131,7 @@
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"yearBuilt"] forKey:@"Year Built"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"summary"] forKey:@"Summary"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"description"] forKey:@"Description"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 	
 	NSLog(@"fieldInformationForLandmark, landmarkFieldInfo: %@", landmarkFieldInfo);
 	

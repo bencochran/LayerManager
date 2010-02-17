@@ -22,6 +22,7 @@
 	UIView *buttonContainer;
 	UIImage *photo;
 	UIImageView *photoView;
+	NSURL *imageURL;
 	NSDictionary *infoDictionary;
 }
 

@@ -11,6 +11,7 @@
 #import "GNLayer.h"
 #import "GNInfoInputViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ASIHTTPRequest.h"
 
 @implementation GNEditingTableViewController
 
@@ -28,11 +29,13 @@
 												[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]);
 				[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
 			}
+			imageURL = [NSURL URLWithString:[fieldDictionary objectForKey:@"imageURL"]];
 		}
 		else {
 			for (int i = 0; i < ([fields count]); i++) {
 				[userInput insertObject:@"" atIndex:i];
 			}
+			imageURL = nil;
 		}
 		selectedLocation = location;
 		NSLog(@"Number of elements in user input: %d",[userInput count]);
@@ -74,8 +77,30 @@
 		[takePhotoButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
 		[buttonContainer addSubview:takePhotoButton];
 	}
+	if (imageURL){
+		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:imageURL];
+		[request setDelegate:self];
+		[request startAsynchronous];
+	}
 	self.tableView.tableHeaderView = buttonContainer;
 	photoView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,80,80)];
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request{
+	// Use when fetching text data
+	NSString *responseString = [request responseString];
+	
+	// Use when fetching binary data
+	NSData *responseData = [request responseData];
+	photo = [[UIImage imageWithData:responseData] retain];
+	photoView.image = photo;
+	[buttonContainer addSubview:photoView];
+	[buttonContainer setNeedsDisplay];
+	
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request{
+	NSError *error = [request error];
 }
 
 -(IBAction) takePhoto:(id) sender {
