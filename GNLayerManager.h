@@ -46,6 +46,9 @@ extern NSString *const GNEditableLandmarksUpdated;
 - (void)updateEditableLandmarksForLocation:(CLLocation *)location;
 - (void)layer:(GNLayer *)layer didUpdateEditableLandmarks:(NSArray *)landmarks;
 
+- (NSArray *)layersForLandmark:(GNLandmark *)landmark;
+- (NSArray *)activeLayersForLandmark:(GNLandmark *)landmark;
+
 - (NSArray *)closestLandmarks;
 
 @end

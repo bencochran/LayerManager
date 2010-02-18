@@ -192,6 +192,27 @@ static GNLayerManager *sharedManager = nil;
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:userEditableLandmarks,@"landmarks",nil]];
 }
 
+- (NSArray *)layersForLandmark:(GNLandmark *)landmark {
+	NSMutableArray *layersForLandmark = [NSMutableArray array];
+	for (GNLayer *layer in self.layers) {
+		if ([layer.landmarks containsObject:landmark]) {
+			[layersForLandmark addObject:layer];
+		}
+	}
+	return layersForLandmark;
+}
+
+- (NSArray *)activeLayersForLandmark:(GNLandmark *)landmark {
+	NSMutableArray *layersForLandmark = [NSMutableArray array];
+	for (GNLayer *layer in self.layers) {
+		if (layer.active && [layer.landmarks containsObject:landmark]) {
+			[layersForLandmark addObject:layer];
+		}
+	}
+	return layersForLandmark;
+}
+
+
 - (NSArray *)closestLandmarks {
 	[validatedLandmarks sortUsingSelector:@selector(compareTo:)];
 	

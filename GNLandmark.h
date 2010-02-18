@@ -15,17 +15,18 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
-@class GNLayer;
+@class GNLayer, GNLayerManager;
 
 @interface GNLandmark : CLLocation <MKAnnotation> {
 	NSString *_id;
-	NSString* _name;
+	NSString *_name;
 	float _distance;
 	NSMutableArray* _activeLayers;
 }
 
 @property (nonatomic, copy) NSString *ID;
 @property (nonatomic, copy) NSString* name;
+@property (nonatomic, retain) NSString* subtitle;
 @property (nonatomic) float distance;
 @property (nonatomic, retain) NSMutableArray* activeLayers;
 

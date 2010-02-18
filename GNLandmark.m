@@ -17,6 +17,14 @@
 	return self.name;
 }
 
+- (NSString *)subtitle {
+	NSMutableArray *layerNames = [NSMutableArray array];
+	for (GNLayer *layer in [[GNLayerManager sharedManager] layersForLandmark:self]) {
+		[layerNames addObject:[layer name]];
+	}
+	return [layerNames componentsJoinedByString:@", "];
+}
+
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude {
 	CLLocationCoordinate2D coordinate;
 	coordinate.latitude = latitude;
