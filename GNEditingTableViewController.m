@@ -21,8 +21,7 @@
 		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count])];
 		selectedLandmark = landmark;
 		selectedLayer = layer;
-		if (selectedLandmark && [selectedLandmark.activeLayers containsObject:layer]) {
-			NSLog(@"Hello World!");
+		if (selectedLandmark && [layer.landmarks containsObject:selectedLandmark]) {
 			NSDictionary *fieldDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
 			for (int i = 0; i < ([fields count]); i++) {
 				NSLog(@"Fields (key = %@): %@", [[fields objectAtIndex:i] objectAtIndex:0],
