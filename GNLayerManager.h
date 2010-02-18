@@ -17,7 +17,7 @@ extern NSString *const GNEditableLandmarksUpdated;
 	NSMutableArray *layers;
 	// allLandmarks: key = landmark ID, value = GNLandmark
 	NSMutableDictionary *allLandmarks;
-	NSMutableArray *closestLandmarks;
+	NSMutableArray *validatedLandmarks;
 	NSMutableArray *userEditableLandmarks;
 	// The hard-coded maximum number of landmarks to retreive
 	int maxLandmarks;

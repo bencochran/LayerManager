@@ -60,6 +60,7 @@ static GNLayerManager *sharedManager = nil;
 		layers = [[NSMutableArray alloc] init];
 		allLandmarks = [[NSMutableDictionary alloc] init];
 		userEditableLandmarks = [[NSMutableArray alloc] init];
+		validatedLandmarks = [[NSMutableArray alloc] init];
 		maxLandmarks = 10;
 	}
 	return self;
@@ -97,6 +98,7 @@ static GNLayerManager *sharedManager = nil;
 				// the given layer is the only remaining active layer for this landmark:
 				// once layer is inactive, landmark will also be inactive, so remove it
 				[allLandmarks removeObjectForKey: landmark.ID];
+				[validatedLandmarks removeObject:landmark];
 			}
 		}		
 		
@@ -158,22 +160,15 @@ static GNLayerManager *sharedManager = nil;
 
 - (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks {
 	for (GNLandmark *landmark in landmarks) {
-		if (![closestLandmarks containsObject:landmark]) {
-			[closestLandmarks addObject:landmark];
+		if (![validatedLandmarks containsObject:landmark]) {
+			[validatedLandmarks addObject:landmark];
 		}
 	}
-	
-	[closestLandmarks sortUsingSelector:@selector(compareTo:)];
-	
-	///////////////////////////////////// TODO: Also need to cap to maxDistance
-	closestLandmarks = [[closestLandmarks objectsAtIndexes:
-						[NSIndexSet indexSetWithIndexesInRange:
-						 NSMakeRange(0, MIN([self maxLandmarks], [closestLandmarks count]))]] mutableCopy];	
-	
+		
 	// Send a notification that the landmarks list has been updated.
 	[[NSNotificationCenter defaultCenter] postNotificationName:GNLandmarksUpdated
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:closestLandmarks,@"landmarks",nil]];
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.closestLandmarks,@"landmarks",nil]];
 }
 
 - (void)updateEditableLandmarksForLocation:(CLLocation *)location {
@@ -195,6 +190,16 @@ static GNLayerManager *sharedManager = nil;
 	[[NSNotificationCenter defaultCenter] postNotificationName:GNEditableLandmarksUpdated
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:userEditableLandmarks,@"landmarks",nil]];
+}
+
+- (NSArray *)closestLandmarks {
+	[validatedLandmarks sortUsingSelector:@selector(compareTo:)];
+	
+	///////////////////////////////////// TODO: Also need to cap to maxDistance
+	NSArray *closest = [validatedLandmarks objectsAtIndexes:
+						 [NSIndexSet indexSetWithIndexesInRange:
+						  NSMakeRange(0, MIN([self maxLandmarks], [validatedLandmarks count]))]];	
+	return closest;
 }
 
 - (NSString *)description {

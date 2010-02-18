@@ -48,9 +48,6 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		NSLog(@"updateToCenterLocation: was called on %s, which is inavtive", [self name]);
 		return;
 	}
-	
-	NSLog(@"called update to center location on %@", self.name);
-	
 	center = [location retain];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[self URLForLocation:location limitToValidated:YES]];
 	[request setDelegate:self];
