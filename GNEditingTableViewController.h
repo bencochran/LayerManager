@@ -18,12 +18,10 @@
 	CLLocation *selectedLocation;
 	GNLandmark *selectedLandmark;
 	UIImagePickerController *photoController;
-	UIButton *takePhotoButton;
 	UIView *buttonContainer;
 	UIImage *photo;
 	UIImageView *photoView;
 	NSURL *imageURL;
-	NSDictionary *infoDictionary;
 }
 
 - (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark;
