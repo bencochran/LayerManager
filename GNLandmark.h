@@ -26,7 +26,7 @@
 
 @property (nonatomic, copy) NSString *ID;
 @property (nonatomic, copy) NSString* name;
-@property (nonatomic, retain) NSString* subtitle;
+@property (nonatomic, readonly) NSString* subtitle;
 @property (nonatomic) float distance;
 @property (nonatomic, retain) NSMutableArray* activeLayers;
 

@@ -13,7 +13,7 @@
 NSString *const GNLandmarksUpdated = @"GNLandmarksUpdated";
 NSString *const GNEditableLandmarksUpdated = @"GNEditableLandmarksUpdated";
 
-@synthesize maxLandmarks, userEditableLandmarks, closestLandmarks;
+@synthesize maxLandmarks, userEditableLandmarks;
 
 static GNLayerManager *sharedManager = nil;
 

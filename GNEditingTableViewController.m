@@ -85,10 +85,7 @@
 	photoView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,80,80)];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request{
-	// Use when fetching text data
-	NSString *responseString = [request responseString];
-	
+- (void)requestFinished:(ASIHTTPRequest *)request{	
 	// Use when fetching binary data
 	NSData *responseData = [request responseData];
 	photo = [[UIImage imageWithData:responseData] retain];
@@ -99,7 +96,7 @@
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request{
-	NSError *error = [request error];
+//	NSError *error = [request error];
 }
 
 -(IBAction) takePhoto:(id) sender {
