@@ -59,9 +59,6 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 }
 
 - (void)didFinishUpdateRequest:(ASIHTTPRequest *)request {
-	NSLog(@"called didFinishUpdateRequest on %@", self.name);
-	NSLog(@"request data %s", [request responseString]);
-
 	if (self.active) {
 		NSArray *landmarks = [self parseDataIntoLandmarks:[request responseData]];
 		[self ingestLandmarks:landmarks];
@@ -87,7 +84,8 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
 }
 
-- (void)requestEditableLandmarksForLocation:(CLLocation *)location {	
+- (void)updateEditableLandmarksForLocation:(CLLocation *)location {
+	NSLog(@"updateEditableLandmarksForLocation on layer %@", self);
 	center = [location retain];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[self URLForLocation:location limitToValidated:NO]];
 	[request setDelegate:self];
@@ -97,7 +95,6 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 
 - (void)didFinishEditableLandmarksRequest:(ASIHTTPRequest *)request {
 	NSArray *landmarks = [self parseDataIntoLandmarks:[request responseData]];
-	
 	[[GNLayerManager sharedManager] layer:self didUpdateEditableLandmarks:landmarks];
 }
 

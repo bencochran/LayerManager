@@ -17,6 +17,7 @@ extern NSString *const GNEditableLandmarksUpdated;
 	NSMutableArray *layers;
 	// allLandmarks: key = landmark ID, value = GNLandmark
 	NSMutableDictionary *allLandmarks;
+	NSMutableArray *closestLandmarks;
 	NSMutableArray *userEditableLandmarks;
 	// The hard-coded maximum number of landmarks to retreive
 	int maxLandmarks;
@@ -27,6 +28,7 @@ extern NSString *const GNEditableLandmarksUpdated;
 @property (readonly, nonatomic) NSArray *layers;
 @property (readonly) int maxLandmarks;
 @property (readonly, nonatomic) NSArray *userEditableLandmarks;
+@property (readonly, nonatomic) NSArray *closestLandmarks;
 
 + (GNLayerManager *)sharedManager;
 
@@ -40,7 +42,10 @@ extern NSString *const GNEditableLandmarksUpdated;
 - (void)updateToCenterLocation:(CLLocation *)location;
 - (void)updateWithPreviousLocation;
 - (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks;
+
+- (void)updateEditableLandmarksForLocation:(CLLocation *)location;
 - (void)layer:(GNLayer *)layer didUpdateEditableLandmarks:(NSArray *)landmarks;
+
 - (NSArray *)closestLandmarks;
 
 @end
