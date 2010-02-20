@@ -31,17 +31,15 @@
 	return self;
 }
 
-- (NSURL *)URLForLocation:(CLLocation *)location {	
+- (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {
 	// http://dev.gnar.us/getInfo.py/DiningAreas?lat=44.46055309703&lon=-93.1566672394&maxLandmarks=2
+	// TODO: add limitToValidated stuff
 	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/Food?lat=%f&lon=%f&maxLandmarks=%d",
 						   [location coordinate].latitude, [location coordinate].longitude, [[GNLayerManager sharedManager] maxLandmarks]];
 	return [NSURL URLWithString:urlString];
 }
 
-- (void)ingestNewData:(NSData *)data {
-	[self removeSelfFromLandmarks];
-	[layerInfoByLandmarkID removeAllObjects];
-	
+- (NSArray *)parseDataIntoLandmarks:(NSData *) data {
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSArray *layerInfoList = [parser objectWithString:reply error:nil];
@@ -51,6 +49,7 @@
 	// load the distance and landmark info
 	NSMutableDictionary *layerInfo;
 	GNLandmark *landmark;
+	NSMutableArray *landmarks = [NSMutableArray array];
 	
 	for (NSDictionary *landmarkAndLayerInfo in layerInfoList)
 	{
@@ -67,21 +66,12 @@
 													  altitude:center.altitude];
 		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
 		
-		
-		NSLog(@"Food, added landmark: %@", landmark);
-		NSLog(@"Food, added landmark info: %@", layerInfo);
-		
-		if (self.active) {
-			[landmark addActiveLayer:self];
-		}
-		
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
-		[self.landmarks addObject:landmark];
 		[layerInfo release];
+		[landmarks addObject:landmark];
 	}
 	
-	[self.landmarks sortUsingSelector:@selector(compareTo:)];
-	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
+	return landmarks;
 }
 
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{

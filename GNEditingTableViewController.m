@@ -19,18 +19,16 @@
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		fields = [newFields retain];
 		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count])];
-		selectedLandmark = landmark;
-		selectedLayer = layer;
-		selectedLocation = location;
-		if (selectedLandmark && [selectedLandmark.activeLayers containsObject:layer]) {
-			NSLog(@"Hello World!");
+		selectedLandmark = [landmark retain];
+		selectedLayer = [layer retain];
+		if (selectedLandmark && [layer.landmarks containsObject:selectedLandmark]) {
 			NSDictionary *fieldDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
 			for (int i = 0; i < ([fields count]); i++) {
 				NSLog(@"Fields (key = %@): %@", [[fields objectAtIndex:i] objectAtIndex:0],
 												[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]);
 				[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
 			}
-			imageURL = [NSURL URLWithString:[fieldDictionary objectForKey:@"imageURL"]];
+			imageURL = [[NSURL URLWithString:[fieldDictionary objectForKey:@"imageURL"]] retain];
 		}
 		else {
 			for (int i = 0; i < ([fields count]); i++) {
@@ -38,6 +36,7 @@
 			}
 			imageURL = nil;
 		}
+		selectedLocation = [location retain];
 		NSLog(@"Number of elements in user input: %d",[userInput count]);
 	}
 	return self;
@@ -67,10 +66,11 @@
 	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(postToServer:)];
 	self.navigationItem.rightBarButtonItem = doneButton;
 	self.navigationItem.rightBarButtonItem.enabled = NO;
+	[doneButton release];
 	buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
 	NSLog(@"Photo: %@",photo);
 	if (photo == nil){
-		takePhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		UIButton *takePhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[takePhotoButton setTitle:@"Photo" forState:UIControlStateNormal];
 		takePhotoButton.frame = CGRectMake(10,10,80,80);
 		takePhotoButton.alpha = 0.8;
@@ -80,16 +80,14 @@
 	if (imageURL){
 		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:imageURL];
 		[request setDelegate:self];
+		[request setDidFinishSelector:@selector(setDidFinishSelector:)];
 		[request startAsynchronous];
 	}
 	self.tableView.tableHeaderView = buttonContainer;
 	photoView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,80,80)];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request{
-	// Use when fetching text data
-	NSString *responseString = [request responseString];
-	
+- (void)setDidFinishSelector:(ASIHTTPRequest *)request{	
 	// Use when fetching binary data
 	NSData *responseData = [request responseData];
 	photo = [[UIImage imageWithData:responseData] retain];
@@ -100,7 +98,7 @@
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request{
-	NSError *error = [request error];
+//	NSError *error = [request error];
 }
 
 -(IBAction) takePhoto:(id) sender {
@@ -286,6 +284,16 @@
 
 
 - (void)dealloc {
+	[fields release];
+	[userInput release];
+	[selectedLayer release];
+	[selectedLocation release];
+	[selectedLandmark release];
+	[buttonContainer release];
+	[photo release];
+	[photoView release];
+	[imageURL release];
+	
     [super dealloc];
 }
 

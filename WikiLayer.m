@@ -20,7 +20,7 @@
 	return self;
 }
 
-- (NSURL *)URLForLocation:(CLLocation *)location {
+- (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {
 	NSString *query = [NSString stringWithFormat:@"PREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>\n"
 												  "PREFIX p:<http://dbpedia.org/property/>\n"
 												  "SELECT ?s ?name ?lat ?long WHERE{\n"
@@ -50,10 +50,7 @@
 	return [NSURL URLWithString:urlString];
 }
 
-- (void)ingestNewData:(NSData *)data {
-	[self removeSelfFromLandmarks];
-	[layerInfoByLandmarkID removeAllObjects];
-	
+- (NSArray *)parseDataIntoLandmarks:(NSData *)data {	
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSDictionary *layerInfoList = [parser objectWithString:reply error:nil];
@@ -67,6 +64,7 @@
 	NSString *landmarkName;
 	CLLocationDegrees landmarkLon;
 	CLLocationDegrees landmarkLat;
+	NSMutableArray *landmarks = [NSMutableArray array];
 	
 	for (NSDictionary *landmarkAndLayerInfo in [[layerInfoList objectForKey:@"results"] objectForKey:@"bindings"])
 	{
@@ -91,21 +89,17 @@
 													  latitude:landmarkLat
 													 longitude:landmarkLon
 													  altitude:center.altitude];
-		if (self.active) {
-			[landmark addActiveLayer:self];
-		}
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 		
 		// calculate distance
 		landmark.distance = [landmark getDistanceFrom:center];
-		[self.landmarks addObject:landmark];
 		
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 		[layerInfo release]; layerInfo = nil;
+		[landmarks addObject:landmark];
 	}
 	
-	[self.landmarks sortUsingSelector:@selector(compareTo:)];
-	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
+	return landmarks;
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request{

@@ -13,7 +13,7 @@
 
 -(id)initWithFieldArray:(NSArray *)newFieldArray andInput:(NSString *)input{
 	if (self = [super init]) {
-		fieldArray = newFieldArray;
+		fieldArray = [newFieldArray retain];
 		savedInput = input;
 		NSLog(@"Field name for info input: %@",[fieldArray objectAtIndex:0]);
 	}
@@ -27,6 +27,7 @@
 	self.navigationItem.rightBarButtonItem = saveButton;
 	[saveButton release];
 	self.title = [fieldArray objectAtIndex:0];
+
 	if([fieldArray objectAtIndex:1] == @"textView"){
 		textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 100)];
 		textView.delegate = self;
@@ -87,6 +88,7 @@
 
 
 - (void)dealloc {
+	[fieldArray release];
     [super dealloc];
 }
 

@@ -11,14 +11,15 @@
 @implementation GNLayerManager
 
 NSString *const GNLandmarksUpdated = @"GNLandmarksUpdated";
+NSString *const GNEditableLandmarksUpdated = @"GNEditableLandmarksUpdated";
 
-@synthesize maxLandmarks;
+@synthesize maxLandmarks, userEditableLandmarks;
 
 static GNLayerManager *sharedManager = nil;
 
 + (GNLayerManager*)sharedManager {
 	if (sharedManager == nil) {
-		sharedManager = [[super allocWithZone:NULL] init];
+		sharedManager = [[super allocWithZone:nil] init];
 	}
 	return sharedManager;
 }
@@ -58,6 +59,8 @@ static GNLayerManager *sharedManager = nil;
 	if (self = [super init]) {
 		layers = [[NSMutableArray alloc] init];
 		allLandmarks = [[NSMutableDictionary alloc] init];
+		userEditableLandmarks = [[NSMutableArray alloc] init];
+		validatedLandmarks = [[NSMutableArray alloc] init];
 		maxLandmarks = 10;
 	}
 	return self;
@@ -95,6 +98,7 @@ static GNLayerManager *sharedManager = nil;
 				// the given layer is the only remaining active layer for this landmark:
 				// once layer is inactive, landmark will also be inactive, so remove it
 				[allLandmarks removeObjectForKey: landmark.ID];
+				[validatedLandmarks removeObject:landmark];
 			}
 		}		
 		
@@ -115,7 +119,7 @@ static GNLayerManager *sharedManager = nil;
 	if(landmark == nil)
 	{
 		landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude];
-		[allLandmarks setObject:landmark forKey:landmarkID];
+		[allLandmarks setObject:landmark forKey:landmark.ID];
 	}
 	return landmark;
 }
@@ -127,7 +131,7 @@ static GNLayerManager *sharedManager = nil;
 	if(landmark == nil)
 	{
 		landmark = [GNLandmark landmarkWithID:landmarkID name:landmarkName latitude:latitude longitude:longitude altitude:altitude];
-		[allLandmarks setObject:landmark forKey:landmarkID];
+		[allLandmarks setObject:landmark forKey:landmark.ID];
 	}
 	return landmark;
 }
@@ -154,31 +158,68 @@ static GNLayerManager *sharedManager = nil;
 	}
 }
 
-- (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks {	
+- (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks {
+	for (GNLandmark *landmark in landmarks) {
+		if (![validatedLandmarks containsObject:landmark]) {
+			[validatedLandmarks addObject:landmark];
+		}
+	}
+		
 	// Send a notification that the landmarks list has been updated.
 	[[NSNotificationCenter defaultCenter] postNotificationName:GNLandmarksUpdated
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.closestLandmarks,@"landmarks",nil]];
 }
 
-- (NSArray *)closestLandmarks {
-	NSMutableArray* activeLandmarks = [NSMutableArray array];
-	
-	for (GNLandmark *landmark in [allLandmarks allValues]) {
-		if (landmark.activeLayers.count > 0) {
-			[activeLandmarks addObject:landmark];
+- (void)updateEditableLandmarksForLocation:(CLLocation *)location {
+	for (GNLayer *layer in layers) {
+		if([layer layerIsUserModifiable]) {
+			[layer updateEditableLandmarksForLocation:location];
+		}
+	}
+}
+
+- (void)layer:(GNLayer *)layer didUpdateEditableLandmarks:(NSArray *)landmarks {
+	for (GNLandmark *landmark in landmarks) {
+		if (![userEditableLandmarks containsObject:landmark]) {
+			[userEditableLandmarks addObject:landmark];
 		}
 	}
 	
-	[activeLandmarks sortUsingSelector:@selector(compareTo:)];
+	// Send a notification that  has been updated.
+	[[NSNotificationCenter defaultCenter] postNotificationName:GNEditableLandmarksUpdated
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:userEditableLandmarks,@"landmarks",nil]];
+}
+
+- (NSArray *)layersForLandmark:(GNLandmark *)landmark {
+	NSMutableArray *layersForLandmark = [NSMutableArray array];
+	for (GNLayer *layer in self.layers) {
+		if ([layer.landmarks containsObject:landmark]) {
+			[layersForLandmark addObject:layer];
+		}
+	}
+	return layersForLandmark;
+}
+
+- (NSArray *)activeLayersForLandmark:(GNLandmark *)landmark {
+	NSMutableArray *layersForLandmark = [NSMutableArray array];
+	for (GNLayer *layer in self.layers) {
+		if (layer.active && [layer.landmarks containsObject:landmark]) {
+			[layersForLandmark addObject:layer];
+		}
+	}
+	return layersForLandmark;
+}
+
+
+- (NSArray *)closestLandmarks {
+	[validatedLandmarks sortUsingSelector:@selector(compareTo:)];
 	
-	///////////////////////////////////// Also need to cap to maxDistance
-	NSArray* closest = [activeLandmarks objectsAtIndexes:
+	///////////////////////////////////// TODO: Also need to cap to maxDistance
+	NSArray *closest = [validatedLandmarks objectsAtIndexes:
 						 [NSIndexSet indexSetWithIndexesInRange:
-						  NSMakeRange(0, MIN([self maxLandmarks], [activeLandmarks count]))]];
-	
-	NSLog(@"closest: %@", closest);
-	
+						  NSMakeRange(0, MIN([self maxLandmarks], [validatedLandmarks count]))]];	
 	return closest;
 }
 
@@ -189,6 +230,7 @@ static GNLayerManager *sharedManager = nil;
 -(void)dealloc {
 	[layers release];
 	[allLandmarks release];
+	[userEditableLandmarks release];
 	[super dealloc];
 }
 

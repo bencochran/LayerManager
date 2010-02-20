@@ -15,22 +15,24 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
-@class GNLayer;
+@class GNLayer, GNLayerManager;
 
 @interface GNLandmark : CLLocation <MKAnnotation> {
 	NSString *_id;
-	NSString* _name;
+	NSString *_name;
 	float _distance;
 	NSMutableArray* _activeLayers;
 }
 
 @property (nonatomic, copy) NSString *ID;
 @property (nonatomic, copy) NSString* name;
+@property (nonatomic, readonly) NSString* subtitle;
 @property (nonatomic) float distance;
 @property (nonatomic, retain) NSMutableArray* activeLayers;
 
 // To comply with the MKAnnotation interface
 @property (nonatomic, readonly) NSString *title;
+////////// TODO: Add subtitle for MKAnnotation to make it prettier
 
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;

@@ -52,6 +52,7 @@ extern NSString *const GNLayerUpdateFailed;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) BOOL active;
 @property (nonatomic, retain) NSMutableArray *landmarks;
+@property (readonly) BOOL layerIsUserModifiable;
 
 - (UIImage *) getIcon;
 - (void)removeSelfFromLandmarks;
@@ -61,9 +62,13 @@ extern NSString *const GNLayerUpdateFailed;
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo;
 - (UIViewController *)getEditingViewControllerWithLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark;
 
+- (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated;
+- (NSArray *)parseDataIntoLandmarks:(NSData *)data;
+
 - (void)updateToCenterLocation:(CLLocation *)location;
-- (NSURL *)URLForLocation:(CLLocation *)location;
-- (void)ingestNewData:(NSData *)data;
+- (void)ingestLandmarks:(NSArray *)landmarks;
+
+- (void)updateEditableLandmarksForLocation:(CLLocation *)location;
 
 - (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark;
 

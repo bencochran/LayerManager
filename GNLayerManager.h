@@ -11,19 +11,24 @@
 #import "GNLandmark.h"
 
 extern NSString *const GNLandmarksUpdated;
+extern NSString *const GNEditableLandmarksUpdated;
 
 @interface GNLayerManager : NSObject {
 	NSMutableArray *layers;
 	// allLandmarks: key = landmark ID, value = GNLandmark
 	NSMutableDictionary *allLandmarks;
+	NSMutableArray *validatedLandmarks;
+	NSMutableArray *userEditableLandmarks;
 	// The hard-coded maximum number of landmarks to retreive
 	int maxLandmarks;
 	// The most recent center location
 	CLLocation *center;
 }
 
-@property (readonly) NSArray *layers;
+@property (readonly, nonatomic) NSArray *layers;
 @property (readonly) int maxLandmarks;
+@property (readonly, nonatomic) NSArray *userEditableLandmarks;
+@property (readonly, nonatomic) NSArray *closestLandmarks;
 
 + (GNLayerManager *)sharedManager;
 
@@ -37,6 +42,13 @@ extern NSString *const GNLandmarksUpdated;
 - (void)updateToCenterLocation:(CLLocation *)location;
 - (void)updateWithPreviousLocation;
 - (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks;
+
+- (void)updateEditableLandmarksForLocation:(CLLocation *)location;
+- (void)layer:(GNLayer *)layer didUpdateEditableLandmarks:(NSArray *)landmarks;
+
+- (NSArray *)layersForLandmark:(GNLandmark *)landmark;
+- (NSArray *)activeLayersForLandmark:(GNLandmark *)landmark;
+
 - (NSArray *)closestLandmarks;
 
 @end
