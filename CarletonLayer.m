@@ -30,9 +30,9 @@
 }
 
 - (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {	
-	// http://dev.gnar.us/getInfo.py/CarletonBuildings?lat=44.46055309703&lon=-93.1566672394&maxLandmarks=2
+	// http://dev.gnar.us/getInfo.py/Carleton?lat=44.46055309703;lon=-93.1566672394;maxLandmarks=2
 	///////////////////////// TODO: limitToValidated
-	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/CarletonBuildings?lat=%f&lon=%f&maxLandmarks=%d",
+	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/Carleton?lat=%f;lon=%f;maxLandmarks=%d",
 						   [location coordinate].latitude, [location coordinate].longitude, [[GNLayerManager sharedManager] maxLandmarks]];
 	return [NSURL URLWithString:urlString];
 }
