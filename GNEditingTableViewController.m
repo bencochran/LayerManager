@@ -21,6 +21,7 @@
 		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count])];
 		selectedLandmark = landmark;
 		selectedLayer = layer;
+		selectedLocation = location;
 		if (selectedLandmark && [selectedLandmark.activeLayers containsObject:layer]) {
 			NSLog(@"Hello World!");
 			NSDictionary *fieldDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
@@ -37,7 +38,6 @@
 			}
 			imageURL = nil;
 		}
-		selectedLocation = location;
 		NSLog(@"Number of elements in user input: %d",[userInput count]);
 	}
 	return self;

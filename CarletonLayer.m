@@ -107,7 +107,6 @@
 	CarletonViewController *viewController = [[CarletonViewController alloc] init];
 	viewController.buildingName = landmark.name;
 	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
-	
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
 	
 	if (urlString != nil) {
@@ -119,14 +118,14 @@
 	NSLog(@"layer info: %@", [layerInfoByLandmarkID objectForKey:landmark.ID]);
 	NSLog(@"urlString: %@", urlString);
 	
+	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(getEditingViewControllerWithLocation: andLandmark:)];
+	[viewController.navigationItem setRightBarButtonItem:editButton animated:YES];
 	return [viewController autorelease];
 }
 
 - (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark {
 	NSDictionary *layerInfo = [layerInfoByLandmarkID objectForKey:landmark.ID];
 	NSMutableDictionary *landmarkFieldInfo = [[NSMutableDictionary alloc] init];
-	///////////// WHAT SHOULD WE DO ABOUT EXISTING IMAGE???????????????????????
-	
 	[landmarkFieldInfo setObject:landmark.name forKey:@"Name"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"yearBuilt"] forKey:@"Year Built"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"summary"] forKey:@"Summary"];
