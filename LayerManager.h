@@ -9,3 +9,4 @@
 #import "TweetLayer.h"
 #import "FoodLayer.h"
 #import "WikiLayer.h"
+#import "FlickrLayer.h"
