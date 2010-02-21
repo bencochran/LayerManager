@@ -87,6 +87,8 @@
 	[request setPostValue:[info objectAtIndex:3] forKey:@"description"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
+	[request setPostValue:landmarkID forKey:@"landmarkID"];
+	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
 	[request setData:photoData forKey:@"image"];
 	[request startAsynchronous];
 }

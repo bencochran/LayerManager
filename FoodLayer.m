@@ -90,6 +90,8 @@
 	[request setPostValue:[info objectAtIndex:4] forKey:@"menu"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
+	[request setPostValue:landmarkID forKey:@"landmarkID"];
+	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
 	[request setData:photoData forKey:@"foodImage"];
 	request.delegate = self;
 	[request startAsynchronous];

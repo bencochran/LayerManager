@@ -52,7 +52,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 					 layerName,
 					 [[UIDevice currentDevice] uniqueIdentifier], 
 					 [location coordinate].latitude, 
-					 [location coordinate].longitude, 
+					 [location coordinate].longitude,
 					 [[GNLayerManager sharedManager] maxLandmarks]];
 	}
 	else {

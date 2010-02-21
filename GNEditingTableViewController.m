@@ -138,7 +138,13 @@
 	//GNLayer *layer = [layersViewController getSelectedLayer];
 	//UIViewController *mapViewController = [self.navigationController.viewControllers objectAtIndex:1];
 	//CLLocation *location = [mapViewController getSelectedLocation];
-	[selectedLayer postLandmarkArray:userInput withLocation:selectedLocation andPhoto:photo];
+	if (selectedLandmark) {
+		// The substringFromIndex:7 parameter strips off the "gnarus:" in the beginning of landmarkID's for the gnarus server.
+		[selectedLayer postLandmarkArray:userInput withID:[selectedLandmark.ID substringFromIndex:7] withLocation:selectedLocation andPhoto:photo];
+	}
+	else {
+		[selectedLayer postLandmarkArray:userInput withID:@"0" withLocation:selectedLocation andPhoto:photo];
+	}
 	[self.navigationController popToRootViewControllerAnimated:YES];
 
 }

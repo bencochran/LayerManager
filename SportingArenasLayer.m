@@ -84,7 +84,7 @@
 	return landmarks;
 }
 
-- (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{
+- (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{
 	NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
 	NSURL *url = [NSURL URLWithString:@"http://dev.gnar.us/post.py/sportingarenas"];
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -95,6 +95,8 @@
 	[request setPostValue:[info objectAtIndex:3] forKey:@"scheduleURL"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
+	[request setPostValue:landmarkID forKey:@"landmarkID"];
+	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
 	[request setData:photoData forKey:@"sportingArenasImage"];
 	request.delegate = self;
 	[request startAsynchronous];
