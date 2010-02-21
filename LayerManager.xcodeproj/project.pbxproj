@@ -72,6 +72,11 @@
 		FC6F419A1130795E00036392 /* libObjectiveFlickr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6F41991130793C00036392 /* libObjectiveFlickr.a */; };
 		FC6F41AA113079F500036392 /* FlickrLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FC6F41A8113079F500036392 /* FlickrLayer.h */; };
 		FC6F41AB113079F500036392 /* FlickrLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6F41A9113079F500036392 /* FlickrLayer.m */; };
+		FC6F43811131EBBF00036392 /* ObjectiveFlickr.h in Headers */ = {isa = PBXBuildFile; fileRef = FC6F437C1131EBBF00036392 /* ObjectiveFlickr.h */; };
+		FC6F43821131EBBF00036392 /* ObjectiveFlickr.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6F437D1131EBBF00036392 /* ObjectiveFlickr.m */; };
+		FC6F43831131EBBF00036392 /* OFUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = FC6F437E1131EBBF00036392 /* OFUtilities.h */; };
+		FC6F43841131EBBF00036392 /* OFXMLMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC6F437F1131EBBF00036392 /* OFXMLMapper.h */; };
+		FC6F43851131EBBF00036392 /* OFXMLMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6F43801131EBBF00036392 /* OFXMLMapper.m */; };
 		FC9694DB11224C8C00218696 /* WikiLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FC9694D911224C8C00218696 /* WikiLayer.h */; };
 		FC9694DC11224C8C00218696 /* WikiLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9694DA11224C8C00218696 /* WikiLayer.m */; };
 		FCBF977F111A46A00071F029 /* GNInfoInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */; };
@@ -201,6 +206,11 @@
 		FC6F41A8113079F500036392 /* FlickrLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrLayer.h; sourceTree = "<group>"; };
 		FC6F41A9113079F500036392 /* FlickrLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrLayer.m; sourceTree = "<group>"; };
 		FC6F4300113103AF00036392 /* FoodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodView.xib; sourceTree = "<group>"; };
+		FC6F437C1131EBBF00036392 /* ObjectiveFlickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveFlickr.h; sourceTree = "<group>"; };
+		FC6F437D1131EBBF00036392 /* ObjectiveFlickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectiveFlickr.m; sourceTree = "<group>"; };
+		FC6F437E1131EBBF00036392 /* OFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFUtilities.h; sourceTree = "<group>"; };
+		FC6F437F1131EBBF00036392 /* OFXMLMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFXMLMapper.h; sourceTree = "<group>"; };
+		FC6F43801131EBBF00036392 /* OFXMLMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OFXMLMapper.m; sourceTree = "<group>"; };
 		FC9694D911224C8C00218696 /* WikiLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiLayer.h; sourceTree = "<group>"; };
 		FC9694DA11224C8C00218696 /* WikiLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiLayer.m; sourceTree = "<group>"; };
 		FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNInfoInputViewController.h; sourceTree = "<group>"; };
@@ -254,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				FC6F418D1130793C00036392 /* ObjectiveFlickr.xcodeproj */,
+				FC6F437B1131EBBF00036392 /* ObjectiveFlickr */,
 				FC242BA8111F49D8003AFB03 /* ASIHTTPRequest */,
 				B8CB2E91110D8B2400BED463 /* GHUnit */,
 				A251AE8710F523650041E1D7 /* Tests */,
@@ -415,6 +426,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		FC6F437B1131EBBF00036392 /* ObjectiveFlickr */ = {
+			isa = PBXGroup;
+			children = (
+				FC6F437C1131EBBF00036392 /* ObjectiveFlickr.h */,
+				FC6F437D1131EBBF00036392 /* ObjectiveFlickr.m */,
+				FC6F437E1131EBBF00036392 /* OFUtilities.h */,
+				FC6F437F1131EBBF00036392 /* OFXMLMapper.h */,
+				FC6F43801131EBBF00036392 /* OFXMLMapper.m */,
+			);
+			name = ObjectiveFlickr;
+			path = objectiveflickr/Source;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -450,6 +474,9 @@
 				FC9694DB11224C8C00218696 /* WikiLayer.h in Headers */,
 				FC6F41AA113079F500036392 /* FlickrLayer.h in Headers */,
 				A26D1BEE1130B2F8008EBEFF /* SportingArenasLayer.h in Headers */,
+				FC6F43811131EBBF00036392 /* ObjectiveFlickr.h in Headers */,
+				FC6F43831131EBBF00036392 /* OFUtilities.h in Headers */,
+				FC6F43841131EBBF00036392 /* OFXMLMapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,6 +635,8 @@
 				FC9694DC11224C8C00218696 /* WikiLayer.m in Sources */,
 				FC6F41AB113079F500036392 /* FlickrLayer.m in Sources */,
 				A26D1BEF1130B2F8008EBEFF /* SportingArenasLayer.m in Sources */,
+				FC6F43821131EBBF00036392 /* ObjectiveFlickr.m in Sources */,
+				FC6F43851131EBBF00036392 /* OFXMLMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
