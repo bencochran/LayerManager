@@ -32,11 +32,20 @@
 - (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {
 	// http://dev.gnar.us/getInfo.py/SportingArenas?udid=3&lat=44.46055309703&lon=-93.1566672394&maxLandmarks=2
 	// TODO: add limitToValidated stuff
-	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/SportingArenas?udid=%@&lat=%f&lon=%f&maxLandmarks=%d", 
+	NSString *urlString = nil;
+	if (limitToValidated == YES) {
+		urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/SportingArenas?udid=%@&lat=%f&lon=%f&maxLandmarks=%d",
 						   [[UIDevice currentDevice] uniqueIdentifier], 
 						   [location coordinate].latitude, 
 						   [location coordinate].longitude, 
 						   [[GNLayerManager sharedManager] maxLandmarks]];
+	}
+	else {
+		urlString = [NSString stringWithFormat:@"http://dev.gnar.us/Vote.py/AddingToSportingArenas?lat=%f&lon=%f&maxDistance=%f",
+						   [location coordinate].latitude, 
+						   [location coordinate].longitude, 
+						   [[GNLayerManager sharedManager] maxDistance]];
+	}
 	return [NSURL URLWithString:urlString];
 }
 

@@ -3,7 +3,7 @@
 //  LayerManager
 //
 //  Created by Jake Kring on 2/20/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Gnarus. All rights reserved.
 //
 
 #import "FlickrLayer.h"
