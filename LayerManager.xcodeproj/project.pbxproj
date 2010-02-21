@@ -200,6 +200,7 @@
 		FC6F418D1130793C00036392 /* ObjectiveFlickr.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveFlickr.xcodeproj; path = objectiveflickr/ObjectiveFlickr.xcodeproj; sourceTree = "<group>"; };
 		FC6F41A8113079F500036392 /* FlickrLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrLayer.h; sourceTree = "<group>"; };
 		FC6F41A9113079F500036392 /* FlickrLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrLayer.m; sourceTree = "<group>"; };
+		FC6F4300113103AF00036392 /* FoodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodView.xib; sourceTree = "<group>"; };
 		FC9694D911224C8C00218696 /* WikiLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiLayer.h; sourceTree = "<group>"; };
 		FC9694DA11224C8C00218696 /* WikiLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiLayer.m; sourceTree = "<group>"; };
 		FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNInfoInputViewController.h; sourceTree = "<group>"; };
@@ -356,6 +357,7 @@
 				A26D1C2B1130B813008EBEFF /* sports.png */,
 				A2D2085E110E62C100C99513 /* GNEditingTable.xib */,
 				B8AD59211106B89900D2E6A0 /* CarletonView.xib */,
+				FC6F4300113103AF00036392 /* FoodView.xib */,
 				A25B5893111A272200C63840 /* academic.png */,
 				A25B5894111A272200C63840 /* bird.png */,
 				A25B5895111A272200C63840 /* food.png */,

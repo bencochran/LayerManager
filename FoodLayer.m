@@ -139,3 +139,122 @@
 }
 
 @end
+
+//////////
+
+@implementation FoodViewController
+
+@synthesize imageURL=_imageURL, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu;
+
+- (id)init {
+	if (self = [super initWithNibName:@"FoodView" bundle:nil]) {
+		
+	}
+	return self;
+}
+
+- (void)setImageURL:(NSURL *)url {
+	_imageURL = [url retain];
+	
+	NSURLRequest *theRequest=[NSURLRequest requestWithURL:url
+											  cachePolicy:NSURLRequestUseProtocolCachePolicy
+										  timeoutInterval:60.0];
+	// create the connection with the request
+	// and start loading the data
+	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+	if (theConnection) {
+		// Create the NSMutableData that will hold the received data
+		// receivedData is declared as a method instance elsewhere
+		receivedData=[[NSMutableData data] retain];
+	} else {
+		// inform the user that the download could not be made
+	}
+	
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    // this method is called when the server has determined that it
+    // has enough information to create the NSURLResponse
+	
+    // it can be called multiple times, for example in the case of a
+    // redirect, so each time we reset the data.
+    // receivedData is declared as a method instance elsewhere
+    [receivedData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    // append the new data to the receivedData
+    // receivedData is declared as a method instance elsewhere
+    [receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    // release the connection, and the data object
+    [connection release];
+    // receivedData is declared as a method instance elsewhere
+    [receivedData release];
+	
+    // inform the user
+    NSLog(@"Connection failed! Error - %@ %@",
+          [error localizedDescription],
+          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+	UIImage *image = [UIImage imageWithData:receivedData];
+	imageView.image = image;
+	
+    // release the connection, and the data object
+    [connection release];
+    [receivedData release];
+}
+
+
+/*
+ // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+ if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	nameLabel.text = self.name;
+	if (self.description != nil) {
+		descriptionView.text = self.description;
+	}
+}
+
+/*
+ // Override to allow orientations other than the default portrait orientation.
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ // Return YES for supported orientations
+ return (interfaceOrientation == UIInterfaceOrientationPortrait);
+ }
+ */
+
+- (void)didReceiveMemoryWarning {
+	// Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc that aren't in use.
+}
+
+- (void)viewDidUnload {
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+}
+
+- (void)dealloc {
+    [super dealloc];
+}
+
+@end
