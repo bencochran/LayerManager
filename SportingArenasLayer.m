@@ -47,7 +47,7 @@
 						   [[GNLayerManager sharedManager] maxDistance]];
 	}
 	return [NSURL URLWithString:urlString];*/
-	return [self URLForLocation:location limitToValidated:limitToValidated withLayerName:@"Food"];
+	return [self URLForLocation:location limitToValidated:limitToValidated withLayerName:@"SportingArenas"];
 }
 
 - (NSArray *)parseDataIntoLandmarks:(NSData *) data {
@@ -65,7 +65,7 @@
 	for (NSDictionary *landmarkAndLayerInfo in layerInfoList)
 	{
 		layerInfo = [[NSMutableDictionary alloc] init];
-		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summaryString"] forKey:@"summaryString"];
+		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"usedBy"] forKey:@"usedBy"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"scheduleURL"] forKey:@"scheduleURL"];
 		
@@ -90,7 +90,7 @@
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
 	NSLog(@"Info: %@", info);
 	[request setPostValue:[info objectAtIndex:0] forKey:@"name"];
-	[request setPostValue:[info objectAtIndex:1] forKey:@"summaryString"];
+	[request setPostValue:[info objectAtIndex:1] forKey:@"summary"];
 	[request setPostValue:[info objectAtIndex:2] forKey:@"usedBy"];
 	[request setPostValue:[info objectAtIndex:3] forKey:@"scheduleURL"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];

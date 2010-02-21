@@ -110,7 +110,7 @@
 							<object class="IBUITextView" id="200129945">
 								<reference key="NSNextResponder" ref="711279410"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{138, 42}, {177, 75}}</string>
+								<string key="NSFrame">{{150, 42}, {177, 75}}</string>
 								<reference key="NSSuperview" ref="711279410"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -261,14 +261,14 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="424182206"/>
-							<reference ref="151572262"/>
 							<reference ref="1014800134"/>
 							<reference ref="434176902"/>
-							<reference ref="746719792"/>
 							<reference ref="100882297"/>
 							<reference ref="285169766"/>
 							<reference ref="1017139742"/>
+							<reference ref="151572262"/>
 							<reference ref="200129945"/>
+							<reference ref="746719792"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -394,7 +394,15 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">objectiveflickr/Source/ObjectiveFlickr.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">UIImageView</string>
+					<string key="superclassName">UIView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
@@ -402,6 +410,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UITextView</string>
+					<string key="superclassName">UIScrollView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
