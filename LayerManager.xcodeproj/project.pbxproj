@@ -26,6 +26,8 @@
 		A215FFB810B24F2800774314 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A215FFAB10B24F2800774314 /* SBJsonWriter.m */; };
 		A251B08C10F53CB10041E1D7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8BC147E109EBBB8000701DF /* CoreLocation.framework */; };
 		A251B08D10F53CB30041E1D7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8BC147E109EBBB8000701DF /* CoreLocation.framework */; };
+		A26D1BEE1130B2F8008EBEFF /* SportingArenasLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A26D1BEC1130B2F8008EBEFF /* SportingArenasLayer.h */; };
+		A26D1BEF1130B2F8008EBEFF /* SportingArenasLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A26D1BED1130B2F8008EBEFF /* SportingArenasLayer.m */; };
 		A2D2085F110E62C100C99513 /* GNEditingTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */; };
 		A2D20860110E62C100C99513 /* GNEditingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */; };
 		AA747D9F0F9514B9006C5449 /* LayerManager_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */; };
@@ -151,6 +153,9 @@
 		A25B5893111A272200C63840 /* academic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = academic.png; sourceTree = "<group>"; };
 		A25B5894111A272200C63840 /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bird.png; sourceTree = "<group>"; };
 		A25B5895111A272200C63840 /* food.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food.png; sourceTree = "<group>"; };
+		A26D1BEC1130B2F8008EBEFF /* SportingArenasLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SportingArenasLayer.h; sourceTree = "<group>"; };
+		A26D1BED1130B2F8008EBEFF /* SportingArenasLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SportingArenasLayer.m; sourceTree = "<group>"; };
+		A26D1C2B1130B813008EBEFF /* sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sports.png; sourceTree = "<group>"; };
 		A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNEditingTableViewController.h; sourceTree = "<group>"; };
 		A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNEditingTableViewController.m; sourceTree = "<group>"; };
 		A2D2085E110E62C100C99513 /* GNEditingTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GNEditingTable.xib; sourceTree = "<group>"; };
@@ -302,6 +307,8 @@
 				B88D771810CF6110003A76A1 /* TweetLayer.m */,
 				FC6F41A8113079F500036392 /* FlickrLayer.h */,
 				FC6F41A9113079F500036392 /* FlickrLayer.m */,
+				A26D1BEC1130B2F8008EBEFF /* SportingArenasLayer.h */,
+				A26D1BED1130B2F8008EBEFF /* SportingArenasLayer.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -346,6 +353,7 @@
 		B8AD59261106B8B800D2E6A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A26D1C2B1130B813008EBEFF /* sports.png */,
 				A2D2085E110E62C100C99513 /* GNEditingTable.xib */,
 				B8AD59211106B89900D2E6A0 /* CarletonView.xib */,
 				A25B5893111A272200C63840 /* academic.png */,
@@ -439,6 +447,7 @@
 				FC242C44111F4D35003AFB03 /* ASIInputStream.h in Headers */,
 				FC9694DB11224C8C00218696 /* WikiLayer.h in Headers */,
 				FC6F41AA113079F500036392 /* FlickrLayer.h in Headers */,
+				A26D1BEE1130B2F8008EBEFF /* SportingArenasLayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +605,7 @@
 				FC242C45111F4D35003AFB03 /* ASIInputStream.m in Sources */,
 				FC9694DC11224C8C00218696 /* WikiLayer.m in Sources */,
 				FC6F41AB113079F500036392 /* FlickrLayer.m in Sources */,
+				A26D1BEF1130B2F8008EBEFF /* SportingArenasLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

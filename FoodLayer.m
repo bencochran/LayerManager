@@ -18,7 +18,7 @@
 		userModifiable = YES;
 		NSArray *nameField = [[NSMutableArray alloc] initWithObjects:@"Name", @"textField", nil];
 		NSArray *hoursField = [[NSMutableArray alloc] initWithObjects:@"Hours", @"textView", nil];
-		NSArray* summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"textField", nil];
+		NSArray *summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"textField", nil];
 		NSArray *descriptionField = [[NSMutableArray alloc] initWithObjects:@"Description", @"textView", nil];
 		NSArray *menuField = [[NSMutableArray alloc] initWithObjects:@"Menu", @"textView", nil];
 		layerFields = [[NSArray alloc] initWithObjects:nameField, hoursField, summaryField, descriptionField, menuField, nil];
@@ -32,10 +32,13 @@
 }
 
 - (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {
-	// http://dev.gnar.us/getInfo.py/DiningAreas?lat=44.46055309703&lon=-93.1566672394&maxLandmarks=2
+	// http://dev.gnar.us/getInfo.py/Food?lat=44.46055309703&lon=-93.1566672394&maxLandmarks=2
 	// TODO: add limitToValidated stuff
-	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/Food?lat=%f&lon=%f&maxLandmarks=%d",
-						   [location coordinate].latitude, [location coordinate].longitude, [[GNLayerManager sharedManager] maxLandmarks]];
+	NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/Food?udid=%@&lat=%f&lon=%f&maxLandmarks=%d", 
+						   [[UIDevice currentDevice] uniqueIdentifier], 
+						   [location coordinate].latitude, 
+						   [location coordinate].longitude, 
+						   [[GNLayerManager sharedManager] maxLandmarks]];
 	return [NSURL URLWithString:urlString];
 }
 
