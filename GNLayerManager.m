@@ -13,7 +13,7 @@
 NSString *const GNLandmarksUpdated = @"GNLandmarksUpdated";
 NSString *const GNEditableLandmarksUpdated = @"GNEditableLandmarksUpdated";
 
-@synthesize maxLandmarks, userEditableLandmarks;
+@synthesize maxLandmarks, maxDistance, userEditableLandmarks;
 
 static GNLayerManager *sharedManager = nil;
 
@@ -62,6 +62,7 @@ static GNLayerManager *sharedManager = nil;
 		userEditableLandmarks = [[NSMutableArray alloc] init];
 		validatedLandmarks = [[NSMutableArray alloc] init];
 		maxLandmarks = 10;
+		maxDistance = 100;
 	}
 	return self;
 }

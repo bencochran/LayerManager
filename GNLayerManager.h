@@ -21,12 +21,15 @@ extern NSString *const GNEditableLandmarksUpdated;
 	NSMutableArray *userEditableLandmarks;
 	// The hard-coded maximum number of landmarks to retreive
 	int maxLandmarks;
+	// The hard-coded maximum radius in which to retrieve unvalidated landmarks
+	float maxDistance;
 	// The most recent center location
 	CLLocation *center;
 }
 
 @property (readonly, nonatomic) NSArray *layers;
 @property (readonly) int maxLandmarks;
+@property (readonly) float maxDistance;
 @property (readonly, nonatomic) NSArray *userEditableLandmarks;
 @property (readonly, nonatomic) NSArray *closestLandmarks;
 
