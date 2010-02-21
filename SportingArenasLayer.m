@@ -13,7 +13,7 @@
 
 -(id)init {
 	if (self = [super init]) {
-		self.name = @"SportingArenas";
+		self.name = @"Sports";
 		iconPath = @"sports.png";
 		userModifiable = YES;
 		NSArray *nameField = [[NSMutableArray alloc] initWithObjects:@"Name", @"textField", nil];

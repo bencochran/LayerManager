@@ -10,3 +10,4 @@
 #import "FoodLayer.h"
 #import "WikiLayer.h"
 #import "FlickrLayer.h"
+#import "SportingArenasLayer.h"
