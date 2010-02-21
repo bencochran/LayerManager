@@ -32,7 +32,7 @@
 - (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {
 	// http://dev.gnar.us/getInfo.py/SportingArenas?udid=3&lat=44.46055309703&lon=-93.1566672394&maxLandmarks=2
 	// TODO: add limitToValidated stuff
-	NSString *urlString = nil;
+	/*NSString *urlString = nil;
 	if (limitToValidated == YES) {
 		urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/SportingArenas?udid=%@&lat=%f&lon=%f&maxLandmarks=%d",
 						   [[UIDevice currentDevice] uniqueIdentifier], 
@@ -46,7 +46,8 @@
 						   [location coordinate].longitude, 
 						   [[GNLayerManager sharedManager] maxDistance]];
 	}
-	return [NSURL URLWithString:urlString];
+	return [NSURL URLWithString:urlString];*/
+	return [self URLForLocation:location limitToValidated:limitToValidated withLayerName:@"Food"];
 }
 
 - (NSArray *)parseDataIntoLandmarks:(NSData *) data {

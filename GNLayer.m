@@ -34,12 +34,35 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	return [UIImage imageNamed:iconPath];
 }
 
-// Compile a NSURL that will be used to request new data.
+// Compile an NSURL that will be used to request new data.
 // limitToValidated is YES when we're using the resulting
 // landmarks to allow a user to add new landmarks
 - (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
+}
+
+// Returns an NSURL when given the name of the Layer.
+// Subclasses will implement URLForLocation simply by calling URLForLocation withLayerName
+// FOR USE ONLY BY LAYERS USING THE GNARUS SERVER.
+- (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated withLayerName:(NSString *)layerName {
+	NSString *urlString = nil;
+	if (limitToValidated == YES) {
+		urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/%@?udid=%@&lat=%f&lon=%f&maxLandmarks=%d",
+					 layerName,
+					 [[UIDevice currentDevice] uniqueIdentifier], 
+					 [location coordinate].latitude, 
+					 [location coordinate].longitude, 
+					 [[GNLayerManager sharedManager] maxLandmarks]];
+	}
+	else {
+		urlString = [NSString stringWithFormat:@"http://dev.gnar.us/Vote.py/AddingTo%@?lat=%f&lon=%f&maxDistance=%f",
+					 layerName,
+					 [location coordinate].latitude, 
+					 [location coordinate].longitude, 
+					 [[GNLayerManager sharedManager] maxDistance]];
+	}
+	return [NSURL URLWithString:urlString];
 }
 
 - (void)updateToCenterLocation:(CLLocation *)location {

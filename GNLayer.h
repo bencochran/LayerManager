@@ -63,6 +63,7 @@ extern NSString *const GNLayerUpdateFailed;
 - (UIViewController *)getEditingViewControllerWithLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark;
 
 - (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated;
+- (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated withLayerName:(NSString *)layerName;
 - (NSArray *)parseDataIntoLandmarks:(NSData *)data;
 
 - (void)updateToCenterLocation:(CLLocation *)location;
