@@ -38,7 +38,8 @@
 					[imageURL release];
 					imageURL = nil;
 				}
-			}
+			}		
+			NSLog(@"Field Dictionary: %@", fieldDictionary);
 		}
 		else {
 			if (selectedLandmark){
@@ -236,8 +237,11 @@
 	//}
 	//else {
 	NSString *fieldName = [[[fields objectAtIndex:(indexPath.section)]objectAtIndex:0] stringByAppendingString:@": "];
+	NSLog(@"Is it right here?");
 	NSString *inputFields = [userInput objectAtIndex:(indexPath.section)];
+	NSLog(@"Or maybe here...");
 	cell.textLabel.text = [fieldName stringByAppendingString: inputFields];
+	NSLog(@"Or else here");
     //}
 	//[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 	
