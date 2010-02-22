@@ -70,11 +70,17 @@
 		NSLog(@"Image URL: %@",imageURL);
 		NSLog(@"Thumbnail ULR: %@",thumbnailURL);
 		
+		[layerInfo setObject:photoID forKey:@"photoID"];
+		[layerInfo setObject:photoOwner forKey:@"photoOwner"];
+		[layerInfo setObject:imageURL forKey:@"imageURL"];
+		[layerInfo setObject:thumbnailURL forKey:@"thumbnailURL"];	
+		
 		landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"flickr:%@", photoID]
 														  name:landmarkName
 													  latitude:landmarkLat
 													 longitude:landmarkLon
 													  altitude:center.altitude];
+		
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 		
 		// calculate distance
@@ -93,6 +99,7 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	FlickrViewController *viewController = [[FlickrViewController alloc] init];
+	[viewController setImageURL:[[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"]];
 	return viewController;
 }
 
