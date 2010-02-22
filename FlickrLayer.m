@@ -8,7 +8,6 @@
 
 #import "FlickrLayer.h"
 
-
 @implementation FlickrLayer 
 
 -(id)init {
@@ -30,7 +29,13 @@
 	center = [location retain];
 	OFFlickrAPIRequest *request = [[OFFlickrAPIRequest alloc] initWithAPIContext:context];
 	[request setDelegate:self];
-	[request callAPIMethodWithGET:@"flickr.photos.geo.photosForLocation" arguments:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",location.coordinate.latitude], @"lat",[NSString stringWithFormat:@"%f",location.coordinate.longitude], @"lon", nil]];
+	[request callAPIMethodWithGET:@"flickr.photos.search" arguments:[NSDictionary dictionaryWithObjectsAndKeys:
+																	 [NSString stringWithFormat:@"%d",location.coordinate.latitude], @"lat",
+																	 [NSString stringWithFormat:@"%f",location.coordinate.longitude], @"lon", 
+																	 @"1", @"has_geo", 
+																	 @"2", @"radius", 
+																	 @"1234567890" ,@"min_upload_date",
+																	 nil]];
 	}
 
 - (NSArray *)parseDataIntoLandmarks:(NSData *)data {	
@@ -47,7 +52,7 @@
 	//NSString *landmarkName;
 	//CLLocationDegrees landmarkLon;
 	//CLLocationDegrees landmarkLat;
-	//NSMutableArray *landmarks = [NSMutableArray array];
+	NSMutableArray *landmarks = [NSMutableArray array];
 	
 	//for (NSDictionary *landmarkAndLayerInfo in [[layerInfoList objectForKey:@"results"] objectForKey:@"bindings"])
 	//{
@@ -82,15 +87,16 @@
 	//	[landmarks addObject:landmark];
 	//}
 	
-	//return landmarks;
+	return landmarks;
 }
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary{
 	NSLog(@"request succeeded");
-		NSLog(@"photo ID,%@", [inResponseDictionary objectForKey:@"photo id"]);
+	NSLog(@"photo ID,%@", [inResponseDictionary objectForKey:@"photo id"]);
 }
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError{
-	NSLog(@"some sort of error occured: %d", [inError code]);
+		NSLog(@"Error: %i",[inError code]);
 	}	
+
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest imageUploadSentBytes:(NSUInteger)inSentBytes totalBytes:(NSUInteger)inTotalBytes{
 	}
 	
@@ -100,15 +106,7 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	UIViewController *viewController = [[UIViewController alloc] init];
-	UIWebView *webView = [[UIWebView alloc] init];
-	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"wikiURL"];
-	
-	[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
-	
-	viewController.title = self.name;
-	viewController.view = webView;
-	
-	[webView release];
+	//Just show the photo.
 	
 	return [viewController autorelease];	
 }
