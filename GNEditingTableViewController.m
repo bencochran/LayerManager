@@ -29,6 +29,10 @@
 				[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
 			}
 			imageURL = [[NSURL URLWithString:[fieldDictionary objectForKey:@"imageURL"]] retain];
+			if ([imageURL class] == [NSNull class]) {
+				[imageURL release];
+				imageURL = nil;
+			}
 		}
 		else {
 			for (int i = 0; i < ([fields count]); i++) {
@@ -80,14 +84,14 @@
 	if (imageURL){
 		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:imageURL];
 		[request setDelegate:self];
-		[request setDidFinishSelector:@selector(setDidFinishSelector:)];
+		[request setDidFinishSelector:@selector(setDidFinishPhotoRequest:)];
 		[request startAsynchronous];
 	}
 	self.tableView.tableHeaderView = buttonContainer;
 	photoView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,80,80)];
 }
 
-- (void)setDidFinishSelector:(ASIHTTPRequest *)request{	
+- (void)setDidFinishPhotoRequest:(ASIHTTPRequest *)request{	
 	// Use when fetching binary data
 	NSData *responseData = [request responseData];
 	photo = [[UIImage imageWithData:responseData] retain];

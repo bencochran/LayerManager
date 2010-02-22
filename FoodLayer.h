@@ -30,6 +30,9 @@
 	NSString *_summary;
 	NSString *_hours;
 	NSString *_menu;
+	GNLayer *_layer;
+	GNLandmark *_landmark;
+	
 }
 
 @property (nonatomic, retain) NSURL *imageURL;
@@ -38,5 +41,7 @@
 @property (nonatomic, copy) NSString *hours;
 @property (nonatomic, copy) NSString *summary;
 @property (nonatomic, copy) NSString *menu;
+@property (nonatomic, retain) GNLayer *layer;
+@property (nonatomic, retain) GNLandmark *landmark;
 
 @end

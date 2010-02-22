@@ -62,6 +62,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 					 [location coordinate].longitude, 
 					 [[GNLayerManager sharedManager] maxDistance]];
 	}
+	NSLog(@"url: %@", urlString);
 	return [NSURL URLWithString:urlString];
 }
 
@@ -115,6 +116,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 
 - (void)didFinishEditableLandmarksRequest:(ASIHTTPRequest *)request {
 	NSArray *landmarks = [self parseDataIntoLandmarks:[request responseData]];
+	NSLog(@"got this response: %@", [request responseString]);
 	[[GNLayerManager sharedManager] layer:self didUpdateEditableLandmarks:landmarks];
 }
 

@@ -160,6 +160,10 @@ static GNLayerManager *sharedManager = nil;
 }
 
 - (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks {
+	
+	NSLog(@"got these active landmarks: %@ from layer: %@", landmarks, layer);
+	NSLog(@"already had these active landmarks: %@", userEditableLandmarks);
+
 	for (GNLandmark *landmark in landmarks) {
 		if (![validatedLandmarks containsObject:landmark]) {
 			[validatedLandmarks addObject:landmark];
@@ -181,6 +185,8 @@ static GNLayerManager *sharedManager = nil;
 }
 
 - (void)layer:(GNLayer *)layer didUpdateEditableLandmarks:(NSArray *)landmarks {
+	NSLog(@"got these editable landmarks: %@ from layer: %@", landmarks, layer);
+	NSLog(@"already had these editable landmarks: %@", userEditableLandmarks);
 	for (GNLandmark *landmark in landmarks) {
 		if (![userEditableLandmarks containsObject:landmark]) {
 			[userEditableLandmarks addObject:landmark];

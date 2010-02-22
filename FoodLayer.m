@@ -116,7 +116,14 @@
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
-	UIViewController *viewController = [[UIViewController alloc] init];
+	FoodViewController *viewController = [[FoodViewController alloc] init];
+	viewController.name = landmark.name;
+	viewController.layer = self;
+	viewController.landmark = landmark;
+	viewController.summary = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
+	viewController.hours = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"];
+	viewController.menu = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menu"];
+	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
 //	UIWebView *webView = [[UIWebView alloc] init];
 //	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
 //
@@ -125,20 +132,22 @@
 //	viewController.title = self.name;
 //	viewController.view = webView;
 //	[webView release];
-	
 	return [viewController autorelease];
 }
 
 - (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark {
-	NSMutableDictionary *landmarkInfo = [[NSMutableDictionary alloc] init];
-	NSLog(@"fieldInformationForLandmark, entire dictionary: %@", layerInfoByLandmarkID);
-	NSLog(@"fieldInformationForLandmark, hours value: %@", [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"]);
-	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"] forKey:@"Hours"];
-	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"] forKey:@"Summary"];
-	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"] forKey:@"Description"];
-	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menu"] forKey:@"Menu"];
-	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"name"] forKey:@"Name"];	
-	return [landmarkInfo autorelease];
+	NSDictionary *layerInfo = [layerInfoByLandmarkID objectForKey:landmark.ID];
+	NSMutableDictionary *landmarkFieldInfo = [[NSMutableDictionary alloc] init];
+	[landmarkFieldInfo setObject:landmark.name forKey:@"Name"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"menu"] forKey:@"Menu"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"summary"] forKey:@"Summary"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"description"] forKey:@"Description"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"hours"] forKey:@"Hours"];
+	
+	NSLog(@"fieldInformationForLandmark, landmarkFieldInfo: %@", landmarkFieldInfo);
+	
+	return [landmarkFieldInfo autorelease];
 }
 
 @end
@@ -147,7 +156,7 @@
 
 @implementation FoodViewController
 
-@synthesize imageURL=_imageURL, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu;
+@synthesize imageURL=_imageURL, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"FoodView" bundle:nil]) {
@@ -234,6 +243,27 @@
 	if (self.description != nil) {
 		descriptionView.text = self.description;
 	}
+	else {
+		descriptionView.text = @"Click edit to add a Description";
+	}
+	if (self.hours != nil) {
+		hoursView.text = self.hours;
+	}
+	else {
+		descriptionView.text = @"Click edit to add Hours";
+	}
+	if (self.summary != nil) {
+		summaryView.text = self.summary;
+	}
+	else {
+		summaryView.text = @"Click edit to add a Summary";
+	}
+	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton:)];
+	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
+}
+
+-(void)didSelectEditButton{
+	[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark];	
 }
 
 /*

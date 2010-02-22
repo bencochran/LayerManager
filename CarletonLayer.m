@@ -99,8 +99,10 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	CarletonViewController *viewController = [[CarletonViewController alloc] init];
-	viewController.buildingName = landmark.name;
-	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
+	viewController.buildingNameLabel.text = landmark.name;
+	viewController.descriptionView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
+	viewController.layer = self;
+	viewController.landmark = landmark;
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
 	
 	if (urlString != nil) {
@@ -112,8 +114,6 @@
 	NSLog(@"layer info: %@", [layerInfoByLandmarkID objectForKey:landmark.ID]);
 	NSLog(@"urlString: %@", urlString);
 	
-	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(getEditingViewControllerWithLocation: andLandmark:)];
-	[viewController.navigationItem setRightBarButtonItem:editButton animated:YES];
 	return [viewController autorelease];
 }
 
@@ -137,7 +137,7 @@
 
 @implementation CarletonViewController
 
-@synthesize imageURL=_imageURL, buildingName=_buildingName, description=_description;
+@synthesize imageURL=_imageURL, buildingNameLabel=_buildingNameLabel, descriptionView=_descriptionView, landmark=_landmark, layer=_layer;
 
 - (id)init {
 	if (self = [super initWithNibName:@"CarletonView" bundle:nil]) {
@@ -217,29 +217,17 @@
  }
  */
 
-- (void)setBuildingName:(NSString *)name {
-	if (_buildingName != nil) [_buildingName release];
-	_buildingName = [name copy];
-	buildingNameLabel.text = _buildingName;
-}
 
-- (void)description:(NSString *)description {
-	if (_description != nil) [_description release];
-	_description = [description copy];
-	if (_description != nil) {
-		descriptionView.text = _description;
-	} else {
-		descriptionView.text = @"I'll assume this building is great."; 
-	}
-}
 
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	buildingNameLabel.text = self.buildingName;
-	if (self.description != nil) {
-		descriptionView.text = self.description;
-	}
+	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self.layer action:@selector(didSelectEditButton:)];
+	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
+}
+
+- (void)didSelectEditButton{
+	[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark];
 }
 
 /*
