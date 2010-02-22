@@ -217,6 +217,7 @@
 		FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNInfoInputViewController.m; sourceTree = "<group>"; };
 		FCE3BA2510F900AC003BE4A2 /* FoodLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodLayer.h; sourceTree = "<group>"; };
 		FCE3BA2610F900AC003BE4A2 /* FoodLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodLayer.m; sourceTree = "<group>"; };
+		FCF17FB0113331560042866E /* FlickrView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlickrView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +299,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FCF17FB0113331560042866E /* FlickrView.xib */,
 				FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */,
 				FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */,
 				A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */,
