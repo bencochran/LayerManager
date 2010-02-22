@@ -69,7 +69,7 @@
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"usedBy"] forKey:@"usedBy"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"scheduleURL"] forKey:@"scheduleURL"];
 		
-		landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"gnarus:%@", [landmarkAndLayerInfo objectForKey:@"ID"]]
+		landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"gnarus:%@", [landmarkAndLayerInfo objectForKey:@"id"]]
 														  name:[landmarkAndLayerInfo objectForKey:@"name"]
 													  latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]

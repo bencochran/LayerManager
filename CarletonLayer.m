@@ -61,12 +61,12 @@
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"yearBuilt"] forKey:@"yearBuilt"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
 		
-		landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"gnarus:%@",[landmarkAndLayerInfo objectForKey:@"ID"]]
+		landmark = [[GNLayerManager sharedManager] getLandmark:[NSString stringWithFormat:@"gnarus:%@",[landmarkAndLayerInfo objectForKey:@"id"]]
 														  name:[landmarkAndLayerInfo objectForKey:@"name"]
 													  latitude:[[landmarkAndLayerInfo objectForKey:@"latitude"] floatValue]
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
-  		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
+		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
 				
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 		[self.landmarks addObject:landmark];
