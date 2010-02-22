@@ -99,8 +99,8 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	CarletonViewController *viewController = [[CarletonViewController alloc] init];
-	viewController.buildingNameLabel.text = landmark.name;
-	viewController.descriptionView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
+	viewController.buildingName = landmark.name;
+	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
 	viewController.layer = self;
 	viewController.landmark = landmark;
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
@@ -110,7 +110,6 @@
 	}
 	
 	NSLog(@"landmark: %@", landmark);
-	NSLog(@"all layer info: %@", layerInfoByLandmarkID);
 	NSLog(@"layer info: %@", [layerInfoByLandmarkID objectForKey:landmark.ID]);
 	NSLog(@"urlString: %@", urlString);
 	
@@ -137,11 +136,10 @@
 
 @implementation CarletonViewController
 
-@synthesize imageURL=_imageURL, buildingNameLabel=_buildingNameLabel, descriptionView=_descriptionView, landmark=_landmark, layer=_layer;
+@synthesize imageURL=_imageURL, buildingName=_buildingName, buildingNameLabel=_buildingNameLabel, descriptionView=_descriptionView, description=_description, landmark=_landmark, layer=_layer;
 
 - (id)init {
 	if (self = [super initWithNibName:@"CarletonView" bundle:nil]) {
-		
 	}
 	return self;
 }
@@ -222,8 +220,10 @@
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self.layer action:@selector(didSelectEditButton:)];
-	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
+	self.descriptionView.text = self.description;
+	self.buildingNameLabel.text = self.buildingName;
+	//UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self.layer action:@selector(didSelectEditButton)];
+	//[self.navigationItem setRightBarButtonItem:editButton animated:YES];
 }
 
 - (void)didSelectEditButton{
