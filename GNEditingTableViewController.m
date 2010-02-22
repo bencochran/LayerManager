@@ -22,6 +22,7 @@
 		selectedLandmark = [landmark retain];
 		selectedLayer = [layer retain];
 		if (selectedLandmark && [layer.landmarks containsObject:selectedLandmark]) {
+			previouslyExisted = YES;
 			NSDictionary *fieldDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
 			for (int i = 0; i < ([fields count]); i++) {
 				NSLog(@"Fields (key = %@): %@", [[fields objectAtIndex:i] objectAtIndex:0],
@@ -35,7 +36,14 @@
 			}
 		}
 		else {
-			for (int i = 0; i < ([fields count]); i++) {
+			if (selectedLandmark){
+				[userInput insertObject:selectedLandmark.name atIndex:0];
+				previouslyExisted = YES;
+			}
+			else{
+				[userInput insertObject:@"" atIndex:0];
+			}
+			for (int i = 1; i < ([fields count]); i++) {
 				[userInput insertObject:@"" atIndex:i];
 			}
 			imageURL = nil;
@@ -48,7 +56,7 @@
 
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index{
 	[userInput replaceObjectAtIndex:index withObject:input];
-	if (index == 0) {
+	if (index == 0 || previouslyExisted) {
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 	}
 }
@@ -153,6 +161,7 @@
 
 }
 
+
 /*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -230,6 +239,15 @@
     return cell;
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (previouslyExisted && indexPath.section == 0){
+        return nil;
+    }
+	return indexPath;
+    
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
@@ -244,9 +262,11 @@
 	//}
 	//else {
 	currentField = indexPath.section;
-	UIViewController *infoInputViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section)] 
+	if (!(previouslyExisted && currentField == 0)){
+		UIViewController *infoInputViewController =[[[GNInfoInputViewController alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section)] 
 																							 andInput:[userInput objectAtIndex:indexPath.section]] autorelease];
-	[self.navigationController pushViewController:infoInputViewController animated:YES];
+		[self.navigationController pushViewController:infoInputViewController animated:YES];
+	}
 	//}
 	//UIViewController *editingViewController = [layer getEditingViewController];
 	//[self.navigationController pushViewController:editingViewController animated:YES];

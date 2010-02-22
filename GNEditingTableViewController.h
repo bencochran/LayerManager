@@ -17,6 +17,7 @@
 	GNLayer *selectedLayer;
 	CLLocation *selectedLocation;
 	GNLandmark *selectedLandmark;
+	BOOL previouslyExisted;
 	UIImagePickerController *photoController;
 	UIView *buttonContainer;
 	UIImage *photo;

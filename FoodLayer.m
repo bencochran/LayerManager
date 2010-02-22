@@ -69,7 +69,6 @@
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
 		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
-		
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 		[layerInfo release];
 		[landmarks addObject:landmark];
@@ -92,7 +91,7 @@
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
 	[request setPostValue:landmarkID forKey:@"landmarkID"];
 	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
-	[request setData:photoData forKey:@"foodImage"];
+	[request setData:photoData forKey:@"image"];
 	request.delegate = self;
 	[request startAsynchronous];
 }
