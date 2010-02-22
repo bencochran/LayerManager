@@ -263,7 +263,7 @@
 }
 
 -(void)didSelectEditButton{
-	[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark];	
+	[self.navigationController pushViewController:[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark] animated:YES];	
 }
 
 /*
