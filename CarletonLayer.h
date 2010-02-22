@@ -18,9 +18,9 @@
 
 @interface CarletonViewController : UIViewController {
 	IBOutlet UILabel *_buildingNameLabel;
-	IBOutlet UIImageView *imageView;
 	IBOutlet UITextView *_descriptionView;
 	NSMutableData *receivedData;
+	IBOutlet UIImageView *imageView;
 	NSURL *_imageURL;
 	GNLayer *_layer;
 	GNLandmark *_landmark;

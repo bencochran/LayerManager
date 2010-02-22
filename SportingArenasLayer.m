@@ -121,7 +121,13 @@
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
-	UIViewController *viewController = [[UIViewController alloc] init];
+	SportingArenasViewController *viewController = [[SportingArenasViewController alloc] init];
+	viewController.nameLabel.text = landmark.name;
+	viewController.layer = self;
+	viewController.landmark = landmark;
+	viewController.summaryView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
+	viewController.usedByView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"usedBy"];
+	viewController.scheduleURLView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"scheduleURL"];
 	//	UIWebView *webView = [[UIWebView alloc] init];
 	//	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
 	//
@@ -135,15 +141,135 @@
 }
 
 - (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark {
-	NSMutableDictionary *landmarkInfo = [[NSMutableDictionary alloc] init];
-	NSLog(@"fieldInformationForLandmark, entire dictionary: %@", layerInfoByLandmarkID);
-	NSLog(@"fieldInformationForLandmark, hours value: %@", [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"]);
-	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"] forKey:@"Hours"];
-	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"] forKey:@"Summary"];
-	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"] forKey:@"Description"];
-	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menu"] forKey:@"Menu"];
-	//[landmarkInfo setObject:[(NSDictionary*)[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"name"] forKey:@"Name"];	
-	return [landmarkInfo autorelease];
+	NSDictionary *layerInfo = [layerInfoByLandmarkID objectForKey:landmark.ID];
+	NSMutableDictionary *landmarkFieldInfo = [[NSMutableDictionary alloc] init];
+	[landmarkFieldInfo setObject:landmark.name forKey:@"Name"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"summary"] forKey:@"Summary"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"usedBy"] forKey:@"Used By"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"scheduleURL"] forKey:@"Schedule"];	
+	return [landmarkFieldInfo autorelease];
+}
+
+@end
+
+//////////
+
+@implementation SportingArenasViewController
+
+@synthesize imageURL=_imageURL, nameLabel=_nameLabel, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, layer=_layer, landmark=_landmark;
+
+- (id)init {
+	if (self = [super initWithNibName:@"SportingArenasView" bundle:nil]) {
+		
+	}
+	return self;
+}
+
+- (void)setImageURL:(NSURL *)url {
+	_imageURL = [url retain];
+	
+	NSURLRequest *theRequest=[NSURLRequest requestWithURL:url
+											  cachePolicy:NSURLRequestUseProtocolCachePolicy
+										  timeoutInterval:60.0];
+	// create the connection with the request
+	// and start loading the data
+	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+	if (theConnection) {
+		// Create the NSMutableData that will hold the received data
+		// receivedData is declared as a method instance elsewhere
+		receivedData=[[NSMutableData data] retain];
+	} else {
+		// inform the user that the download could not be made
+	}
+	
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    // this method is called when the server has determined that it
+    // has enough information to create the NSURLResponse
+	
+    // it can be called multiple times, for example in the case of a
+    // redirect, so each time we reset the data.
+    // receivedData is declared as a method instance elsewhere
+    [receivedData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    // append the new data to the receivedData
+    // receivedData is declared as a method instance elsewhere
+    [receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    // release the connection, and the data object
+    [connection release];
+    // receivedData is declared as a method instance elsewhere
+    [receivedData release];
+	
+    // inform the user
+    NSLog(@"Connection failed! Error - %@ %@",
+          [error localizedDescription],
+          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+	UIImage *image = [UIImage imageWithData:receivedData];
+	imageView.image = image;
+	
+    // release the connection, and the data object
+    [connection release];
+    [receivedData release];
+}
+
+
+/*
+ // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+ if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton:)];
+	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
+}
+
+-(void)didSelectEditButton{
+	[self.navigationController pushViewController:[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark] animated:YES];	
+}
+
+/*
+ // Override to allow orientations other than the default portrait orientation.
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ // Return YES for supported orientations
+ return (interfaceOrientation == UIInterfaceOrientationPortrait);
+ }
+ */
+
+- (void)didReceiveMemoryWarning {
+	// Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc that aren't in use.
+}
+
+- (void)viewDidUnload {
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+}
+
+- (void)dealloc {
+    [super dealloc];
 }
 
 @end

@@ -17,30 +17,25 @@
 ///////
 
 @interface FoodViewController : UIViewController {
-	IBOutlet UILabel *nameLabel;
+	IBOutlet UILabel *_nameLabel;
 	IBOutlet UIImageView *imageView;
-	IBOutlet UITextView *descriptionView;
-	IBOutlet UITextView *summaryView;
-	IBOutlet UITextView *menuView;
-	IBOutlet UITextView *hoursView;
+	IBOutlet UITextView *_descriptionView;
+	IBOutlet UITextView *_summaryView;
+	IBOutlet UITextView *_menuView;
+	IBOutlet UITextView *_hoursView;
 	NSMutableData *receivedData;
 	NSURL *_imageURL;
-	NSString *_name;
-	NSString *_description;
-	NSString *_summary;
-	NSString *_hours;
-	NSString *_menu;
 	GNLayer *_layer;
 	GNLandmark *_landmark;
 	
 }
 
 @property (nonatomic, retain) NSURL *imageURL;
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *description;
-@property (nonatomic, copy) NSString *hours;
-@property (nonatomic, copy) NSString *summary;
-@property (nonatomic, copy) NSString *menu;
+@property (nonatomic, retain) UILabel *nameLabel;
+@property (nonatomic, retain) UITextView *descriptionView;
+@property (nonatomic, retain) UITextView *hoursView;
+@property (nonatomic, retain) UITextView *summaryView;
+@property (nonatomic, retain) UITextView *menuView;
 @property (nonatomic, retain) GNLayer *layer;
 @property (nonatomic, retain) GNLandmark *landmark;
 
