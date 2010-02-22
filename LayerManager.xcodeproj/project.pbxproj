@@ -299,7 +299,6 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FCF17FB0113331560042866E /* FlickrView.xib */,
 				FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */,
 				FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */,
 				A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */,
@@ -368,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				A26D1C2B1130B813008EBEFF /* sports.png */,
+				FCF17FB0113331560042866E /* FlickrView.xib */,
 				A2D2085E110E62C100C99513 /* GNEditingTable.xib */,
 				B8AD59211106B89900D2E6A0 /* CarletonView.xib */,
 				FC6F4300113103AF00036392 /* FoodView.xib */,
