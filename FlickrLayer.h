@@ -8,10 +8,26 @@
 
 #import <Foundation/Foundation.h>
 #import "GNLayer.h"
-#import "ObjectiveFlickr.h"
+#import "JSON.h"
 
-@interface FlickrLayer : GNLayer <OFFlickrAPIRequestDelegate> {
-	OFFlickrAPIContext *context;
+@interface FlickrLayer : GNLayer {
 }
+
+@end
+
+/////
+
+@interface FlickrViewController : UIViewController {
+	IBOutlet UIImageView *imageView;
+	NSURL *_imageURL;
+	NSMutableData *receivedData;
+	GNLayer *_layer;
+	GNLandmark *_landmark;
+}
+
+@property (nonatomic, retain) NSURL *imageURL;
+@property (nonatomic, retain) GNLayer *layer;
+@property (nonatomic, retain) GNLandmark *landmark;
+
 
 @end
