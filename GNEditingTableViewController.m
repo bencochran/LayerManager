@@ -29,10 +29,15 @@
 												[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]);
 				[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
 			}
-			imageURL = [[NSURL URLWithString:[fieldDictionary objectForKey:@"imageURL"]] retain];
-			if ([imageURL class] == [NSNull class]) {
-				[imageURL release];
+			if ([[fieldDictionary objectForKey:@"imageURL"] class] == [NSNull class]) {
 				imageURL = nil;
+			}
+			else {
+				imageURL = [[NSURL URLWithString:[fieldDictionary objectForKey:@"imageURL"]] retain];
+				if ([imageURL class] == [NSNull class]) {
+					[imageURL release];
+					imageURL = nil;
+				}
 			}
 		}
 		else {
