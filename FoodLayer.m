@@ -59,6 +59,8 @@
 	{
 		layerInfo = [[NSMutableDictionary alloc] init];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"menu"] forKey:@"menu"];
+		NSLog(@"landmark and layer info: %@", landmarkAndLayerInfo);
+		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"hours"] forKey:@"hours"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"description"] forKey:@"description"];
@@ -116,13 +118,18 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	FoodViewController *viewController = [[FoodViewController alloc] init];
-	viewController.nameLabel.text = landmark.name;
+	viewController.title = landmark.name;
 	viewController.layer = self;
 	viewController.landmark = landmark;
 	viewController.summary = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
 	viewController.hours = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"];
 	viewController.menu = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menu"];
 	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
+	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
+	
+	if (urlString != nil) {
+		viewController.imageURL = [NSURL URLWithString:urlString]; 
+	}
 //	UIWebView *webView = [[UIWebView alloc] init];
 //	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
 //
@@ -155,7 +162,7 @@
 
 @implementation FoodViewController
 
-@synthesize imageURL=_imageURL, nameLabel=_nameLabel, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
+@synthesize imageURL=_imageURL, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"FoodView" bundle:nil]) {
@@ -239,7 +246,6 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-	self.nameLabel.text = self.name;
 	if (self.summary == nil){
 		self.summaryView.text = @"Click 'Edit' to enter a Summary.";
 	}

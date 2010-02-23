@@ -17,7 +17,6 @@
 ///////
 
 @interface FoodViewController : UIViewController {
-	IBOutlet UILabel *_nameLabel;
 	IBOutlet UIImageView *imageView;
 	IBOutlet UITextView *_descriptionView;
 	IBOutlet UITextView *_summaryView;
@@ -36,7 +35,6 @@
 }
 
 @property (nonatomic, retain) NSURL *imageURL;
-@property (nonatomic, retain) UILabel *nameLabel;
 @property (nonatomic, retain) UITextView *descriptionView;
 @property (nonatomic, retain) UITextView *hoursView;
 @property (nonatomic, retain) UITextView *summaryView;

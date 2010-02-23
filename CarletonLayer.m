@@ -99,8 +99,10 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	CarletonViewController *viewController = [[CarletonViewController alloc] init];
-	viewController.buildingName = landmark.name;
+	viewController.title = landmark.name;
 	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
+	viewController.summary = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
+	viewController.yearBuilt = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"yearBuilt"];
 	viewController.layer = self;
 	viewController.landmark = landmark;
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
@@ -136,7 +138,7 @@
 
 @implementation CarletonViewController
 
-@synthesize imageURL=_imageURL, buildingName=_buildingName, buildingNameLabel=_buildingNameLabel, descriptionView=_descriptionView, description=_description, landmark=_landmark, layer=_layer;
+@synthesize imageURL=_imageURL, descriptionView=_descriptionView, description=_description, summaryView=_summaryView, summary=_summary, yearBuiltView=_yearBuiltView, yearBuilt=_yearBuilt, landmark=_landmark, layer=_layer;
 
 - (id)init {
 	if (self = [super initWithNibName:@"CarletonView" bundle:nil]) {
@@ -221,14 +223,25 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-	self.buildingNameLabel.text = self.buildingName;
 	if (self.description == nil){
 		self.descriptionView.text = @"Click 'Edit' to enter a Description.";
 	}
 	else{
 		self.descriptionView.text = self.description;
 	}
-	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self.layer action:@selector(didSelectEditButton)];
+	if (self.summary == nil){
+		self.summaryView.text = @"Click 'Edit' to enter a Summary.";
+	}
+	else{
+		self.summaryView.text = self.summary;
+	}
+	if (self.yearBuilt == nil){
+		self.yearBuiltView.text = @"Click 'Edit' if you know when this was built.";
+	}
+	else{
+		self.yearBuiltView.text = self.yearBuilt;
+	}
+	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
 	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
 }
 

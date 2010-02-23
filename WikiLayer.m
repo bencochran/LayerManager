@@ -126,7 +126,7 @@
 	
 	[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
 	
-	viewController.title = self.name;
+	viewController.title = landmark.name;
 	viewController.view = webView;
 
 	[webView release];
