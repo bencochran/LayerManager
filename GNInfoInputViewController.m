@@ -60,7 +60,8 @@
 	else{
 		inputString = textField.text;
 	}
-	UIViewController *editingTableViewController = [self.navigationController.viewControllers objectAtIndex:3];
+	NSInteger lastIndex = [self.navigationController.viewControllers count] - 2;
+	UIViewController *editingTableViewController = [self.navigationController.viewControllers objectAtIndex:lastIndex];
 	[editingTableViewController addUserInput:inputString toField:[editingTableViewController getCurrentField]];
 	[[editingTableViewController tableView] reloadData];
 	[self.navigationController popViewControllerAnimated:YES];

@@ -163,6 +163,9 @@
 	else {
 		[selectedLayer postLandmarkArray:userInput withID:@"0" withLocation:selectedLocation andPhoto:photo];
 	}
+	[[GNLayerManager sharedManager] setLayer:selectedLayer active:NO];
+	[[GNLayerManager sharedManager] setLayer:selectedLayer active:YES];
+	// update selected layer to center location [selectedLayer updateToCenterLocation:[[GNLayerManager sharedManager] center];
 	[self.navigationController popToRootViewControllerAnimated:YES];
 
 }
