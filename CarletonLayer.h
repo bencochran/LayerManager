@@ -19,6 +19,8 @@
 @interface CarletonViewController : UIViewController {
 	IBOutlet UILabel *_buildingNameLabel;
 	IBOutlet UITextView *_descriptionView;
+	NSString *_buildingName;
+	NSString *_description;
 	NSMutableData *receivedData;
 	IBOutlet UIImageView *imageView;
 	NSURL *_imageURL;
@@ -28,9 +30,11 @@
 //	NSString *_description;
 }
 
-@property (nonatomic, retain) NSURL *imageURL;
 @property (nonatomic, retain) UILabel *buildingNameLabel;
-@property (nonatomic, retain) UITextView *descriptionView;
+@property (nonatomic, retain) UITextView *descriptionView; 
+@property (nonatomic, retain) NSURL *imageURL;
+@property (nonatomic, copy) NSString *buildingName;
+@property (nonatomic, copy) NSString *description;
 @property (nonatomic, retain) GNLayer *layer;
 @property (nonatomic, retain) GNLandmark *landmark;
 
