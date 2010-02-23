@@ -13,7 +13,7 @@
 -(id)init {
 	if (self = [super init]) {
 		self.name = @"Flickr";
-		iconPath = @"wiki.png";
+		iconPath = @"flickr.png";
 		userModifiable = NO;
 	}
 	return self;
