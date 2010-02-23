@@ -220,6 +220,7 @@
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 	self.buildingNameLabel.text = self.buildingName;
 	if (self.description == nil){
 		self.descriptionView.text = @"Click 'Edit' to enter a Description.";

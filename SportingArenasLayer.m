@@ -240,6 +240,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 	self.nameLabel.text = self.name;
 	if (self.summary == nil){
 		self.summaryView.text = @"Click 'Edit' to enter a Summary.";
