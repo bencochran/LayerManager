@@ -1,6 +1,3 @@
 [submodule "ghunit"]
 	path = ghunit
 	url = git://github.com/gabriel/gh-unit.git
-[submodule "objectiveflickr"]
-	path = objectiveflickr
-	url = git://github.com/lukhnos/objectiveflickr.git
