@@ -122,12 +122,12 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	SportingArenasViewController *viewController = [[SportingArenasViewController alloc] init];
-	viewController.nameLabel.text = landmark.name;
+	viewController.name = landmark.name;
 	viewController.layer = self;
 	viewController.landmark = landmark;
-	viewController.summaryView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
-	viewController.usedByView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"usedBy"];
-	viewController.scheduleURLView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"scheduleURL"];
+	viewController.summary = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
+	viewController.usedBy = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"usedBy"];
+	viewController.scheduleURL = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"scheduleURL"];
 	//	UIWebView *webView = [[UIWebView alloc] init];
 	//	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
 	//
@@ -157,7 +157,7 @@
 
 @implementation SportingArenasViewController
 
-@synthesize imageURL=_imageURL, nameLabel=_nameLabel, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, layer=_layer, landmark=_landmark;
+@synthesize imageURL=_imageURL, nameLabel=_nameLabel, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, name=_name, summary=_summary, usedBy=_usedBy, scheduleURL=_scheduleURL, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"SportingArenasView" bundle:nil]) {
@@ -240,8 +240,27 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton:)];
-	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
+	self.nameLabel.text = self.name;
+	if (self.summary == nil){
+		self.summaryView.text = @"Click 'Edit' to enter a Summary.";
+	}
+	else{
+		self.summaryView.text = self.summary;
+	}
+	if (self.usedBy == nil){
+		self.usedByView.text = @"Click 'Edit' to enter a list of Sports Teams who use this Facility.";
+	}
+	else{
+		self.usedByView.text = self.usedBy;
+	}
+	if (self.scheduleURL == nil){
+		self.scheduleURLView.text = @"Click 'Edit' to enter a URL for this Facility's schedule.";
+	}
+	else{
+		self.scheduleURLView.text = self.scheduleURL;
+	}
+	//UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton:)];
+	//[self.navigationItem setRightBarButtonItem:editButton animated:YES];
 }
 
 -(void)didSelectEditButton{

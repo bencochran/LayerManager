@@ -220,8 +220,13 @@
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.descriptionView.text = self.description;
 	self.buildingNameLabel.text = self.buildingName;
+	if (self.description == nil){
+		self.descriptionView.text = @"Click 'Edit' to enter a Description.";
+	}
+	else{
+		self.descriptionView.text = self.description;
+	}
 	//UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self.layer action:@selector(didSelectEditButton)];
 	//[self.navigationItem setRightBarButtonItem:editButton animated:YES];
 }

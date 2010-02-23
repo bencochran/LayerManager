@@ -23,6 +23,11 @@
 	IBOutlet UITextView *_summaryView;
 	IBOutlet UITextView *_menuView;
 	IBOutlet UITextView *_hoursView;
+	NSString *_name;
+	NSString *_description;
+	NSString *_summary;
+	NSString *_menu;
+	NSString *_hours;
 	NSMutableData *receivedData;
 	NSURL *_imageURL;
 	GNLayer *_layer;
@@ -36,6 +41,11 @@
 @property (nonatomic, retain) UITextView *hoursView;
 @property (nonatomic, retain) UITextView *summaryView;
 @property (nonatomic, retain) UITextView *menuView;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *hours;
+@property (nonatomic, copy) NSString *summary;
+@property (nonatomic, copy) NSString *menu;
 @property (nonatomic, retain) GNLayer *layer;
 @property (nonatomic, retain) GNLandmark *landmark;
 
