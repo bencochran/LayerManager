@@ -17,10 +17,12 @@
 /////
 
 @interface CarletonViewController : UIViewController {
-	IBOutlet UILabel *_buildingNameLabel;
 	IBOutlet UITextView *_descriptionView;
-	NSString *_buildingName;
+	IBOutlet UITextView *_summaryView;
+	IBOutlet UITextView *_yearBuiltView;
 	NSString *_description;
+	NSString *_summary;
+	NSString *_yearBuilt;
 	NSMutableData *receivedData;
 	IBOutlet UIImageView *imageView;
 	NSURL *_imageURL;
@@ -30,11 +32,13 @@
 //	NSString *_description;
 }
 
-@property (nonatomic, retain) UILabel *buildingNameLabel;
-@property (nonatomic, retain) UITextView *descriptionView; 
+@property (nonatomic, retain) UITextView *descriptionView;
+@property (nonatomic, retain) UITextView *summaryView; 
+@property (nonatomic, retain) UITextView *yearBuiltView; 
 @property (nonatomic, retain) NSURL *imageURL;
-@property (nonatomic, copy) NSString *buildingName;
 @property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *summary;
+@property (nonatomic, copy) NSString *yearBuilt;
 @property (nonatomic, retain) GNLayer *layer;
 @property (nonatomic, retain) GNLandmark *landmark;
 

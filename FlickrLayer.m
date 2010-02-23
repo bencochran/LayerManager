@@ -100,6 +100,7 @@
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	FlickrViewController *viewController = [[FlickrViewController alloc] init];
 	[viewController setImageURL:[[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"]];
+	viewController.title = landmark.name;
 	return viewController;
 }
 
@@ -113,7 +114,6 @@
 
 - (id)init {
 	if (self = [super initWithNibName:@"FlickrView" bundle:nil]) {
-		
 	}
 	return self;
 }
