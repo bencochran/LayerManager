@@ -264,7 +264,7 @@
 	else{
 		self.hoursView.text = self.hours;
 	}
-	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton:)];
+	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
 	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
 }
 

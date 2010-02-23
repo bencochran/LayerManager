@@ -260,8 +260,8 @@
 	else{
 		self.scheduleURLView.text = self.scheduleURL;
 	}
-	//UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton:)];
-	//[self.navigationItem setRightBarButtonItem:editButton animated:YES];
+	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
+	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
 }
 
 -(void)didSelectEditButton{

@@ -228,8 +228,8 @@
 	else{
 		self.descriptionView.text = self.description;
 	}
-	//UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self.layer action:@selector(didSelectEditButton)];
-	//[self.navigationItem setRightBarButtonItem:editButton animated:YES];
+	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self.layer action:@selector(didSelectEditButton)];
+	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
 }
 
 - (void)didSelectEditButton{
