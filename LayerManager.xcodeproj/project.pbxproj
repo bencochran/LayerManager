@@ -203,6 +203,7 @@
 		FC242C42111F4D35003AFB03 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIInputStream.h; path = "asi-http-request/Classes/ASIInputStream.h"; sourceTree = "<group>"; };
 		FC242C43111F4D35003AFB03 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIInputStream.m; path = "asi-http-request/Classes/ASIInputStream.m"; sourceTree = "<group>"; };
 		FC54672D11337B8A0069EA00 /* flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickr.png; sourceTree = "<group>"; };
+		FC546739113380A20069EA00 /* SportingArenasView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SportingArenasView.xib; sourceTree = "<group>"; };
 		FC6F418D1130793C00036392 /* ObjectiveFlickr.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveFlickr.xcodeproj; path = objectiveflickr/ObjectiveFlickr.xcodeproj; sourceTree = "<group>"; };
 		FC6F41A8113079F500036392 /* FlickrLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrLayer.h; sourceTree = "<group>"; };
 		FC6F41A9113079F500036392 /* FlickrLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrLayer.m; sourceTree = "<group>"; };
@@ -372,6 +373,7 @@
 				A2D2085E110E62C100C99513 /* GNEditingTable.xib */,
 				B8AD59211106B89900D2E6A0 /* CarletonView.xib */,
 				FC6F4300113103AF00036392 /* FoodView.xib */,
+				FC546739113380A20069EA00 /* SportingArenasView.xib */,
 				A25B5893111A272200C63840 /* academic.png */,
 				FC54672D11337B8A0069EA00 /* flickr.png */,
 				A25B5894111A272200C63840 /* bird.png */,

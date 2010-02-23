@@ -119,10 +119,10 @@
 	viewController.nameLabel.text = landmark.name;
 	viewController.layer = self;
 	viewController.landmark = landmark;
-	viewController.summaryView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
-	viewController.hoursView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"];
-	viewController.menuView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menu"];
-	viewController.descriptionView.text = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
+	viewController.summary = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
+	viewController.hours = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"];
+	viewController.menu = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menu"];
+	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
 //	UIWebView *webView = [[UIWebView alloc] init];
 //	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
 //
@@ -155,7 +155,7 @@
 
 @implementation FoodViewController
 
-@synthesize imageURL=_imageURL, nameLabel=_nameLabel, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, layer=_layer, landmark=_landmark;
+@synthesize imageURL=_imageURL, nameLabel=_nameLabel, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"FoodView" bundle:nil]) {
@@ -238,6 +238,31 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	self.nameLabel.text = self.name;
+	if (self.summary == nil){
+		self.summaryView.text = @"Click 'Edit' to enter a Summary.";
+	}
+	else{
+		self.summaryView.text = self.summary;
+	}
+	if (self.description == nil){
+		self.descriptionView.text = @"Click 'Edit' to enter a Description.";
+	}
+	else{
+		self.descriptionView.text = self.description;
+	}
+	if (self.menu == nil){
+		self.menuView.text = @"Click 'Edit' to enter a Menu.";
+	}
+	else{
+		self.menuView.text = self.menu;
+	}
+	if (self.hours == nil){
+		self.hoursView.text = @"Click 'Edit' to enter Hours.";
+	}
+	else{
+		self.hoursView.text = self.hours;
+	}
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton:)];
 	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
 }
