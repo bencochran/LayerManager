@@ -69,14 +69,8 @@
 		FC242C26111F4C14003AFB03 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC242C24111F4C14003AFB03 /* Reachability.m */; };
 		FC242C44111F4D35003AFB03 /* ASIInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = FC242C42111F4D35003AFB03 /* ASIInputStream.h */; };
 		FC242C45111F4D35003AFB03 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FC242C43111F4D35003AFB03 /* ASIInputStream.m */; };
-		FC6F419A1130795E00036392 /* libObjectiveFlickr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6F41991130793C00036392 /* libObjectiveFlickr.a */; };
 		FC6F41AA113079F500036392 /* FlickrLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FC6F41A8113079F500036392 /* FlickrLayer.h */; };
 		FC6F41AB113079F500036392 /* FlickrLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6F41A9113079F500036392 /* FlickrLayer.m */; };
-		FC6F43811131EBBF00036392 /* ObjectiveFlickr.h in Headers */ = {isa = PBXBuildFile; fileRef = FC6F437C1131EBBF00036392 /* ObjectiveFlickr.h */; };
-		FC6F43821131EBBF00036392 /* ObjectiveFlickr.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6F437D1131EBBF00036392 /* ObjectiveFlickr.m */; };
-		FC6F43831131EBBF00036392 /* OFUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = FC6F437E1131EBBF00036392 /* OFUtilities.h */; };
-		FC6F43841131EBBF00036392 /* OFXMLMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC6F437F1131EBBF00036392 /* OFXMLMapper.h */; };
-		FC6F43851131EBBF00036392 /* OFXMLMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6F43801131EBBF00036392 /* OFXMLMapper.m */; };
 		FC9694DB11224C8C00218696 /* WikiLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FC9694D911224C8C00218696 /* WikiLayer.h */; };
 		FC9694DC11224C8C00218696 /* WikiLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9694DA11224C8C00218696 /* WikiLayer.m */; };
 		FCBF977F111A46A00071F029 /* GNInfoInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */; };
@@ -111,27 +105,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 1D6058910D05DD3D006BFB54;
 			remoteInfo = Tests;
-		};
-		FC6F41961130793C00036392 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FC6F418D1130793C00036392 /* ObjectiveFlickr.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6A8666490F9593B200325E1C;
-			remoteInfo = "ObjectiveFlickr (framework)";
-		};
-		FC6F41981130793C00036392 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FC6F418D1130793C00036392 /* ObjectiveFlickr.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6ABF72E60F939BE600B9179E;
-			remoteInfo = "ObjectiveFlickr (library)";
-		};
-		FC6F41A01130798400036392 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FC6F418D1130793C00036392 /* ObjectiveFlickr.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6ABF72E50F939BE600B9179E;
-			remoteInfo = "ObjectiveFlickr (library)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -204,15 +177,9 @@
 		FC242C43111F4D35003AFB03 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIInputStream.m; path = "asi-http-request/Classes/ASIInputStream.m"; sourceTree = "<group>"; };
 		FC54672D11337B8A0069EA00 /* flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickr.png; sourceTree = "<group>"; };
 		FC546739113380A20069EA00 /* SportingArenasView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SportingArenasView.xib; sourceTree = "<group>"; };
-		FC6F418D1130793C00036392 /* ObjectiveFlickr.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveFlickr.xcodeproj; path = objectiveflickr/ObjectiveFlickr.xcodeproj; sourceTree = "<group>"; };
 		FC6F41A8113079F500036392 /* FlickrLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrLayer.h; sourceTree = "<group>"; };
 		FC6F41A9113079F500036392 /* FlickrLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrLayer.m; sourceTree = "<group>"; };
 		FC6F4300113103AF00036392 /* FoodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodView.xib; sourceTree = "<group>"; };
-		FC6F437C1131EBBF00036392 /* ObjectiveFlickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveFlickr.h; sourceTree = "<group>"; };
-		FC6F437D1131EBBF00036392 /* ObjectiveFlickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectiveFlickr.m; sourceTree = "<group>"; };
-		FC6F437E1131EBBF00036392 /* OFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFUtilities.h; sourceTree = "<group>"; };
-		FC6F437F1131EBBF00036392 /* OFXMLMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFXMLMapper.h; sourceTree = "<group>"; };
-		FC6F43801131EBBF00036392 /* OFXMLMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OFXMLMapper.m; sourceTree = "<group>"; };
 		FC9694D911224C8C00218696 /* WikiLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiLayer.h; sourceTree = "<group>"; };
 		FC9694DA11224C8C00218696 /* WikiLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiLayer.m; sourceTree = "<group>"; };
 		FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNInfoInputViewController.h; sourceTree = "<group>"; };
@@ -245,7 +212,6 @@
 				B89BA2FF11081DA900A5FE3C /* MapKit.framework in Frameworks */,
 				B805EAAA111F5B0D00C3E65B /* UIKit.framework in Frameworks */,
 				B805EAAE111F5B1400C3E65B /* libz.1.2.3.dylib in Frameworks */,
-				FC6F419A1130795E00036392 /* libObjectiveFlickr.a in Frameworks */,
 				B805EAB0111F5B1B00C3E65B /* CFNetwork.framework in Frameworks */,
 				B805EAB4111F5B1F00C3E65B /* SystemConfiguration.framework in Frameworks */,
 			);
@@ -266,8 +232,6 @@
 		0867D691FE84028FC02AAC07 /* LayerManager */ = {
 			isa = PBXGroup;
 			children = (
-				FC6F418D1130793C00036392 /* ObjectiveFlickr.xcodeproj */,
-				FC6F437B1131EBBF00036392 /* ObjectiveFlickr */,
 				FC242BA8111F49D8003AFB03 /* ASIHTTPRequest */,
 				B8CB2E91110D8B2400BED463 /* GHUnit */,
 				A251AE8710F523650041E1D7 /* Tests */,
@@ -423,28 +387,6 @@
 			name = ASIHTTPRequest;
 			sourceTree = "<group>";
 		};
-		FC6F418E1130793C00036392 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FC6F41971130793C00036392 /* ObjectiveFlickr.framework */,
-				FC6F41991130793C00036392 /* libObjectiveFlickr.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		FC6F437B1131EBBF00036392 /* ObjectiveFlickr */ = {
-			isa = PBXGroup;
-			children = (
-				FC6F437C1131EBBF00036392 /* ObjectiveFlickr.h */,
-				FC6F437D1131EBBF00036392 /* ObjectiveFlickr.m */,
-				FC6F437E1131EBBF00036392 /* OFUtilities.h */,
-				FC6F437F1131EBBF00036392 /* OFXMLMapper.h */,
-				FC6F43801131EBBF00036392 /* OFXMLMapper.m */,
-			);
-			name = ObjectiveFlickr;
-			path = objectiveflickr/Source;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -480,9 +422,6 @@
 				FC9694DB11224C8C00218696 /* WikiLayer.h in Headers */,
 				FC6F41AA113079F500036392 /* FlickrLayer.h in Headers */,
 				A26D1BEE1130B2F8008EBEFF /* SportingArenasLayer.h in Headers */,
-				FC6F43811131EBBF00036392 /* ObjectiveFlickr.h in Headers */,
-				FC6F43831131EBBF00036392 /* OFUtilities.h in Headers */,
-				FC6F43841131EBBF00036392 /* OFXMLMapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,7 +457,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				FC6F41A11130798400036392 /* PBXTargetDependency */,
 			);
 			name = LayerManager;
 			productName = LayerManager;
@@ -540,10 +478,6 @@
 				{
 					ProductGroup = B8CB2DA5110D840800BED463 /* Products */;
 					ProjectRef = B8CB2DA4110D840800BED463 /* GHUnitIPhone.xcodeproj */;
-				},
-				{
-					ProductGroup = FC6F418E1130793C00036392 /* Products */;
-					ProjectRef = FC6F418D1130793C00036392 /* ObjectiveFlickr.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -574,20 +508,6 @@
 			fileType = wrapper.application;
 			path = Tests.app;
 			remoteRef = B8CB2DB2110D840800BED463 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		FC6F41971130793C00036392 /* ObjectiveFlickr.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ObjectiveFlickr.framework;
-			remoteRef = FC6F41961130793C00036392 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		FC6F41991130793C00036392 /* libObjectiveFlickr.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libObjectiveFlickr.a;
-			remoteRef = FC6F41981130793C00036392 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -641,8 +561,6 @@
 				FC9694DC11224C8C00218696 /* WikiLayer.m in Sources */,
 				FC6F41AB113079F500036392 /* FlickrLayer.m in Sources */,
 				A26D1BEF1130B2F8008EBEFF /* SportingArenasLayer.m in Sources */,
-				FC6F43821131EBBF00036392 /* ObjectiveFlickr.m in Sources */,
-				FC6F43851131EBBF00036392 /* OFXMLMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,11 +571,6 @@
 			isa = PBXTargetDependency;
 			target = D2AAC07D0554694100DB518D /* LayerManager */;
 			targetProxy = A215019610B26A8700774314 /* PBXContainerItemProxy */;
-		};
-		FC6F41A11130798400036392 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "ObjectiveFlickr (library)";
-			targetProxy = FC6F41A01130798400036392 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
