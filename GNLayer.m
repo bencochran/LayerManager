@@ -86,6 +86,14 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	}
 }
 
+- (BOOL)containsLandmark:(GNLandmark *)landmark limitToValidated:(BOOL)limitToValidated {
+	if (limitToValidated) {
+		return [self.landmarks containsObject:landmark];
+	} else {
+		return ([self.landmarks containsObject:landmark] || [layerInfoByLandmarkID objectForKey:landmark.ID] != nil);
+	}
+}
+
 // Parse the NSData and return an NSArray of landmarks the layer should not
 // store the landmarks created in this step, that will happen elsewhere
 -(NSArray *)parseDataIntoLandmarks:(NSData *)data {

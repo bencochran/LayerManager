@@ -21,7 +21,7 @@
 		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count])];
 		selectedLandmark = [landmark retain];
 		selectedLayer = [layer retain];
-		if (selectedLandmark && [layer.landmarks containsObject:selectedLandmark]) {
+		if (selectedLandmark && [layer containsLandmark:selectedLandmark limitToValidated:NO]) {
 			previouslyExisted = YES;
 			NSDictionary *fieldDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
 			for (int i = 0; i < ([fields count]); i++) {
