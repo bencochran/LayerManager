@@ -62,8 +62,9 @@
 
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index{
 	[userInput replaceObjectAtIndex:index withObject:input];
-	if (index == 0 || previouslyExisted) {
+	if (index == 0) {
 		self.navigationItem.rightBarButtonItem.enabled = YES;
+		self.title = input;
 	}
 }
 -(NSInteger)getCurrentField {
@@ -81,10 +82,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(postToServer:)];
-	self.navigationItem.rightBarButtonItem = doneButton;
-	self.navigationItem.rightBarButtonItem.enabled = NO;
-	[doneButton release];
+	if (previouslyExisted){
+		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStyleDone target:self action:@selector(postToServer:)];
+		self.navigationItem.rightBarButtonItem = doneButton;
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+		[doneButton release];
+		self.title = selectedLandmark.name;
+	}
+	else{
+		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(postToServer:)];
+		self.navigationItem.rightBarButtonItem = doneButton;
+		self.navigationItem.rightBarButtonItem.enabled = NO;
+		[doneButton release];
+	}
 	buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
 	NSLog(@"Photo: %@",photo);
 	if (photo == nil){
@@ -163,8 +173,7 @@
 	else {
 		[selectedLayer postLandmarkArray:userInput withID:@"0" withLocation:selectedLocation andPhoto:photo];
 	}
-	[[GNLayerManager sharedManager] setLayer:selectedLayer active:NO];
-	[[GNLayerManager sharedManager] setLayer:selectedLayer active:YES];
+	NSLog(@"Posting user input array : %@", userInput);
 	// update selected layer to center location [selectedLayer updateToCenterLocation:[[GNLayerManager sharedManager] center];
 	[self.navigationController popToRootViewControllerAnimated:YES];
 

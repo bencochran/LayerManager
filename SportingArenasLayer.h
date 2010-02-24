@@ -17,12 +17,11 @@
 ///////
 
 @interface SportingArenasViewController : UIViewController {
-	IBOutlet UILabel *_nameLabel;
 	IBOutlet UIImageView *imageView;
-	IBOutlet UITextView *_summaryView;
-	IBOutlet UITextView *_usedByView;
-	IBOutlet UITextView *_scheduleURLView;
-	NSString *_name;
+	IBOutlet UILabel *_summaryView;
+	IBOutlet UILabel *_usedByView;
+	IBOutlet UILabel *_scheduleURLView;
+	IBOutlet UILabel *_editPhoto;
 	NSString *_summary;
 	NSString *_usedBy;
 	NSString *_scheduleURL;
@@ -34,11 +33,10 @@
 }
 
 @property (nonatomic, retain) NSURL *imageURL;
-@property (nonatomic, retain) UILabel *nameLabel;
-@property (nonatomic, retain) UITextView *usedByView;
-@property (nonatomic, retain) UITextView *summaryView;
-@property (nonatomic, retain) UITextView *scheduleURLView;
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, retain) UILabel *usedByView;
+@property (nonatomic, retain) UILabel *summaryView;
+@property (nonatomic, retain) UILabel *scheduleURLView;
+@property (nonatomic, retain) UILabel *editPhoto;
 @property (nonatomic, copy) NSString *summary;
 @property (nonatomic, copy) NSString *usedBy;
 @property (nonatomic, copy) NSString *scheduleURL;

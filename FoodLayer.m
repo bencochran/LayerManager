@@ -59,7 +59,7 @@
 	{
 		layerInfo = [[NSMutableDictionary alloc] init];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"menu"] forKey:@"menu"];
-		NSLog(@"landmark and layer info: %@", landmarkAndLayerInfo);
+		//NSLog(@"landmark and layer info: %@", landmarkAndLayerInfo);
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"hours"] forKey:@"hours"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
@@ -162,7 +162,7 @@
 
 @implementation FoodViewController
 
-@synthesize imageURL=_imageURL, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
+@synthesize imageURL=_imageURL, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, editPhoto=_editPhoto, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"FoodView" bundle:nil]) {
@@ -269,6 +269,12 @@
 	}
 	else{
 		self.hoursView.text = self.hours;
+	}
+	if (_imageURL){
+		self.editPhoto.text = @"";
+	}
+	else{
+		self.editPhoto.text = @"Click 'Edit' to add Photo";	
 	}
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
 	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
