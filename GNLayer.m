@@ -76,6 +76,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[self URLForLocation:location limitToValidated:YES]];
 	[request setDelegate:self];
 	[request setDidFinishSelector:@selector(didFinishUpdateRequest:)];
+	[request setDidFailSelector:@selector(updateRequestFailed:)];
 	[request startAsynchronous];
 }
 
@@ -128,7 +129,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[[GNLayerManager sharedManager] layer:self didUpdateEditableLandmarks:landmarks];
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request {
+- (void)updateRequestFailed:(ASIHTTPRequest *)request {
 	// Log it
 	NSLog(@"Connection failed! Error - %@ %@",
           [[request error] localizedDescription],
