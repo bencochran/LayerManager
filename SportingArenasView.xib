@@ -122,6 +122,18 @@ Y2lsaXR5Lg</string>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">1.000000e+01</float>
 							</object>
+							<object class="IBUIView" id="685595445">
+								<reference key="NSNextResponder" ref="1001895678"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{39, 62}, {251, 227}}</string>
+								<reference key="NSSuperview" ref="1001895678"/>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MCAwIDAgMC41Nzk5OTk5OAA</bytes>
+								</object>
+								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+							</object>
 							<object class="IBUILabel" id="82513237">
 								<reference key="NSNextResponder" ref="1001895678"/>
 								<int key="NSvFlags">292</int>
@@ -158,6 +170,7 @@ Y2lsaXR5Lg</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<bool key="IBUIAlwaysBounceVertical">YES</bool>
 						<bool key="IBUIBouncesZoom">NO</bool>
 					</object>
 				</object>
@@ -227,6 +240,14 @@ Y2lsaXR5Lg</string>
 					</object>
 					<int key="connectionID">27</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_photoFrame</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="685595445"/>
+					</object>
+					<int key="connectionID">31</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -271,6 +292,7 @@ Y2lsaXR5Lg</string>
 							<reference ref="1068810979"/>
 							<reference ref="82513237"/>
 							<reference ref="256050868"/>
+							<reference ref="685595445"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -309,6 +331,11 @@ Y2lsaXR5Lg</string>
 						<reference key="object" ref="82513237"/>
 						<reference key="parent" ref="1001895678"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">28</int>
+						<reference key="object" ref="685595445"/>
+						<reference key="parent" ref="1001895678"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -325,6 +352,7 @@ Y2lsaXR5Lg</string>
 					<string>21.IBPluginDependency</string>
 					<string>22.IBPluginDependency</string>
 					<string>26.IBPluginDependency</string>
+					<string>28.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
@@ -333,6 +361,7 @@ Y2lsaXR5Lg</string>
 					<string>SportingArenasViewController</string>
 					<string>UIResponder</string>
 					<string>{{346, 276}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -364,7 +393,7 @@ Y2lsaXR5Lg</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">27</int>
+			<int key="maxID">31</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -391,6 +420,7 @@ Y2lsaXR5Lg</string>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>_editPhoto</string>
+							<string>_photoFrame</string>
 							<string>_scheduleURLView</string>
 							<string>_summaryView</string>
 							<string>_usedByView</string>
@@ -399,6 +429,7 @@ Y2lsaXR5Lg</string>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UILabel</string>
+							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>

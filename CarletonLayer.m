@@ -138,7 +138,7 @@
 
 @implementation CarletonViewController
 
-@synthesize imageURL=_imageURL, descriptionView=_descriptionView, description=_description, summaryView=_summaryView, summary=_summary, yearBuiltView=_yearBuiltView, yearBuilt=_yearBuilt, editPhoto=_editPhoto, landmark=_landmark, layer=_layer;
+@synthesize imageURL=_imageURL, descriptionView=_descriptionView, description=_description, summaryView=_summaryView, summary=_summary, yearBuiltView=_yearBuiltView, yearBuilt=_yearBuilt, editPhoto=_editPhoto, photoFrame=_photoFrame, landmark=_landmark, layer=_layer;
 
 - (id)init {
 	if (self = [super initWithNibName:@"CarletonView" bundle:nil]) {
@@ -242,6 +242,7 @@
 	}
 	if (_imageURL){
 		self.editPhoto.text = @"";
+		[self.photoFrame setAlpha:0]; 
 	}
 	else{
 		self.editPhoto.text = @"Click 'Edit' to add Photo";	
@@ -251,7 +252,8 @@
 }
 
 - (void)didSelectEditButton{
-	[self.navigationController pushViewController:[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark] animated:YES];	
+	GNEditingTableViewController *editingViewController = (GNEditingTableViewController *)[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark];
+	[self.navigationController pushViewController:editingViewController animated:YES];	
 }
 
 /*

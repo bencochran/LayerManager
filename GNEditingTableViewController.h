@@ -18,12 +18,15 @@
 	CLLocation *selectedLocation;
 	GNLandmark *selectedLandmark;
 	BOOL previouslyExisted;
+	BOOL _adding;
 	UIImagePickerController *photoController;
 	UIView *buttonContainer;
 	UIImage *photo;
 	UIImageView *photoView;
 	NSURL *imageURL;
 }
+
+@property (assign) BOOL adding;
 
 - (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark;
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index;

@@ -162,7 +162,7 @@
 
 @implementation FoodViewController
 
-@synthesize imageURL=_imageURL, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, editPhoto=_editPhoto, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
+@synthesize imageURL=_imageURL, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, editPhoto=_editPhoto, photoFrame=_photoFrame, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"FoodView" bundle:nil]) {
@@ -272,6 +272,7 @@
 	}
 	if (_imageURL){
 		self.editPhoto.text = @"";
+		[self.photoFrame setAlpha:0];
 	}
 	else{
 		self.editPhoto.text = @"Click 'Edit' to add Photo";	
@@ -281,7 +282,8 @@
 }
 
 -(void)didSelectEditButton{
-	[self.navigationController pushViewController:[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark] animated:YES];	
+	GNEditingTableViewController *editingViewController = (GNEditingTableViewController *)[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark];
+	[self.navigationController pushViewController:editingViewController animated:YES];	
 }
 
 /*

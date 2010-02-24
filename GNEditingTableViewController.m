@@ -15,6 +15,8 @@
 
 @implementation GNEditingTableViewController
 
+@synthesize adding=_adding;
+
 - (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark{
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		fields = [newFields retain];
@@ -22,7 +24,9 @@
 		selectedLandmark = [landmark retain];
 		selectedLayer = [layer retain];
 		if (selectedLandmark && [layer containsLandmark:selectedLandmark limitToValidated:NO]) {
+			NSLog(@"Hello from NOT ADDING");
 			previouslyExisted = YES;
+			self.adding = NO;
 			NSDictionary *fieldDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
 			for (int i = 0; i < ([fields count]); i++) {
 				NSLog(@"Fields (key = %@): %@", [[fields objectAtIndex:i] objectAtIndex:0],
@@ -42,7 +46,10 @@
 			NSLog(@"Field Dictionary: %@", fieldDictionary);
 		}
 		else {
+			NSLog(@"Hello from ADDING!");
+			self.adding = YES;
 			if (selectedLandmark){
+				self.title = selectedLandmark.name;
 				[userInput insertObject:selectedLandmark.name atIndex:0];
 				previouslyExisted = YES;
 			}
@@ -71,6 +78,9 @@
 	return currentField;
 }
 
+- (void)setAdding:(BOOL)adding {
+	_adding = adding;
+}
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -82,17 +92,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	if (previouslyExisted){
+	NSLog(@"Adding: %@", self.adding ? @"yes" : @"no");
+	if (self.adding){
 		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStyleDone target:self action:@selector(postToServer:)];
 		self.navigationItem.rightBarButtonItem = doneButton;
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 		[doneButton release];
-		self.title = selectedLandmark.name;
 	}
 	else{
-		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(postToServer:)];
+		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(postToServer:)];
 		self.navigationItem.rightBarButtonItem = doneButton;
-		self.navigationItem.rightBarButtonItem.enabled = NO;
+		if (previouslyExisted){
+			self.navigationItem.rightBarButtonItem.enabled = YES;
+		}
+		else{
+			self.navigationItem.rightBarButtonItem.enabled = NO;
+		}
 		[doneButton release];
 	}
 	buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
