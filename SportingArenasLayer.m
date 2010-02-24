@@ -54,6 +54,9 @@
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSArray *layerInfoList = [parser objectWithString:reply error:nil];
+	for (NSDictionary *dictionary in layerInfoList){
+		NSLog(@"Here's a Dick: %@", dictionary);
+	}
 	[reply release]; reply = nil;
 	[parser release]; parser = nil;
 	
@@ -65,6 +68,7 @@
 	for (NSDictionary *landmarkAndLayerInfo in layerInfoList)
 	{
 		layerInfo = [[NSMutableDictionary alloc] init];
+		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"usedBy"] forKey:@"usedBy"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"scheduleURL"] forKey:@"scheduleURL"];
@@ -122,7 +126,7 @@
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	SportingArenasViewController *viewController = [[SportingArenasViewController alloc] init];
-	viewController.name = landmark.name;
+	viewController.title = landmark.name;
 	viewController.layer = self;
 	viewController.landmark = landmark;
 	viewController.summary = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
@@ -157,7 +161,7 @@
 
 @implementation SportingArenasViewController
 
-@synthesize imageURL=_imageURL, nameLabel=_nameLabel, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, name=_name, summary=_summary, usedBy=_usedBy, scheduleURL=_scheduleURL, layer=_layer, landmark=_landmark;
+@synthesize imageURL=_imageURL, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, summary=_summary, usedBy=_usedBy, scheduleURL=_scheduleURL, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"SportingArenasView" bundle:nil]) {
@@ -241,7 +245,6 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-	self.nameLabel.text = self.name;
 	if (self.summary == nil){
 		self.summaryView.text = @"Click 'Edit' to enter a Summary.";
 	}

@@ -59,7 +59,7 @@
 	{
 		layerInfo = [[NSMutableDictionary alloc] init];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"menu"] forKey:@"menu"];
-		NSLog(@"landmark and layer info: %@", landmarkAndLayerInfo);
+		//NSLog(@"landmark and layer info: %@", landmarkAndLayerInfo);
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"hours"] forKey:@"hours"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 		[layerInfo setObject:[landmarkAndLayerInfo objectForKey:@"summary"] forKey:@"summary"];

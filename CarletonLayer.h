@@ -18,8 +18,8 @@
 
 @interface CarletonViewController : UIViewController {
 	IBOutlet UITextView *_descriptionView;
-	IBOutlet UITextView *_summaryView;
-	IBOutlet UITextView *_yearBuiltView;
+	IBOutlet UILabel *_summaryView;
+	IBOutlet UILabel *_yearBuiltView;
 	NSString *_description;
 	NSString *_summary;
 	NSString *_yearBuilt;
@@ -33,8 +33,8 @@
 }
 
 @property (nonatomic, retain) UITextView *descriptionView;
-@property (nonatomic, retain) UITextView *summaryView; 
-@property (nonatomic, retain) UITextView *yearBuiltView; 
+@property (nonatomic, retain) UILabel *summaryView; 
+@property (nonatomic, retain) UILabel *yearBuiltView; 
 @property (nonatomic, retain) NSURL *imageURL;
 @property (nonatomic, copy) NSString *description;
 @property (nonatomic, copy) NSString *summary;
