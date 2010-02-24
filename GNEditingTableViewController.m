@@ -82,7 +82,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	if (previouslyExisted){
-		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Vote" style:UIBarButtonItemStyleDone target:self action:@selector(postToServer:)];
+		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStyleDone target:self action:@selector(postToServer:)];
 		self.navigationItem.rightBarButtonItem = doneButton;
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 		[doneButton release];
