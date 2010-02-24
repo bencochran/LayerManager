@@ -177,6 +177,18 @@
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">1.000000e+01</float>
 							</object>
+							<object class="IBUIView" id="612415481">
+								<reference key="NSNextResponder" ref="711279410"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{20, 20}, {122, 97}}</string>
+								<reference key="NSSuperview" ref="711279410"/>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MCAwIDAgMC41Nzk5OTk5OAA</bytes>
+								</object>
+								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+							</object>
 							<object class="IBUILabel" id="924141300">
 								<reference key="NSNextResponder" ref="711279410"/>
 								<int key="NSvFlags">292</int>
@@ -295,6 +307,14 @@
 					</object>
 					<int key="connectionID">31</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_photoFrame</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="612415481"/>
+					</object>
+					<int key="connectionID">34</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -341,6 +361,7 @@
 							<reference ref="746719792"/>
 							<reference ref="424182206"/>
 							<reference ref="924141300"/>
+							<reference ref="612415481"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -389,6 +410,11 @@
 						<reference key="object" ref="924141300"/>
 						<reference key="parent" ref="711279410"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">33</int>
+						<reference key="object" ref="612415481"/>
+						<reference key="parent" ref="711279410"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -404,6 +430,7 @@
 					<string>12.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
+					<string>33.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
@@ -415,6 +442,7 @@
 					<string>FoodViewController</string>
 					<string>UIResponder</string>
 					<string>{{294, 276}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -448,7 +476,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">31</int>
+			<int key="maxID">34</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -464,6 +492,7 @@
 							<string>_editPhoto</string>
 							<string>_hoursView</string>
 							<string>_menuView</string>
+							<string>_photoFrame</string>
 							<string>_summaryView</string>
 							<string>imageView</string>
 						</object>
@@ -473,6 +502,7 @@
 							<string>UILabel</string>
 							<string>UITextView</string>
 							<string>UITextView</string>
+							<string>UIView</string>
 							<string>UITextView</string>
 							<string>UIImageView</string>
 						</object>

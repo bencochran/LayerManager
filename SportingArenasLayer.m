@@ -132,6 +132,10 @@
 	viewController.summary = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
 	viewController.usedBy = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"usedBy"];
 	viewController.scheduleURL = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"scheduleURL"];
+	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
+	if (urlString != nil) {
+		viewController.imageURL = [NSURL URLWithString:urlString]; 
+	}
 	//	UIWebView *webView = [[UIWebView alloc] init];
 	//	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
 	//
@@ -161,7 +165,7 @@
 
 @implementation SportingArenasViewController
 
-@synthesize imageURL=_imageURL, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, editPhoto=_editPhoto, summary=_summary, usedBy=_usedBy, scheduleURL=_scheduleURL, layer=_layer, landmark=_landmark;
+@synthesize imageURL=_imageURL, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, editPhoto=_editPhoto, photoFrame=_photoFrame, summary=_summary, usedBy=_usedBy, scheduleURL=_scheduleURL, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"SportingArenasView" bundle:nil]) {
@@ -265,6 +269,7 @@
 	}
 	if (_imageURL){
 		self.editPhoto.text = @"";
+		[self.photoFrame setAlpha:0];
 	}
 	else{
 		self.editPhoto.text = @"Click 'Edit' to add Photo";	
@@ -274,7 +279,8 @@
 }
 
 -(void)didSelectEditButton{
-	[self.navigationController pushViewController:[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark] animated:YES];	
+	GNEditingTableViewController *editingViewController = (GNEditingTableViewController *)[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark];
+	[self.navigationController pushViewController:editingViewController animated:YES];	
 }
 
 /*
