@@ -21,6 +21,8 @@
 @class GNLayerManager;
 
 extern NSString *const GNLayerUpdateFailed;
+extern NSString *const GNLayerDidStartUpdating;
+extern NSString *const GNLayerDidFinishUpdating;
 
 @interface GNLayer : NSObject {
 	NSString *_name;
