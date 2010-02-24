@@ -161,7 +161,7 @@
 
 @implementation SportingArenasViewController
 
-@synthesize imageURL=_imageURL, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, summary=_summary, usedBy=_usedBy, scheduleURL=_scheduleURL, layer=_layer, landmark=_landmark;
+@synthesize imageURL=_imageURL, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, editPhoto=_editPhoto, summary=_summary, usedBy=_usedBy, scheduleURL=_scheduleURL, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"SportingArenasView" bundle:nil]) {
@@ -262,6 +262,12 @@
 	}
 	else{
 		self.scheduleURLView.text = self.scheduleURL;
+	}
+	if (_imageURL){
+		self.editPhoto.text = @"";
+	}
+	else{
+		self.editPhoto.text = @"Click 'Edit' to add Photo";	
 	}
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
 	[self.navigationItem setRightBarButtonItem:editButton animated:YES];

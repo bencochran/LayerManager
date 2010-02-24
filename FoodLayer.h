@@ -22,6 +22,7 @@
 	IBOutlet UITextView *_summaryView;
 	IBOutlet UITextView *_menuView;
 	IBOutlet UITextView *_hoursView;
+	IBOutlet UILabel *_editPhoto;
 	NSString *_name;
 	NSString *_description;
 	NSString *_summary;
@@ -39,6 +40,7 @@
 @property (nonatomic, retain) UITextView *hoursView;
 @property (nonatomic, retain) UITextView *summaryView;
 @property (nonatomic, retain) UITextView *menuView;
+@property (nonatomic, retain) UILabel *editPhoto;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *description;
 @property (nonatomic, copy) NSString *hours;

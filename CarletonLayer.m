@@ -138,7 +138,7 @@
 
 @implementation CarletonViewController
 
-@synthesize imageURL=_imageURL, descriptionView=_descriptionView, description=_description, summaryView=_summaryView, summary=_summary, yearBuiltView=_yearBuiltView, yearBuilt=_yearBuilt, landmark=_landmark, layer=_layer;
+@synthesize imageURL=_imageURL, descriptionView=_descriptionView, description=_description, summaryView=_summaryView, summary=_summary, yearBuiltView=_yearBuiltView, yearBuilt=_yearBuilt, editPhoto=_editPhoto, landmark=_landmark, layer=_layer;
 
 - (id)init {
 	if (self = [super initWithNibName:@"CarletonView" bundle:nil]) {
@@ -160,7 +160,6 @@
 		// receivedData is declared as a method instance elsewhere
 		receivedData=[[NSMutableData data] retain];
 	} else {
-		// inform the user that the download could not be made
 	}
 	
 }
@@ -240,6 +239,12 @@
 	}
 	else{
 		self.yearBuiltView.text = self.yearBuilt;
+	}
+	if (_imageURL){
+		self.editPhoto.text = @"";
+	}
+	else{
+		self.editPhoto.text = @"Click 'Edit' to add Photo";	
 	}
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
 	[self.navigationItem setRightBarButtonItem:editButton animated:YES];

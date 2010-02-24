@@ -64,6 +64,7 @@
 	[userInput replaceObjectAtIndex:index withObject:input];
 	if (index == 0) {
 		self.navigationItem.rightBarButtonItem.enabled = YES;
+		self.title = input;
 	}
 }
 -(NSInteger)getCurrentField {
@@ -86,6 +87,7 @@
 		self.navigationItem.rightBarButtonItem = doneButton;
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 		[doneButton release];
+		self.title = selectedLandmark.name;
 	}
 	else{
 		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(postToServer:)];

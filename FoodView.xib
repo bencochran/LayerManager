@@ -41,17 +41,6 @@
 						<int key="NSvFlags">274</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIImageView" id="151572262">
-								<reference key="NSNextResponder" ref="711279410"/>
-								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{20, 20}, {122, 97}}</string>
-								<reference key="NSSuperview" ref="711279410"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-								<int key="IBUIContentMode">1</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-							</object>
 							<object class="IBUITextView" id="1017139742">
 								<reference key="NSNextResponder" ref="711279410"/>
 								<int key="NSvFlags">274</int>
@@ -188,6 +177,38 @@
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">1.000000e+01</float>
 							</object>
+							<object class="IBUILabel" id="924141300">
+								<reference key="NSNextResponder" ref="711279410"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{20, 58}, {122, 21}}</string>
+								<reference key="NSSuperview" ref="711279410"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string type="base64-UTF8" key="IBUIText">Q2xpY2sgJ0VkaXQnIHRvIGFkZCBQaG90bw</string>
+								<object class="NSColor" key="IBUITextColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MSAxIDEAA</bytes>
+									<object class="NSColorSpace" key="NSCustomColorSpace">
+										<int key="NSID">1</int>
+									</object>
+								</object>
+								<nil key="IBUIHighlightedColor"/>
+								<int key="IBUIBaselineAdjustment">1</int>
+								<float key="IBUIMinimumFontSize">1.000000e+01</float>
+								<int key="IBUITextAlignment">1</int>
+							</object>
+							<object class="IBUIImageView" id="151572262">
+								<reference key="NSNextResponder" ref="711279410"/>
+								<int key="NSvFlags">274</int>
+								<string key="NSFrame">{{20, 20}, {122, 97}}</string>
+								<reference key="NSSuperview" ref="711279410"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<int key="IBUIContentMode">1</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+							</object>
 						</object>
 						<string key="NSFrameSize">{320, 416}</string>
 						<reference key="NSSuperview" ref="191373211"/>
@@ -266,6 +287,14 @@
 					</object>
 					<int key="connectionID">28</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_editPhoto</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="924141300"/>
+					</object>
+					<int key="connectionID">31</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -311,6 +340,7 @@
 							<reference ref="100882297"/>
 							<reference ref="746719792"/>
 							<reference ref="424182206"/>
+							<reference ref="924141300"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -354,6 +384,11 @@
 						<reference key="object" ref="200129945"/>
 						<reference key="parent" ref="711279410"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">30</int>
+						<reference key="object" ref="924141300"/>
+						<reference key="parent" ref="711279410"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -368,6 +403,7 @@
 					<string>11.IBPluginDependency</string>
 					<string>12.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
+					<string>30.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
@@ -379,6 +415,7 @@
 					<string>FoodViewController</string>
 					<string>UIResponder</string>
 					<string>{{294, 276}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -411,7 +448,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">29</int>
+			<int key="maxID">31</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -424,6 +461,7 @@
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>_descriptionView</string>
+							<string>_editPhoto</string>
 							<string>_hoursView</string>
 							<string>_menuView</string>
 							<string>_summaryView</string>
@@ -432,6 +470,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UITextView</string>
+							<string>UILabel</string>
 							<string>UITextView</string>
 							<string>UITextView</string>
 							<string>UITextView</string>
@@ -455,13 +494,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">JSON/SBJsonWriter.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">objectiveflickr/Source/ObjectiveFlickr.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
