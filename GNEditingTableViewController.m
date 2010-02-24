@@ -23,6 +23,7 @@
 		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count])];
 		selectedLandmark = [landmark retain];
 		selectedLayer = [layer retain];
+		didTakePhoto = NO;
 		if (selectedLandmark && [layer containsLandmark:selectedLandmark limitToValidated:NO]) {
 			NSLog(@"Hello from NOT ADDING");
 			previouslyExisted = YES;
@@ -174,6 +175,7 @@
 	self.tableView.tableHeaderView = buttonContainer;
 	[photoController release];
 	photoController = nil;
+	didTakePhoto = YES;
 }
 
 - (void)postToServer:(id)sender {
@@ -181,6 +183,9 @@
 	//GNLayer *layer = [layersViewController getSelectedLayer];
 	//UIViewController *mapViewController = [self.navigationController.viewControllers objectAtIndex:1];
 	//CLLocation *location = [mapViewController getSelectedLocation];
+	if (!didTakePhoto){
+		photo=nil;
+	}
 	if (selectedLandmark) {
 		// The substringFromIndex:7 parameter strips off the "gnarus:" in the beginning of landmarkID's for the gnarus server.
 		[selectedLayer postLandmarkArray:userInput withID:[selectedLandmark.ID substringFromIndex:7] withLocation:selectedLocation andPhoto:photo];

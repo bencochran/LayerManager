@@ -19,6 +19,7 @@
 	GNLandmark *selectedLandmark;
 	BOOL previouslyExisted;
 	BOOL _adding;
+	BOOL didTakePhoto;
 	UIImagePickerController *photoController;
 	UIView *buttonContainer;
 	UIImage *photo;
