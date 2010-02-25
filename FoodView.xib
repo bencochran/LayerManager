@@ -210,6 +210,17 @@
 								<float key="IBUIMinimumFontSize">1.000000e+01</float>
 								<int key="IBUITextAlignment">1</int>
 							</object>
+							<object class="IBUIActivityIndicatorView" id="938206644">
+								<reference key="NSNextResponder" ref="711279410"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{62, 50}, {37, 37}}</string>
+								<reference key="NSSuperview" ref="711279410"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<bool key="IBUIAnimating">YES</bool>
+								<int key="IBUIStyle">0</int>
+							</object>
 							<object class="IBUIImageView" id="151572262">
 								<reference key="NSNextResponder" ref="711279410"/>
 								<int key="NSvFlags">274</int>
@@ -315,6 +326,14 @@
 					</object>
 					<int key="connectionID">34</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_photoLoading</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="938206644"/>
+					</object>
+					<int key="connectionID">36</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -362,6 +381,7 @@
 							<reference ref="424182206"/>
 							<reference ref="924141300"/>
 							<reference ref="612415481"/>
+							<reference ref="938206644"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -415,6 +435,11 @@
 						<reference key="object" ref="612415481"/>
 						<reference key="parent" ref="711279410"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">35</int>
+						<reference key="object" ref="938206644"/>
+						<reference key="parent" ref="711279410"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -431,6 +456,7 @@
 					<string>3.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
 					<string>33.IBPluginDependency</string>
+					<string>35.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
@@ -442,6 +468,7 @@
 					<string>FoodViewController</string>
 					<string>UIResponder</string>
 					<string>{{294, 276}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -476,7 +503,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">34</int>
+			<int key="maxID">36</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -493,6 +520,7 @@
 							<string>_hoursView</string>
 							<string>_menuView</string>
 							<string>_photoFrame</string>
+							<string>_photoLoading</string>
 							<string>_summaryView</string>
 							<string>imageView</string>
 						</object>
@@ -503,6 +531,7 @@
 							<string>UITextView</string>
 							<string>UITextView</string>
 							<string>UIView</string>
+							<string>UIActivityIndicatorView</string>
 							<string>UITextView</string>
 							<string>UIImageView</string>
 						</object>

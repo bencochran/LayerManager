@@ -22,6 +22,7 @@
 	IBOutlet UILabel *_yearBuiltView;
 	IBOutlet UILabel *_editPhoto;
 	IBOutlet UIView *_photoFrame;
+	IBOutlet UIActivityIndicatorView *_photoLoading;
 	NSString *_description;
 	NSString *_summary;
 	NSString *_yearBuilt;
@@ -39,6 +40,7 @@
 @property (nonatomic, retain) UILabel *yearBuiltView;
 @property (nonatomic, retain) UILabel *editPhoto;
 @property (nonatomic, retain) UIView *photoFrame;
+@property (nonatomic, retain) UIActivityIndicatorView *photoLoading;
 @property (nonatomic, retain) NSURL *imageURL;
 @property (nonatomic, copy) NSString *description;
 @property (nonatomic, copy) NSString *summary;

@@ -92,11 +92,13 @@
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
 	[request setPostValue:landmarkID forKey:@"landmarkID"];
 	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
-//	if(photo){
+	if(photo){
 		NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
 		[request setData:photoData forKey:@"image"];
-//	}
-//		NSLog(@"uploading photo");
+	}
+	else{
+		[request setPostValue:@"" forKey:@"image"];
+	}
 	request.delegate = self;
 	[request startAsynchronous];
 }
@@ -165,7 +167,7 @@
 
 @implementation FoodViewController
 
-@synthesize imageURL=_imageURL, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, editPhoto=_editPhoto, photoFrame=_photoFrame, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
+@synthesize imageURL=_imageURL, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, editPhoto=_editPhoto, photoFrame=_photoFrame, photoLoading=_photoLoading, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"FoodView" bundle:nil]) {
@@ -228,7 +230,7 @@
 {
 	UIImage *image = [UIImage imageWithData:receivedData];
 	imageView.image = image;
-	
+	[self.photoLoading stopAnimating];	
     // release the connection, and the data object
     [connection release];
     [receivedData release];
@@ -278,6 +280,7 @@
 		[self.photoFrame setAlpha:0];
 	}
 	else{
+		[self.photoLoading stopAnimating];
 		self.editPhoto.text = @"Click 'Edit' to add Photo";	
 	}
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];

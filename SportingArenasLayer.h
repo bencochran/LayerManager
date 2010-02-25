@@ -23,6 +23,7 @@
 	IBOutlet UILabel *_scheduleURLView;
 	IBOutlet UILabel *_editPhoto;
 	IBOutlet UIView *_photoFrame;
+	IBOutlet UIActivityIndicatorView *_photoLoading;
 	NSString *_summary;
 	NSString *_usedBy;
 	NSString *_scheduleURL;
@@ -39,6 +40,7 @@
 @property (nonatomic, retain) UILabel *scheduleURLView;
 @property (nonatomic, retain) UILabel *editPhoto;
 @property (nonatomic, retain) UIView *photoFrame;
+@property (nonatomic, retain) UIActivityIndicatorView *photoLoading;
 @property (nonatomic, copy) NSString *summary;
 @property (nonatomic, copy) NSString *usedBy;
 @property (nonatomic, copy) NSString *scheduleURL;

@@ -100,10 +100,13 @@
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
 	[request setPostValue:landmarkID forKey:@"landmarkID"];
 	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
-//	if(photo){
+	if(photo){
 		NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
 		[request setData:photoData forKey:@"image"];
-//	}
+	}
+	else{
+		[request setPostValue:@"" forKey:@"image"];
+	}
 	request.delegate = self;
 	[request startAsynchronous];
 }
@@ -135,18 +138,10 @@
 	viewController.usedBy = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"usedBy"];
 	viewController.scheduleURL = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"scheduleURL"];
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
+	NSLog(@"URL String: <%@>", urlString);
 	if (urlString != nil) {
 		viewController.imageURL = [NSURL URLWithString:urlString]; 
 	}
-	//	UIWebView *webView = [[UIWebView alloc] init];
-	//	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
-	//
-	//	[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
-	//	
-	//	viewController.title = self.name;
-	//	viewController.view = webView;
-	//	[webView release];
-	
 	return [viewController autorelease];
 }
 
@@ -167,7 +162,7 @@
 
 @implementation SportingArenasViewController
 
-@synthesize imageURL=_imageURL, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, editPhoto=_editPhoto, photoFrame=_photoFrame, summary=_summary, usedBy=_usedBy, scheduleURL=_scheduleURL, layer=_layer, landmark=_landmark;
+@synthesize imageURL=_imageURL, summaryView=_summaryView, usedByView=_usedByView, scheduleURLView=_scheduleURLView, editPhoto=_editPhoto, photoFrame=_photoFrame, photoLoading=_photoLoading, summary=_summary, usedBy=_usedBy, scheduleURL=_scheduleURL, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithNibName:@"SportingArenasView" bundle:nil]) {
@@ -230,7 +225,7 @@
 {
 	UIImage *image = [UIImage imageWithData:receivedData];
 	imageView.image = image;
-	
+	[self.photoLoading stopAnimating];
     // release the connection, and the data object
     [connection release];
     [receivedData release];
@@ -274,7 +269,8 @@
 		[self.photoFrame setAlpha:0];
 	}
 	else{
-		self.editPhoto.text = @"Click 'Edit' to add Photo";	
+		[self.photoLoading stopAnimating];
+		self.editPhoto.text = @"Click 'Edit' to add Photo";
 	}
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
 	[self.navigationItem setRightBarButtonItem:editButton animated:YES];

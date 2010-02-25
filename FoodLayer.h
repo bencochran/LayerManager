@@ -24,6 +24,7 @@
 	IBOutlet UITextView *_hoursView;
 	IBOutlet UILabel *_editPhoto;
 	IBOutlet UIView *_photoFrame;
+	IBOutlet UIActivityIndicatorView *_photoLoading;
 	NSString *_name;
 	NSString *_description;
 	NSString *_summary;
@@ -43,6 +44,7 @@
 @property (nonatomic, retain) UITextView *menuView;
 @property (nonatomic, retain) UILabel *editPhoto;
 @property (nonatomic, retain) UIView *photoFrame;
+@property (nonatomic, retain) UIActivityIndicatorView *photoLoading;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *description;
 @property (nonatomic, copy) NSString *hours;

@@ -87,12 +87,14 @@
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"lat"];
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
 	[request setPostValue:landmarkID forKey:@"landmarkID"];
-	[request   setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
-//	if(photo){
+	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
+	if (photo){
 		NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
 		[request setData:photoData forKey:@"image"];
-//		NSLog(@"uploading photo");
-//	}
+	}
+	else{
+		[request setPostValue:@"" forKey:@"image"];
+	}
 	[request setDidFailSelector:@selector(requestFailed:)];
 	[request setDidFinishSelector:@selector(requestFinished:)];
 	[request setDelegate:self];
@@ -152,7 +154,7 @@
 
 @implementation CarletonViewController
 
-@synthesize imageURL=_imageURL, descriptionView=_descriptionView, description=_description, summaryView=_summaryView, summary=_summary, yearBuiltView=_yearBuiltView, yearBuilt=_yearBuilt, editPhoto=_editPhoto, photoFrame=_photoFrame, landmark=_landmark, layer=_layer;
+@synthesize imageURL=_imageURL, descriptionView=_descriptionView, description=_description, summaryView=_summaryView, summary=_summary, yearBuiltView=_yearBuiltView, yearBuilt=_yearBuilt, editPhoto=_editPhoto, photoFrame=_photoFrame, photoLoading=_photoLoading, landmark=_landmark, layer=_layer;
 
 - (id)init {
 	if (self = [super initWithNibName:@"CarletonView" bundle:nil]) {
@@ -213,7 +215,7 @@
 {
 	UIImage *image = [UIImage imageWithData:receivedData];
 	imageView.image = image;
-	
+	[self.photoLoading stopAnimating];	
     // release the connection, and the data object
     [connection release];
     [receivedData release];
@@ -260,6 +262,7 @@
 		[self.photoFrame setAlpha:0]; 
 	}
 	else{
+		[self.photoLoading stopAnimating];
 		self.editPhoto.text = @"Click 'Edit' to add Photo";	
 	}
 	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
