@@ -10,6 +10,8 @@
 @implementation GNLayer
 
 NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
+NSString *const GNLayerDidStartUpdating = @"GNLayerDidStartUpdating";
+NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 
 @synthesize name=_name, active=_active, landmarks=_landmarks;
 
@@ -78,6 +80,10 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 	[request setDidFinishSelector:@selector(didFinishUpdateRequest:)];
 	[request setDidFailSelector:@selector(updateRequestFailed:)];
 	[request startAsynchronous];
+	
+	// Let it be known that this layer started updating
+	[[NSNotificationCenter defaultCenter] postNotificationName:GNLayerDidStartUpdating
+														object:self];
 }
 
 - (void)didFinishUpdateRequest:(ASIHTTPRequest *)request {
@@ -85,6 +91,9 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		NSArray *landmarks = [self parseDataIntoLandmarks:[request responseData]];
 		[self ingestLandmarks:landmarks];
 	}
+	// Let it be known that this layer finished updating
+	[[NSNotificationCenter defaultCenter] postNotificationName:GNLayerDidFinishUpdating
+														object:self];	
 }
 
 - (BOOL)containsLandmark:(GNLandmark *)landmark limitToValidated:(BOOL)limitToValidated {
@@ -111,7 +120,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 		[self.landmarks addObject:landmark];
 	}
 	
-	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];
+	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];	
 }
 
 - (void)updateEditableLandmarksForLocation:(CLLocation *)location {
