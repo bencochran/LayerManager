@@ -160,9 +160,9 @@ static GNLayerManager *sharedManager = nil;
 }
 
 - (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks {
-	
-	NSLog(@"got these active landmarks: %@ from layer: %@", landmarks, layer);
-	NSLog(@"already had these active landmarks: %@", userEditableLandmarks);
+	NSLog(@"Layer updated with validated landmarks: %@", layer.name);
+	NSLog(@"Layer returned these validated landmarks: %@", landmarks);
+	NSLog(@"User editable landmarks: %@", userEditableLandmarks);
 
 	for (GNLandmark *landmark in landmarks) {
 		if (![validatedLandmarks containsObject:landmark]) {
@@ -185,8 +185,10 @@ static GNLayerManager *sharedManager = nil;
 }
 
 - (void)layer:(GNLayer *)layer didUpdateEditableLandmarks:(NSArray *)landmarks {
-	NSLog(@"got these editable landmarks: %@ from layer: %@", landmarks, layer);
-	NSLog(@"already had these editable landmarks: %@", userEditableLandmarks);
+	NSLog(@"Layer updated ediable landmarks: %@", layer.name);
+	NSLog(@"Layer returned these editable landmarks: %@", landmarks);
+	NSLog(@"Preexisting user editable landmarks: %@", userEditableLandmarks);
+	
 	for (GNLandmark *landmark in landmarks) {
 		if (![userEditableLandmarks containsObject:landmark]) {
 			[userEditableLandmarks addObject:landmark];
@@ -202,7 +204,7 @@ static GNLayerManager *sharedManager = nil;
 - (NSArray *)layersForLandmark:(GNLandmark *)landmark {
 	NSMutableArray *layersForLandmark = [NSMutableArray array];
 	for (GNLayer *layer in self.layers) {
-		if ([layer.landmarks containsObject:landmark]) {
+		if ([layer containsLandmark:landmark limitToValidated:NO]) {
 			[layersForLandmark addObject:layer];
 		}
 	}
@@ -212,7 +214,7 @@ static GNLayerManager *sharedManager = nil;
 - (NSArray *)activeLayersForLandmark:(GNLandmark *)landmark {
 	NSMutableArray *layersForLandmark = [NSMutableArray array];
 	for (GNLayer *layer in self.layers) {
-		if (layer.active && [layer.landmarks containsObject:landmark]) {
+		if (layer.active && [layer containsLandmark:landmark limitToValidated:YES]) {
 			[layersForLandmark addObject:layer];
 		}
 	}
