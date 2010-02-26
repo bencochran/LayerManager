@@ -7,6 +7,7 @@
 //
 
 #import "GNLandmark.h"
+#import "GNLayerManager.h"
 #import <stdlib.h>
 
 @implementation GNLandmark
