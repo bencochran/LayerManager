@@ -88,7 +88,7 @@
 	return landmarks;
 }
 
-- (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{
+- (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo {
 	NSURL *url = [NSURL URLWithString:@"http://dev.gnar.us/post.py/sportingArenas"];
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
 	NSLog(@"Info: %@", info);
@@ -100,11 +100,12 @@
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
 	[request setPostValue:landmarkID forKey:@"landmarkID"];
 	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
-	if(photo){
+	
+	if(photo) {
 		NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
 		[request setData:photoData forKey:@"image"];
 	}
-	else{
+	else {
 		[request setPostValue:@"" forKey:@"image"];
 	}
 	request.delegate = self;
@@ -123,7 +124,6 @@
 	NSError *error = [request error];
 	NSLog(@"Error: %@", error);
 }
-
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {
 	return [(NSDictionary*) [layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];

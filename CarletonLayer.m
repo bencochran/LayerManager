@@ -88,11 +88,12 @@
 	[request setPostValue:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"lon"];
 	[request setPostValue:landmarkID forKey:@"landmarkID"];
 	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
-	if (photo){
+	
+	if (photo) {
 		NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
 		[request setData:photoData forKey:@"image"];
 	}
-	else{
+	else {
 		[request setPostValue:@"" forKey:@"image"];
 	}
 	[request setDidFailSelector:@selector(requestFailed:)];
@@ -102,11 +103,11 @@
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
-	NSLog(@"post request failed with error: %@", [request error]);
+	NSLog(@"Post request for CarletonLayer failed with error: %@", [request error]);
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
-	NSLog(@"post request finished: %@", [request responseString]);
+	NSLog(@"Post request for CarletonLayer finished: %@", [request responseString]);
 }
 
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {

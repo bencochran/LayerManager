@@ -45,6 +45,7 @@
 			self.adding = NO;
 			
 			NSDictionary *fieldDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
+			NSLog(@"Field information from layer %@ for landmark: %@", selectedLayer.name, fieldDictionary);
 			
 			NSLog(@"Entering existing user input");
 			for (int i = 0; i < ([fields count]); i++) {
@@ -131,10 +132,10 @@
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 		[doneButton release];
 	}
-	else{
+	else {
 		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(postToServer:)];
 		self.navigationItem.rightBarButtonItem = doneButton;
-		if (previouslyExisted){
+		if (previouslyExisted) {
 			self.navigationItem.rightBarButtonItem.enabled = YES;
 		}
 		else{
@@ -144,7 +145,7 @@
 	}
 	buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
 	NSLog(@"Photo: %@",photo);
-	if (photo == nil){
+	if (photo == nil) {
 		UIButton *takePhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[takePhotoButton setTitle:@"Photo" forState:UIControlStateNormal];
 		takePhotoButton.frame = CGRectMake(10,10,80,80);
@@ -152,7 +153,7 @@
 		[takePhotoButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
 		[buttonContainer addSubview:takePhotoButton];
 	}
-	if (imageURL){
+	if (imageURL) {
 		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:imageURL];
 		[request setDelegate:self];
 		[request setDidFinishSelector:@selector(setDidFinishPhotoRequest:)];
@@ -177,7 +178,7 @@
 //	NSError *error = [request error];
 }
 
--(IBAction) takePhoto:(id) sender {
+-(IBAction)takePhoto:(id)sender {
 	NSLog(@"In takePhoto");
 	photoController = [[UIImagePickerController alloc] init];
 	
@@ -192,7 +193,6 @@
 	[self presentModalViewController:photoController animated:YES];
 	
 	NSLog(@"End of takePhoto, photoController: %@", photoController);
-
 }
 
 
@@ -211,11 +211,7 @@
 }
 
 - (void)postToServer:(id)sender {
-	//UIViewController *layersViewController = [self.navigationController.viewControllers objectAtIndex:2];
-	//GNLayer *layer = [layersViewController getSelectedLayer];
-	//UIViewController *mapViewController = [self.navigationController.viewControllers objectAtIndex:1];
-	//CLLocation *location = [mapViewController getSelectedLocation];
-	if (!tookPhoto){
+	if (!tookPhoto) {
 		photo = nil;
 	}
 	if (selectedLandmark) {
@@ -225,10 +221,10 @@
 	else {
 		[selectedLayer postLandmarkArray:userInput withID:@"0" withLocation:selectedLocation andPhoto:photo];
 	}
+	NSLog(@"Posting photo: %@", photo);
 	NSLog(@"Posting user input array : %@", userInput);
 	// update selected layer to center location [selectedLayer updateToCenterLocation:[[GNLayerManager sharedManager] center];
 	[self.navigationController popToRootViewControllerAnimated:YES];
-
 }
 
 
