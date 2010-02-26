@@ -25,7 +25,7 @@
     NSString *contentString;
     BOOL selected;
 }
-@property (nonatomic, getter=getContentString, setter=setContentString) NSString *contentString;
+@property (nonatomic, retain, getter=getContentString, setter=setContentString) NSString *contentString;
 @property (nonatomic, getter=isSelected) BOOL selected;
 
 @end
