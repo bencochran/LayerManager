@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GNLayer.h"
+#import "SportsViewController.h"
 
 @interface SportingArenasLayer : GNLayer {
 }

@@ -130,13 +130,13 @@
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
-	SportingArenasViewController *viewController = [[SportingArenasViewController alloc] init];
+	SportsViewController *viewController = [[SportsViewController alloc] init];
 	viewController.title = landmark.name;
 	viewController.layer = self;
 	viewController.landmark = landmark;
-	viewController.summary = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
-	viewController.usedBy = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"usedBy"];
-	viewController.scheduleURL = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"scheduleURL"];
+	viewController.summaryString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
+	viewController.usedByString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"usedBy"];
+	viewController.scheduleURLString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"scheduleURL"];
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
 	NSLog(@"URL String: <%@>", urlString);
 	if (urlString != nil) {
