@@ -32,7 +32,6 @@
 
 // To comply with the MKAnnotation interface
 @property (nonatomic, readonly) NSString *title;
-////////// TODO: Add subtitle for MKAnnotation to make it prettier
 
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
