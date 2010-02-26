@@ -50,12 +50,7 @@
 			for (int i = 0; i < ([fields count]); i++) {
 				NSLog(@"%@ -> %@", [[fields objectAtIndex:i] objectAtIndex:0],
 									 [fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]);
-				//if([[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] class] == [NSNull class]) {
-				//	[userInput insertObject:@"" atIndex:i];
-				//}
-				//else {
-					[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
-				//}
+				[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
 			}
 			NSLog(@"Completed existing user input: %@", userInput);
 			
