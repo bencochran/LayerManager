@@ -18,8 +18,8 @@
 	IBOutlet UILabel *_usedBy;
 	IBOutlet UITableViewCell *_scheduleURLCell;
 	IBOutlet UITextView*_scheduleURL;
-	IBOutlet UITableViewCell *_imageViewCell;
-	IBOutlet UIImageView *imageView;
+	GNTableViewCell *_imageViewCell;
+	UIImage *_photo;
 	NSString *_summaryString;
 	NSString *_usedByString;
 	NSString *_scheduleURLString;
@@ -37,7 +37,8 @@
 @property (nonatomic, retain) UILabel *usedBy;
 @property (nonatomic, retain) UITableViewCell *scheduleURLCell;
 @property (nonatomic, retain) UITextView *scheduleURL;
-@property (nonatomic, retain) UITableViewCell *imageViewCell;
+@property (nonatomic, retain) GNTableViewCell *imageViewCell;
+@property (nonatomic, retain) UIImage *photo;
 
 @property (nonatomic, copy) NSString *summaryString;
 @property (nonatomic, copy) NSString *usedByString;

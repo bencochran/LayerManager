@@ -10,15 +10,21 @@
 
 
 @implementation GNTableViewCell
-@synthesize cellView=_cellView;
+@synthesize cellView=_cellView, labelView=_labelView, contentString=_contentString, photoView=_photoView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
-        CGRect cellFrame = CGRectMake(0.0, 0.0, self.contentView.bounds.size.width,
-									 self.contentView.bounds.size.height);
-        self.cellView = [[GNCellView alloc] initWithFrame:cellFrame];
-        self.cellView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self.contentView addSubview:self.cellView];
+		self.cellView = [[GNCellView alloc] init];
+		self.cellView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		self.backgroundView = self.cellView;
+		[self.backgroundView setAlpha:0.80];
+		[self.backgroundView setOpaque:YES];
+		self.labelView = [[UILabel alloc] init];
+		self.labelView.font = [UIFont boldSystemFontOfSize:12];
+		self.labelView.textColor = [UIColor whiteColor];
+		self.labelView.backgroundColor = [UIColor clearColor];
+		[self.cellView addSubview:self.labelView];
+		self.photoView = [[UIImageView alloc] init];
     }
     return self;
 }
@@ -31,6 +37,26 @@
     // Configure the view for the selected state
 }
 
+-(void)setContentString:(NSString *)newContentString withFrameSize:(CGFloat)newFrameSize{
+	if (newContentString != self.contentString){
+		CGFloat lineSpacing = (CGFloat)30;
+		self.labelView.text = newContentString;
+		CGRect textFrame = CGRectMake(10.0, 0.0, self.contentView.bounds.size.width-35, newFrameSize*lineSpacing);
+		[self.labelView setFrame:textFrame];
+		self.labelView.numberOfLines = newFrameSize;
+		[self.cellView setNeedsDisplay];
+		self.contentString = newContentString;
+	}
+}
+
+-(void)displayImage:(UIImage *)newImage{
+	CGRect photoFrame = CGRectMake(10.0, 10.0, self.contentView.bounds.size.width-20, self.contentView.bounds.size.height-20);
+	[self.photoView setFrame:photoFrame];
+	self.photoView.contentMode = UIViewContentModeScaleAspectFit;
+	self.photoView.image = newImage;
+	[self.cellView addSubview:self.photoView];
+	[self.cellView setNeedsDisplay];
+}
 
 - (void)dealloc {
     [super dealloc];
@@ -41,17 +67,11 @@
 //////
 @implementation GNCellView
 
-- (void)setContentString:(NSString *)newContentString{
-	if (contentString != newContentString){
-		[contentString release];
-		contentString = [newContentString retain];
+-(id)init{
+	if (self = [super init]){
+		self.backgroundColor = [UIColor clearColor];
 	}
-	[self setNeedsDisplay];
-	
-}
-
-- (NSString *)getContentString{
-	return contentString;
+	return self;
 }
 
 void CGContextAddRoundedRect (CGContextRef context, CGRect rect, int corner_radius) {
@@ -66,6 +86,7 @@ void CGContextAddRoundedRect (CGContextRef context, CGRect rect, int corner_radi
 	
 	/* Begin! */
 	CGContextBeginPath(context);
+	
 	CGContextMoveToPoint(context, x_left, y_top_center);
 	
 	/* First corner */
@@ -84,24 +105,21 @@ void CGContextAddRoundedRect (CGContextRef context, CGRect rect, int corner_radi
 	CGContextAddArcToPoint(context, x_left, y_bottom, x_left, y_bottom_center, corner_radius);
 	CGContextAddLineToPoint(context, x_left, y_top_center);
 	
-	/* Done */
 	CGContextClosePath(context);
 	
 }
 
 - (void)drawRect:(CGRect)rect {
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGRect outerRect = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
-	CGContextSetRGBFillColor(context, 0, 0, 0, 0.5);
-	CGContextAddRoundedRect(context, outerRect, 10);
+	CGRect outerRect = CGRectMake(self.bounds.origin.x+2, self.bounds.origin.y+2, self.bounds.size.width-4, self.bounds.size.height-4);
+	//CGRect innerRect = CGRectMake(self.bounds.origin.x+4, self.bounds.origin.y+4, self.bounds.size.width-8, self.bounds.size.height-8);
+	//CGContextAddRoundedRect(context, outerRect, 15);
+	//CGContextSetLineWidth(context, 2);
+	//CGContextSetRGBStrokeColor(context, 1, 1, 1, 1.0);
+	//CGContextStrokePath(context);
+	CGContextAddRoundedRect(context, outerRect, 15);
+	CGContextSetRGBFillColor(context, 0, 0, 0, 1.0);
 	CGContextFillPath(context);
-	CGContextSetLineWidth(context, 10);
-	CGContextSetRGBStrokeColor(context, 1, 1, 1, 1.0);
-	CGContextAddRoundedRect(context, outerRect, 10);
-	CGContextStrokePath(context);
-	CGContextSetRGBFillColor(context, 1, 1, 1, 1);
-	CGPoint point = CGPointMake(outerRect.origin.x+10, outerRect.origin.y+10);
-	[contentString drawAtPoint:point forWidth:outerRect.size.width withFont:[UIFont boldSystemFontOfSize:14] minFontSize:10 actualFontSize:NULL lineBreakMode:UILineBreakModeTailTruncation baselineAdjustment:UIBaselineAdjustmentAlignBaselines];
 
 }
 

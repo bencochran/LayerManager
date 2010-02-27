@@ -73,6 +73,8 @@
 		FC6F41AB113079F500036392 /* FlickrLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6F41A9113079F500036392 /* FlickrLayer.m */; };
 		FC7AB921113752AE00F5EFD6 /* SportsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FC7AB91F113752AE00F5EFD6 /* SportsViewController.h */; };
 		FC7AB922113752AE00F5EFD6 /* SportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7AB920113752AE00F5EFD6 /* SportsViewController.m */; };
+		FC94C19D1138455D001F7B38 /* GNTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = FC94C19B1138455D001F7B38 /* GNTableViewCell.h */; };
+		FC94C19E1138455D001F7B38 /* GNTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94C19C1138455D001F7B38 /* GNTableViewCell.m */; };
 		FC9694DB11224C8C00218696 /* WikiLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FC9694D911224C8C00218696 /* WikiLayer.h */; };
 		FC9694DC11224C8C00218696 /* WikiLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9694DA11224C8C00218696 /* WikiLayer.m */; };
 		FCBF977F111A46A00071F029 /* GNInfoInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */; };
@@ -188,6 +190,8 @@
 		FC7AB928113752DC00F5EFD6 /* cellBackgroundLG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBackgroundLG.png; sourceTree = "<group>"; };
 		FC7AB929113752E800F5EFD6 /* cellBackgroundMD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBackgroundMD.png; sourceTree = "<group>"; };
 		FC7AB92A113752EE00F5EFD6 /* cellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBackground.png; sourceTree = "<group>"; };
+		FC94C19B1138455D001F7B38 /* GNTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNTableViewCell.h; sourceTree = "<group>"; };
+		FC94C19C1138455D001F7B38 /* GNTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNTableViewCell.m; sourceTree = "<group>"; };
 		FC9694D911224C8C00218696 /* WikiLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiLayer.h; sourceTree = "<group>"; };
 		FC9694DA11224C8C00218696 /* WikiLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiLayer.m; sourceTree = "<group>"; };
 		FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNInfoInputViewController.h; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 				FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */,
 				A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */,
 				A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */,
+				FC94C19B1138455D001F7B38 /* GNTableViewCell.h */,
+				FC94C19C1138455D001F7B38 /* GNTableViewCell.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 				FC6F41AA113079F500036392 /* FlickrLayer.h in Headers */,
 				A26D1BEE1130B2F8008EBEFF /* SportingArenasLayer.h in Headers */,
 				FC7AB921113752AE00F5EFD6 /* SportsViewController.h in Headers */,
+				FC94C19D1138455D001F7B38 /* GNTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +584,7 @@
 				FC6F41AB113079F500036392 /* FlickrLayer.m in Sources */,
 				A26D1BEF1130B2F8008EBEFF /* SportingArenasLayer.m in Sources */,
 				FC7AB922113752AE00F5EFD6 /* SportsViewController.m in Sources */,
+				FC94C19E1138455D001F7B38 /* GNTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

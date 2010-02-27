@@ -12,20 +12,26 @@
 
 @interface GNTableViewCell : UITableViewCell {
 	GNCellView *_cellView;
+	UILabel *_labelView;
+	NSString *_contentString;
+	UIImageView *_photoView;
 }
 
 @property (nonatomic, retain) GNCellView *cellView;
+@property (nonatomic, retain) UILabel *labelView;
+@property (nonatomic, copy) NSString *contentString;
+@property (nonatomic, retain) UIImageView *photoView;
 
-- (void)redisplay;
+//- (void)redisplay;
+
+-(void)setContentString:(NSString *)string withFrameSize:(CGFloat )frameSize;
+-(void)displayImage:(UIImage *)newImage;
 
 @end
 /////////////
 @interface GNCellView : UIView {
-	GNCellView *cellView;
-    NSString *contentString;
-    BOOL selected;
 }
-@property (nonatomic, retain, getter=getContentString, setter=setContentString) NSString *contentString;
-@property (nonatomic, getter=isSelected) BOOL selected;
+
+
 
 @end

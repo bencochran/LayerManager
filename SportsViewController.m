@@ -9,11 +9,11 @@
 #import "SportsViewController.h"
 
 @implementation SportsViewController
-@synthesize summaryCell=_summaryCell, summary=_summary, summaryString=_summaryString, usedByCell=_usedByCell, usedBy=_usedBy, usedByString=_usedByString, scheduleURLCell=_scheduleURLCell, scheduleURL=_scheduleURL, scheduleURLString=_scheduleURLString, imageViewCell=_imageViewCell, imageURL=_imageURL, layer=_layer, landmark=_landmark;
+@synthesize summaryCell=_summaryCell, summary=_summary, summaryString=_summaryString, usedByCell=_usedByCell, usedBy=_usedBy, usedByString=_usedByString, scheduleURLCell=_scheduleURLCell, scheduleURL=_scheduleURL, scheduleURLString=_scheduleURLString, imageViewCell=_imageViewCell, imageURL=_imageURL, photo=_photo, layer=_layer, landmark=_landmark;
 
 - (id)init {
-	//if (self = [super initWithStyle:UITableViewStyleGrouped]){
-	if (self = [super initWithNibName:@"SportsViewController" bundle:nil]) {
+	if (self = [super initWithStyle:UITableViewStyleGrouped]){
+	//if (self = [super initWithNibName:@"SportsViewController" bundle:nil]) {
 	}
 	return self;
 }
@@ -70,8 +70,8 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-	UIImage *image = [UIImage imageWithData:receivedData];
-	imageView.image = image;
+	self.photo = [UIImage imageWithData:receivedData];
+	[self.imageViewCell displayImage:self.photo];
 	//self.imageViewCell.backgroundView = imageView;
     // release the connection, and the data object
     [connection release];
@@ -83,6 +83,13 @@
     [super viewDidLoad];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
+	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
+}
+
+-(void)didSelectEditButton{
+	GNEditingTableViewController *editingViewController = (GNEditingTableViewController *)[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark];
+	[self.navigationController pushViewController:editingViewController animated:YES];	
 }
 
 
@@ -159,44 +166,63 @@
     return 1;
 }
 
+- (CGFloat)getFrameSizeForString:(NSString *)string{
+	//Anyone know how to do MOD in a better way!!!???
+	CGFloat numberOfLines = (CGFloat)(1+([string length]-([string length]%45))/45);
+	return numberOfLines;
+}
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GNTableViewCell *cell = (GNTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     //GNTableViewCell *cell = (GNTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier]autorelease];
-		//cell = [[[GNTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+        cell = [[[GNTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier]autorelease];
+	    }
     
 	if (indexPath.section == 0){
-		//[cell.cellView setContentString:self.summaryString];
-		//return cell;
-		return self.imageViewCell;
+		if (_imageURL == nil){
+			CGFloat stringFrameSize = [self getFrameSizeForString:@"Click 'Edit' to take a Photo..."];
+			[cell setContentString:@"Click 'Edit' to take a Photo..." withFrameSize:stringFrameSize];
+		}
+		else{
+			[cell setContentString:@"" withFrameSize:(CGFloat)6];
+			self.imageViewCell = cell;
+			/// Display spinner here!
+		}
 	}
 	
 	else if (indexPath.section == 1){
-		//[cell.cellView setContentString:self.summaryString];
-		//return cell;
-		self.summary.text = self.summaryString;
-		return self.summaryCell;
+		if ([self.summaryString length]== 0){
+			[cell setContentString:@"Click 'Edit' to enter a Summary..." withFrameSize:(CGFloat)1];
+		}
+		else{
+			CGFloat stringFrameSize = [self getFrameSizeForString:self.summaryString];
+			[cell setContentString:self.summaryString withFrameSize:(CGFloat)stringFrameSize];
+		}
 
 	}
 	
 	else if(indexPath.section == 2){
-		//[cell.cellView setContentString:self.usedByString];
-		//return cell;
-		self.usedBy.text = self.usedByString;
-		return self.usedByCell;
+		if ([self.usedByString length]== 0){
+			[cell setContentString:@"Click 'Edit' to enter a List of Teams..." withFrameSize:(CGFloat)1];
+		}
+		else{
+			CGFloat stringFrameSize = [self getFrameSizeForString:self.usedByString];
+			[cell setContentString:self.usedByString withFrameSize:stringFrameSize];
+		}
 	}
     
 	else{
-		//[cell.cellView setContentString:self.scheduleURLString];
-		//return cell;
-		self.scheduleURL.text = self.scheduleURLString;
-		return self.scheduleURLCell;
+		if ([self.scheduleURLString length] == 0){
+			[cell setContentString:@"Click 'Edit' to enter a URL for the Schedule..." withFrameSize:(CGFloat)1];
+		}
+		else{
+			CGFloat stringFrameSize = [self getFrameSizeForString:self.scheduleURLString];
+			[cell setContentString:self.scheduleURLString withFrameSize:stringFrameSize];
+		}
 	}
 	
     return cell;
@@ -205,13 +231,25 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0){
-		return 180;
+		if (_imageURL == nil){
+			return (CGFloat)30;
+		}
+		else{
+			return (CGFloat)180;
+		}
 	}
 	else if (indexPath.section == 1){
-		return 90;
+		CGFloat stringFrameSize = [self getFrameSizeForString:self.summaryString];
+		return (CGFloat)(stringFrameSize*(CGFloat)30);
+	}
+	else if (indexPath.section == 2){
+		CGFloat stringFrameSize = [self getFrameSizeForString:self.usedByString];
+		return (CGFloat)(stringFrameSize*(CGFloat)30);
 	}
 	else{
-		return 45;
+		CGFloat stringFrameSize = [self getFrameSizeForString:self.scheduleURLString];
+		return (CGFloat)(stringFrameSize*(CGFloat)30);
+	
 	}
 }
 
@@ -221,7 +259,7 @@
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
 	if (indexPath.section == 3){
-		//if (! self.scheduleURLString == nil){
+		if (self.scheduleURLString != nil){
 			UIViewController *viewController = [[UIViewController alloc] init];
 			UIWebView *webView = [[UIWebView alloc] init];
 			NSString *urlString = self.scheduleURLString;
@@ -231,9 +269,8 @@
 			[webView release];
 			[self.navigationController pushViewController:viewController animated:YES];
 			[viewController release];	
-		//}
+		}
 	}
-	
 }
 
 
