@@ -104,8 +104,9 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	}
 }
 
-// Parse the NSData and return an NSArray of landmarks the layer should not
-// store the landmarks created in this step, that will happen elsewhere
+// Parse the NSData and return an NSArray of landmarks. The layer should not
+// store the landmarks created in this step, but it should store the parsed
+// layer information in layerInfoByLandmarkID
 -(NSArray *)parseDataIntoLandmarks:(NSData *)data {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
