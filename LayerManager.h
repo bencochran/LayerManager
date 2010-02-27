@@ -6,8 +6,8 @@
 
 // Layers
 #import "CarletonLayer.h"
-#import "TweetLayer.h"
-#import "FoodLayer.h"
-#import "WikiLayer.h"
 #import "FlickrLayer.h"
+#import "FoodLayer.h"
 #import "SportingArenasLayer.h"
+#import "TweetLayer.h"
+#import "WikiLayer.h"

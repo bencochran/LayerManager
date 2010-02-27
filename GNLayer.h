@@ -53,8 +53,6 @@ extern NSString *const GNLayerDidFinishUpdating;
 	// getEditingViewControllerWithLocation:andLandmark: is overrridden in subclass)
 	NSArray *layerFields;
 	
-	// NSData to hold incoming data from the NSURLConnection as it is received
-	NSMutableData *receivedData;
 	// The most recently used center location
 	CLLocation *center;
 
@@ -65,8 +63,8 @@ extern NSString *const GNLayerDidFinishUpdating;
 @property (nonatomic) BOOL active;
 @property (readonly) BOOL layerIsUserModifiable;
 
-// general accessors
-- (UIImage *) getIcon;
+//// General accessors
+- (UIImage *)getIcon;
 - (BOOL)layerIsUserModifiable;
 
 
@@ -88,7 +86,7 @@ extern NSString *const GNLayerDidFinishUpdating;
 // If limitToValidated == NO and this layer is user modifiable, returns a URL that will retrieve
 // all validated and unvalidated landmarks within a radius of the given location
 - (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated;
-// A convenience method for Gnarus layers
+// A convenience method for layers that use the Gnarus server
 - (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated withLayerName:(NSString *)layerName;
 // Given the data returned by a call to one of the provided URLs, returns an NSArray
 // containing the appropriate landmarks retrieved from GNLayerManager. Stores the layer info
@@ -103,13 +101,13 @@ extern NSString *const GNLayerDidFinishUpdating;
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark;
 
 
-//// Methods for updating information on user-editable landmarks ////
-////   Should only be implemented if layer is user modifiable    ////
+////   Methods for updating information on user-editable landmarks    ////
+//// Should only be  called / implemented if layer is user modifiable ////
 
 // Retrieves all validated and unvalidated landmarks within a radius of the provided location
 // and stores the layer information for these landmarks in layerInfoByLandmarkID
 - (void)updateEditableLandmarksForLocation:(CLLocation *)location;
-// Returns a UIViewController that allows a user to add a new landmark to the provided location
+// Returns a UIViewController that allows the user to add a new landmark to the provided location
 // if landmark == nil, save/vote for existing information on an unvalidated landmark, edit/update
 // information for both validated and unvalidated landmarks, and add layer information to this layer
 // for an existing landmark (either validated or unvalidated)
@@ -119,9 +117,10 @@ extern NSString *const GNLayerDidFinishUpdating;
 - (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark;
 // Uploads the provided layer information, landmark ID, location, and image to the server
 // of a user modifiable layer. If the landmark currently exists, the landmarkID must be
-// that landmark's ID. If the landmark does not already exist, the landmarkID must be
-// @"0" (for Gnarus layers). If the landmark already exists, the location must be that
-// landmark's location.  If the photo is nil, the layer's existing photo for this landmark is not changed.
+// that landmark's ID. For Gnarus layers, if the landmark does not already exist, the
+// landmarkID must be @"0". If photo == nil, the layer's existing photo for this landmark is not changed.
 - (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo;
+// Similar to the above method, but used when creating a completely new landmark
+- (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo;
 
 @end

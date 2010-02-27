@@ -30,6 +30,7 @@
 @property (nonatomic, retain) NSMutableArray* activeLayers;
 
 // To comply with the MKAnnotation interface
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSString* subtitle;
 

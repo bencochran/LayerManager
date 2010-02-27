@@ -20,7 +20,6 @@
 	return self;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
@@ -28,7 +27,7 @@
 	[saveButton release];
 	self.title = [fieldArray objectAtIndex:0];
 
-	if([fieldArray objectAtIndex:1] == @"textView"){
+	if ([fieldArray objectAtIndex:1] == @"textView") {
 		textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 100)];
 		textView.delegate = self;
 		textView.textAlignment = UITextAlignmentLeft;
@@ -38,7 +37,7 @@
 		[textView becomeFirstResponder];
 		[textView release];
 	}
-	else{
+	else {
 		textField = [[UITextField alloc] initWithFrame:CGRectMake(10,10,300,25)];
 		textField.textAlignment = UITextAlignmentLeft;
 		textField.borderStyle = UITextBorderStyleRoundedRect;
@@ -87,11 +86,9 @@
 	// e.g. self.myOutlet = nil;
 }
 
-
 - (void)dealloc {
 	[fieldArray release];
     [super dealloc];
 }
-
 
 @end

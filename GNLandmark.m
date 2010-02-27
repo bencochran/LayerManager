@@ -8,11 +8,14 @@
 
 #import "GNLandmark.h"
 #import "GNLayerManager.h"
-#import <stdlib.h>
 
 @implementation GNLandmark
 
 @synthesize ID=_id, name=_name, distance=_distance, activeLayers=_activeLayers;
+
+- (CLLocationCoordinate2D)coordinate {
+	return super.coordinate;
+}
 
 - (NSString *)title {
 	return self.name;
