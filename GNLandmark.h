@@ -2,7 +2,7 @@
 //  GNLandmark.h
 //  Stores the information relevant to a landmark:
 //      a longitude and latitude (inherited from CLLocation)
-//      a unique string identifier
+//      a unique string identifier (should begin with a source-specific string immediately followed by a colon)
 //      a string name (not necessarily unique)
 //      a float with the value of the last known distance from the user
 //      a list of the active layers that are currently storing information on this landmark

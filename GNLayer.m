@@ -71,7 +71,7 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 - (void)updateToCenterLocation:(CLLocation *)location {
 	if (self.active != YES) {
 		// Well, this shouldn't have happened.
-		NSLog(@"updateToCenterLocation: was called on %s, which is inavtive", [self name]);
+		NSLog(@"updateToCenterLocation: was called on %s, which is inactive", [self name]);
 		return;
 	}
 	center = [location retain];
@@ -161,6 +161,7 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 }
 
 // Returns a short string summarizing the layer information for the given landmark
+// (Should be displayed below the layer name in the LayersListViewController)
 - (NSString *)summaryForLandmark:(GNLandmark *)landmark {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
@@ -196,6 +197,10 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<GNLayer name: %@, active: %@>", self.name, self.active ? @"YES" : @"NO"];
+}
+
+- (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo {
+	[self doesNotRecognizeSelector:_cmd];
 }
 
 -(void)dealloc {
