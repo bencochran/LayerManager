@@ -122,7 +122,7 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	return nil;
 }
 
-// Returns an NSURL when given the name of the Layer.
+// Returns an NSURL when given the name of the layer.
 // Gnarus layer subclasses will implement URLForLocation
 // simply by calling URLForLocation withLayerName
 // >> FOR USE ONLY BY LAYERS USING THE GNARUS SERVER. <<
@@ -163,7 +163,7 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
           [[request error] localizedDescription],
           [[[request error] userInfo] objectForKey:NSErrorFailingURLStringKey]);
 	
-	// Also send a notification
+	// Send out a notification
 	[[NSNotificationCenter defaultCenter] postNotificationName:GNLayerUpdateFailed
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[request error], @"error", request, @"request", nil]];
@@ -193,7 +193,7 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	if (limitToValidated) {
 		return [self.landmarks containsObject:landmark];
 	} else {
-		return ([layerInfoByLandmarkID objectForKey:landmark.ID] != nil);//([self.landmarks containsObject:landmark] || [layerInfoByLandmarkID objectForKey:landmark.ID] != nil);
+		return ([layerInfoByLandmarkID objectForKey:landmark.ID] != nil);
 	}
 }
 

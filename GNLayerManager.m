@@ -24,8 +24,7 @@ static GNLayerManager *sharedManager = nil;
 	return sharedManager;
 }
 
-// Prevent someone from attempting to allocate
-// our class manually
+// Prevent someone from attempting to allocate our class manually
 + (id)allocWithZone:(NSZone *)zone {
 	return [[self sharedManager] retain];
 }
@@ -59,10 +58,11 @@ static GNLayerManager *sharedManager = nil;
 	if (self = [super init]) {
 		layers = [[NSMutableArray alloc] init];
 		allLandmarks = [[NSMutableDictionary alloc] init];
-		userEditableLandmarks = [[NSMutableArray alloc] init];
 		validatedLandmarks = [[NSMutableArray alloc] init];
+		userEditableLandmarks = [[NSMutableArray alloc] init];
 		maxLandmarks = 10;
 		maxDistance = 100;
+		center = nil;
 	}
 	return self;
 }
@@ -98,7 +98,7 @@ static GNLayerManager *sharedManager = nil;
 			if (landmark.activeLayers.count <= 1) {
 				// the given layer is the only remaining active layer for this landmark:
 				// once layer is inactive, landmark will also be inactive, so remove it
-				[allLandmarks removeObjectForKey: landmark.ID];
+				[allLandmarks removeObjectForKey:landmark.ID];
 				[validatedLandmarks removeObject:landmark];
 			}
 		}		
@@ -135,6 +135,36 @@ static GNLayerManager *sharedManager = nil;
 		[allLandmarks setObject:landmark forKey:landmark.ID];
 	}
 	return landmark;
+}
+
+- (NSArray *)closestLandmarks {
+	[validatedLandmarks sortUsingSelector:@selector(compareTo:)];
+	
+	///////////////////////////////////// TODO: Also need to cap to maxDistance
+	NSArray *closest = [validatedLandmarks objectsAtIndexes:
+						[NSIndexSet indexSetWithIndexesInRange:
+						 NSMakeRange(0, MIN([self maxLandmarks], [validatedLandmarks count]))]];	
+	return closest;
+}
+
+- (NSArray *)activeLayersForLandmark:(GNLandmark *)landmark {
+	NSMutableArray *layersForLandmark = [NSMutableArray array];
+	for (GNLayer *layer in self.layers) {
+		if (layer.active && [layer containsLandmark:landmark limitToValidated:YES]) {
+			[layersForLandmark addObject:layer];
+		}
+	}
+	return layersForLandmark;
+}
+
+- (NSArray *)layersForLandmark:(GNLandmark *)landmark {
+	NSMutableArray *layersForLandmark = [NSMutableArray array];
+	for (GNLayer *layer in self.layers) {
+		if ([layer containsLandmark:landmark limitToValidated:NO]) {
+			[layersForLandmark addObject:layer];
+		}
+	}
+	return layersForLandmark;
 }
 
 - (void)updateToCenterLocation:(CLLocation *)location {
@@ -199,37 +229,6 @@ static GNLayerManager *sharedManager = nil;
 	[[NSNotificationCenter defaultCenter] postNotificationName:GNEditableLandmarksUpdated
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:userEditableLandmarks,@"landmarks",nil]];
-}
-
-- (NSArray *)layersForLandmark:(GNLandmark *)landmark {
-	NSMutableArray *layersForLandmark = [NSMutableArray array];
-	for (GNLayer *layer in self.layers) {
-		if ([layer containsLandmark:landmark limitToValidated:NO]) {
-			[layersForLandmark addObject:layer];
-		}
-	}
-	return layersForLandmark;
-}
-
-- (NSArray *)activeLayersForLandmark:(GNLandmark *)landmark {
-	NSMutableArray *layersForLandmark = [NSMutableArray array];
-	for (GNLayer *layer in self.layers) {
-		if (layer.active && [layer containsLandmark:landmark limitToValidated:YES]) {
-			[layersForLandmark addObject:layer];
-		}
-	}
-	return layersForLandmark;
-}
-
-
-- (NSArray *)closestLandmarks {
-	[validatedLandmarks sortUsingSelector:@selector(compareTo:)];
-	
-	///////////////////////////////////// TODO: Also need to cap to maxDistance
-	NSArray *closest = [validatedLandmarks objectsAtIndexes:
-						 [NSIndexSet indexSetWithIndexesInRange:
-						  NSMakeRange(0, MIN([self maxLandmarks], [validatedLandmarks count]))]];	
-	return closest;
 }
 
 - (NSString *)description {

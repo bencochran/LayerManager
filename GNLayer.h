@@ -55,7 +55,6 @@ extern NSString *const GNLayerDidFinishUpdating;
 	
 	// The most recently used center location
 	CLLocation *center;
-
 }
 
 @property (nonatomic, copy) NSString *name;
@@ -115,12 +114,12 @@ extern NSString *const GNLayerDidFinishUpdating;
 // Returns a dictionary that maps each string in layerFields to the layer information
 // for that field that is currently stored on this layer about this landmark
 - (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark;
-// Uploads the provided layer information, landmark ID, location, and image to the server
-// of a user modifiable layer. If the landmark currently exists, the landmarkID must be
-// that landmark's ID. For Gnarus layers, if the landmark does not already exist, the
-// landmarkID must be @"0". If photo == nil, the layer's existing photo for this landmark is not changed.
+// Uploads the provided layer information, landmark ID, location, and image to the server of a
+// user modifiable layer. If the landmark currently exists, the landmarkID must be that
+// landmark's ID. For Gnarus layers, if the landmark does not already exist, the landmarkID
+// must be @"0". If photo == nil, the layer's existing photo for this landmark is not changed.
 - (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo;
-// Similar to the above method, but used when creating a completely new landmark
+// Similar to the above method, but can be used when creating a completely new landmark
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo;
 
 @end
