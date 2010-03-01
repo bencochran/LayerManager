@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GNLandmarkViewController.h"
 #import "GNLayer.h"
 
 @interface FoodLayer : GNLayer {
 }
 
 @end
-
+/*
 ///////
 
 @interface FoodViewController : UIViewController {
@@ -54,3 +55,4 @@
 @property (nonatomic, retain) GNLandmark *landmark;
 
 @end
+ */

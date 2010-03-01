@@ -15,7 +15,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
 		self.cellView = [[GNCellView alloc] init];
-		self.cellView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		//self.cellView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		self.backgroundView = self.cellView;
 		[self.backgroundView setAlpha:0.80];
 		[self.backgroundView setOpaque:YES];
@@ -39,11 +39,11 @@
 
 -(void)setContentString:(NSString *)newContentString withFrameSize:(CGFloat)newFrameSize{
 	if (newContentString != self.contentString){
-		CGFloat lineSpacing = (CGFloat)30;
+		CGFloat lineSpacing = (CGFloat)15;
 		self.labelView.text = newContentString;
-		CGRect textFrame = CGRectMake(10.0, 0.0, self.contentView.bounds.size.width-35, newFrameSize*lineSpacing);
+		CGRect textFrame = CGRectMake(15.0, 0.0, self.contentView.bounds.size.width-45, (newFrameSize*lineSpacing)+(CGFloat)40);
 		[self.labelView setFrame:textFrame];
-		self.labelView.numberOfLines = newFrameSize;
+		self.labelView.numberOfLines = newFrameSize+ (CGFloat)1;
 		[self.cellView setNeedsDisplay];
 		self.contentString = newContentString;
 	}
@@ -111,7 +111,7 @@ void CGContextAddRoundedRect (CGContextRef context, CGRect rect, int corner_radi
 
 - (void)drawRect:(CGRect)rect {
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGRect outerRect = CGRectMake(self.bounds.origin.x+2, self.bounds.origin.y+2, self.bounds.size.width-4, self.bounds.size.height-4);
+	CGRect outerRect = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
 	//CGRect innerRect = CGRectMake(self.bounds.origin.x+4, self.bounds.origin.y+4, self.bounds.size.width-8, self.bounds.size.height-8);
 	//CGContextAddRoundedRect(context, outerRect, 15);
 	//CGContextSetLineWidth(context, 2);

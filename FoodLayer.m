@@ -15,6 +15,7 @@
 	if (self = [super init]) {
 		self.name = @"Food";
 		iconPath = @"food.png";
+		self.tableNameOnServer = @"Food";
 		userModifiable = YES;
 		NSArray *nameField = [[NSMutableArray alloc] initWithObjects:@"Name", @"textField", nil];
 		NSArray *hoursField = [[NSMutableArray alloc] initWithObjects:@"Hours", @"textView", nil];
@@ -22,6 +23,8 @@
 		NSArray *descriptionField = [[NSMutableArray alloc] initWithObjects:@"Description", @"textView", nil];
 		NSArray *menuField = [[NSMutableArray alloc] initWithObjects:@"Menu", @"textView", nil];
 		layerFields = [[NSArray alloc] initWithObjects:nameField, hoursField, summaryField, descriptionField, menuField, nil];
+		self.fields = [[NSArray alloc] initWithObjects:@"Name",@"Hours", @"Summary",@"Description",@"Menu", nil];
+		self.serverNamesForFields = [[NSArray alloc] initWithObjects:@"hours", @"summary",@"description",@"menu", nil];
 		[nameField release];
 		[hoursField release];
 		[summaryField release];
@@ -122,19 +125,18 @@
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
-	FoodViewController *viewController = [[FoodViewController alloc] init];
+	GNLandmarkViewController *viewController = [[GNLandmarkViewController alloc] init];
 	viewController.title = landmark.name;
 	viewController.layer = self;
 	viewController.landmark = landmark;
-	viewController.summary = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
-	viewController.hours = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"hours"];
-	viewController.menu = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menu"];
-	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
+	viewController.fieldNames = self.fields;
+	viewController.fieldInfo = (NSMutableDictionary *)[self fieldInformationForLandmark:landmark];
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
-	
+	NSLog(@"URL String: <%@>", urlString);
 	if (urlString != nil) {
 		viewController.imageURL = [NSURL URLWithString:urlString]; 
 	}
+	return [viewController autorelease];
 //	UIWebView *webView = [[UIWebView alloc] init];
 //	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"menuURL"];
 //
@@ -143,7 +145,6 @@
 //	viewController.title = self.name;
 //	viewController.view = webView;
 //	[webView release];
-	return [viewController autorelease];
 }
 
 - (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark {
@@ -164,7 +165,8 @@
 @end
 
 //////////
-
+/*
+ 
 @implementation FoodViewController
 
 @synthesize imageURL=_imageURL, hoursView=_hoursView, summaryView=_summaryView, descriptionView=_descriptionView, menuView=_menuView, editPhoto=_editPhoto, photoFrame=_photoFrame, photoLoading=_photoLoading, name=_name, hours=_hours, summary=_summary, description=_description, menu=_menu, layer=_layer, landmark=_landmark;
@@ -247,6 +249,7 @@
  }
  */
 
+/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -299,7 +302,7 @@
  return (interfaceOrientation == UIInterfaceOrientationPortrait);
  }
  */
-
+/*
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -317,3 +320,4 @@
 }
 
 @end
+*/

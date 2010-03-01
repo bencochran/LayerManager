@@ -15,12 +15,14 @@
 
 @implementation GNEditingTableViewController
 
-@synthesize adding=_adding;
+@synthesize adding=_adding, userInputDict=_userInputDict;
 
 - (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark{
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		fields = [newFields retain];
+		NSLog(@"Fields: %@",fields);
 		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count])];
+		self.userInputDict = [[NSMutableDictionary alloc] init];
 		selectedLocation = [location retain];
 		selectedLayer = [layer retain]; 
 		selectedLandmark = [landmark retain];
@@ -106,6 +108,9 @@
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 		self.title = input;
 	}
+	else{
+		[self.userInputDict setObject:input forKey:[selectedLayer.serverNamesForFields objectAtIndex:index-1]];
+	}
 }
 -(NSInteger)getCurrentField {
 	return currentField;
@@ -161,7 +166,7 @@
 	}
 	self.tableView.tableHeaderView = buttonContainer;
 	photoView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,80,80)];
-	photoView.contentMode = UIViewContentModeScaleAspectFill;
+	photoView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)setDidFinishPhotoRequest:(ASIHTTPRequest *)request{	
@@ -216,10 +221,11 @@
 	}
 	if (selectedLandmark) {
 		// The substringFromIndex:7 parameter strips off the "gnarus:" in the beginning of landmarkID's for the gnarus server.
-		[selectedLayer postLandmarkArray:userInput withID:[selectedLandmark.ID substringFromIndex:7] withLocation:selectedLocation andPhoto:photo];
+		[selectedLayer postLandmark:self.userInputDict withName:selectedLandmark.name withLocation:selectedLocation withID:[selectedLandmark.ID substringFromIndex:7] andPhoto:photo];
+		//[selectedLayer postLandmarkArray:userInput withID:[selectedLandmark.ID substringFromIndex:7] withLocation:selectedLocation andPhoto:photo];
 	}
 	else {
-		[selectedLayer postLandmarkArray:userInput withID:@"0" withLocation:selectedLocation andPhoto:photo];
+		[selectedLayer postLandmark:self.userInputDict withName:self.title withLocation:selectedLocation withID:@"0" andPhoto:photo];
 	}
 	NSLog(@"Posting photo: %@", photo);
 	NSLog(@"Posting user input array : %@", userInput);
@@ -227,6 +233,9 @@
 	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+	return [[fields objectAtIndex:section] objectAtIndex:0];
+}
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -286,16 +295,14 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
-    
+    static NSString *CellIdentifier = @"Cell";	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 	
-	NSString *fieldName = [[[fields objectAtIndex:(indexPath.section)]objectAtIndex:0] stringByAppendingString:@": "];
 	NSString *inputFields = [userInput objectAtIndex:(indexPath.section)];
-	cell.textLabel.text = [fieldName stringByAppendingString: inputFields];
+	cell.textLabel.text = inputFields;
 	
 	//[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 	

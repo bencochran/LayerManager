@@ -23,7 +23,7 @@ NSString *const GNLayerUpdateFailed = @"GNLayerUpdateFailed";
 NSString *const GNLayerDidStartUpdating = @"GNLayerDidStartUpdating";
 NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 
-@synthesize name=_name, landmarks=_landmarks, active=_active;
+@synthesize name=_name, landmarks=_landmarks, active=_active, fields=_fields, serverNamesForFields=_serverNamesForFields, tableNameOnServer=_tableNameOnServer;
 
 -(id)init {
 	if (self = [super init]) {
@@ -57,6 +57,44 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<GNLayer name: %@, active: %@>", self.name, self.active ? @"YES" : @"NO"];
 }
+
+-(void)postLandmark:(NSMutableDictionary *)updatedInfo withName:(NSString *)landmarkName withLocation:(CLLocation *)location withID:(NSString *)landmarkID andPhoto:(UIImage *)photo{
+	NSURL *url = [NSURL URLWithString:@"http://dev.gnar.us/post.py/generalLayer"];
+	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+	NSMutableDictionary *landmarkDict = [[NSMutableDictionary alloc]init];
+	NSMutableDictionary *layerDict = [[NSMutableDictionary alloc]init];
+	//for (NSString *fieldName in self.serverNamesForFields){
+	//	[layerDict setObject:@"None" forKey:fieldName];
+	//}
+	for (NSString *field in updatedInfo){
+		NSString *info = [updatedInfo objectForKey:field];
+		[layerDict setObject:info forKey:field];
+	}
+	[layerDict setObject:landmarkID forKey:@"landmarkID"];
+	NSString *layerDictString = [layerDict JSONRepresentation];
+	NSLog(@"JSON Layer: %@", layerDictString);
+	[request setPostValue:layerDictString forKey:@"layerDict"];
+	[request setPostValue:self.tableNameOnServer forKey:@"tableName"];
+	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
+	if(photo) {
+		[request setPostValue:@"True" forKey:@"hasImage"];
+		NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
+		[request setData:photoData forKey:@"image"];
+	}
+	else{
+		[request setPostValue:@"False" forKey:@"hasImage"];
+		[request setData:nil forKey:@"image"];
+		}
+	[landmarkDict setObject:landmarkName forKey:@"name"];
+	[landmarkDict setObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"latitude"];
+	[landmarkDict setObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"longitude"];
+	NSString *landmarkDictString = [landmarkDict JSONRepresentation];
+	NSLog(@"JSON Landmark: %@", landmarkDictString);
+	[request setPostValue:landmarkDictString forKey:@"landmarkDict"];
+	request.delegate = self;
+	[request startAsynchronous];
+}
+	
 
 -(void)dealloc {
 	[self.name release];

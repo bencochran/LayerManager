@@ -17,6 +17,7 @@
 #import "GNEditingTableViewController.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
+#import "JSON.h"
 
 @class GNLayerManager;
 
@@ -36,6 +37,9 @@ extern NSString *const GNLayerDidFinishUpdating;
 	// Keys are landmark IDs, values are objects containing
 	// layer information that can be parsed to create a UIViewController
 	NSMutableDictionary *layerInfoByLandmarkID;
+	NSArray *_fields;
+	NSArray *_serverNamesForFields;
+	NSString *_tableNameOnServer;
 	
 	// YES when storing information about closest validated landmarks on this layer
 	BOOL _active;
@@ -59,6 +63,9 @@ extern NSString *const GNLayerDidFinishUpdating;
 }
 
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *tableNameOnServer;
+@property (nonatomic, retain) NSArray *fields;
+@property (nonatomic, retain) NSArray *serverNamesForFields;
 @property (nonatomic, retain) NSMutableArray *landmarks;
 @property (nonatomic) BOOL active;
 @property (readonly) BOOL layerIsUserModifiable;
@@ -122,5 +129,8 @@ extern NSString *const GNLayerDidFinishUpdating;
 - (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo;
 // Similar to the above method, but used when creating a completely new landmark
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo;
+
+-(void)postLandmark:(NSMutableDictionary *)updatedInfo withName:(NSString *)landmarkName withLocation:(CLLocation *)location withID:(NSString *)landmarkID andPhoto:(UIImage *)photo;
+
 
 @end
