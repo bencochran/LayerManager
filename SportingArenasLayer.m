@@ -141,6 +141,11 @@
 	viewController.landmark = landmark;
 	viewController.fieldNames = self.fields;
 	viewController.fieldInfo = (NSMutableDictionary *)[self fieldInformationForLandmark:landmark];
+	for (NSString *name in viewController.fieldNames){
+		if ([[viewController.fieldInfo objectForKey:name]isKindOfClass:[NSNull class]]){
+			[viewController.fieldInfo setObject:@"" forKey:name];
+		}
+	}
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
 	NSLog(@"URL String: <%@>", urlString);
 	if (urlString != nil) {

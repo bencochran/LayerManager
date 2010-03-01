@@ -76,15 +76,11 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	[request setPostValue:layerDictString forKey:@"layerDict"];
 	[request setPostValue:self.tableNameOnServer forKey:@"tableName"];
 	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
+	[request setPostValue:@"True" forKey:@"hasImage"];
 	if(photo) {
-		[request setPostValue:@"True" forKey:@"hasImage"];
 		NSData *photoData = [NSData dataWithData:UIImageJPEGRepresentation(photo, 0.8)];
 		[request setData:photoData forKey:@"image"];
 	}
-	else{
-		[request setPostValue:@"False" forKey:@"hasImage"];
-		[request setData:nil forKey:@"image"];
-		}
 	[landmarkDict setObject:landmarkName forKey:@"name"];
 	[landmarkDict setObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"latitude"];
 	[landmarkDict setObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"longitude"];

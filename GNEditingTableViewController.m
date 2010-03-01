@@ -53,7 +53,12 @@
 			for (int i = 0; i < ([fields count]); i++) {
 				NSLog(@"%@ -> %@", [[fields objectAtIndex:i] objectAtIndex:0],
 									 [fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]);
-				[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
+				if ([[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]isKindOfClass:[NSNull class]]){
+					[userInput insertObject:@"" atIndex:i];
+				}
+				else{
+					[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
+				}
 			}
 			NSLog(@"Completed existing user input: %@", userInput);
 			
@@ -296,13 +301,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";	
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+	GNTableViewCell *cell = (GNTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		cell = [[[GNTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+	}
+	// UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //if (cell == nil) {
+    //    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    //}
 	
 	NSString *inputFields = [userInput objectAtIndex:(indexPath.section)];
-	cell.textLabel.text = inputFields;
+	[cell setContentString:inputFields withFrameSize:(CGFloat)0];
 	
 	//[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 	
