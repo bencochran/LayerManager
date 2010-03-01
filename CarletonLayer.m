@@ -131,7 +131,7 @@
 	}
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
 	NSLog(@"URL String: <%@>", urlString);
-	if (urlString != nil) {
+	if (urlString != nil && (![urlString isKindOfClass:[NSNull class]])) {
 		viewController.imageURL = [NSURL URLWithString:urlString]; 
 	}
 	return [viewController autorelease];

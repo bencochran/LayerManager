@@ -203,21 +203,17 @@
 		}
 	}
 	else{
-		if ([self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]]){
-			NSString *contentString = [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]];
-			if ([contentString length]== 0){
-				[cell setContentString:[NSString stringWithFormat:@"Click 'Edit' to enter a %@...",[self.fieldNames objectAtIndex:indexPath.section]]
-						 withFrameSize:(CGFloat)0];
-			}
-			else{
-				CGFloat stringFrameSize = [self getFrameSizeForString:contentString];
-				[cell setContentString:contentString withFrameSize:(CGFloat)stringFrameSize];
-			}
+		NSString *contentString = [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]];
+		if ([contentString length]== 0){
+			[cell setContentString:[NSString stringWithFormat:@"Click 'Edit' to enter a %@...",[self.fieldNames objectAtIndex:indexPath.section]]
+					 withFrameSize:(CGFloat)0];
 		}
 		else{
-			NSLog(@"Empty Field: ",[self.fieldNames objectAtIndex:indexPath.section]);
+			CGFloat stringFrameSize = [self getFrameSizeForString:contentString];
+			[cell setContentString:contentString withFrameSize:(CGFloat)stringFrameSize];
 		}
 	}
+
 /*	
 	else if (indexPath.section == 1){
 		NSString *tring = 
@@ -266,16 +262,10 @@
 		}
 	}
 	else{
-		if ([self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]]){
-			NSString *contentString = [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]];
-			CGFloat stringFrameSize = [self getFrameSizeForString:contentString];
-			return (CGFloat)(stringFrameSize*(CGFloat)15)+(CGFloat)40;
+		NSString *contentString = [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]];
+		CGFloat stringFrameSize = [self getFrameSizeForString:contentString];
+		return (CGFloat)(stringFrameSize*(CGFloat)15)+(CGFloat)40;
 		}
-		else{
-			NSLog(@"Empty Field: ",[self.fieldNames objectAtIndex:indexPath.section]);
-			return (CGFloat)40;
-		}
-	}
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
