@@ -616,6 +616,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/asi-http-request/build/Debug-iphonesimulator\"",
 				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = LayerManager;
 			};
 			name = Debug;
@@ -638,6 +642,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/asi-http-request/build/Debug-iphonesimulator\"",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
 				);
 				PRODUCT_NAME = LayerManager;
 			};
