@@ -88,6 +88,8 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	NSLog(@"JSON Landmark: %@", landmarkDictString);
 	[request setPostValue:landmarkDictString forKey:@"landmarkDict"];
 	request.delegate = self;
+	[request setDidFailSelector:@selector(postRequestDidFail:)];
+	[request setDidFinishSelector:@selector(postRequestDidFinish:)];
 	[request startAsynchronous];
 }
 	
@@ -261,7 +263,7 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 		[self doesNotRecognizeSelector:_cmd];
 		return nil;
 	}
-	return [[[GNEditingTableViewController alloc] initWithFields:layerFields andLayer:self andLocation:location andLandmark:landmark] autorelease];
+	return [[[GNEditingTableViewController alloc] initWithLayer:self andLocation:location andLandmark:landmark] autorelease];
 }
 
 - (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark {
@@ -275,6 +277,16 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 
 - (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo {
 	[self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)postRequestDidFinish:(ASIHTTPRequest *)request {
+	NSLog(@"Post request finished with the following response: %@", [request responseString]);
+}
+
+- (void)postRequestDidFail:(ASIHTTPRequest *)request {
+	NSLog(@"Post request failed failed! Error - %@ %@",
+          [[request error] localizedDescription],
+          [[[request error] userInfo] objectForKey:NSErrorFailingURLStringKey]);
 }
 
 @end

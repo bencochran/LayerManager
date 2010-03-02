@@ -17,8 +17,9 @@
 	NSArray *fieldArray;
 	NSString *inputString;
 	NSString *savedInput;
+	BOOL wasAField;
 }
 
-- (id)initWithFieldArray:(NSArray *)fieldArray andInput:(NSString *)input;
+- (id)initWithFieldName:(NSString *)name andContent:(NSString *)input;
 
 @end
