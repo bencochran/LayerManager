@@ -87,9 +87,16 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	NSString *landmarkDictString = [landmarkDict JSONRepresentation];
 	NSLog(@"JSON Landmark: %@", landmarkDictString);
 	[request setPostValue:landmarkDictString forKey:@"landmarkDict"];
+<<<<<<< HEAD
 	request.delegate = self;
 	[request setDidFailSelector:@selector(postRequestDidFail:)];
 	[request setDidFinishSelector:@selector(postRequestDidFinish:)];
+=======
+	[request setDidFailSelector:@selector(postRequestDidFail:)];
+	[request setDidFinishSelector:@selector(postRequestDidFinish:)];
+	[request setDelegate:self];
+	NSLog(@"request postData: %@", [request postData]);
+>>>>>>> ca668b2b8ab769a1cb3882faca0411189b599f06
 	[request startAsynchronous];
 }
 	
@@ -279,14 +286,13 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	[self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)postRequestDidFinish:(ASIHTTPRequest *)request {
-	NSLog(@"Post request finished with the following response: %@", [request responseString]);
-}
 
 - (void)postRequestDidFail:(ASIHTTPRequest *)request {
-	NSLog(@"Post request failed failed! Error - %@ %@",
+	NSLog(@"Post request failed with error: %@ %@",
           [[request error] localizedDescription],
           [[[request error] userInfo] objectForKey:NSErrorFailingURLStringKey]);
 }
-
+- (void)postRequestDidFinish:(ASIHTTPRequest *)request {
+	NSLog(@"Post request finished with response: %@", [request responseString]);
+}
 @end
