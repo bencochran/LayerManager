@@ -6,21 +6,22 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "SportsViewController.h"
+#import "GNLandmarkViewController.h"
 
-@implementation SportsViewController
-@synthesize summaryCell=_summaryCell, summary=_summary, summaryString=_summaryString, usedByCell=_usedByCell, usedBy=_usedBy, usedByString=_usedByString, scheduleURLCell=_scheduleURLCell, scheduleURL=_scheduleURL, scheduleURLString=_scheduleURLString, imageViewCell=_imageViewCell, imageURL=_imageURL, photo=_photo, layer=_layer, landmark=_landmark;
+@implementation GNLandmarkViewController
+@synthesize imageViewCell=_imageViewCell, imageURL=_imageURL, photo=_photo, fieldInfo=_fieldInfo, fieldNames=_fieldNames, layer=_layer, landmark=_landmark;
 
 - (id)init {
 	if (self = [super initWithStyle:UITableViewStyleGrouped]){
 	//if (self = [super initWithNibName:@"SportsViewController" bundle:nil]) {
+		NSLog(@"Are we even getting here?");
+		self.fieldInfo = [[NSMutableDictionary alloc]init];
 	}
 	return self;
 }
 
 - (void)setImageURL:(NSURL *)url {
 	_imageURL = [url retain];
-	
 	NSURLRequest *theRequest=[NSURLRequest requestWithURL:url
 											  cachePolicy:NSURLRequestUseProtocolCachePolicy
 										  timeoutInterval:60.0];
@@ -31,12 +32,25 @@
 		// Create the NSMutableData that will hold the received data
 		// receivedData is declared as a method instance elsewhere
 		receivedData=[[NSMutableData data] retain];
-	} else {
+	} 
+	else {
 		// inform the user that the download could not be made
 	}
-	
 }
-
+/*
+-(void)setFieldInfo:(NSMutableDictionary *)newFieldInfo{
+	for (NSString *field in self.fieldNames){
+		[self.fieldInfo setObject:@"" forKey:field];
+	}
+	[self.fieldInfo setObject:@"" forKey:@"imageURL"];
+	NSLog(@"Field Info: %@", self.fieldInfo);
+	for (NSString *newField in newFieldInfo){
+		if ([newFieldInfo objectForKey:newField]){
+			[self.fieldInfo setObject:[newFieldInfo objectForKey:newField] forKey:newField];
+		}
+	}
+}
+*/
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     // this method is called when the server has determined that it
@@ -83,8 +97,10 @@
     [super viewDidLoad];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
-	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
+	if ([self.layer layerIsUserModifiable]){
+		UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
+		[self.navigationItem setRightBarButtonItem:editButton animated:YES];
+	}
 }
 
 -(void)didSelectEditButton{
@@ -142,22 +158,15 @@
 	if (section == 0){
 		headerString = @"Photo";
 	}
-	else if (section == 1){
-		headerString = @"Summary";
-
-	}
-	else if (section ==2) {
-		headerString = @"Used By";
-	}
-	else{
-		headerString = @"Schedule URL";
+	else {
+		headerString = [self.fieldNames objectAtIndex:section];
 	}
 	return headerString;
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return [self.fieldNames count];
 }
 
 
@@ -168,7 +177,7 @@
 
 - (CGFloat)getFrameSizeForString:(NSString *)string{
 	//Anyone know how to do MOD in a better way!!!???
-	CGFloat numberOfLines = (CGFloat)(1+([string length]-([string length]%45))/45);
+	CGFloat numberOfLines = (CGFloat)(([string length]-([string length]%40))/40);
 	return numberOfLines;
 }
 
@@ -188,13 +197,26 @@
 			[cell setContentString:@"Click 'Edit' to take a Photo..." withFrameSize:stringFrameSize];
 		}
 		else{
-			[cell setContentString:@"" withFrameSize:(CGFloat)6];
+			[cell setContentString:@"" withFrameSize:(CGFloat)5];
 			self.imageViewCell = cell;
 			/// Display spinner here!
 		}
 	}
-	
+	else{
+		NSString *contentString = [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]];
+		if ([contentString length]== 0){
+			[cell setContentString:[NSString stringWithFormat:@"Click 'Edit' to enter a %@...",[self.fieldNames objectAtIndex:indexPath.section]]
+					 withFrameSize:(CGFloat)0];
+		}
+		else{
+			CGFloat stringFrameSize = [self getFrameSizeForString:contentString];
+			[cell setContentString:contentString withFrameSize:(CGFloat)stringFrameSize];
+		}
+	}
+
+/*	
 	else if (indexPath.section == 1){
+		NSString *tring = 
 		if ([self.summaryString length]== 0){
 			[cell setContentString:@"Click 'Edit' to enter a Summary..." withFrameSize:(CGFloat)1];
 		}
@@ -224,6 +246,7 @@
 			[cell setContentString:self.scheduleURLString withFrameSize:stringFrameSize];
 		}
 	}
+ */
 	
     return cell;
 }
@@ -232,25 +255,26 @@
 {
     if (indexPath.section == 0){
 		if (_imageURL == nil){
-			return (CGFloat)30;
+			return (CGFloat)40;
 		}
 		else{
 			return (CGFloat)180;
 		}
 	}
-	else if (indexPath.section == 1){
-		CGFloat stringFrameSize = [self getFrameSizeForString:self.summaryString];
-		return (CGFloat)(stringFrameSize*(CGFloat)30);
-	}
-	else if (indexPath.section == 2){
-		CGFloat stringFrameSize = [self getFrameSizeForString:self.usedByString];
-		return (CGFloat)(stringFrameSize*(CGFloat)30);
+	else{
+		NSString *contentString = [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]];
+		CGFloat stringFrameSize = [self getFrameSizeForString:contentString];
+		return (CGFloat)(stringFrameSize*(CGFloat)15)+(CGFloat)40;
+		}
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	if ([[self.fieldNames objectAtIndex:indexPath.section] rangeOfString:@"URL"].length && [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]]){
+		return indexPath;
 	}
 	else{
-		CGFloat stringFrameSize = [self getFrameSizeForString:self.scheduleURLString];
-		return (CGFloat)(stringFrameSize*(CGFloat)30);
-	
-	}
+		return nil;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -258,19 +282,16 @@
 	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
 	// [self.navigationController pushViewController:anotherViewController];
 	// [anotherViewController release];
-	if (indexPath.section == 3){
-		if (self.scheduleURLString != nil){
-			UIViewController *viewController = [[UIViewController alloc] init];
-			UIWebView *webView = [[UIWebView alloc] init];
-			NSString *urlString = self.scheduleURLString;
-			[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
-			viewController.title = self.landmark.name;
-			viewController.view = webView;
-			[webView release];
-			[self.navigationController pushViewController:viewController animated:YES];
-			[viewController release];	
-		}
-	}
+	UIViewController *viewController = [[UIViewController alloc] init];
+	UIWebView *webView = [[UIWebView alloc] init];
+	NSString *urlString = [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]];
+	[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
+	viewController.title = self.landmark.name;
+	viewController.view = webView;
+	[webView release];
+	[self.navigationController pushViewController:viewController animated:YES];
+	[viewController release];	
+
 }
 
 

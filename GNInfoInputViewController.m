@@ -11,11 +11,10 @@
 
 @implementation GNInfoInputViewController
 
--(id)initWithFieldArray:(NSArray *)newFieldArray andInput:(NSString *)input{
+-(id)initWithFieldName:(NSString *)name andContent:(NSString *)input{
 	if (self = [super init]) {
-		fieldArray = [newFieldArray retain];
+		self.title = name;
 		savedInput = input;
-		NSLog(@"Field name for info input: %@",[fieldArray objectAtIndex:0]);
 	}
 	return self;
 }
@@ -25,15 +24,16 @@
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
 	self.navigationItem.rightBarButtonItem = saveButton;
 	[saveButton release];
-	self.title = [fieldArray objectAtIndex:0];
+	//self.title = [fieldArray objectAtIndex:0];
 
-	if ([fieldArray objectAtIndex:1] == @"textView") {
+	if ([savedInput length] > 40) {
 		textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 100)];
 		textView.delegate = self;
 		textView.textAlignment = UITextAlignmentLeft;
 		[self.view addSubview:textView];
 		self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 		textView.text = savedInput;
+		wasAField = NO;
 		[textView becomeFirstResponder];
 		[textView release];
 	}
@@ -44,6 +44,7 @@
 		[self.view addSubview:textField];
 		self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 		textField.text = savedInput;
+		wasAField = YES;
 		[textField becomeFirstResponder];
 		[textField release];
 	}
@@ -53,11 +54,11 @@
 }
 
 - (void)save:(id)sender {
-	if([fieldArray objectAtIndex:1] == @"textView"){
-		inputString = textView.text;
+	if(wasAField){
+		inputString = textField.text;
 	}
 	else{
-		inputString = textField.text;
+		inputString = textView.text;
 	}
 	NSInteger lastIndex = [self.navigationController.viewControllers count] - 2;
 	UIViewController *editingTableViewController = [self.navigationController.viewControllers objectAtIndex:lastIndex];

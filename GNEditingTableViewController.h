@@ -9,29 +9,41 @@
 #import <UIKit/UIKit.h>
 #import "GNLayer.h"
 #import "GNLandmark.h"
+#import "GNTableViewCell.h"
 
 @interface GNEditingTableViewController : UITableViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
-	NSArray *fields;
+	NSArray *_fields;
 	NSInteger currentField;
-	NSMutableArray *userInput;
+	NSMutableDictionary *_fieldContent;
+	NSMutableDictionary *_userInputDict;
 	GNLayer *selectedLayer;
 	CLLocation *selectedLocation;
 	GNLandmark *selectedLandmark;
 	BOOL previouslyExisted;
 	BOOL _adding;
 	BOOL tookPhoto;
+	NSMutableData *receivedData;
 	UIImagePickerController *photoController;
 	UIView *buttonContainer;
-	UIImage *photo;
+	UIImage *_photo;
 	UIImageView *photoView;
-	NSURL *imageURL;
+	GNTableViewCell *_imageViewCell;
+	NSString *imageURLString;
+	NSURL *_imageURL;
 }
 
 @property (assign) BOOL adding;
+@property (nonatomic, retain) NSMutableDictionary *userInputDict;
+@property (nonatomic, retain) NSMutableDictionary *fieldContent;
+@property (nonatomic, retain) GNTableViewCell *imageViewCell;
+@property (nonatomic, retain) NSArray *fields;
+@property (nonatomic, retain) NSURL *imageURL;
+@property (nonatomic, retain) UIImage *photo;
 
-- (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark;
+- (id)initWithLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark;
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index;
-- (IBAction) takePhoto:(id) sender;
+- (void) takePhoto;
+- (void) getImageWithURL:(NSURL *)url;
 - (NSInteger)getCurrentField;
 
 @end

@@ -15,12 +15,15 @@
 	if (self = [super init]) {
 		self.name = @"Carleton";
 		iconPath = @"academic.png";
+		self.tableNameOnServer = @"Carleton";
 		userModifiable = YES;
 		NSArray *nameField = [[NSMutableArray alloc] initWithObjects:@"Name", @"textField", nil];
 		NSArray *yearBuiltField = [[NSMutableArray alloc] initWithObjects:@"Year Built", @"textField", nil];
 		NSArray* summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"textField", nil];
 		NSArray *descriptionField = [[NSMutableArray alloc] initWithObjects:@"Description", @"textView", nil];
 		layerFields = [[NSArray alloc] initWithObjects:nameField, yearBuiltField, summaryField, descriptionField, nil];
+		self.fields = [[NSArray alloc] initWithObjects:@"Name", @"Year Built", @"Summary", @"Description", nil];
+		self.serverNamesForFields = [[NSArray alloc] initWithObjects:@"yearBuilt", @"summary",@"description", nil];
 		[nameField release];
 		[yearBuiltField release];
 		[summaryField release];
@@ -115,23 +118,22 @@
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
-	CarletonViewController *viewController = [[CarletonViewController alloc] init];
+	GNLandmarkViewController *viewController = [[GNLandmarkViewController alloc] init];
 	viewController.title = landmark.name;
-	viewController.description = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"description"];
-	viewController.summary = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
-	viewController.yearBuilt = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"yearBuilt"];
 	viewController.layer = self;
 	viewController.landmark = landmark;
+	viewController.fieldNames = self.fields;	
+	viewController.fieldInfo = (NSMutableDictionary *)[self fieldInformationForLandmark:landmark];
+	for (NSString *name in viewController.fieldNames){
+		if ([[viewController.fieldInfo objectForKey:name]isKindOfClass:[NSNull class]]){
+			[viewController.fieldInfo setObject:@"" forKey:name];
+		}
+	}
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
-	
-	if (urlString != nil) {
+	NSLog(@"URL String: <%@>", urlString);
+	if (urlString != nil && (![urlString isKindOfClass:[NSNull class]])) {
 		viewController.imageURL = [NSURL URLWithString:urlString]; 
 	}
-	
-	NSLog(@"landmark: %@", landmark);
-	NSLog(@"layer info: %@", [layerInfoByLandmarkID objectForKey:landmark.ID]);
-	NSLog(@"urlString: %@", urlString);
-	
 	return [viewController autorelease];
 }
 
@@ -152,7 +154,7 @@
 @end
 
 //////////
-
+/*
 @implementation CarletonViewController
 
 @synthesize imageURL=_imageURL, descriptionView=_descriptionView, description=_description, summaryView=_summaryView, summary=_summary, yearBuiltView=_yearBuiltView, yearBuilt=_yearBuilt, editPhoto=_editPhoto, photoFrame=_photoFrame, photoLoading=_photoLoading, landmark=_landmark, layer=_layer;
@@ -231,7 +233,7 @@
  return self;
  }
  */
-
+/*
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -279,7 +281,7 @@
  return (interfaceOrientation == UIInterfaceOrientationPortrait);
  }
  */
-
+/*
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -297,3 +299,4 @@
 }
 
 @end
+*/

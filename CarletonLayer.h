@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GNLandmarkViewController.h"
 #import "GNLayer.h"
 
 @interface CarletonLayer : GNLayer {
@@ -15,7 +16,7 @@
 @end
 
 /////
-
+/*
 @interface CarletonViewController : UIViewController {
 	IBOutlet UITextView *_descriptionView;
 	IBOutlet UILabel *_summaryView;
@@ -50,3 +51,4 @@
 
 
 @end
+ */

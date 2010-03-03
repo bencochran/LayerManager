@@ -14,13 +14,16 @@
 -(id)init {
 	if (self = [super init]) {
 		self.name = @"Sports";
+		self.tableNameOnServer=@"SportingArenas";
 		iconPath = @"sports.png";
 		userModifiable = YES;
 		NSArray *nameField = [[NSMutableArray alloc] initWithObjects:@"Name", @"textField", nil];
 		NSArray *summaryField = [[NSMutableArray alloc] initWithObjects:@"Summary", @"textField", nil];
 		NSArray *usedByField = [[NSMutableArray alloc] initWithObjects:@"Used By", @"textField", nil];
-		NSArray *scheduleURLField = [[NSMutableArray alloc] initWithObjects:@"Schedule", @"textField", nil];
+		NSArray *scheduleURLField = [[NSMutableArray alloc] initWithObjects:@"Schedule URL", @"textField", nil];
 		layerFields = [[NSArray alloc] initWithObjects:nameField, summaryField, usedByField, scheduleURLField, nil];
+		self.fields = [[NSArray alloc] initWithObjects:@"Name",@"Summary",@"Used By",@"Schedule URL", nil];
+		self.serverNamesForFields = [[NSArray alloc] initWithObjects:@"summary",@"usedBy",@"scheduleURL", nil];
 		[nameField release];
 		[summaryField release];
 		[usedByField release];
@@ -88,6 +91,8 @@
 	return landmarks;
 }
 
+
+
 - (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo {
 	NSURL *url = [NSURL URLWithString:@"http://dev.gnar.us/post.py/sportingArenas"];
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -130,16 +135,19 @@
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
-	SportsViewController *viewController = [[SportsViewController alloc] init];
+	GNLandmarkViewController *viewController = [[GNLandmarkViewController alloc] init];
 	viewController.title = landmark.name;
 	viewController.layer = self;
 	viewController.landmark = landmark;
-	viewController.summaryString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
-	viewController.usedByString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"usedBy"];
-	viewController.scheduleURLString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"scheduleURL"];
+	viewController.fieldNames = self.fields;
+	viewController.fieldInfo = (NSMutableDictionary *)[self fieldInformationForLandmark:landmark];
+	for (NSString *name in viewController.fieldNames){
+		if ([[viewController.fieldInfo objectForKey:name]isKindOfClass:[NSNull class]]){
+			[viewController.fieldInfo setObject:@"" forKey:name];
+		}
+	}
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
-	NSLog(@"URL String: <%@>", urlString);
-	if (urlString != nil) {
+	if (urlString != nil && (![urlString isKindOfClass:[NSNull class]])) {
 		viewController.imageURL = [NSURL URLWithString:urlString]; 
 	}
 	return [viewController autorelease];
@@ -151,8 +159,9 @@
 	[landmarkFieldInfo setObject:landmark.name forKey:@"Name"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"summary"] forKey:@"Summary"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"usedBy"] forKey:@"Used By"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"scheduleURL"] forKey:@"Schedule URL"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
-	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"scheduleURL"] forKey:@"Schedule"];	
+	NSLog(@"Field Info Hurr: %@", landmarkFieldInfo);
 	return [landmarkFieldInfo autorelease];
 }
 

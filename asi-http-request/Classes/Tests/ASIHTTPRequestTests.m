@@ -78,7 +78,28 @@
 	[request startAsynchronous];
 	[request cancel];
 	GHAssertNotNil([request error],@"Failed to cancel the request");
+	
+	// Test cancelling a redirected request works
+	// This test is probably unreliable on very slow or very fast connections, as it depends on being able to complete the first request (but not the second) in under 2 seconds
+	request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://allseeing-i.com/ASIHTTPRequest/tests/cancel_redirect"]];
+	[request startAsynchronous];
+	
+	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:2.0]];
+	[request cancel];
+	
+	BOOL success = ([[[request url] absoluteString] isEqualToString:@"http://allseeing-i.com/ASIHTTPRequest/tests/the_great_american_novel.txt"]);
+
+	GHAssertTrue(success, @"Request did not redirect quickly enough, cannot proceed with test");
+	
+	GHAssertNotNil([request error],@"Failed to cancel the request");	 
+	
+	success = [request totalBytesRead] < 7900198;
+	GHAssertTrue(success, @"Downloaded the whole of the response even though we should have cancelled by now");
+	
+
 }
+
+
 
 - (void)testDelegateMethods
 {
@@ -242,6 +263,15 @@
 	
 	BOOL success = [[request error] code] == ASIRequestTimedOutErrorType;
 	GHAssertTrue(success,@"Timeout didn't generate the correct error");
+	
+	[ASIHTTPRequest setDefaultTimeOutSeconds:0.0001];
+	request = [[[ASIHTTPRequest alloc] initWithURL:url] autorelease];
+	[request startSynchronous];
+	
+	success = [[request error] code] == ASIRequestTimedOutErrorType;
+	GHAssertTrue(success,@"Failed to change the default timeout");	
+	
+	[ASIHTTPRequest setDefaultTimeOutSeconds:10];
 }
 
 
@@ -322,8 +352,12 @@
 	ASIHTTPRequest *request;
 	ASIFormDataRequest *request2;
 	BOOL success;
-	int i;
-	for (i=301; i<305; i++) {
+	unsigned int i;
+	for (i=301; i<308; i++) {
+		
+		if (i > 304 && i < 307) {
+			continue;
+		}
 		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://allseeing-i.com/ASIHTTPRequest/tests/redirect/%hi",i]];
 		request = [ASIHTTPRequest requestWithURL:url];
 		[request setShouldRedirect:NO];
@@ -335,21 +369,68 @@
 		GHAssertTrue(success,[NSString stringWithFormat:@"Got the wrong content when not redirecting after a %hi",i]);
 	
 		request2 = [ASIFormDataRequest requestWithURL:url];
-		[request2 setPostValue:@"foo" forKey:@"eep"];
+		[request2 setPostValue:@"Giant Monkey" forKey:@"lookbehindyou"];
 		[request2 startSynchronous];
 		
 		NSString *method = @"GET";
 		if (i>304) {
-			method = @"POST";
+			method = @"POST";	
 		}
-		
-		success = [[request2 responseString] isEqualToString:[NSString stringWithFormat:@"Redirected as %@ after a %hi status code",method,i]];
+		NSString *expectedString = [NSString stringWithFormat:@"Redirected as %@ after a %hi status code",method,i];
+		if (i>304) {
+			expectedString = [NSString stringWithFormat:@"%@\r\nWatch out for the Giant Monkey!",expectedString];
+		}
+
+		success = [[request2 responseString] isEqualToString:expectedString];
 		GHAssertTrue(success,[NSString stringWithFormat:@"Got the wrong content when redirecting after a %hi",i]);
 	
 		success = ([request2 responseStatusCode] == 200);
-		GHAssertTrue(success,[NSString stringWithFormat:@"Got the wrong status code (expected %hi)",i]);
+		GHAssertTrue(success,@"Got the wrong status code (expected 200)");
 
 	}
+	
+	// Test RFC 2616 behaviour
+	for (i=301; i<303; i++) {
+		
+		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://allseeing-i.com/ASIHTTPRequest/tests/redirect/%hi",i]];
+		request2 = [ASIFormDataRequest requestWithURL:url];
+		[request2 setPostValue:@"Giant Monkey" forKey:@"lookbehindyou"];
+		[request2 setShouldUseRFC2616RedirectBehaviour:YES];
+		[request2 startSynchronous];
+		
+		success = ([request2 responseStatusCode] == 200);
+		GHAssertTrue(success,@"Got the wrong status code (expected 200)");	
+
+		if (i == 303) {
+			success = ([request2 postLength] == 0 && ![request2 postBody] && [[request2 requestMethod] isEqualToString:@"GET"]);
+			GHAssertTrue(success,@"Failed to reset request to GET on 303 redirect");
+			
+			success = [[request2 responseString] isEqualToString:[NSString stringWithFormat:@"Redirected as GET after a %hi status code",i]];
+			GHAssertTrue(success,@"Failed to dump the post body on 303 redirect");
+			
+		} else {
+			success = ([request2 postLength] > 0 || ![request2 postBody] || ![[request2 requestMethod] isEqualToString:@"POST"]);
+			GHAssertTrue(success,@"Failed to use the same request method and body for a redirect when using rfc2616 behaviour");
+		
+			success = ([[request2 responseString] isEqualToString:[NSString stringWithFormat:@"Redirected as POST after a %hi status code\r\nWatch out for the Giant Monkey!",i]]);
+			GHAssertTrue(success,@"Failed to send the correct post body on redirect");
+		}
+	}
+	
+	// Ensure the file contains only the body of the last request (after redirects) when downloading to a file
+	request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://allseeing-i.com/ASIHTTPRequest/tests/redirect/301"]];
+	NSString *path = [[self filePathForTemporaryTestFiles] stringByAppendingPathComponent:@"test.txt"];
+	[request setDownloadDestinationPath:path];
+	[request startSynchronous];
+	NSString *result = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+	success = [result isEqualToString:@"Redirected as GET after a 301 status code"];
+	GHAssertTrue(success,@"Failed to store just the body of the file request on redirect");
+	
+	success = ([request originalURL] != [request url]);
+	GHAssertTrue(success,@"Failed to update request url on redirection");
+	
+	success = ([[[request originalURL] absoluteString] isEqualToString:@"http://allseeing-i.com/ASIHTTPRequest/tests/redirect/301"]);
+	GHAssertTrue(success,@"Failed to preserve original url");	
 }
 
 // Using a persistent connection for HTTP 305-307 would cause crashes on the redirect, not really sure why
@@ -446,6 +527,21 @@
 
 	BOOL success = (progress == 1.0);
 	GHAssertTrue(success,@"Failed to properly increment download progress %f != 1.0",progress);	
+	
+	progress = 0;
+	request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://allseeing-i.com/ASIHTTPRequest/tests/the_great_american_novel.txt"]];
+	[request setDownloadProgressDelegate:self];
+	[request startAsynchronous];
+	
+	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:2]];
+	
+	success = (progress != 1.0);
+	GHAssertTrue(success,@"Downloaded too quickly, cannot proceed with test");	
+	 
+	success = (progress > 0);
+	GHAssertTrue(success,@"Either downloaded too slowly, or progress is not being correctly updated");		 
+	
+	
 }
 
 - (void)testUploadProgress
@@ -625,6 +721,27 @@
 	html = [request responseString];
 	success = [html isEqualToString:@"No cookie exists"];
 	GHAssertTrue(success,@"Cookie presented to the server when it should have been removed");
+	
+	// Test fetching cookies for a relative url - fixes a problem where urls created with URLWithString:relativeToURL: wouldn't always read cookies from the persistent store
+	[ASIHTTPRequest clearSession];
+	
+	url = [[[NSURL alloc] initWithString:@"http://allseeing-i.com/ASIHTTPRequest/tests/set_cookie"] autorelease];
+	request = [[[ASIHTTPRequest alloc] initWithURL:url] autorelease];
+	[request setUseCookiePersistance:YES];
+	[request setUseSessionPersistance:NO];
+	[request startSynchronous];
+	
+	NSURL *originalURL = [NSURL URLWithString:@"http://allseeing-i.com/ASIHTTPRequest/tests/"];
+	url = [NSURL URLWithString:@"read_cookie" relativeToURL:originalURL];
+	request = [[[ASIHTTPRequest alloc] initWithURL:url] autorelease];
+	[request setUseCookiePersistance:YES];
+	[request setUseSessionPersistance:NO];
+	[request startSynchronous];
+	html = [request responseString];
+	NSLog(@"%@",html);
+	success = [html isEqualToString:@"I have 'This is the value' as the value of 'ASIHTTPRequestTestCookie'"];
+	GHAssertTrue(success,@"Custom cookie not presented to the server with cookie persistance OFF");
+	
 }
 
 // Test fix for a crash if you tried to remove credentials that didn't exist
@@ -1225,6 +1342,16 @@
 			break;
 	}
 	GHAssertTrue(success,@"Got wrong request content - very bad!");
+	
+}
+
+- (void)testCloseConnection
+{
+	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://allseeing-i.com/ASIHTTPRequest/tests/close-connection"]];
+	[request startSynchronous];
+	
+	BOOL success = ![request connectionCanBeReused];
+	GHAssertTrue(success,@"Should not be able to re-use a request sent with Connection:close");
 	
 }
 

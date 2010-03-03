@@ -54,6 +54,8 @@
 		B8CB2DB4110D844100BED463 /* libGHUnitIPhoneSimulator3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CB2DAF110D840800BED463 /* libGHUnitIPhoneSimulator3_0.a */; };
 		B8CB2DD0110D84EF00BED463 /* UnitTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A251AE9010F525160041E1D7 /* UnitTestCase.m */; };
 		B8CB2E96110D8B2E00BED463 /* GHUnitIPhoneTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CB2E95110D8B2E00BED463 /* GHUnitIPhoneTestMain.m */; };
+		B8EB0FAE113C9BDC00C726B6 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = B8EB0FAC113C9BDC00C726B6 /* Reachability.h */; };
+		B8EB0FAF113C9BDC00C726B6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EB0FAD113C9BDC00C726B6 /* Reachability.m */; };
 		FC242BBF111F4A02003AFB03 /* ASIFormDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = FC242BBD111F4A02003AFB03 /* ASIFormDataRequest.h */; };
 		FC242BC0111F4A02003AFB03 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC242BBE111F4A02003AFB03 /* ASIFormDataRequest.m */; };
 		FC242BC5111F4A2C003AFB03 /* ASIHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = FC242BC3111F4A2C003AFB03 /* ASIHTTPRequest.h */; };
@@ -65,14 +67,12 @@
 		FC242BD5111F4A63003AFB03 /* ASIAuthenticationDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = FC242BD3111F4A63003AFB03 /* ASIAuthenticationDialog.h */; };
 		FC242BD6111F4A63003AFB03 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = FC242BD4111F4A63003AFB03 /* ASIAuthenticationDialog.m */; };
 		FC242BD8111F4A73003AFB03 /* ASIHTTPRequestConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = FC242BD7111F4A73003AFB03 /* ASIHTTPRequestConfig.h */; };
-		FC242C25111F4C14003AFB03 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = FC242C23111F4C14003AFB03 /* Reachability.h */; };
-		FC242C26111F4C14003AFB03 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC242C24111F4C14003AFB03 /* Reachability.m */; };
 		FC242C44111F4D35003AFB03 /* ASIInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = FC242C42111F4D35003AFB03 /* ASIInputStream.h */; };
 		FC242C45111F4D35003AFB03 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FC242C43111F4D35003AFB03 /* ASIInputStream.m */; };
 		FC6F41AA113079F500036392 /* FlickrLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FC6F41A8113079F500036392 /* FlickrLayer.h */; };
 		FC6F41AB113079F500036392 /* FlickrLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6F41A9113079F500036392 /* FlickrLayer.m */; };
-		FC7AB921113752AE00F5EFD6 /* SportsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FC7AB91F113752AE00F5EFD6 /* SportsViewController.h */; };
-		FC7AB922113752AE00F5EFD6 /* SportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7AB920113752AE00F5EFD6 /* SportsViewController.m */; };
+		FC7AB921113752AE00F5EFD6 /* GNLandmarkViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FC7AB91F113752AE00F5EFD6 /* GNLandmarkViewController.h */; };
+		FC7AB922113752AE00F5EFD6 /* GNLandmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7AB920113752AE00F5EFD6 /* GNLandmarkViewController.m */; };
 		FC94C19D1138455D001F7B38 /* GNTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = FC94C19B1138455D001F7B38 /* GNTableViewCell.h */; };
 		FC94C19E1138455D001F7B38 /* GNTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94C19C1138455D001F7B38 /* GNTableViewCell.m */; };
 		FC9694DB11224C8C00218696 /* WikiLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FC9694D911224C8C00218696 /* WikiLayer.h */; };
@@ -163,6 +163,8 @@
 		B8BC147E109EBBB8000701DF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B8CB2DA4110D840800BED463 /* GHUnitIPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHUnitIPhone.xcodeproj; path = "ghunit/Project-IPhone/GHUnitIPhone.xcodeproj"; sourceTree = "<group>"; };
 		B8CB2E95110D8B2E00BED463 /* GHUnitIPhoneTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHUnitIPhoneTestMain.m; path = "ghunit/Classes-IPhone/GHUnitIPhoneTestMain.m"; sourceTree = "<group>"; };
+		B8EB0FAC113C9BDC00C726B6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "asi-http-request/External/Reachability2.0/Reachability.h"; sourceTree = "<group>"; };
+		B8EB0FAD113C9BDC00C726B6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "asi-http-request/External/Reachability2.0/Reachability.m"; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libLayerManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLayerManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC242BBD111F4A02003AFB03 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIFormDataRequest.h; path = "asi-http-request/Classes/ASIFormDataRequest.h"; sourceTree = "<group>"; };
 		FC242BBE111F4A02003AFB03 /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIFormDataRequest.m; path = "asi-http-request/Classes/ASIFormDataRequest.m"; sourceTree = "<group>"; };
@@ -175,8 +177,6 @@
 		FC242BD3111F4A63003AFB03 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = "<group>"; };
 		FC242BD4111F4A63003AFB03 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = "<group>"; };
 		FC242BD7111F4A73003AFB03 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIHTTPRequestConfig.h; path = "asi-http-request/Classes/ASIHTTPRequestConfig.h"; sourceTree = "<group>"; };
-		FC242C23111F4C14003AFB03 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "asi-http-request/External/Reachability1.5/Reachability.h"; sourceTree = "<group>"; };
-		FC242C24111F4C14003AFB03 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "asi-http-request/External/Reachability1.5/Reachability.m"; sourceTree = "<group>"; };
 		FC242C42111F4D35003AFB03 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIInputStream.h; path = "asi-http-request/Classes/ASIInputStream.h"; sourceTree = "<group>"; };
 		FC242C43111F4D35003AFB03 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIInputStream.m; path = "asi-http-request/Classes/ASIInputStream.m"; sourceTree = "<group>"; };
 		FC54672D11337B8A0069EA00 /* flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickr.png; sourceTree = "<group>"; };
@@ -185,11 +185,8 @@
 		FC6F41A9113079F500036392 /* FlickrLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrLayer.m; sourceTree = "<group>"; };
 		FC6F4300113103AF00036392 /* FoodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodView.xib; sourceTree = "<group>"; };
 		FC7AB91E113752AE00F5EFD6 /* SportsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SportsViewController.xib; sourceTree = "<group>"; };
-		FC7AB91F113752AE00F5EFD6 /* SportsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SportsViewController.h; sourceTree = "<group>"; };
-		FC7AB920113752AE00F5EFD6 /* SportsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SportsViewController.m; sourceTree = "<group>"; };
-		FC7AB928113752DC00F5EFD6 /* cellBackgroundLG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBackgroundLG.png; sourceTree = "<group>"; };
-		FC7AB929113752E800F5EFD6 /* cellBackgroundMD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBackgroundMD.png; sourceTree = "<group>"; };
-		FC7AB92A113752EE00F5EFD6 /* cellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBackground.png; sourceTree = "<group>"; };
+		FC7AB91F113752AE00F5EFD6 /* GNLandmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLandmarkViewController.h; sourceTree = "<group>"; };
+		FC7AB920113752AE00F5EFD6 /* GNLandmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLandmarkViewController.m; sourceTree = "<group>"; };
 		FC94C19B1138455D001F7B38 /* GNTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNTableViewCell.h; sourceTree = "<group>"; };
 		FC94C19C1138455D001F7B38 /* GNTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNTableViewCell.m; sourceTree = "<group>"; };
 		FC9694D911224C8C00218696 /* WikiLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiLayer.h; sourceTree = "<group>"; };
@@ -296,8 +293,8 @@
 				FCE3BA2610F900AC003BE4A2 /* FoodLayer.m */,
 				A26D1BEC1130B2F8008EBEFF /* SportingArenasLayer.h */,
 				A26D1BED1130B2F8008EBEFF /* SportingArenasLayer.m */,
-				FC7AB91F113752AE00F5EFD6 /* SportsViewController.h */,
-				FC7AB920113752AE00F5EFD6 /* SportsViewController.m */,
+				FC7AB91F113752AE00F5EFD6 /* GNLandmarkViewController.h */,
+				FC7AB920113752AE00F5EFD6 /* GNLandmarkViewController.m */,
 				FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */,
 				FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */,
 				A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */,
@@ -355,9 +352,6 @@
 				FC6F4300113103AF00036392 /* FoodView.xib */,
 				FC546739113380A20069EA00 /* SportingArenasView.xib */,
 				FC7AB91E113752AE00F5EFD6 /* SportsViewController.xib */,
-				FC7AB92A113752EE00F5EFD6 /* cellBackground.png */,
-				FC7AB929113752E800F5EFD6 /* cellBackgroundMD.png */,
-				FC7AB928113752DC00F5EFD6 /* cellBackgroundLG.png */,
 				A25B5893111A272200C63840 /* academic.png */,
 				FC54672D11337B8A0069EA00 /* flickr.png */,
 				A25B5894111A272200C63840 /* bird.png */,
@@ -399,10 +393,10 @@
 				FC242BD3111F4A63003AFB03 /* ASIAuthenticationDialog.h */,
 				FC242BD4111F4A63003AFB03 /* ASIAuthenticationDialog.m */,
 				FC242BD7111F4A73003AFB03 /* ASIHTTPRequestConfig.h */,
-				FC242C23111F4C14003AFB03 /* Reachability.h */,
-				FC242C24111F4C14003AFB03 /* Reachability.m */,
 				FC242C42111F4D35003AFB03 /* ASIInputStream.h */,
 				FC242C43111F4D35003AFB03 /* ASIInputStream.m */,
+				B8EB0FAC113C9BDC00C726B6 /* Reachability.h */,
+				B8EB0FAD113C9BDC00C726B6 /* Reachability.m */,
 			);
 			name = ASIHTTPRequest;
 			sourceTree = "<group>";
@@ -437,13 +431,13 @@
 				FC242BCF111F4A53003AFB03 /* ASINSStringAdditions.h in Headers */,
 				FC242BD5111F4A63003AFB03 /* ASIAuthenticationDialog.h in Headers */,
 				FC242BD8111F4A73003AFB03 /* ASIHTTPRequestConfig.h in Headers */,
-				FC242C25111F4C14003AFB03 /* Reachability.h in Headers */,
 				FC242C44111F4D35003AFB03 /* ASIInputStream.h in Headers */,
 				FC9694DB11224C8C00218696 /* WikiLayer.h in Headers */,
 				FC6F41AA113079F500036392 /* FlickrLayer.h in Headers */,
 				A26D1BEE1130B2F8008EBEFF /* SportingArenasLayer.h in Headers */,
-				FC7AB921113752AE00F5EFD6 /* SportsViewController.h in Headers */,
+				FC7AB921113752AE00F5EFD6 /* GNLandmarkViewController.h in Headers */,
 				FC94C19D1138455D001F7B38 /* GNTableViewCell.h in Headers */,
+				B8EB0FAE113C9BDC00C726B6 /* Reachability.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,13 +572,13 @@
 				FC242BCC111F4A44003AFB03 /* ASINetworkQueue.m in Sources */,
 				FC242BD0111F4A53003AFB03 /* ASINSStringAdditions.m in Sources */,
 				FC242BD6111F4A63003AFB03 /* ASIAuthenticationDialog.m in Sources */,
-				FC242C26111F4C14003AFB03 /* Reachability.m in Sources */,
 				FC242C45111F4D35003AFB03 /* ASIInputStream.m in Sources */,
 				FC9694DC11224C8C00218696 /* WikiLayer.m in Sources */,
 				FC6F41AB113079F500036392 /* FlickrLayer.m in Sources */,
 				A26D1BEF1130B2F8008EBEFF /* SportingArenasLayer.m in Sources */,
-				FC7AB922113752AE00F5EFD6 /* SportsViewController.m in Sources */,
+				FC7AB922113752AE00F5EFD6 /* GNLandmarkViewController.m in Sources */,
 				FC94C19E1138455D001F7B38 /* GNTableViewCell.m in Sources */,
+				B8EB0FAF113C9BDC00C726B6 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +616,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/asi-http-request/build/Debug-iphonesimulator\"",
 				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = LayerManager;
 			};
 			name = Debug;
@@ -644,6 +642,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/asi-http-request/build/Debug-iphonesimulator\"",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
 				);
 				PRODUCT_NAME = LayerManager;
 			};
