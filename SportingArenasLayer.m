@@ -159,8 +159,8 @@
 	[landmarkFieldInfo setObject:landmark.name forKey:@"Name"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"summary"] forKey:@"Summary"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"usedBy"] forKey:@"Used By"];
-	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"scheduleURL"] forKey:@"Schedule URL"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
+	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"scheduleURL"] forKey:@"Schedule URL"];
 	NSLog(@"Field Info Hurr: %@", landmarkFieldInfo);
 	return [landmarkFieldInfo autorelease];
 }

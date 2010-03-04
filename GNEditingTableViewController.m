@@ -15,72 +15,115 @@
 
 @implementation GNEditingTableViewController
 
-@synthesize adding=_adding, userInputDict=_userInputDict, fields=_fields, fieldContent=_fieldContent, imageViewCell=_imageViewCell, imageURL=_imageURL, photo=_photo;
+@synthesize adding=_adding, userInputDict=_userInputDict;
 
-- (id)initWithLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark{
+- (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark{
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-		selectedLayer = [layer retain]; 
-		self.fields = selectedLayer.fields;
-		selectedLocation = [location retain];
-		selectedLandmark = [landmark retain];
-		//eNSLog(@"Fields: %@",self.fields);
-		self.fieldContent =[[NSMutableDictionary alloc] init];
+		fields = [newFields retain];
+		NSLog(@"Fields: %@",fields);
+		userInput =[[NSMutableArray alloc] initWithCapacity:([fields count])];
 		self.userInputDict = [[NSMutableDictionary alloc] init];
+		selectedLocation = [location retain];
+		selectedLayer = [layer retain]; 
+		selectedLandmark = [landmark retain];
 		tookPhoto = NO;
-		previouslyExisted = NO;
-		self.adding = NO;
-		//NSLog(@"Creating editing table for landmark: %@", selectedLandmark);
-		//NSLog(@"Layer name: %@", selectedLayer.name);
+		
+		NSLog(@"Creating editing table for landmark: %@", selectedLandmark);
+		NSLog(@"Layer name: %@", selectedLayer.name);
 		
 		if (selectedLandmark) {
+			NSLog(@"Landmark already exists");
 			if ([selectedLayer containsLandmark:selectedLandmark limitToValidated:NO]) {
-				previouslyExisted = YES;
-				NSMutableDictionary *tempDict = (NSMutableDictionary *)[selectedLayer fieldInformationForLandmark:selectedLandmark];
-				for (NSString *fieldName in tempDict){
-					if ([[tempDict objectForKey:fieldName] isKindOfClass:[NSNull class]]){
-						NSLog(@"hello from nilville");
-						[self.fieldContent setObject:@"" forKey:fieldName];
-					}
-					else{
-						[self.fieldContent setObject:[tempDict objectForKey:fieldName] forKey:fieldName];
-					}
-				}
-				[tempDict release];
-				imageURLString = [self.fieldContent objectForKey:@"imageURL"];
-				[self.fieldContent removeObjectForKey:@"imageURL"];
+				NSLog(@"Layer's landmark info: %@",  [selectedLayer fieldInformationForLandmark:selectedLandmark]);
 			}
 			else {
-				self.adding = YES;
-				for (NSString *fieldName in self.fields){
-					[self.fieldContent setObject:@"" forKey:fieldName];
+				NSLog(@"Layer does not already have landmark info");
+			}
+		}
+		
+		if (selectedLandmark && [layer containsLandmark:selectedLandmark limitToValidated:NO]) {
+			NSLog(@"Landmark already exists");
+			previouslyExisted = YES;
+			self.adding = NO;
+			
+			NSDictionary *fieldDictionary = [selectedLayer fieldInformationForLandmark:selectedLandmark];
+			NSLog(@"Field information from layer %@ for landmark: %@", selectedLayer.name, fieldDictionary);
+			
+			NSLog(@"Entering existing user input");
+			for (int i = 0; i < ([fields count]); i++) {
+				NSLog(@"%@ -> %@", [[fields objectAtIndex:i] objectAtIndex:0],
+									 [fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]);
+				if ([[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]isKindOfClass:[NSNull class]]){
+					[userInput insertObject:@"" atIndex:i];
 				}
-				[self.fieldContent setObject:(NSString *)selectedLandmark.name forKey:"Name"];
-				imageURLString = @"";
+				else{
+					[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
+				}
+			}
+			NSLog(@"Completed existing user input: %@", userInput);
+			
+			NSLog(@"Finding image for existing landmark. . .");
+			if ([[fieldDictionary objectForKey:@"imageURL"] class] == [NSNull class]) {
+				NSLog(@"Layer does not support images: set imageURL to nil");
+				imageURL = nil;
+			}
+			else {
+				NSLog(@"Layer supports images: get existing image for this landmark");
+				imageURL = [[NSURL URLWithString:[fieldDictionary objectForKey:@"imageURL"]] retain];
+				if ([imageURL class] == [NSNull class]) {
+					NSLog(@"Existing image for this landmark is nil: set imageURL to nil");
+					[imageURL release];
+					imageURL = nil;
+				} else {
+					NSLog(@"Successfully set imageURL to existing image");
+				}
 			}
 		}
-		else{
+		else {
+			NSLog(@"Layer does not have information for this landmark: adding");
+			
 			self.adding = YES;
-			for (NSString *fieldName in self.fields){
-				[self.fieldContent setObject:@"" forKey:fieldName];
+			if (selectedLandmark) {
+				NSLog(@"Landmark already exists, set name field (at index 0) to: %@", selectedLandmark.name);
+				previouslyExisted = YES;
+				self.title = selectedLandmark.name;
+				[userInput insertObject:selectedLandmark.name atIndex:0];
 			}
-			imageURLString = @"";
+			else {
+				NSLog(@"Landmark does not already exist, set name field (at index 0) to the empty string");
+				previouslyExisted = NO;
+				[userInput insertObject:@"" atIndex:0];
+			}
+			
+			// Set all other user inputs to the empty string, and set imageURL to nil 
+			for (int i = 1; i < ([fields count]); i++) {
+				[userInput insertObject:@"" atIndex:i];
+			}
+			imageURL = nil;
 		}
+		
+		NSLog(@"Number of elements in user input: %d",[userInput count]);
 	}
 	return self;
 }
 
 - (void)addUserInput:(NSString *)input toField:(NSInteger)index{
-	[self.fieldContent setObject:input forKey:[self.fields objectAtIndex:index]];
+	[userInput replaceObjectAtIndex:index withObject:input];
 	if (index == 0) {
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 		self.title = input;
 	}
-	[self.userInputDict setObject:input forKey:[selectedLayer.serverNamesForFields objectAtIndex:index-1]];
+	else{
+		[self.userInputDict setObject:input forKey:[selectedLayer.serverNamesForFields objectAtIndex:index-1]];
+	}
 }
 -(NSInteger)getCurrentField {
 	return currentField;
 }
 
+- (void)setAdding:(BOOL)adding {
+	_adding = adding;
+}
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -110,98 +153,42 @@
 		}
 		[doneButton release];
 	}
-	NSLog(@"Image URL: %@", imageURLString);
-	NSLog(@"Fields: %@", self.fields);
-	NSLog(@"Content of Fields: %@", self.fieldContent);
-
-	if (imageURLString == @"") {
-		NSLog(@"doesn't have IMage URL");
+	buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
+	NSLog(@"Photo: %@",photo);
+	if (photo == nil) {
+		UIButton *takePhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		[takePhotoButton setTitle:@"Photo" forState:UIControlStateNormal];
+		takePhotoButton.frame = CGRectMake(10,10,80,80);
+		takePhotoButton.alpha = 0.8;
+		[takePhotoButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
+		[buttonContainer addSubview:takePhotoButton];
 	}
-	else{
-		[self getImageWithURL:[NSURL URLWithString:imageURLString]];
-	}
-		/*		imageURL = [NSURL URLWithString:imageURLString];
+	if (imageURL) {
 		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:imageURL];
 		[request setDelegate:self];
 		[request setDidFinishSelector:@selector(setDidFinishPhotoRequest:)];
 		[request startAsynchronous];
-		
-		NSLog(@"has image URL");
 	}
-	buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
-	UIButton *takePhotoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[takePhotoButton setTitle:@"Photo" forState:UIControlStateNormal];
-	takePhotoButton.frame = CGRectMake(10,10,80,80);
-	takePhotoButton.alpha = 0.8;
-	[takePhotoButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
-	[buttonContainer addSubview:takePhotoButton];
 	self.tableView.tableHeaderView = buttonContainer;
 	photoView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,80,80)];
 	photoView.contentMode = UIViewContentModeScaleAspectFit;
 }
-*/
+
+- (void)setDidFinishPhotoRequest:(ASIHTTPRequest *)request{	
+	// Use when fetching binary data
+	NSData *responseData = [request responseData];
+	photo = [[UIImage imageWithData:responseData] retain];
+	photoView.image = photo;
+	[buttonContainer addSubview:photoView];
+	[buttonContainer setNeedsDisplay];
 	
 }
-- (void)getImageWithURL:(NSURL *)url {
-	self.imageURL = [url retain];
-	NSURLRequest *theRequest=[NSURLRequest requestWithURL:url
-											  cachePolicy:NSURLRequestUseProtocolCachePolicy
-										  timeoutInterval:60.0];
-	// create the connection with the request
-	// and start loading the data
-	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
-	if (theConnection) {
-		// Create the NSMutableData that will hold the received data
-		// receivedData is declared as a method instance elsewhere
-		receivedData=[[NSMutableData data] retain];
-	} 
-	else {
-		// inform the user that the download could not be made
-	}
+
+- (void)requestFailed:(ASIHTTPRequest *)request{
+//	NSError *error = [request error];
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    // this method is called when the server has determined that it
-    // has enough information to create the NSURLResponse
-	
-    // it can be called multiple times, for example in the case of a
-    // redirect, so each time we reset the data.
-    // receivedData is declared as a method instance elsewhere
-    [receivedData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // append the new data to the receivedData
-    // receivedData is declared as a method instance elsewhere
-    [receivedData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    // release the connection, and the data object
-    [connection release];
-    // receivedData is declared as a method instance elsewhere
-    [receivedData release];
-	
-    // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-	self.photo = [UIImage imageWithData:receivedData];
-	[self.imageViewCell displayImage:self.photo];
-	//self.imageViewCell.backgroundView = imageView;
-    // release the connection, and the data object
-    [connection release];
-    [receivedData release];
-}
-
--(void)takePhoto{
+-(IBAction)takePhoto:(id)sender {
 	NSLog(@"In takePhoto");
 	photoController = [[UIImagePickerController alloc] init];
 	
@@ -218,42 +205,41 @@
 	NSLog(@"End of takePhoto, photoController: %@", photoController);
 }
 
+
 - (void)imagePickerController:(UIImagePickerController *)controller didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	NSLog(@"In imagePickerController, controller: %@", controller);
 	
 	[controller dismissModalViewControllerAnimated:YES];
-	self.photo = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];
-	[self.imageViewCell displayImage:self.photo];
-
+	photo = [[info objectForKey:UIImagePickerControllerOriginalImage] retain];
+	photoView.image = photo;
+	[buttonContainer addSubview:photoView];
+	[buttonContainer setNeedsDisplay];
+	self.tableView.tableHeaderView = buttonContainer;
 	[photoController release];
 	photoController = nil;
 	tookPhoto = YES;
 }
+
 - (void)postToServer:(id)sender {
 	if (!tookPhoto) {
-		self.photo = nil;
+		photo = nil;
 	}
 	if (selectedLandmark) {
 		// The substringFromIndex:7 parameter strips off the "gnarus:" in the beginning of landmarkID's for the gnarus server.
-		[selectedLayer postLandmark:self.userInputDict withName:selectedLandmark.name withLocation:selectedLocation withID:[selectedLandmark.ID substringFromIndex:7] andPhoto:self.photo];
+		[selectedLayer postLandmark:self.userInputDict withName:selectedLandmark.name withLocation:selectedLocation withID:[selectedLandmark.ID substringFromIndex:7] andPhoto:photo];
 		//[selectedLayer postLandmarkArray:userInput withID:[selectedLandmark.ID substringFromIndex:7] withLocation:selectedLocation andPhoto:photo];
 	}
 	else {
-		[selectedLayer postLandmark:self.userInputDict withName:self.title withLocation:selectedLocation withID:@"0" andPhoto:self.photo];
+		[selectedLayer postLandmark:self.userInputDict withName:self.title withLocation:selectedLocation withID:@"0" andPhoto:photo];
 	}
-	NSLog(@"Posting photo: %@", self.photo);
-	//NSLog(@"Posting user input array : %@", userInput);
+	NSLog(@"Posting photo: %@", photo);
+	NSLog(@"Posting user input array : %@", userInput);
 	// update selected layer to center location [selectedLayer updateToCenterLocation:[[GNLayerManager sharedManager] center];
 	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-	if (section == 0){
-		return @"Photo";
-	}
-	else{
-		return [self.fields objectAtIndex:section-1];
-	}
+	return [[fields objectAtIndex:section] objectAtIndex:0];
 }
 
 /*
@@ -302,7 +288,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // One section is devoted to each field, including the proposed title/name.
-	return [self.fields count]+1;
+	return [fields count];
 }
 
 
@@ -323,27 +309,18 @@
     //if (cell == nil) {
     //    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     //}
-	if (indexPath.section == 0){
-		if (imageURLString == @""){
-			[cell setContentString:@"Click to take a Photo..." withFrameSize:(CGFloat)40];
-		}
-		else{
-			[cell setContentString:@"" withFrameSize:(CGFloat)5];
-			self.imageViewCell = cell;
-		}
-	}
-	else{
-	NSString *contentString = [self.fieldContent objectForKey:[self.fields objectAtIndex:indexPath.section-1]];
-	[cell setContentString:contentString withFrameSize:(CGFloat)0];
+	
+	NSString *inputFields = [userInput objectAtIndex:(indexPath.section)];
+	[cell setContentString:inputFields withFrameSize:(CGFloat)0];
 	
 	//[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
-	}
+	
     return cell;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ((indexPath.section == 0)||(previouslyExisted && indexPath.section == 1)){
+    if (previouslyExisted && indexPath.section == 0){
         return nil;
     }
 	return indexPath;
@@ -351,37 +328,25 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0){
-		[self takePhoto];
-	}
-	currentField = indexPath.section - 1;
+	currentField = indexPath.section;
 	if (!(previouslyExisted && currentField == 0)){
-		UIViewController *infoInputViewController = [[GNInfoInputViewController alloc] initWithFieldName:[self.fields objectAtIndex:currentField] andContent:[self.fieldContent objectForKey:[self.fields objectAtIndex:currentField]]];
+		UIViewController *infoInputViewController = [[GNInfoInputViewController alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section)] 
+																								 andInput:[userInput objectAtIndex:indexPath.section]];
 		[self.navigationController pushViewController:infoInputViewController animated:YES];
 		[infoInputViewController release];
 	}
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	if (indexPath.section==0 && ((imageURLString != @"")||tookPhoto)){
-		return (CGFloat)180;
-	}
-	else{
-		return (CGFloat)40;
-	}
-}
-
 - (void)dealloc {
-	//[self.fields release];
-	//[userInput release];
+	[fields release];
+	[userInput release];
 	[selectedLayer release];
 	[selectedLocation release];
 	[selectedLandmark release];
-	//[buttonContainer release];
-	//[self.photo release];
-	//[photoView release];
-	//[self.imageURL release];
+	[buttonContainer release];
+	[photo release];
+	[photoView release];
+	[imageURL release];
 	
     [super dealloc];
 }

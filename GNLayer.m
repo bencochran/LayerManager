@@ -264,7 +264,7 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 		[self doesNotRecognizeSelector:_cmd];
 		return nil;
 	}
-	return [[[GNEditingTableViewController alloc] initWithLayer:self andLocation:location andLandmark:landmark] autorelease];
+	return [[[GNEditingTableViewController alloc] initWithFields:layerFields andLayer:self andLocation:location andLandmark:landmark] autorelease];
 }
 
 - (NSDictionary *)fieldInformationForLandmark:(GNLandmark *)landmark {
@@ -279,7 +279,6 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 - (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo {
 	[self doesNotRecognizeSelector:_cmd];
 }
-
 
 - (void)postRequestDidFail:(ASIHTTPRequest *)request {
 	NSLog(@"Post request failed with error: %@ %@",
