@@ -87,16 +87,10 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	NSString *landmarkDictString = [landmarkDict JSONRepresentation];
 	NSLog(@"JSON Landmark: %@", landmarkDictString);
 	[request setPostValue:landmarkDictString forKey:@"landmarkDict"];
-<<<<<<< HEAD
-	request.delegate = self;
-	[request setDidFailSelector:@selector(postRequestDidFail:)];
-	[request setDidFinishSelector:@selector(postRequestDidFinish:)];
-=======
-	[request setDidFailSelector:@selector(postRequestDidFail:)];
-	[request setDidFinishSelector:@selector(postRequestDidFinish:)];
 	[request setDelegate:self];
+	[request setDidFailSelector:@selector(postRequestDidFail:)];
+	[request setDidFinishSelector:@selector(postRequestDidFinish:)];
 	NSLog(@"request postData: %@", [request postData]);
->>>>>>> ca668b2b8ab769a1cb3882faca0411189b599f06
 	[request startAsynchronous];
 }
 	
