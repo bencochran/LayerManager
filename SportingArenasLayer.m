@@ -33,23 +33,6 @@
 }
 
 - (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {
-	// http://dev.gnar.us/getInfo.py/SportingArenas?udid=3&lat=44.46055309703&lon=-93.1566672394&maxLandmarks=2
-	// TODO: add limitToValidated stuff
-	/*NSString *urlString = nil;
-	if (limitToValidated == YES) {
-		urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/SportingArenas?udid=%@&lat=%f&lon=%f&maxLandmarks=%d",
-						   [[UIDevice currentDevice] uniqueIdentifier], 
-						   [location coordinate].latitude, 
-						   [location coordinate].longitude, 
-						   [[GNLayerManager sharedManager] maxLandmarks]];
-	}
-	else {
-		urlString = [NSString stringWithFormat:@"http://dev.gnar.us/Vote.py/AddingToSportingArenas?lat=%f&lon=%f&maxDistance=%f",
-						   [location coordinate].latitude, 
-						   [location coordinate].longitude, 
-						   [[GNLayerManager sharedManager] maxDistance]];
-	}
-	return [NSURL URLWithString:urlString];*/
 	return [self URLForLocation:location limitToValidated:limitToValidated withLayerName:@"SportingArenas"];
 }
 
@@ -57,16 +40,13 @@
 	NSString *reply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSArray *layerInfoList = [parser objectWithString:reply error:nil];
-	for (NSDictionary *dictionary in layerInfoList){
-		NSLog(@"Here's a Dick: %@", dictionary);
-	}
 	[reply release]; reply = nil;
 	[parser release]; parser = nil;
 	
 	// load the distance and landmark info
 	NSMutableDictionary *layerInfo;
 	GNLandmark *landmark;
-	NSMutableArray *landmarks = [NSMutableArray array];
+	NSMutableArray *parsedLandmarks = [NSMutableArray array];
 	
 	for (NSDictionary *landmarkAndLayerInfo in layerInfoList)
 	{
@@ -82,21 +62,19 @@
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
 		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
-		
+		[parsedLandmarks addObject:landmark];
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 		[layerInfo release];
-		[landmarks addObject:landmark];
 	}
 	
-	return landmarks;
+	return parsedLandmarks;
 }
 
-
-
 - (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo {
+	NSLog(@"Posting info: %@", info);
+	
 	NSURL *url = [NSURL URLWithString:@"http://dev.gnar.us/post.py/sportingArenas"];
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-	NSLog(@"Info: %@", info);
 	[request setPostValue:[info objectAtIndex:0] forKey:@"name"];
 	[request setPostValue:[info objectAtIndex:1] forKey:@"summary"];
 	[request setPostValue:[info objectAtIndex:2] forKey:@"usedBy"];
@@ -117,21 +95,15 @@
 	[request startAsynchronous];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
+- (void)requestFinished:(ASIHTTPRequest *)request {
 	// Use when fetching text data
 	NSString *responseString = [request responseString];
 	NSLog(@"Finished: %@", responseString);
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
+- (void)requestFailed:(ASIHTTPRequest *)request {
 	NSError *error = [request error];
 	NSLog(@"Error: %@", error);
-}
-
-- (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	return [(NSDictionary*) [layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
@@ -161,7 +133,7 @@
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"usedBy"] forKey:@"Used By"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"scheduleURL"] forKey:@"Schedule URL"];
-	NSLog(@"Field Info Hurr: %@", landmarkFieldInfo);
+	//NSLog(@"Field Info: %@", landmarkFieldInfo);
 	return [landmarkFieldInfo autorelease];
 }
 
@@ -175,7 +147,6 @@
 
 - (id)init {
 	if (self = [super initWithNibName:@"SportingArenasView" bundle:nil]) {
-		
 	}
 	return self;
 }
@@ -199,8 +170,7 @@
 	
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     // this method is called when the server has determined that it
     // has enough information to create the NSURLResponse
 	
@@ -210,15 +180,13 @@
     [receivedData setLength:0];
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     // append the new data to the receivedData
     // receivedData is declared as a method instance elsewhere
     [receivedData appendData:data];
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // release the connection, and the data object
     [connection release];
     // receivedData is declared as a method instance elsewhere
@@ -230,8 +198,7 @@
           [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	UIImage *image = [UIImage imageWithData:receivedData];
 	imageView.image = image;
 	[self.photoLoading stopAnimating];
@@ -255,29 +222,29 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-	if (self.summary == nil){
+	if (self.summary == nil) {
 		self.summaryView.text = @"Click 'Edit' to enter a Summary.";
 	}
-	else{
+	else {
 		self.summaryView.text = self.summary;
 	}
-	if (self.usedBy == nil){
+	if (self.usedBy == nil) {
 		self.usedByView.text = @"Click 'Edit' to enter a list of Sports Teams who use this Facility.";
 	}
-	else{
+	else {
 		self.usedByView.text = self.usedBy;
 	}
-	if (self.scheduleURL == nil){
+	if (self.scheduleURL == nil) {
 		self.scheduleURLView.text = @"Click 'Edit' to enter a URL for this Facility's schedule.";
 	}
-	else{
+	else {
 		self.scheduleURLView.text = self.scheduleURL;
 	}
-	if (_imageURL){
+	if (_imageURL) {
 		self.editPhoto.text = @"";
 		[self.photoFrame setAlpha:0];
 	}
-	else{
+	else {
 		[self.photoLoading stopAnimating];
 		self.editPhoto.text = @"Click 'Edit' to add Photo";
 	}
@@ -285,7 +252,7 @@
 	[self.navigationItem setRightBarButtonItem:editButton animated:YES];
 }
 
--(void)didSelectEditButton{
+-(void)didSelectEditButton {
 	GNEditingTableViewController *editingViewController = (GNEditingTableViewController *)[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark];
 	[self.navigationController pushViewController:editingViewController animated:YES];	
 }

@@ -35,14 +35,6 @@
 }
 
 - (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {
-	// http://dev.gnar.us/getInfo.py/Food?lat=44.46055309703&lon=-93.1566672394&maxLandmarks=2
-	// TODO: add limitToValidated stuff
-	/*NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/Food?udid=%@&lat=%f&lon=%f&maxLandmarks=%d", 
-						   [[UIDevice currentDevice] uniqueIdentifier], 
-						   [location coordinate].latitude, 
-						   [location coordinate].longitude, 
-						   [[GNLayerManager sharedManager] maxLandmarks]];
-	return [NSURL URLWithString:urlString];*/
 	return [self URLForLocation:location limitToValidated:limitToValidated withLayerName:@"Food"];
 }
 
@@ -56,7 +48,7 @@
 	// load the distance and landmark info
 	NSMutableDictionary *layerInfo;
 	GNLandmark *landmark;
-	NSMutableArray *landmarks = [NSMutableArray array];
+	NSMutableArray *parsedLandmarks = [NSMutableArray array];
 	
 	for (NSDictionary *landmarkAndLayerInfo in layerInfoList)
 	{
@@ -74,18 +66,18 @@
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
 		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
+		[parsedLandmarks addObject:landmark];
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 		[layerInfo release];
-		[landmarks addObject:landmark];
 	}
 	
-	return landmarks;
+	return parsedLandmarks;
 }
 
 - (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{
 	NSURL *url = [NSURL URLWithString:@"http://dev.gnar.us/post.py/food"];
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-	NSLog(@"Info: %@", info);
+	//NSLog(@"Info: %@", info);
 	[request setPostValue:[info objectAtIndex:0] forKey:@"name"];
 	[request setPostValue:[info objectAtIndex:1] forKey:@"hours"];
 	[request setPostValue:[info objectAtIndex:2] forKey:@"summary"];
@@ -117,11 +109,6 @@
 {
 	NSError *error = [request error];
 	NSLog(@"Error: %@", error);
-}
-
-
-- (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	return [(NSDictionary*) [layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
@@ -161,7 +148,7 @@
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"hours"] forKey:@"Hours"];
 	
-	NSLog(@"fieldInformationForLandmark, landmarkFieldInfo: %@", landmarkFieldInfo);
+	//NSLog(@"fieldInformationForLandmark, landmarkFieldInfo: %@", landmarkFieldInfo);
 	
 	return [landmarkFieldInfo autorelease];
 }

@@ -72,7 +72,7 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	}
 	[layerDict setObject:landmarkID forKey:@"landmarkID"];
 	NSString *layerDictString = [layerDict JSONRepresentation];
-	NSLog(@"JSON Layer: %@", layerDictString);
+	//NSLog(@"JSON Layer: %@", layerDictString);
 	[request setPostValue:layerDictString forKey:@"layerDict"];
 	[request setPostValue:self.tableNameOnServer forKey:@"tableName"];
 	[request setPostValue:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"UDID"];
@@ -85,15 +85,14 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	[landmarkDict setObject:[NSString stringWithFormat:@"%f",location.coordinate.latitude] forKey:@"latitude"];
 	[landmarkDict setObject:[NSString stringWithFormat:@"%f",location.coordinate.longitude] forKey:@"longitude"];
 	NSString *landmarkDictString = [landmarkDict JSONRepresentation];
-	NSLog(@"JSON Landmark: %@", landmarkDictString);
+	//NSLog(@"JSON Landmark: %@", landmarkDictString);
 	[request setPostValue:landmarkDictString forKey:@"landmarkDict"];
 	[request setDelegate:self];
 	[request setDidFailSelector:@selector(postRequestDidFail:)];
 	[request setDidFinishSelector:@selector(postRequestDidFinish:)];
-	NSLog(@"request postData: %@", [request postData]);
+	//NSLog(@"request postData: %@", [request postData]);
 	[request startAsynchronous];
 }
-	
 
 -(void)dealloc {
 	[self.name release];
@@ -106,31 +105,24 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 }
 
 #pragma mark -
-#pragma mark Might delete
-///////////////////////////////// MIGHT DELETE vvvvvvvvvvv
+#pragma mark Updating and accessing validated landmarks
 
-// Removes this layer from the active layers list of each of its closest landmarks
 // Clears this layer's list of closest validated landmarks
-- (void)removeSelfFromLandmarks {
-	for (GNLandmark *landmark in self.landmarks) {
-		[landmark removeActiveLayer:self];
-	}
-	
+- (void)clearValidatedLandmarks {
 	[self.landmarks removeAllObjects];
 }
 
-// Returns a short string summarizing the layer information for the given landmark
-// (Should be displayed below the layer name in the LayersListViewController)
-- (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	[self doesNotRecognizeSelector:_cmd];
-	return nil;
+// Clears all data stored by this layer that is not currently
+// relevant to a validated landmark in _landmarks
+- (void)flushNonvalidatedInfo {
+	NSMutableArray *IDsToRemove = [[NSMutableArray alloc] init];
+	[IDsToRemove addObjectsFromArray:[layerInfoByLandmarkID allKeys]];
+	for (GNLandmark *landmark in self.landmarks) {
+		[IDsToRemove removeObject:landmark.ID];
+	}
+	[layerInfoByLandmarkID removeObjectsForKeys:IDsToRemove];
+	[IDsToRemove release];
 }
-
-////////////////////////////////// MIGHT DELETE ^^^^^^^^^^^^
-
-
-#pragma mark -
-#pragma mark Updating and accessing validated landmarks
 
 - (void)updateToCenterLocation:(CLLocation *)location {
 	if (self.active != YES) {
@@ -180,7 +172,7 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 					 [location coordinate].longitude, 
 					 [[GNLayerManager sharedManager] maxDistance]];
 	}
-	NSLog(@"URL: %@", urlString);
+	//NSLog(@"URL: %@", urlString);
 	return [NSURL URLWithString:urlString];
 }
 
@@ -215,14 +207,8 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 }
 
 - (void)ingestLandmarks:(NSArray *)landmarks {
-	[self removeSelfFromLandmarks];
-	
-	for (GNLandmark *landmark in landmarks)
-	{		
-		[landmark addActiveLayer:self];
-		[self.landmarks addObject:landmark];
-	}
-	
+	[self clearValidatedLandmarks];
+	[self.landmarks addObjectsFromArray:landmarks];
 	[[GNLayerManager sharedManager] layerDidUpdate:self withLandmarks:self.landmarks];	
 }
 
@@ -244,7 +230,7 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 #pragma mark Updating and accessing user-modifiable landmarks
 
 - (void)updateEditableLandmarksForLocation:(CLLocation *)location {
-	NSLog(@"updateEditableLandmarksForLocation on layer %@", self);
+	NSLog(@"updateEditableLandmarksForLocation on %@", self.name);
 	center = [location retain];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[self URLForLocation:location limitToValidated:NO]];
 	[request setDelegate:self];
@@ -253,9 +239,9 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 }
 
 - (void)didFinishEditableLandmarksRequest:(ASIHTTPRequest *)request {
-	NSLog(@"Getting editable landmarks for %@ got this response: %@", [self name], [request responseString]);
-	NSArray *landmarks = [self parseDataIntoLandmarks:[request responseData]];
-	[[GNLayerManager sharedManager] layer:self didUpdateEditableLandmarks:landmarks];
+	//NSLog(@"Getting editable landmarks for %@ got this response: %@", [self name], [request responseString]);
+	NSArray *editableLandmarks = [self parseDataIntoLandmarks:[request responseData]];
+	[[GNLayerManager sharedManager] layer:self didUpdateEditableLandmarks:editableLandmarks];
 }
 
 - (UIViewController *)getEditingViewControllerWithLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark; {
@@ -285,7 +271,9 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
           [[request error] localizedDescription],
           [[[request error] userInfo] objectForKey:NSErrorFailingURLStringKey]);
 }
+
 - (void)postRequestDidFinish:(ASIHTTPRequest *)request {
 	NSLog(@"Post request finished with response: %@", [request responseString]);
 }
+
 @end

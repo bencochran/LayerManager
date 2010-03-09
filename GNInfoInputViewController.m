@@ -53,10 +53,10 @@
 }
 
 - (void)save:(id)sender {
-	if([fieldArray objectAtIndex:1] == @"textView"){
+	if([fieldArray objectAtIndex:1] == @"textView") {
 		inputString = textView.text;
 	}
-	else{
+	else {
 		inputString = textField.text;
 	}
 	NSInteger lastIndex = [self.navigationController.viewControllers count] - 2;

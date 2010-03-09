@@ -11,7 +11,7 @@
 
 @implementation GNLandmark
 
-@synthesize ID=_id, name=_name, distance=_distance, activeLayers=_activeLayers;
+@synthesize ID=_id, name=_name, distance=_distance;
 
 - (CLLocationCoordinate2D)coordinate {
 	return super.coordinate;
@@ -38,7 +38,6 @@
 	landmark.ID = ID;
 	landmark.name = name;
 	landmark.distance = INFINITY;
-	landmark.activeLayers = [[NSMutableArray alloc] init];
 	return [landmark autorelease];	
 }
 
@@ -47,21 +46,7 @@
 	landmark.ID = ID;
 	landmark.name = name;
 	landmark.distance = INFINITY;
-	landmark.activeLayers = [[NSMutableArray alloc] init];
 	return [landmark autorelease];
-}
-
--(void)addActiveLayer:(GNLayer*)layer {
-	[self.activeLayers removeObject:layer];
-	[self.activeLayers addObject:layer];
-}
-
--(void)removeActiveLayer:(GNLayer*)layer {
-	[self.activeLayers removeObject: layer];
-}
-
--(void)clearActiveLayers {
-	[self.activeLayers removeAllObjects];
 }
 
 // Used to sort landmarks by distance
@@ -82,7 +67,6 @@
 -(void)dealloc {
 	[self.ID release];
 	[self.name release];
-	[self.activeLayers release];
 	[super dealloc];
 }
 

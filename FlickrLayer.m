@@ -25,7 +25,7 @@
 					   [location coordinate].latitude,
 					   [location coordinate].longitude,
 						   minUploadDate];
-	NSLog(@"url: %@", urlString);
+	//NSLog(@"url: %@", urlString);
 	return [NSURL URLWithString:urlString];
 }
 
@@ -49,8 +49,8 @@
 	CLLocationDegrees landmarkLat;
 	NSURL *imageURL;
 	NSURL *thumbnailURL;
-	NSMutableArray *landmarks = [NSMutableArray array];
-	NSLog(@"number of photos: %i", [[[layerInfoList objectForKey:@"photos"] objectForKey:@"photo"] count]);
+	NSMutableArray *parsedLandmarks = [NSMutableArray array];
+	NSLog(@"Number of FlickrLayer photos: %i", [[[layerInfoList objectForKey:@"photos"] objectForKey:@"photo"] count]);
 	
 	for (NSDictionary *landmarkAndLayerInfo in [[layerInfoList objectForKey:@"photos"] objectForKey:@"photo"])
 	{
@@ -62,13 +62,13 @@
 		photoOwner = [landmarkAndLayerInfo objectForKey:@"owner"];
 		imageURL = [NSURL URLWithString:[landmarkAndLayerInfo objectForKey:@"url_m"]];
 		thumbnailURL = [NSURL URLWithString:[landmarkAndLayerInfo objectForKey:@"url_sq"]]; 
-		NSLog(@"Title: %@",landmarkName);
+		/*NSLog(@"Title: %@",landmarkName);
 		NSLog(@"ID: %@",photoID);
 		NSLog(@"Owner: %@",photoOwner);
 		NSLog(@"Long: %f",landmarkLon);
 		NSLog(@"Lat: %f",landmarkLat);
 		NSLog(@"Image URL: %@",imageURL);
-		NSLog(@"Thumbnail ULR: %@",thumbnailURL);
+		NSLog(@"Thumbnail ULR: %@",thumbnailURL);*/
 		
 		[layerInfo setObject:photoID forKey:@"photoID"];
 		[layerInfo setObject:photoOwner forKey:@"photoOwner"];
@@ -80,21 +80,13 @@
 													  latitude:landmarkLat
 													 longitude:landmarkLon
 													  altitude:center.altitude];
-		
-		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
-		
 		// calculate distance
 		landmark.distance = [landmark getDistanceFrom:center];
-		
+		[parsedLandmarks addObject:landmark];
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
-		[layerInfo release]; layerInfo = nil;
-		[landmarks addObject:landmark];
+		[layerInfo release];
 	}	
-	return landmarks;
-}
-
-- (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	return @"Flickr photos have no Summary";
+	return parsedLandmarks;
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {

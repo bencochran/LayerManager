@@ -12,9 +12,8 @@
 @synthesize imageViewCell=_imageViewCell, imageURL=_imageURL, photo=_photo, fieldInfo=_fieldInfo, fieldNames=_fieldNames, layer=_layer, landmark=_landmark;
 
 - (id)init {
-	if (self = [super initWithStyle:UITableViewStyleGrouped]){
+	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 	//if (self = [super initWithNibName:@"SportsViewController" bundle:nil]) {
-		NSLog(@"Are we even getting here?");
 		self.fieldInfo = [[NSMutableDictionary alloc]init];
 	}
 	return self;
@@ -51,8 +50,7 @@
 	}
 }
 */
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     // this method is called when the server has determined that it
     // has enough information to create the NSURLResponse
 	
@@ -62,15 +60,13 @@
     [receivedData setLength:0];
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     // append the new data to the receivedData
     // receivedData is declared as a method instance elsewhere
     [receivedData appendData:data];
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // release the connection, and the data object
     [connection release];
     // receivedData is declared as a method instance elsewhere
@@ -82,8 +78,7 @@
           [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	self.photo = [UIImage imageWithData:receivedData];
 	[self.imageViewCell displayImage:self.photo];
 	//self.imageViewCell.backgroundView = imageView;
@@ -97,17 +92,16 @@
     [super viewDidLoad];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	if ([self.layer layerIsUserModifiable]){
+	if ([self.layer layerIsUserModifiable]) {
 		UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(didSelectEditButton)];
 		[self.navigationItem setRightBarButtonItem:editButton animated:YES];
 	}
 }
 
--(void)didSelectEditButton{
+-(void)didSelectEditButton {
 	GNEditingTableViewController *editingViewController = (GNEditingTableViewController *)[self.layer getEditingViewControllerWithLocation:self.landmark andLandmark:self.landmark];
 	[self.navigationController pushViewController:editingViewController animated:YES];	
 }
-
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -153,7 +147,7 @@
 
 #pragma mark Table view methods
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	NSString *headerString = [NSString stringWithString:@""];
 	if (section == 0){
 		headerString = @"Photo";
@@ -175,7 +169,7 @@
     return 1;
 }
 
-- (CGFloat)getFrameSizeForString:(NSString *)string{
+- (CGFloat)getFrameSizeForString:(NSString *)string {
 	//Anyone know how to do MOD in a better way!!!???
 	CGFloat numberOfLines = (CGFloat)(([string length]-([string length]%40))/40);
 	return numberOfLines;
@@ -183,32 +177,31 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     static NSString *CellIdentifier = @"Cell";
     GNTableViewCell *cell = (GNTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     //GNTableViewCell *cell = (GNTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[GNTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier]autorelease];
-	    }
+	}
     
-	if (indexPath.section == 0){
-		if (_imageURL == nil){
+	if (indexPath.section == 0) {
+		if (_imageURL == nil) {
 			CGFloat stringFrameSize = [self getFrameSizeForString:@"Click 'Edit' to take a Photo..."];
 			[cell setContentString:@"Click 'Edit' to take a Photo..." withFrameSize:stringFrameSize];
 		}
-		else{
+		else {
 			[cell setContentString:@"" withFrameSize:(CGFloat)5];
 			self.imageViewCell = cell;
 			/// Display spinner here!
 		}
 	}
-	else{
+	else {
 		NSString *contentString = [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]];
-		if ([contentString length]== 0){
+		if ([contentString length]== 0) {
 			[cell setContentString:[NSString stringWithFormat:@"Click 'Edit' to enter a %@...",[self.fieldNames objectAtIndex:indexPath.section]]
 					 withFrameSize:(CGFloat)0];
 		}
-		else{
+		else {
 			CGFloat stringFrameSize = [self getFrameSizeForString:contentString];
 			[cell setContentString:contentString withFrameSize:(CGFloat)stringFrameSize];
 		}
@@ -253,26 +246,26 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0){
-		if (_imageURL == nil){
+    if (indexPath.section == 0) {
+		if (_imageURL == nil) {
 			return (CGFloat)40;
 		}
-		else{
+		else {
 			return (CGFloat)180;
 		}
 	}
-	else{
+	else {
 		NSString *contentString = [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]];
 		CGFloat stringFrameSize = [self getFrameSizeForString:contentString];
 		return (CGFloat)(stringFrameSize*(CGFloat)15)+(CGFloat)40;
-		}
+	}
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if ([[self.fieldNames objectAtIndex:indexPath.section] rangeOfString:@"URL"].length && [self.fieldInfo objectForKey:[self.fieldNames objectAtIndex:indexPath.section]]){
 		return indexPath;
 	}
-	else{
+	else {
 		return nil;
     }
 }
@@ -291,9 +284,7 @@
 	[webView release];
 	[self.navigationController pushViewController:viewController animated:YES];
 	[viewController release];	
-
 }
-
 
 /*
 // Override to support conditional editing of the table view.
@@ -302,7 +293,6 @@
     return YES;
 }
 */
-
 
 /*
 // Override to support editing the table view.
@@ -318,13 +308,11 @@
 }
 */
 
-
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
 }
 */
-
 
 /*
 // Override to support conditional rearranging of the table view.
@@ -334,11 +322,8 @@
 }
 */
 
-
 - (void)dealloc {
     [super dealloc];
 }
 
-
 @end
-

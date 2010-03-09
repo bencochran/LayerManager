@@ -17,7 +17,7 @@
 
 @synthesize adding=_adding, userInputDict=_userInputDict;
 
-- (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark{
+- (id)initWithFields:(NSArray *)newFields andLayer:(GNLayer *)layer andLocation:(CLLocation *)location andLandmark:(GNLandmark *)landmark {
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		fields = [newFields retain];
 		NSLog(@"Fields: %@",fields);
@@ -53,10 +53,10 @@
 			for (int i = 0; i < ([fields count]); i++) {
 				NSLog(@"%@ -> %@", [[fields objectAtIndex:i] objectAtIndex:0],
 									 [fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]);
-				if ([[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]isKindOfClass:[NSNull class]]){
+				if ([[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]]isKindOfClass:[NSNull class]]) {
 					[userInput insertObject:@"" atIndex:i];
 				}
-				else{
+				else {
 					[userInput insertObject:[fieldDictionary objectForKey:[[fields objectAtIndex:i] objectAtIndex:0]] atIndex:i];
 				}
 			}
@@ -107,13 +107,13 @@
 	return self;
 }
 
-- (void)addUserInput:(NSString *)input toField:(NSInteger)index{
+- (void)addUserInput:(NSString *)input toField:(NSInteger)index {
 	[userInput replaceObjectAtIndex:index withObject:input];
 	if (index == 0) {
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 		self.title = input;
 	}
-	else{
+	else {
 		[self.userInputDict setObject:input forKey:[selectedLayer.serverNamesForFields objectAtIndex:index-1]];
 	}
 }
@@ -124,6 +124,7 @@
 - (void)setAdding:(BOOL)adding {
 	_adding = adding;
 }
+
 /*
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -136,7 +137,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	NSLog(@"Adding: %@", self.adding ? @"yes" : @"no");
-	if (self.adding){
+	if (self.adding) {
 		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStyleDone target:self action:@selector(postToServer:)];
 		self.navigationItem.rightBarButtonItem = doneButton;
 		self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -148,7 +149,7 @@
 		if (previouslyExisted) {
 			self.navigationItem.rightBarButtonItem.enabled = YES;
 		}
-		else{
+		else {
 			self.navigationItem.rightBarButtonItem.enabled = NO;
 		}
 		[doneButton release];
@@ -181,10 +182,9 @@
 	photoView.image = photo;
 	[buttonContainer addSubview:photoView];
 	[buttonContainer setNeedsDisplay];
-	
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request{
+- (void)requestFailed:(ASIHTTPRequest *)request {
 //	NSError *error = [request error];
 }
 
@@ -192,7 +192,7 @@
 	NSLog(@"In takePhoto");
 	photoController = [[UIImagePickerController alloc] init];
 	
-	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
 		photoController.sourceType = UIImagePickerControllerSourceTypeCamera;
 	}
 	else {
@@ -238,7 +238,7 @@
 	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	return [[fields objectAtIndex:section] objectAtIndex:0];
 }
 
@@ -291,7 +291,6 @@
 	return [fields count];
 }
 
-
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return 1;
@@ -299,7 +298,6 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     static NSString *CellIdentifier = @"Cell";	
 	GNTableViewCell *cell = (GNTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
@@ -318,18 +316,16 @@
     return cell;
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (previouslyExisted && indexPath.section == 0){
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (previouslyExisted && indexPath.section == 0) {
         return nil;
     }
 	return indexPath;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	currentField = indexPath.section;
-	if (!(previouslyExisted && currentField == 0)){
+	if (!(previouslyExisted && currentField == 0)) {
 		UIViewController *infoInputViewController = [[GNInfoInputViewController alloc] initWithFieldArray:[fields objectAtIndex:(indexPath.section)] 
 																								 andInput:[userInput objectAtIndex:indexPath.section]];
 		[self.navigationController pushViewController:infoInputViewController animated:YES];

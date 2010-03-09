@@ -21,13 +21,11 @@
 	NSString *_id;
 	NSString *_name;
 	float _distance;
-	NSMutableArray* _activeLayers;
 }
 
 @property (nonatomic, copy) NSString *ID;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) float distance;
-@property (nonatomic, retain) NSMutableArray* activeLayers;
 
 // To comply with the MKAnnotation interface
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
@@ -36,9 +34,5 @@
 
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
-
-- (void)addActiveLayer:(GNLayer *)layer;
-- (void)removeActiveLayer:(GNLayer *)layer;
-- (void)clearActiveLayers;
 
 @end

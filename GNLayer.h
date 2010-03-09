@@ -74,17 +74,12 @@ extern NSString *const GNLayerDidFinishUpdating;
 - (BOOL)layerIsUserModifiable;
 
 
-///////////////////////// Might remove these two -Wade
-// Removes this layer from the active layer lists of all the landmarks
-// in _landmarks and then clears _landmarks
-- (void)removeSelfFromLandmarks;
-// Returns a short summary string of the layer information for this landmark
-// Will (theoretically) be displayed below this layer's name in the LayersListViewController
-- (NSString *)summaryForLandmark:(GNLandmark *)landmark;
-
-
 //// Methods for updating and accessing _landmarks (the current list of closest validated landmarks) ////
 
+// Clears this layer's list of validated landmarks
+- (void)clearValidatedLandmarks;
+// Clears all layer information not relevant to currently stored validated landmarks
+- (void)flushNonvalidatedInfo;
 // Updates the list of closest validated landmarks to the validated landmarks nearest to the
 // provided location and stores the layer information for these landmarks in layerInfoByLandmarkID
 - (void)updateToCenterLocation:(CLLocation *)location;

@@ -31,14 +31,13 @@
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
 
--(void)setContentString:(NSString *)newContentString withFrameSize:(CGFloat)newFrameSize{
-	if (newContentString != self.contentString){
+-(void)setContentString:(NSString *)newContentString withFrameSize:(CGFloat)newFrameSize {
+	if (newContentString != self.contentString) {
 		CGFloat lineSpacing = (CGFloat)15;
 		self.labelView.text = newContentString;
 		CGRect textFrame = CGRectMake(15.0, 0.0, self.contentView.bounds.size.width-45, (newFrameSize*lineSpacing)+(CGFloat)40);
@@ -49,7 +48,7 @@
 	}
 }
 
--(void)displayImage:(UIImage *)newImage{
+-(void)displayImage:(UIImage *)newImage {
 	CGRect photoFrame = CGRectMake(10.0, 10.0, self.contentView.bounds.size.width-20, self.contentView.bounds.size.height-20);
 	[self.photoView setFrame:photoFrame];
 	self.photoView.contentMode = UIViewContentModeScaleAspectFit;
@@ -68,7 +67,7 @@
 @implementation GNCellView
 
 -(id)init{
-	if (self = [super init]){
+	if (self = [super init]) {
 		self.backgroundColor = [UIColor clearColor];
 	}
 	return self;

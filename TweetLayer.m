@@ -39,7 +39,7 @@
 	NSDictionary *tweet;
 	GNLandmark *landmark;
 	NSMutableDictionary *layerInfo;
-	NSMutableArray *landmarks = [NSMutableArray array];
+	NSMutableArray *parsedLandmarks = [NSMutableArray array];
 
 	NSNumber *latitude;
 	NSNumber *longitude;
@@ -60,24 +60,14 @@
 														  latitude:[latitude floatValue]
 														 longitude:[longitude floatValue]
 														  altitude:center.altitude];
-			
-			[layerInfoByLandmarkID setObject:tweet forKey:landmark.ID];
-			
 			// calculate distance
 			landmark.distance = [landmark getDistanceFrom:center];
-			[self.landmarks addObject:landmark];
-			
+			[parsedLandmarks addObject:landmark];
 			[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
 			[layerInfo release];
-			
-			[landmarks addObject:landmark];
 		}
 	}
-	return landmarks;
-}
-
-- (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	return [(NSDictionary*) [layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"text"];
+	return parsedLandmarks;
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {

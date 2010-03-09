@@ -32,15 +32,7 @@
 	return self;
 }
 
-- (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {	
-	// http://dev.gnar.us/getInfo.py/Carleton?lat=44.46055309703&lon=-93.1566672394&maxLandmarks=2
-	///////////////////////// TODO: limitToValidated
-	/*NSString *urlString = [NSString stringWithFormat:@"http://dev.gnar.us/getInfo.py/Carleton?udid=%@&lat=%f&lon=%f&maxLandmarks=%d", 
-						   [[UIDevice currentDevice] uniqueIdentifier], 
-						   [location coordinate].latitude, 
-						   [location coordinate].longitude, 
-						   [[GNLayerManager sharedManager] maxLandmarks]];
-	return [NSURL URLWithString:urlString];*/
+- (NSURL *)URLForLocation:(CLLocation *)location limitToValidated:(BOOL)limitToValidated {
 	return [self URLForLocation:location limitToValidated:limitToValidated withLayerName:@"Carleton"];
 }
 
@@ -54,7 +46,7 @@
 	// load the distance and landmark info
 	NSMutableDictionary *layerInfo;
 	GNLandmark *landmark;
-	NSMutableArray *landmarks = [NSMutableArray array];
+	NSMutableArray *parsedLandmarks = [NSMutableArray array];
 	
 	for (NSDictionary *landmarkAndLayerInfo in layerInfoList)
 	{
@@ -70,14 +62,12 @@
 													 longitude:[[landmarkAndLayerInfo objectForKey:@"longitude"] floatValue]
 													  altitude:center.altitude];
 		landmark.distance = [[landmarkAndLayerInfo objectForKey:@"distance"] floatValue];
-				
+		[parsedLandmarks addObject:landmark];
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
-		[self.landmarks addObject:landmark];
 		[layerInfo release];
-		[landmarks addObject:landmark];
 	}
 	
-	return landmarks;
+	return parsedLandmarks;
 }
 
 - (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo{
@@ -113,10 +103,6 @@
 	NSLog(@"Post request for CarletonLayer finished: %@", [request responseString]);
 }
 
-- (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	return [(NSDictionary*) [layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
-}
-
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {
 	GNLandmarkViewController *viewController = [[GNLandmarkViewController alloc] init];
 	viewController.title = landmark.name;
@@ -130,7 +116,7 @@
 		}
 	}
 	NSString *urlString = [[layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"imageURL"];
-	NSLog(@"URL String: <%@>", urlString);
+	//NSLog(@"URL String: <%@>", urlString);
 	if (urlString != nil && (![urlString isKindOfClass:[NSNull class]])) {
 		viewController.imageURL = [NSURL URLWithString:urlString]; 
 	}
@@ -146,7 +132,7 @@
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"description"] forKey:@"Description"];
 	[landmarkFieldInfo setObject:[layerInfo objectForKey:@"imageURL"] forKey:@"imageURL"];
 	
-	NSLog(@"Layer %@, landmark (%@), fieldInformationForLandmark: %@", self.name, landmark, landmarkFieldInfo);
+	//NSLog(@"Layer %@, landmark (%@), fieldInformationForLandmark: %@", self.name, landmark, landmarkFieldInfo);
 	
 	return [landmarkFieldInfo autorelease];
 }

@@ -64,7 +64,7 @@
 	NSString *landmarkName;
 	CLLocationDegrees landmarkLon;
 	CLLocationDegrees landmarkLat;
-	NSMutableArray *landmarks = [NSMutableArray array];
+	NSMutableArray *parsedLandmarks = [NSMutableArray array];
 	
 	for (NSDictionary *landmarkAndLayerInfo in [[layerInfoList objectForKey:@"results"] objectForKey:@"bindings"])
 	{
@@ -89,34 +89,26 @@
 													  latitude:landmarkLat
 													 longitude:landmarkLon
 													  altitude:center.altitude];
-		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
-		
 		// calculate distance
 		landmark.distance = [landmark getDistanceFrom:center];
-		
+		[parsedLandmarks addObject:landmark];
 		[layerInfoByLandmarkID setObject:layerInfo forKey:landmark.ID];
-		[layerInfo release]; layerInfo = nil;
-		[landmarks addObject:landmark];
+		[layerInfo release];
 	}
 	
-	return landmarks;
+	return parsedLandmarks;
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request{
 	// Use when fetching text data
 	NSString *responseString = [request responseString];
-	NSLog(@"Finished: %@", responseString);
+	NSLog(@"WikiLayer finished: %@", responseString);
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
 	NSError *error = [request error];
 	NSLog(@"Error: %@", error);
-}
-
-
-- (NSString *)summaryForLandmark:(GNLandmark *)landmark {
-	return [(NSDictionary*) [layerInfoByLandmarkID objectForKey:landmark.ID] objectForKey:@"summary"];
 }
 
 - (UIViewController *)viewControllerForLandmark:(GNLandmark *)landmark {

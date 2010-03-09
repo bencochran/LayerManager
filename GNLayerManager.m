@@ -85,25 +85,33 @@ static GNLayerManager *sharedManager = nil;
 }
 
 // Sets the given layer to the indicated activity.
-// If the layer is being set to inactive, removes the layer
-// from its landmarks' lists of active layers. Then removes
-// any of that layer's landmarks that have no active layers
-// from the allLandmarks dictionary.
+// If the layer is being set to inactive, clears that layer's
+// list of validated landmarks and flushes its nonvalidated info.
+// Removes any landmarks that have no active layers from
+// validatedLandmarks and allLandmarks.
+// >>> Note: Cannot be called while in editing mode
 -(void) setLayer:(GNLayer*)layer active:(BOOL)active {
 	[layer setActive:active];
 	
 	if(active == NO)
 	{
 		for (GNLandmark *landmark in layer.landmarks) {
-			if (landmark.activeLayers.count <= 1) {
-				// the given layer is the only remaining active layer for this landmark:
-				// once layer is inactive, landmark will also be inactive, so remove it
-				[allLandmarks removeObjectForKey:landmark.ID];
-				[validatedLandmarks removeObject:landmark];
+			BOOL landmarkInUse = NO;
+			for (GNLayer *currLayer in self.layers) {
+				if(currLayer != layer && [currLayer containsLandmark:landmark limitToValidated:YES]) {
+					landmarkInUse = YES;
+					break;
+				}
 			}
-		}		
+			if (!landmarkInUse) {
+				// no layers are storing information on this landmark - remove it
+				[validatedLandmarks removeObject:landmark];
+				[allLandmarks removeObjectForKey:landmark.ID];
+			}
+		}
 		
-		[layer removeSelfFromLandmarks];
+		[layer clearValidatedLandmarks];
+		[layer flushNonvalidatedInfo];
 	}
 	
 	// Immediately send a notification of updated landmarks in order
@@ -111,6 +119,23 @@ static GNLayerManager *sharedManager = nil;
 	[[NSNotificationCenter defaultCenter] postNotificationName:GNLandmarksUpdated
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.closestLandmarks,@"landmarks",nil]];	
+}
+
+// Clears all information on all layers not currently relevant to validated landmarks
+// Clears userEditableLandmarks and updates allLandmarks to only contain validated landmarks
+- (void)flushAllNonvalidatedInfo {
+	for (GNLayer *layer in self.layers) {
+		[layer flushNonvalidatedInfo];
+	}
+	
+	[userEditableLandmarks removeAllObjects];
+	NSMutableArray *IDsToRemove = [[NSMutableArray alloc] init];
+	[IDsToRemove addObjectsFromArray:[allLandmarks allKeys]];
+	for (GNLandmark *landmark in validatedLandmarks) {
+		[IDsToRemove removeObject:landmark.ID];
+	}
+	[allLandmarks removeObjectsForKeys:IDsToRemove];
+	[IDsToRemove release];
 }
 
 // If a landmark with the given ID exists in the allLandmarks NSMutableDictionary, returns that GNLandmark
@@ -140,7 +165,7 @@ static GNLayerManager *sharedManager = nil;
 - (NSArray *)closestLandmarks {
 	[validatedLandmarks sortUsingSelector:@selector(compareTo:)];
 	
-	///////////////////////////////////// TODO: Also need to cap to maxDistance
+	// TODO: Cap to maxDistance?
 	NSArray *closest = [validatedLandmarks objectsAtIndexes:
 						[NSIndexSet indexSetWithIndexesInRange:
 						 NSMakeRange(0, MIN([self maxLandmarks], [validatedLandmarks count]))]];	
@@ -192,7 +217,6 @@ static GNLayerManager *sharedManager = nil;
 - (void)layerDidUpdate:(GNLayer *)layer withLandmarks:(NSArray *)landmarks {
 	NSLog(@"Layer updated with validated landmarks: %@", layer.name);
 	NSLog(@"Layer returned these validated landmarks: %@", landmarks);
-	NSLog(@"User editable landmarks: %@", userEditableLandmarks);
 
 	for (GNLandmark *landmark in landmarks) {
 		if (![validatedLandmarks containsObject:landmark]) {
@@ -215,9 +239,8 @@ static GNLayerManager *sharedManager = nil;
 }
 
 - (void)layer:(GNLayer *)layer didUpdateEditableLandmarks:(NSArray *)landmarks {
-	NSLog(@"Layer updated ediable landmarks: %@", layer.name);
-	NSLog(@"Layer returned these editable landmarks: %@", landmarks);
-	NSLog(@"Preexisting user editable landmarks: %@", userEditableLandmarks);
+	//NSLog(@"Preexisting user editable landmarks: %@", userEditableLandmarks);
+	NSLog(@"Layer %@ updated with %i editable landmarks", layer.name, [landmarks count]);
 	
 	for (GNLandmark *landmark in landmarks) {
 		if (![userEditableLandmarks containsObject:landmark]) {
@@ -232,7 +255,7 @@ static GNLayerManager *sharedManager = nil;
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<GNToggleManager layers:%@>", layers];
+	return [NSString stringWithFormat:@"<GNLayerManager layers:%@>", layers];
 }
 
 -(void)dealloc {

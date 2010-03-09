@@ -44,6 +44,8 @@ extern NSString *const GNEditableLandmarksUpdated;
 - (void)addLayer:(GNLayer *)layer active:(BOOL)active;
 - (void)setLayer:(GNLayer *)layer active:(BOOL)active;
 
+- (void)flushAllNonvalidatedInfo;
+
 - (GNLandmark *)getLandmark:(NSString *)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 - (GNLandmark *)getLandmark:(NSString *)landmarkID name:(NSString *)landmarkName latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)altitude;
 
