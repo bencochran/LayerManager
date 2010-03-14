@@ -258,11 +258,11 @@ NSString *const GNLayerDidFinishUpdating = @"GNLayerDidFinishUpdating";
 	return nil;
 }
 
-- (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo {
+- (void)postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo {
 	[self doesNotRecognizeSelector:_cmd];
 }
 
-- (void) postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo {
+- (void)postLandmarkArray:(NSArray *)info withID:(NSString *)landmarkID withLocation:(CLLocation *)location andPhoto:(UIImage *)photo {
 	[self doesNotRecognizeSelector:_cmd];
 }
 

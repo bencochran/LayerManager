@@ -5,7 +5,6 @@
 //      a unique string identifier (should begin with a source-specific string immediately followed by a colon)
 //      a string name (not necessarily unique)
 //      a float with the value of the last known distance from the user
-//      a list of the active layers that are currently storing information on this landmark
 //
 //  Created by iComps on 11/1/09.
 //  Copyright 2009 Gnarus. All rights reserved.
@@ -29,9 +28,14 @@
 
 // To comply with the MKAnnotation interface
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+// title will simply be this landmark's name
 @property (nonatomic, readonly) NSString *title;
+// subtitle will be a comma-delimited string of all layers
+// that are currently storing information on this landmark
+// (both validated and unvalidated information)
 @property (nonatomic, readonly) NSString *subtitle;
 
+// methods to create landmarks with the indicated information
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude altitude:(CLLocationDistance)alitiude;
 + (GNLandmark *)landmarkWithID:(NSString *)ID name:(NSString *)name latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
 

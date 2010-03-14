@@ -2,7 +2,7 @@
 //  GNLayer.h
 //  The general layer superclass. Contains information relevant to all layers:
 //      a unique string name
-//      a mutable array of this layer's most recent closest validated landmarks (sorted in increasing order by distance)
+//      a mutable array of this layer's most recent closest validated landmarks
 //      a mutable dictionary of the layer information for each landmark (both validated and unvalidated)
 //      a BOOL indicating whether or not this layer is active
 //      a string path to this layer's icon (should be hard-coded into each subclass)
@@ -29,14 +29,15 @@ extern NSString *const GNLayerDidFinishUpdating;
 @interface GNLayer : NSObject {
 	// this layer's name (must be unique)
 	NSString *_name;
-	// _landmarks is the last list of closest validated landmarks
-	// returned by the server, sorted in increasing order by distance
+	// _landmarks is the last list of closest validated landmarks returned by the server
 	NSMutableArray *_landmarks;
 	// layerInfoByLandmarkID stores the information necessary to generate
 	// the UIViewControllers for each recently loaded landmark (validated & unvalidated)
 	// Keys are landmark IDs, values are objects containing
 	// layer information that can be parsed to create a UIViewController
 	NSMutableDictionary *layerInfoByLandmarkID;
+	
+	// Objects that will be used to generalize layer parsing and posting methods
 	NSArray *_fields;
 	NSArray *_serverNamesForFields;
 	NSString *_tableNameOnServer;
@@ -93,7 +94,7 @@ extern NSString *const GNLayerDidFinishUpdating;
 // containing the appropriate landmarks retrieved from GNLayerManager. Stores the layer info
 // for these landmarks in layerInfoByLandmarkID but does NOT store the landmarks in _landmarks
 - (NSArray *)parseDataIntoLandmarks:(NSData *)data;
-// Stores the provided array of landmarks in _landmarks, and sorts _landmarks by distance
+// Stores the provided array of landmarks in _landmarks
 - (void)ingestLandmarks:(NSArray *)landmarks;
 // If limitToValidated == YES, returns YES if the provided landmark is in _landmarks
 // Otherwise, returns YES if this layer is currently storing layer information on this landmark
@@ -125,6 +126,5 @@ extern NSString *const GNLayerDidFinishUpdating;
 - (void) postLandmarkArray:(NSArray *)info withLocation:(CLLocation *)location andPhoto:(UIImage *)photo;
 
 -(void)postLandmark:(NSMutableDictionary *)updatedInfo withName:(NSString *)landmarkName withLocation:(CLLocation *)location withID:(NSString *)landmarkID andPhoto:(UIImage *)photo;
-
 
 @end

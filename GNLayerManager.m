@@ -87,7 +87,7 @@ static GNLayerManager *sharedManager = nil;
 // Sets the given layer to the indicated activity.
 // If the layer is being set to inactive, clears that layer's
 // list of validated landmarks and flushes its nonvalidated info.
-// Removes any landmarks that have no active layers from
+// Then removes any landmarks that have no active layers from
 // validatedLandmarks and allLandmarks.
 // >>> Note: Cannot be called while in editing mode
 -(void) setLayer:(GNLayer*)layer active:(BOOL)active {

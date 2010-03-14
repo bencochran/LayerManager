@@ -1,6 +1,6 @@
 //
-//  SportsViewController.h
-//  LayerManager
+//  GNLandmarkViewController.h
+//  A general UIViewController for displaying information about Gnarus layers
 //
 //  Created by Jake Kring on 2/24/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.

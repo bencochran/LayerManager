@@ -1,6 +1,6 @@
 //
 //  SportingArenasLayer.h
-//  LayerManager
+//  Displays information about areas in which sports are played
 //
 //  Created by Eric Alexander on 2/20/2010.
 //  Copyright 2010 Gnarus. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  FlickrLayer.h
-//  LayerManager
+//  Displays geo-tagged Flickr images
 //
 //  Created by Jake Kring on 2/20/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.

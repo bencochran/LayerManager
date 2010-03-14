@@ -32,6 +32,4 @@
 @interface GNCellView : UIView {
 }
 
-
-
 @end
