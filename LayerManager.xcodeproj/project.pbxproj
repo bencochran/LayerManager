@@ -132,15 +132,15 @@
 		A215FFFE10B2546600774314 /* TesterApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TesterApp-Info.plist"; sourceTree = "<group>"; };
 		A251AE8F10F525160041E1D7 /* UnitTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestCase.h; sourceTree = "<group>"; };
 		A251AE9010F525160041E1D7 /* UnitTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTestCase.m; sourceTree = "<group>"; };
-		A25B5893111A272200C63840 /* academic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = academic.png; sourceTree = "<group>"; };
-		A25B5894111A272200C63840 /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bird.png; sourceTree = "<group>"; };
-		A25B5895111A272200C63840 /* food.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food.png; sourceTree = "<group>"; };
+		A25B5893111A272200C63840 /* academic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = academic.png; path = Resources/academic.png; sourceTree = "<group>"; };
+		A25B5894111A272200C63840 /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bird.png; path = Resources/bird.png; sourceTree = "<group>"; };
+		A25B5895111A272200C63840 /* food.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = food.png; path = Resources/food.png; sourceTree = "<group>"; };
 		A26D1BEC1130B2F8008EBEFF /* SportingArenasLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SportingArenasLayer.h; sourceTree = "<group>"; };
 		A26D1BED1130B2F8008EBEFF /* SportingArenasLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SportingArenasLayer.m; sourceTree = "<group>"; };
-		A26D1C2B1130B813008EBEFF /* sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sports.png; sourceTree = "<group>"; };
+		A26D1C2B1130B813008EBEFF /* sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sports.png; path = Resources/sports.png; sourceTree = "<group>"; };
 		A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNEditingTableViewController.h; sourceTree = "<group>"; };
 		A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNEditingTableViewController.m; sourceTree = "<group>"; };
-		A2D2085E110E62C100C99513 /* GNEditingTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GNEditingTable.xib; sourceTree = "<group>"; };
+		A2D2085E110E62C100C99513 /* GNEditingTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GNEditingTable.xib; path = Resources/GNEditingTable.xib; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B805EAAD111F5B1400C3E65B /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
@@ -149,11 +149,11 @@
 		B81C4D6810CF4F1100EA3205 /* LayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager.h; sourceTree = "<group>"; };
 		B855D749110D3849001CF7BD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B855D74D110D3851001CF7BD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		B87136FC112284AE00091359 /* wiki.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wiki.png; sourceTree = "<group>"; };
+		B87136FC112284AE00091359 /* wiki.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wiki.png; path = Resources/wiki.png; sourceTree = "<group>"; };
 		B88D771710CF6110003A76A1 /* TweetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetLayer.h; sourceTree = "<group>"; };
 		B88D771810CF6110003A76A1 /* TweetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetLayer.m; sourceTree = "<group>"; };
 		B89BA2FE11081DA900A5FE3C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		B8AD59211106B89900D2E6A0 /* CarletonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarletonView.xib; sourceTree = "<group>"; };
+		B8AD59211106B89900D2E6A0 /* CarletonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CarletonView.xib; path = Resources/CarletonView.xib; sourceTree = "<group>"; };
 		B8BC145E109EBAEC000701DF /* GNLandmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLandmark.h; sourceTree = "<group>"; };
 		B8BC145F109EBAEC000701DF /* GNLandmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLandmark.m; sourceTree = "<group>"; };
 		B8BC1460109EBAEC000701DF /* GNLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLayer.h; sourceTree = "<group>"; };
@@ -179,12 +179,12 @@
 		FC242BD7111F4A73003AFB03 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIHTTPRequestConfig.h; path = "asi-http-request/Classes/ASIHTTPRequestConfig.h"; sourceTree = "<group>"; };
 		FC242C42111F4D35003AFB03 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIInputStream.h; path = "asi-http-request/Classes/ASIInputStream.h"; sourceTree = "<group>"; };
 		FC242C43111F4D35003AFB03 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIInputStream.m; path = "asi-http-request/Classes/ASIInputStream.m"; sourceTree = "<group>"; };
-		FC54672D11337B8A0069EA00 /* flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickr.png; sourceTree = "<group>"; };
-		FC546739113380A20069EA00 /* SportingArenasView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SportingArenasView.xib; sourceTree = "<group>"; };
+		FC54672D11337B8A0069EA00 /* flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flickr.png; path = Resources/flickr.png; sourceTree = "<group>"; };
+		FC546739113380A20069EA00 /* SportingArenasView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SportingArenasView.xib; path = Resources/SportingArenasView.xib; sourceTree = "<group>"; };
 		FC6F41A8113079F500036392 /* FlickrLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrLayer.h; sourceTree = "<group>"; };
 		FC6F41A9113079F500036392 /* FlickrLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrLayer.m; sourceTree = "<group>"; };
-		FC6F4300113103AF00036392 /* FoodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodView.xib; sourceTree = "<group>"; };
-		FC7AB91E113752AE00F5EFD6 /* SportsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SportsViewController.xib; sourceTree = "<group>"; };
+		FC6F4300113103AF00036392 /* FoodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FoodView.xib; path = Resources/FoodView.xib; sourceTree = "<group>"; };
+		FC7AB91E113752AE00F5EFD6 /* SportsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SportsViewController.xib; path = Resources/SportsViewController.xib; sourceTree = "<group>"; };
 		FC7AB91F113752AE00F5EFD6 /* GNLandmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLandmarkViewController.h; sourceTree = "<group>"; };
 		FC7AB920113752AE00F5EFD6 /* GNLandmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLandmarkViewController.m; sourceTree = "<group>"; };
 		FC94C19B1138455D001F7B38 /* GNTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNTableViewCell.h; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 		FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNInfoInputViewController.m; sourceTree = "<group>"; };
 		FCE3BA2510F900AC003BE4A2 /* FoodLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodLayer.h; sourceTree = "<group>"; };
 		FCE3BA2610F900AC003BE4A2 /* FoodLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodLayer.m; sourceTree = "<group>"; };
-		FCF17FB0113331560042866E /* FlickrView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlickrView.xib; sourceTree = "<group>"; };
+		FCF17FB0113331560042866E /* FlickrView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FlickrView.xib; path = Resources/FlickrView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
