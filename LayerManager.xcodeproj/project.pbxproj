@@ -113,8 +113,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A215FF8810B2476900774314 /* CarletonLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarletonLayer.h; sourceTree = "<group>"; };
-		A215FF8910B2476900774314 /* CarletonLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarletonLayer.m; sourceTree = "<group>"; };
+		A215FF8810B2476900774314 /* CarletonLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarletonLayer.h; path = Classes/CarletonLayer.h; sourceTree = "<group>"; };
+		A215FF8910B2476900774314 /* CarletonLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarletonLayer.m; path = Classes/CarletonLayer.m; sourceTree = "<group>"; };
 		A215FF9F10B24F2800774314 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		A215FFA010B24F2800774314 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		A215FFA110B24F2800774314 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -130,16 +130,16 @@
 		A215FFAB10B24F2800774314 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		A215FFFC10B2546600774314 /* TesterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TesterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A215FFFE10B2546600774314 /* TesterApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TesterApp-Info.plist"; sourceTree = "<group>"; };
-		A251AE8F10F525160041E1D7 /* UnitTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestCase.h; sourceTree = "<group>"; };
-		A251AE9010F525160041E1D7 /* UnitTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTestCase.m; sourceTree = "<group>"; };
+		A251AE8F10F525160041E1D7 /* UnitTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnitTestCase.h; path = Classes/UnitTestCase.h; sourceTree = "<group>"; };
+		A251AE9010F525160041E1D7 /* UnitTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitTestCase.m; path = Classes/UnitTestCase.m; sourceTree = "<group>"; };
 		A25B5893111A272200C63840 /* academic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = academic.png; path = Resources/academic.png; sourceTree = "<group>"; };
 		A25B5894111A272200C63840 /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bird.png; path = Resources/bird.png; sourceTree = "<group>"; };
 		A25B5895111A272200C63840 /* food.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = food.png; path = Resources/food.png; sourceTree = "<group>"; };
-		A26D1BEC1130B2F8008EBEFF /* SportingArenasLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SportingArenasLayer.h; sourceTree = "<group>"; };
-		A26D1BED1130B2F8008EBEFF /* SportingArenasLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SportingArenasLayer.m; sourceTree = "<group>"; };
+		A26D1BEC1130B2F8008EBEFF /* SportingArenasLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SportingArenasLayer.h; path = Classes/SportingArenasLayer.h; sourceTree = "<group>"; };
+		A26D1BED1130B2F8008EBEFF /* SportingArenasLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SportingArenasLayer.m; path = Classes/SportingArenasLayer.m; sourceTree = "<group>"; };
 		A26D1C2B1130B813008EBEFF /* sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sports.png; path = Resources/sports.png; sourceTree = "<group>"; };
-		A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNEditingTableViewController.h; sourceTree = "<group>"; };
-		A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNEditingTableViewController.m; sourceTree = "<group>"; };
+		A2D2085C110E62C100C99513 /* GNEditingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GNEditingTableViewController.h; path = Classes/GNEditingTableViewController.h; sourceTree = "<group>"; };
+		A2D2085D110E62C100C99513 /* GNEditingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GNEditingTableViewController.m; path = Classes/GNEditingTableViewController.m; sourceTree = "<group>"; };
 		A2D2085E110E62C100C99513 /* GNEditingTable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GNEditingTable.xib; path = Resources/GNEditingTable.xib; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* LayerManager_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerManager_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -150,16 +150,16 @@
 		B855D749110D3849001CF7BD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B855D74D110D3851001CF7BD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B87136FC112284AE00091359 /* wiki.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wiki.png; path = Resources/wiki.png; sourceTree = "<group>"; };
-		B88D771710CF6110003A76A1 /* TweetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetLayer.h; sourceTree = "<group>"; };
-		B88D771810CF6110003A76A1 /* TweetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetLayer.m; sourceTree = "<group>"; };
+		B88D771710CF6110003A76A1 /* TweetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweetLayer.h; path = Classes/TweetLayer.h; sourceTree = "<group>"; };
+		B88D771810CF6110003A76A1 /* TweetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetLayer.m; path = Classes/TweetLayer.m; sourceTree = "<group>"; };
 		B89BA2FE11081DA900A5FE3C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B8AD59211106B89900D2E6A0 /* CarletonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CarletonView.xib; path = Resources/CarletonView.xib; sourceTree = "<group>"; };
-		B8BC145E109EBAEC000701DF /* GNLandmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLandmark.h; sourceTree = "<group>"; };
-		B8BC145F109EBAEC000701DF /* GNLandmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLandmark.m; sourceTree = "<group>"; };
-		B8BC1460109EBAEC000701DF /* GNLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLayer.h; sourceTree = "<group>"; };
-		B8BC1461109EBAEC000701DF /* GNLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLayer.m; sourceTree = "<group>"; };
-		B8BC1462109EBAEC000701DF /* GNLayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLayerManager.h; sourceTree = "<group>"; };
-		B8BC1463109EBAEC000701DF /* GNLayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLayerManager.m; sourceTree = "<group>"; };
+		B8BC145E109EBAEC000701DF /* GNLandmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GNLandmark.h; path = Classes/GNLandmark.h; sourceTree = "<group>"; };
+		B8BC145F109EBAEC000701DF /* GNLandmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GNLandmark.m; path = Classes/GNLandmark.m; sourceTree = "<group>"; };
+		B8BC1460109EBAEC000701DF /* GNLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GNLayer.h; path = Classes/GNLayer.h; sourceTree = "<group>"; };
+		B8BC1461109EBAEC000701DF /* GNLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GNLayer.m; path = Classes/GNLayer.m; sourceTree = "<group>"; };
+		B8BC1462109EBAEC000701DF /* GNLayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GNLayerManager.h; path = Classes/GNLayerManager.h; sourceTree = "<group>"; };
+		B8BC1463109EBAEC000701DF /* GNLayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GNLayerManager.m; path = Classes/GNLayerManager.m; sourceTree = "<group>"; };
 		B8BC147E109EBBB8000701DF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B8CB2DA4110D840800BED463 /* GHUnitIPhone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GHUnitIPhone.xcodeproj; path = "ghunit/Project-IPhone/GHUnitIPhone.xcodeproj"; sourceTree = "<group>"; };
 		B8CB2E95110D8B2E00BED463 /* GHUnitIPhoneTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHUnitIPhoneTestMain.m; path = "ghunit/Classes-IPhone/GHUnitIPhoneTestMain.m"; sourceTree = "<group>"; };
@@ -181,20 +181,20 @@
 		FC242C43111F4D35003AFB03 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIInputStream.m; path = "asi-http-request/Classes/ASIInputStream.m"; sourceTree = "<group>"; };
 		FC54672D11337B8A0069EA00 /* flickr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flickr.png; path = Resources/flickr.png; sourceTree = "<group>"; };
 		FC546739113380A20069EA00 /* SportingArenasView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SportingArenasView.xib; path = Resources/SportingArenasView.xib; sourceTree = "<group>"; };
-		FC6F41A8113079F500036392 /* FlickrLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrLayer.h; sourceTree = "<group>"; };
-		FC6F41A9113079F500036392 /* FlickrLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrLayer.m; sourceTree = "<group>"; };
+		FC6F41A8113079F500036392 /* FlickrLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlickrLayer.h; path = Classes/FlickrLayer.h; sourceTree = "<group>"; };
+		FC6F41A9113079F500036392 /* FlickrLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlickrLayer.m; path = Classes/FlickrLayer.m; sourceTree = "<group>"; };
 		FC6F4300113103AF00036392 /* FoodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FoodView.xib; path = Resources/FoodView.xib; sourceTree = "<group>"; };
 		FC7AB91E113752AE00F5EFD6 /* SportsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SportsViewController.xib; path = Resources/SportsViewController.xib; sourceTree = "<group>"; };
-		FC7AB91F113752AE00F5EFD6 /* GNLandmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNLandmarkViewController.h; sourceTree = "<group>"; };
-		FC7AB920113752AE00F5EFD6 /* GNLandmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNLandmarkViewController.m; sourceTree = "<group>"; };
-		FC94C19B1138455D001F7B38 /* GNTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNTableViewCell.h; sourceTree = "<group>"; };
-		FC94C19C1138455D001F7B38 /* GNTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNTableViewCell.m; sourceTree = "<group>"; };
-		FC9694D911224C8C00218696 /* WikiLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiLayer.h; sourceTree = "<group>"; };
-		FC9694DA11224C8C00218696 /* WikiLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiLayer.m; sourceTree = "<group>"; };
-		FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNInfoInputViewController.h; sourceTree = "<group>"; };
-		FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNInfoInputViewController.m; sourceTree = "<group>"; };
-		FCE3BA2510F900AC003BE4A2 /* FoodLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodLayer.h; sourceTree = "<group>"; };
-		FCE3BA2610F900AC003BE4A2 /* FoodLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodLayer.m; sourceTree = "<group>"; };
+		FC7AB91F113752AE00F5EFD6 /* GNLandmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GNLandmarkViewController.h; path = Classes/GNLandmarkViewController.h; sourceTree = "<group>"; };
+		FC7AB920113752AE00F5EFD6 /* GNLandmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GNLandmarkViewController.m; path = Classes/GNLandmarkViewController.m; sourceTree = "<group>"; };
+		FC94C19B1138455D001F7B38 /* GNTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GNTableViewCell.h; path = Classes/GNTableViewCell.h; sourceTree = "<group>"; };
+		FC94C19C1138455D001F7B38 /* GNTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GNTableViewCell.m; path = Classes/GNTableViewCell.m; sourceTree = "<group>"; };
+		FC9694D911224C8C00218696 /* WikiLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiLayer.h; path = Classes/WikiLayer.h; sourceTree = "<group>"; };
+		FC9694DA11224C8C00218696 /* WikiLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WikiLayer.m; path = Classes/WikiLayer.m; sourceTree = "<group>"; };
+		FCBF977D111A46A00071F029 /* GNInfoInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GNInfoInputViewController.h; path = Classes/GNInfoInputViewController.h; sourceTree = "<group>"; };
+		FCBF977E111A46A00071F029 /* GNInfoInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GNInfoInputViewController.m; path = Classes/GNInfoInputViewController.m; sourceTree = "<group>"; };
+		FCE3BA2510F900AC003BE4A2 /* FoodLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoodLayer.h; path = Classes/FoodLayer.h; sourceTree = "<group>"; };
+		FCE3BA2610F900AC003BE4A2 /* FoodLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoodLayer.m; path = Classes/FoodLayer.m; sourceTree = "<group>"; };
 		FCF17FB0113331560042866E /* FlickrView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FlickrView.xib; path = Resources/FlickrView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
